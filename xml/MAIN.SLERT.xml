@@ -33,7 +33,7 @@
   <book version="5.0" xml:lang="en" xml:id="book.slert.qs">
     <title>Quick Start Manuals</title>
     <xi:include href="art_slert_quickstart.xml"/>
-    <xi:include href="slert_hw_testing.xml"/>
+    <xi:include href="art_slert_hw_testing.xml"/>
     <xi:include href="common_legal.xml"/>
   </book>
 </set>

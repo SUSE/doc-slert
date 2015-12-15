@@ -3,7 +3,7 @@
 ## ----------------------------
 ##
 ## Basics
-MAIN="slert_hw_testing.xml"
+MAIN="art_slert_hw_testing.xml"
 
 ## Profiling
 PROFOS="slerte"
