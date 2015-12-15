@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd" [
+ <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
+ <!ENTITY % entities SYSTEM "entity-decl.ent">
+ %entities;
+]>
+<chapter id="cha.shielding.intro">
+ <title>Introduction</title>
+ <para>
+  In the Linux kernel, the cpuset facility provides a mechanism for creating
+  logical entities called <quote>cpusets</quote> that encompass definitions
+  of CPUs and NUMA Memory Nodes (if NUMA is available). Cpusets constrain
+  the CPU and Memory placement of a task to only the resources defined
+  within that cpuset. These cpusets can then be arranged into a nested
+  hierarchy visible in the <quote>cpuset</quote> virtual file system. Sets
+  of tasks can be assigned to these cpusets to constrain the resources that
+  they use. The tasks can be moved from one cpuset to another to utilize
+  other resources defined in those other cpusets.
+ </para>
+ <para>
+  The <command>cset</command> command is a Python application that provides
+  a command line front end for the Linux cpusets functionality. Working with
+  cpusets directly can be confusing and slightly complex. The cset tool
+  hides that complexity behind an easy-to-use command line interface.
+ </para>
+ <para>
+  There are two distinct use cases for cset: the basic shielding use case
+  and the <quote>advanced</quote> case of using raw <command>set</command>
+  and <command>proc</command> subcommands. The basic shielding function is
+  accessed with the <command>shield</command> subcommand and described in
+  the next section. Using the raw <command>set</command> and
+  <command>proc</command> subcommands allows one to set up arbitrarily
+  complex cpusets and is described in
+  <xref linkend="cha.shielding.cpuset"/>.
+ </para>
+ <para>
+  Note that in general, one either uses the <command>shield</command>
+  subcommand or a combination of the <command>set</command> and
+  <command>proc</command> subcommands. One rarely, if ever, uses all of
+  these subcommands together. Doing so will likely become too confusing.
+  Additionally, the <command>shield</command> subcommand sets up its
+  required cpusets with exclusively marked CPUs. This can interfere with
+  your cpuset strategy. If you find that you need more functionality for
+  your strategy than <command>shield</command> provides, go ahead and
+  transition to using <command>set</command> and <command>proc</command>
+  exclusively. It is straightforward to implement what
+  <command>shield</command> does with a few extra <command>set</command> and
+  <command>proc</command> subcommands.
+ </para>
+ <variablelist>
+  <title>Obtaining Online Help</title>
+  <varlistentry>
+   <term>For a full list of cset subcommands</term>
+   <listitem>
+<screen>&prompt.user;<command>cset</command> <option>help</option></screen>
+   </listitem>
+  </varlistentry>
+  <varlistentry>
+   <term>For in-depth help on individual subcommands</term>
+   <listitem>
+<screen>&prompt.user;<command>cset</command> <option>help</option> <replaceable>&lt;subcommand&gt;</replaceable></screen>
+   </listitem>
+  </varlistentry>
+  <varlistentry>
+   <term>For options on individual subcommands</term>
+   <listitem>
+<screen>&prompt.user;<command>cset</command> <replaceable>&lt;subcommand&gt;</replaceable> <option>(-h | --help)</option></screen>
+   </listitem>
+  </varlistentry>
+ </variablelist>
+</chapter>

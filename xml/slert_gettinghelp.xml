@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd" [
+ <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
+ <!ENTITY % entities SYSTEM "entity-decl.ent">
+ %entities;
+]>
+<chapter id="cha.shieldingt.help">
+ <title>What to Do If There Are Problems</title>
+ <para>
+  If you encounter any issues with the <command>cset</command> application,
+  you can file a bug report on our <command>cset</command> bugzilla product
+  found here:
+ </para>
+ <para>
+  <ulink url="https://code.google.com/p/cpuset/issues/list" />
+ </para>
+ <para>
+  If you are using <command>cset</command> on a supported operating system
+  such as &sls; &productnumber; or &slerte; &productnumber;, then should use
+  the following bugzilla product listing here:
+ </para>
+ <para>
+  <ulink url="https://bugzilla.suse.com" />
+ </para>
+ <para>
+  <command>cset</command> contains a logging application that is invaluable
+  for our developers to diagnose problems and find quick solutions. To
+  create a log of your issue, please use the <option>-l/--log</option>
+  option with a file name as an argument to the main cset application. For
+  example:
+ </para>
+<screen>&prompt.user;<command>cset</command> -l logfile.txt set -n <replaceable>newname</replaceable> <replaceable>oldname</replaceable></screen>
+ <para>
+  If the issue persists and is reproducible, Including this report in your
+  bug submission greatly reduces development time. This command saves
+  debugging information within the file <filename>logfile.txt</filename>.
+ </para>
+</chapter>

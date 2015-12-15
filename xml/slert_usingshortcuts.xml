@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd" [
+ <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
+ <!ENTITY % entities SYSTEM "entity-decl.ent">
+ %entities;
+]>
+<chapter id="cha.shielding.shortcuts">
+ <title>Using Shortcuts</title>
+ <para>
+  The commands listed in the previous sections always used all the required
+  options. However, <command>cset</command> does have a shortcut facility
+  that will execute certain commands without specifying all options. An
+  effort has been made to do this with the <quote>principle of least
+  surprise</quote>. This means that if you do not specify options, but do
+  specify parameters, then the outcome of the command should be intuitive as
+  possible.
+ </para>
+ <para>
+  Using shortcuts is not necessary. In fact, you can use either shortcuts or
+  long options. However, using long options instead of shortcuts does have a
+  use case: when you write a script intended to be self-documenting, or
+  perhaps when you generate <command>cset</command> documentation.
+ </para>
+ <para>
+  To begin, the subcommands <command>shield</command>,
+  <command>set</command> and <command>proc</command> can themselves be
+  shortened to the fewest number of characters that are unambiguous. For
+  example, the following commands are identical:
+ </para>
+ <informaltable>
+  <tgroup cols="2">
+   <colspec colnum="1" colname="1" colwidth="50%"/>
+   <colspec colnum="1" colname="1" colwidth="50%"/>
+   <thead>
+    <row>
+     <entry>
+      <para>
+       Long method
+      </para>
+     </entry>
+     <entry>
+      <para>
+       Short method
+      </para>
+     </entry>
+    </row>
+   </thead>
+   <tbody>
+    <row>
+     <entry>
+<screen>&prompt.user;<command>cset</command> shield -s -p 1234</screen>
+     </entry>
+     <entry>
+<screen>&prompt.user;<command>cset</command> sh -s -p 1234</screen>
+     </entry>
+    </row>
+    <row>
+     <entry>
+<screen>&prompt.user;<command>cset</command> set -c 1,3 -s newset</screen>
+     </entry>
+     <entry>
+<screen>&prompt.user;<command>cset</command> se -c 1,3 -s newset</screen>
+     </entry>
+    </row>
+    <row>
+     <entry>
+<screen>&prompt.user;<command>cset</command> proc -s newset -e bash</screen>
+     </entry>
+     <entry>
+<screen>&prompt.user;<command>cset</command> p -s newset -e bash</screen>
+     </entry>
+    </row>
+   </tbody>
+  </tgroup>
+ </informaltable>
+ <para>
+  Note that <command>proc</command> can be shortened to just
+  <command>p</command>, while <command>shield</command> and
+  <command>set</command> need two letters to disambiguate.
+ </para>
+ <sect1 id="sec.shielding.shortcuts.shield">
+  <title>shield Subcommand Shortcuts</title>
+
+  <para>
+   The <command>shield</command> subcommand supports two areas with
+   shortcuts: the short method (when there are no options given and where to
+   shield is the common use case), and the long method (which makes
+   <option>-p/--pid</option> optional for the <option>-s/--shield</option>
+   and <option>-u/--unshield</option> options).
+  </para>
+
+  <para>
+   For the common use case of actually shielding either a PIDSPEC or execing
+   a command into the shield, the following <command>cset</command> commands
+   are equivalent.
+  </para>
+
+  <informaltable>
+   <tgroup cols="2">
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <thead>
+     <row>
+      <entry>
+       <para>
+        Long method
+       </para>
+      </entry>
+      <entry>
+       <para>
+        Short method
+       </para>
+      </entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> shield -s -p 1234,500-649</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> sh 1234,500-649</screen>
+      </entry>
+     </row>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> shield -s -e bash</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> sh bash</screen>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </informaltable>
+
+  <para>
+   When using the <option>-s</option> or <option>-u</option> shield/unshield
+   options, it is optional to use the <option>-p</option> option to specify
+   a PIDSPEC. For example:
+  </para>
+
+  <informaltable>
+   <tgroup cols="2">
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <thead>
+     <row>
+      <entry>
+       <para>
+        Long method
+       </para>
+      </entry>
+      <entry>
+       <para>
+        Short method
+       </para>
+      </entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> shield -s -p 1234</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> sh -s 1234</screen>
+      </entry>
+     </row>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> shield -u -p 1234</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> sh -u 1234</screen>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </informaltable>
+ </sect1>
+ <sect1 id="sec.shielding.shortcuts.set">
+  <title>set Subcommand Shortcuts</title>
+
+  <para>
+   The <command>set</command> subcommand has a limited number of shortcuts.
+   Basically, the <option>-s/--set</option> option is optional in most cases
+   and the <option>-l/--list</option> option is also optional if you want to
+   list sets. For example, these commands are equivalent.
+  </para>
+
+  <informaltable>
+   <tgroup cols="2">
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <thead>
+     <row>
+      <entry>
+       <para>
+        Long method
+       </para>
+      </entry>
+      <entry>
+       <para>
+        Short method
+       </para>
+      </entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> set -l -s myset</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> se -l myset</screen>
+      </entry>
+     </row>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> se -l myset</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> se myset</screen>
+      </entry>
+     </row>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> set -c 1,2,3 -s newset</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> se -c 1,2,3 newset</screen>
+      </entry>
+     </row>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> set -d -s newset</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> se -d newset</screen>
+      </entry>
+     </row>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> set -n newname -s oldname</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> se -n newname oldname</screen>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </informaltable>
+
+  <para>
+   In fact, if you want to apply either the list or the destroy options to
+   multiple cpusets with one <command>cset</command> command, you will not
+   need to use the <option>-s</option> option. For example:
+  </para>
+
+<screen><command>cset</command> se -d myset yourset ourset
+--> destroys cpusets: myset, yourset and ourset
+
+
+<command>cset</command> se -l prio_high prio_med prio_low
+--> lists only cpusets prio_high, prio_med and prio_low
+--> the -l is optional in this case since list is default</screen>
+ </sect1>
+ <sect1 id="sec.shielding.shortcuts.proc">
+  <title>proc Subcommand Shortcuts</title>
+
+  <para>
+   For the proc subcommand, the <option>-s</option>, <option>-t</option> and
+   <option>-f</option> options to specify the cpuset, the origination cpuset
+   and the destination cpuset can sometimes be optional. For example, the
+   following commands are equivalent. To list tasks in cpusets:
+  </para>
+
+  <informaltable>
+   <tgroup cols="2">
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <thead>
+     <row>
+      <entry>
+       <para>
+        Long method
+       </para>
+      </entry>
+      <entry>
+       <para>
+        Short method
+       </para>
+      </entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> proc -l -s myset</screen>
+       <para>
+        or
+       </para>
+<screen>&prompt.user;<command>cset</command> proc -l -f myset</screen>
+       <para>
+        or
+       </para>
+<screen>&prompt.user;<command>cset</command> proc -l -t myset</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> p -l myset</screen>
+      </entry>
+     </row>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> p -l myset</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> p myset</screen>
+      </entry>
+     </row>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> proc -l -s one two</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> p -l one two</screen>
+      </entry>
+     </row>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> p -l one two</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> p one two</screen>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </informaltable>
+
+  <remark>
+   mschnitzer: Where is the sense between "p -l one two" is equivalent to "p one
+   two". How can that be equivalent? Is -l a command which does nothing? :D
+   It would be nice if you can have a look on all of the "is equivalent to" tables. For double checking if the commands are really correct.
+  </remark>
+
+  <para>
+   To exec a process into a cpuset:
+  </para>
+
+  <informaltable>
+   <tgroup cols="2">
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <thead>
+     <row>
+      <entry>
+       <para>
+        Long method
+       </para>
+      </entry>
+      <entry>
+       <para>
+        Short method
+       </para>
+      </entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> proc -s myset -e bash</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> p myset -e bash</screen>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </informaltable>
+
+  <para>
+   Movement of tasks into and out of cpusets have the following shortcuts.
+   To move a PIDSPEC into a cpuset:
+  </para>
+
+  <informaltable>
+   <tgroup cols="2">
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <thead>
+     <row>
+      <entry>
+       <para>
+        Long method
+       </para>
+      </entry>
+      <entry>
+       <para>
+        Short method
+       </para>
+      </entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> proc -m -p 4242,4243 -s myset</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> p -m 4242,4243 myset</screen>
+      </entry>
+     </row>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> proc -m -p 12 -t myset</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> p -m 12 myset</screen>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </informaltable>
+
+  <para>
+   To move all tasks from one cpuset to another:
+  </para>
+
+  <informaltable>
+   <tgroup cols="2">
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <thead>
+     <row>
+      <entry>
+       <para>
+        Long method
+       </para>
+      </entry>
+      <entry>
+       <para>
+        Short method
+       </para>
+      </entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry>
+<screen>&prompt.user;<command>cset</command> proc -m -f set1 -t set2</screen>
+       <para>
+        or
+       </para>
+<screen>&prompt.user;<command>cset</command> proc -m -s set1 -t set2</screen>
+       <para>
+        or
+       </para>
+<screen>&prompt.user;<command>cset</command> proc -m -f set1 -s set2</screen>
+      </entry>
+      <entry>
+<screen>&prompt.user;<command>cset</command> p -m set1 set2</screen>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </informaltable>
+ </sect1>
+</chapter>
