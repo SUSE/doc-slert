@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
+ <uri pattern="*.xml" uri="/usr/share/xml/suse/schema/rng/0.9/susedoc5.rnc"/>
+</locatingRules>

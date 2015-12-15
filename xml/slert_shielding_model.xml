@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd" [
- <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
- <!ENTITY % entities SYSTEM "entity-decl.ent">
- %entities;
+<!DOCTYPE chapter
+[
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
 ]>
-<chapter id="cha.shielding.model">
+<!-- Converted by suse-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha.shielding.model">
  <title>The Basic Shielding Model</title>
+ <info/>
  <para>
   Although any set up of cpusets can really be described as
   <emphasis>shielding</emphasis>, there is one prevalent shielding model in
@@ -51,7 +53,7 @@
   <command>proc</command> subcommands described in
   <xref linkend="cha.shielding.cpuset"/>.
  </para>
- <sect1 id="sec.shielding.model.ex">
+ <sect1 xml:id="sec.shielding.model.ex">
   <title>A Simple Shielding Example</title>
 
   <para>
@@ -78,18 +80,18 @@
    </para>
   </note>
 
-  <sect2 id="sec.shielding.model.ex.setup_teardown">
+  <sect2 xml:id="sec.shielding.model.ex.setup_teardown">
    <title>Setup and Teardown of the Shield</title>
    <para>
     To set up a shield of 3 CPUs with 1 CPU left for low priority system
     processing, issue the following command.
    </para>
-<screen>&prompt.user;<command>cset</command> shield -c 1-3
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ shield -c 1-3
 cset: --> activating shielding:
 cset: moving 176 tasks from root into system cpuset...
 [==================================================]%
 cset: "system" cpuset of CPUSPEC(0) with 176 tasks running
-cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
+cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running]]></screen>
    <para>
     This command does a number of things. First, it creates a
     <literal>user</literal> cpuset with what’s called a CPUSPEC (CPU
@@ -115,10 +117,10 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
     were created and how many tasks are running on each. If you want to see
     the current status of the shield again, issue this command:
    </para>
-<screen>&prompt.user;<command>cset</command> shield
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ shield
 cset: --> shielding system active with
 cset: "system" cpuset of CPUSPEC(0) with 176 tasks running
-cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
+cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running]]></screen>
    <para>
     Which shows us that the shield is set up and that 176 tasks are running
     in the <literal>system</literal> cpuset—the
@@ -150,11 +152,11 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
     shield, then you can move all movable kernel threads into the unshielded
     <literal>system</literal> set with the following command.
    </para>
-<screen>&prompt.user;<command>cset</command> shield -k on
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ shield -k on
 cset: --> activating kthread shielding
 cset: kthread shield activated, moving 70 tasks into system cpuset...
 [==================================================]%
-cset: done</screen>
+cset: done]]></screen>
    <para>
     You can see that this moved an additional 70 tasks to the unshielded
     <literal>system</literal> cpuset. Note that the <option>-k/--kthread
@@ -164,10 +166,10 @@ cset: done</screen>
     <command>cset shield</command> again shows us the current state of the
     shield.
    </para>
-<screen>&prompt.user;<command>cset</command> shield
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ shield
 cset: --> shielding system active with
 cset: "system" cpuset of CPUSPEC(0) with 246 tasks running
-cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
+cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running]]></screen>
    <para>
     You can get a detailed listing of what is running in the shield by
     adding either <option>-s/--shield</option> or
@@ -175,7 +177,7 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
     subcommand and using the verbose flag. You will get output similar to
     the following.
    </para>
-<screen>&prompt.user;<command>cset</command> shield --unshield -v
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ shield --unshield -v
 cset: "system" cpuset of CPUSPEC(0) with 251 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
@@ -184,7 +186,7 @@ root     2     0     Soth [kthreadd]
 root     84    2     Sf50 [IRQ-9
 ]...
 alext    31796 31789 Soth less
-root     32653 25222 Roth python ./cset shield --unshield -v</screen>
+root     32653 25222 Roth python ./cset shield --unshield -v]]></screen>
    <para>
     Note that the listing is abbreviated; we do have 251 tasks running in
     the <literal>system</literal> set. The output is self-explanatory;
@@ -207,16 +209,16 @@ root     32653 25222 Roth python ./cset shield --unshield -v</screen>
     <literal>root</literal> cpuset. Once so moved, all tasks will have
     access to all resources on the system. For example:
    </para>
-<screen>&prompt.user;<command>cset</command> shield --reset
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ shield --reset
 cset: --> deactivating/reseting shielding
 cset: moving 0 tasks from "/user" user set to root set...
 cset: moving 250 tasks from "/system" system set to root set...
 [==================================================]%
 cset: deleting "/user" and "/system" sets
-cset: done</screen>
+cset: done]]></screen>
   </sect2>
 
-  <sect2 id="sec.shielding.model.ex.move">
+  <sect2 xml:id="sec.shielding.model.ex.move">
    <title>Moving Interesting Tasks Into and Out of the Shield</title>
    <para>
     Now that we have a shield running, the objective is to run our
@@ -224,7 +226,7 @@ cset: done</screen>
     be anything, but usually they are directly related to the purpose of the
     machine. There are two ways to run tasks in the shield:
    </para>
-   <itemizedlist>
+   <itemizedlist mark="bullet" spacing="normal">
     <listitem>
      <para>
       Exec a process into the shield
@@ -236,7 +238,7 @@ cset: done</screen>
      </para>
     </listitem>
    </itemizedlist>
-   <sect3 id="sec.shielding.model.ex.move.exec">
+   <sect3 xml:id="sec.shielding.model.ex.move.exec">
     <title>Execing a Process Into the Shield</title>
     <para>
      Running a new process in the shield can be done with the
@@ -245,16 +247,16 @@ cset: done</screen>
      shield. For this example, let’s exec a new bash shell into the shield
      with the following commands.
     </para>
-<screen>&prompt.user;<command>cset</command> shield -s
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ shield -s
 cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running
 cset: done
 
 
-&prompt.user;<command>cset</command> shield -e bash
+&prompt.user;]]><command>cset</command><![CDATA[ shield -e bash
 cset: --> last message, executed args into cpuset "/user", new pid is: 13300
 
 
-&prompt.user;<command>cset</command> shield -s -v
+&prompt.user;]]><command>cset</command><![CDATA[ shield -s -v
 cset: "user" cpuset of CPUSPEC(1-3) with 2 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
@@ -262,12 +264,12 @@ root     13300 8583  Soth bash
 root     13329 13300 Roth python ./cset shield -s -v
 
 
-&prompt.user;<command>exit</command>
+&prompt.user;]]><command>exit</command><![CDATA[
 
 
-&prompt.user;<command>cset</command> shield -s
+&prompt.user;]]><command>cset</command><![CDATA[ shield -s
 cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running
-cset: done</screen>
+cset: done]]></screen>
     <para>
      The first command above lists the status of the shield. You see that
      the shield is defined as CPUs 1 through 3 inclusive and currently there
@@ -287,7 +289,7 @@ cset: done</screen>
       if the command you want to exec also takes options, separate them with
       the double dash as follows:
      </para>
-<screen>&prompt.user;<command>cset</command> shield -e mycommand -- -v</screen>
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ shield -e mycommand -- -v]]></screen>
      <para>
       The <option>-v</option> will be passed to mycommand, and not to cset.
      </para>
@@ -313,24 +315,24 @@ cset: done</screen>
     </para>
     <para>
      You may have noticed in the output above that both the new shell and
-     the status command are running as the &rootuser; user. This is because
-     cset needs to run as &rootuser; and so all it’s children will also
-     run as &rootuser;. If you need to run a process under a different user
-     and or group, you may use the <option>--user</option> and
-     <option>--group</option> options for execution as follows.
+     the status command are running as the &rootuser; user. This is
+     because cset needs to run as &rootuser; and so all it’s children
+     will also run as &rootuser;. If you need to run a process under a
+     different user and or group, you may use the <option>--user</option>
+     and <option>--group</option> options for execution as follows.
     </para>
-<screen>&prompt.user;<command>cset</command> shield --user=alext --group=users -e bash
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ shield --user=alext --group=users -e bash
 cset: --> last message, executed args into cpuset "/user", new pid is: 14212
 
 
-&prompt.user;<command>cset</command> shield -s -v
+&prompt.user;]]><command>cset</command><![CDATA[ shield -s -v
 cset: "user" cpuset of CPUSPEC(1-3) with 2 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
 alext    14212 8583  Soth bash
-alext    14241 14212 Roth python ./cset shield -s -v</screen>
+alext    14241 14212 Roth python ./cset shield -s -v]]></screen>
    </sect3>
-   <sect3 id="sec.shielding.model.ex.move.shield_unshield">
+   <sect3 xml:id="sec.shielding.model.ex.move.shield_unshield">
     <title>Moving a Running Task Into and Out of the Shield</title>
     <para>
      While execing a process into the shield is undoubtably useful, most of
@@ -403,16 +405,16 @@ alext    14241 14212 Roth python ./cset shield -s -v</screen>
      with a range PIDSPEC and back out with the bash variable for the
      current PID.
     </para>
-<screen>&prompt.user;<command>echo</command> $$
+<screen><![CDATA[&prompt.user;]]><command>echo</command><![CDATA[ $$
 22018
 
 
-&prompt.user;<command>cset</command> shield -s -p 22010-22020
+&prompt.user;]]><command>cset</command><![CDATA[ shield -s -p 22010-22020
 cset: --> shielding following pidspec: 22010-22020
 cset: done
 
 
-&prompt.user;<command>cset</command> shield -s -v
+&prompt.user;]]><command>cset</command><![CDATA[ shield -s -v
 cset: "user" cpuset of CPUSPEC(1-3) with 2 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
@@ -421,14 +423,14 @@ root     22018 5034  Soth bash
 cset: done
 
 
-&prompt.user;<command>cset</command> shield -u -p $$
+&prompt.user;]]><command>cset</command><![CDATA[ shield -u -p $$
 cset: --> unshielding following pidspec: 22018
 cset: done
 
 
-&prompt.user;<command>cset</command> shield -s
+&prompt.user;]]><command>cset</command><![CDATA[ shield -s
 cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running
-cset: done</screen>
+cset: done]]></screen>
    </sect3>
   </sect2>
  </sect1>

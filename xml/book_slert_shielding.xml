@@ -1,38 +1,36 @@
-<?xml-stylesheet href="urn:x-suse:xslt:profiling:novdoc-profile.xsl"
- type="text/xml" 
- title="Profiling step"?>
-<!DOCTYPE book PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN"
-                      "novdocx.dtd"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book
 [
-<!ENTITY % NOVDOC.DEACTIVATE.IDREF "IGNORE">
-<!ENTITY % entities SYSTEM "entity-decl.ent">
-%entities;
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
 ]>
+<!-- Converted by suse-upgrade version 1.1 -->
 
 <!-- ##################################################################### -->
 <!-- SLERT Shielding HowTo-->
 <!-- ##################################################################### -->
 <?provo dirname="slerte/"?>
-<book lang="en" id="book.slert.shielding">
- <bookinfo>
-  <title>How to Shield Your Linux Resources</title>
-  <productname>&productname;</productname>
-  <productname role="abbrev">&slertabbr;</productname>
-  <productnumber>&productnumber;</productnumber>
-  <date><?dbtimestamp format="B d, Y"?></date>
-  <xi:include href="common_copyright_gfdl.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  <authorgroup>
-   <author>
-    <firstname>Alex</firstname>
-    <surname>Tsariounov</surname>
-    <!-- <email>alext@novell.com</email> -->
-   </author>
-  </authorgroup>
-  </bookinfo>
-  <xi:include href="slert_intro.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  <xi:include href="slert_shielding_model.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  <xi:include href="slert_cpuset_manipulation.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  <xi:include href="slert_usingshortcuts.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  <xi:include href="slert_gettinghelp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  <xi:include  href="common_legal.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<book version="5.0" xml:lang="en" xml:id="book.slert.shielding"
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+ <title>How to Shield Your Linux Resources</title>
+  <info>
+    <productname>&productname;</productname>
+    <productname role="abbrev">&slertabbr;</productname>
+    <productnumber>&productnumber;</productnumber>
+    <date><?dbtimestamp format="B d, Y"?></date>
+    <xi:include href="common_copyright_gfdl.xml" parse="xml"/>
+    <authorgroup>
+      <author>
+        <personname><firstname>Alex</firstname><surname>Tsariounov</surname></personname>
+      </author>
+    </authorgroup>
+  </info>
+ <xi:include href="slert_intro.xml" parse="xml"/>
+ <xi:include href="slert_shielding_model.xml" parse="xml"/>
+ <xi:include href="slert_cpuset_manipulation.xml" parse="xml"/>
+ <xi:include href="slert_usingshortcuts.xml" parse="xml"/>
+ <xi:include href="slert_gettinghelp.xml" parse="xml"/>
+ <xi:include href="common_legal.xml" parse="xml"/>
 </book>

@@ -1,13 +1,9 @@
 ## ---------------------------- 
-## Doc Config File for SLERTE
-## Quick Start
+## Doc Config File for SLERTE HW GUide
 ## ----------------------------
 ##
 ## Basics
 MAIN="MAIN.SLERT.xml"
-
-##
-ROOTID="art.slert.hwtest"
 
 ## Profiling
 PROFOS="slerte"
@@ -17,7 +13,7 @@ PROFARCH="x86;amd64;em64t"
 HTMLROOT="slerte11"
 
 ## stylesheet location
-# STYLEROOT="/usr/share/xml/docbook/stylesheet/suse/flyer"
-# FALLBACK_STYLEROOT="/usr/share/xml/docbook/stylesheet/suse"
+#STYLEROOT="/usr/share/xml/docbook/stylesheet/suse/flyer"
+#STYLEROOT="/usr/share/xml/docbook/stylesheet/suse"
 #HTML_CSS="/usr/share/xml/docbook/stylesheet/suse/html/susebooks.css"
 #EPUB_CSS="/usr/share/xml/docbook/stylesheet/suse/epub/susebooks.css"

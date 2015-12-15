@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd" [
- <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
- <!ENTITY % entities SYSTEM "entity-decl.ent">
- %entities;
+<!DOCTYPE chapter
+[
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
 ]>
-<chapter id="cha.shielding.cpuset">
+<!-- Converted by suse-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha.shielding.cpuset">
  <title>Full Featured Cpuset Manipulation Commands</title>
+ <info/>
  <para>
   While basic shielding as described above is useful and a common use model
   for <command>cset</command>, there comes a time when more functionality
@@ -14,7 +16,7 @@
   which allows you to manipulate cpusets; and <command>proc</command>, which
   allows you to manipulate processes within those cpusets.
  </para>
- <sect1 id="sec.shielding.cpuset.set">
+ <sect1 xml:id="sec.shielding.cpuset.set">
   <title>The set Subcommand</title>
 
   <para>
@@ -23,13 +25,13 @@
    allows the management of cpusets in such a manner.
   </para>
 
-  <sect2 id="sec.shielding.cpuset.set.create_destroy">
+  <sect2 xml:id="sec.shielding.cpuset.set.create_destroy">
    <title>Creating and Destroying Cpusets with <command>set</command></title>
    <para>
     The basic syntax of <command>set</command> for cpuset creation is:
    </para>
-<screen>&prompt.user;<command>cset</command> set -c 1-3 -s my_cpuset1
-cset: --> created cpuset "my_cpuset1"</screen>
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -c 1-3 -s my_cpuset1
+cset: --> created cpuset "my_cpuset1"]]></screen>
    <para>
     This creates a cpuset named <literal>my_cpuset1</literal> with a CPUSPEC
     of CPU1, CPU2 and CPU3. The CPUSPEC is the same concept as described in
@@ -47,8 +49,8 @@ cset: --> created cpuset "my_cpuset1"</screen>
     the <literal>my_cpuset1</literal> cpuset to only use CPUs 1 and 3 (and
     omit CPU2), then issue the following command.
    </para>
-<screen>&prompt.user;<command>cset</command> set -c 1,3 -s my_cpuset1
-cset: --> modified cpuset "my_cpuset</screen>
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -c 1,3 -s my_cpuset1
+cset: --> modified cpuset "my_cpuset]]></screen>
    <para>
     <command>cset</command> will then adjust the CPUs that are assigned to
     the <literal>my_cpuset1</literal> set to only use CPU1 and CPU3.
@@ -57,8 +59,8 @@ cset: --> modified cpuset "my_cpuset</screen>
     To rename a cpuset, use the <option>-n/--newname</option> option. For
     example:
    </para>
-<screen>&prompt.user;<command>cset</command> set -s my_cpuset1 -n super_set
-cset: --> renaming "/cpusets/my_cpuset1" to "super_set"</screen>
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -s my_cpuset1 -n super_set
+cset: --> renaming "/cpusets/my_cpuset1" to "super_set"]]></screen>
    <para>
     Renames the cpuset called <literal>my_cpuset1</literal> to
     <literal>super_set</literal>.
@@ -67,10 +69,10 @@ cset: --> renaming "/cpusets/my_cpuset1" to "super_set"</screen>
     To destroy a cpuset, use the <option>-d/--destroy</option> option as
     follows.
    </para>
-<screen>&prompt.user;<command>cset</command> set -d super_set
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -d super_set
 cset: --> processing cpuset "super_set", moving 0 tasks to parent "/"...
 cset: --> deleting cpuset "/super_set"
-cset: done</screen>
+cset: done]]></screen>
    <para>
     This command destroys the newly created cpuset called
     <literal>super_set</literal>. When a cpuset is destroyed, all the tasks
@@ -96,12 +98,12 @@ cset: done</screen>
     with the root cpuset, for which the path is <filename>/</filename>. For
     example:
    </para>
-<screen>&prompt.user;<command>cset</command> set -c 1,3 -s top_set
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -c 1,3 -s top_set
 cset: --> created cpuset "top_set"
 
 
-&prompt.user;<command>cset</command> set -c 3 -s /top_set/sub_set
-cset: --> created cpuset "/top_set/sub_set"</screen>
+&prompt.user;]]><command>cset</command><![CDATA[ set -c 3 -s /top_set/sub_set
+cset: --> created cpuset "/top_set/sub_set"]]></screen>
    <para>
     These commands created two cpusets: <literal>top_set</literal> and
     <literal>sub_set</literal>. The <literal>top_set</literal> uses CPU1 and
@@ -111,8 +113,8 @@ cset: --> created cpuset "/top_set/sub_set"</screen>
     the name is not unique, then <command>cset</command> will complain and
     ask you to use the path. For example:
    </para>
-<screen>&prompt.user;<command>cset</command> set -c 1,3 -s sub_set
-cset: --> modified cpuset "sub_set</screen>
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -c 1,3 -s sub_set
+cset: --> modified cpuset "sub_set]]></screen>
    <para>
     This command adds CPU1 to the <literal>sub_set</literal> cpuset for its
     use. Note that using the path in this case is optional.
@@ -132,18 +134,18 @@ cset: --> modified cpuset "sub_set</screen>
    </para>
   </sect2>
 
-  <sect2 id="sec.shielding.cpuset.set.list">
+  <sect2 xml:id="sec.shielding.cpuset.set.list">
    <title>Listing Cpusets with set</title>
    <para>
     To list cpusets, use the <command>set</command> subcommand with the
     <option>-l/--list</option> option. For example:
    </para>
-<screen>&prompt.user;<command>cset</command> set -l
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -l
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 root         0-3 y        0 y       320   1    /
-one          3 n          0 n       0     1    /one</screen>
+one          3 n          0 n       0     1    /one]]></screen>
    <para>
     This shows that there is currently one cpuset present called
     <literal>one</literal>. (Of course there is also the
@@ -157,25 +159,25 @@ one          3 n          0 n       0     1    /one</screen>
     specify a cpuset to list with the <command>set</command> subcommand as
     follows:
    </para>
-<screen>&prompt.user;<command>cset</command> set -l -s one
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -l -s one
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 one          3 n          0 n       0     1   /one
-two          3 n          0 n       0     1   /one/two</screen>
+two          3 n          0 n       0     1   /one/two]]></screen>
    <para>
     This output shows that there is a cpuset called <literal>two</literal>
     in cpuset <literal>one</literal> and it also has subset. You can also
     ask for a recursive listing as follows:
    </para>
-<screen>&prompt.user;<command>cset</command> set -l -r
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -l -r
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 root         0-3 y        0 y       320   1    /
 one          3 n          0 n       0     1    /one
 two          3 n          0 n       0     1    /one/two
-three        3 n          0 n       0     0    /one/two/three</screen>
+three        3 n          0 n       0     0    /one/two/three]]></screen>
    <para>
     This command lists all cpusets existing on the system since it asks for
     a recursive listing beginning at the <literal>root</literal> cpuset.
@@ -186,7 +188,7 @@ three        3 n          0 n       0     0    /one/two/three</screen>
    </para>
   </sect2>
  </sect1>
- <sect1 id="sec.shielding.cpuset.proc">
+ <sect1 xml:id="sec.shielding.cpuset.proc">
   <title>The <command>proc</command> Subcommand</title>
 
   <para>
@@ -199,15 +201,15 @@ three        3 n          0 n       0     0    /one/two/three</screen>
    cpuset setup of two sets as follows:
   </para>
 
-<screen>&prompt.user;<command>cset</command> set -l
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -l
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 root         0-3 y        0 y       309   2    /
 two          2 n          0 n       3     0    /two
-three        3 n          0 n       10    0    /three</screen>
+three        3 n          0 n       10    0    /three]]></screen>
 
-  <sect2 id="sec.shielding.cpuset.proc.list">
+  <sect2 xml:id="sec.shielding.cpuset.proc.list">
    <title>Listing Tasks With <command>proc</command></title>
    <para>
     Operation of the <command>proc</command> subcommand follows the same
@@ -216,13 +218,13 @@ three        3 n          0 n       10    0    /three</screen>
     and specify the cpuset by name or, if the name exists multiple times in
     the cpuset hierarchy, by path. For example:
    </para>
-<screen>&prompt.user;<command>cset</command> proc -l -s two
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s two
 cset: "two" cpuset of CPUSPEC(2) with 3 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
 root     16141 4300  Soth bash
 root     16171 16141 Soth bash
-root     16703 16171 Roth python ./cset proc -l two</screen>
+root     16703 16171 Roth python ./cset proc -l two]]></screen>
    <para>
     This output shows us that the cpuset called two has CPU2 only attached
     to it and is running three tasks: two shells and the
@@ -246,14 +248,14 @@ root     16703 16171 Roth python ./cset proc -l two</screen>
     for FIFO or <literal>r</literal> for round robin, and the priority would
     be a number from 1 to 99. See below for an example.
    </para>
-<screen>&prompt.user;<command>cset</command> proc -l -s root | head -7
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s root | head -7
 cset: "root" cpuset of CPUSPEC(0-3) with 309 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
 root        1     0 Soth init [5]
 root        2     0 Soth [kthreadd]
 root        3     2 Sf99 [migration/0]
-root        4     2 Sf99 [posix_cpu_timer]</screen>
+root        4     2 Sf99 [posix_cpu_timer]]]></screen>
    <para>
     This output shows the first few tasks in the <literal>root</literal>
     cpuset. Note that both <literal> init</literal> and
@@ -270,7 +272,7 @@ root        4     2 Sf99 [posix_cpu_timer]</screen>
     Taking a peek into the third cpuset called <literal>three</literal>, we
     see:
    </para>
-<screen>&prompt.user;<command>cset</command> proc -l -s three
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s three
 cset: "three" cpuset of CPUSPEC(3) with 10 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
@@ -283,7 +285,7 @@ alext    16492     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg -...
 alext    16493     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg -...
 alext    17243     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg -...
 alext    17244     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg -...
-alext    17265     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg -...</screen>
+alext    17265     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg -...]]></screen>
    <para>
     This output shows that a lot of <literal>beagled</literal> tasks are
     running in this cpuset and it also shows an ellipsis
@@ -292,14 +294,14 @@ alext    17265     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg -...</
     character screen. To see the entire command line, use the
     <option>-v/--verbose</option> flag:
    </para>
-<screen>&prompt.user;<command>cset</command> proc -l -s three -v | head -4
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s three -v | head -4
 cset: "three" cpuset of CPUSPEC(3) with 10 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
-alext    16165     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg --autostarted --indexing-delay 300</screen>
+alext    16165     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg --autostarted --indexing-delay 300]]></screen>
   </sect2>
 
-  <sect2 id="sec.shielding.cpuset.proc.exec">
+  <sect2 xml:id="sec.shielding.cpuset.proc.exec">
    <title>Execing Tasks with <literal>proc</literal></title>
    <para>
     To exec a task into a cpuset, the <command>proc</command> subcommand
@@ -307,18 +309,18 @@ alext    16165     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg --auto
     exec a shell into the cpuset named <literal>two</literal> in our set.
     First we check to see what is running that set:
    </para>
-<screen>&prompt.user;<command>cset</command> proc -l -s two
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s two
 cset: "two" cpuset of CPUSPEC(2) with 0 tasks running
 
-&prompt.user;<command>cset</command> proc -s two -e bash
+&prompt.user;]]><command>cset</command><![CDATA[ proc -s two -e bash
 cset: --> last message, executed args into cpuset "/two", new pid is: 20955
 
-&prompt.user;<command>cset</command> proc -l -s two
+&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s two
 cset: "two" cpuset of CPUSPEC(2) with 2 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
 root     20955 19253 Soth bash
-root     20981 20955 Roth python ./cset proc -l two</screen>
+root     20981 20955 Roth python ./cset proc -l two]]></screen>
    <para>
     You can see that initially, <literal>two</literal> had nothing running
     in it. After the completion of the second command, we list
@@ -331,16 +333,16 @@ root     20981 20955 Roth python ./cset proc -l two</screen>
     cpuset <literal>two</literal>. Let’s test that by just running a new
     shell with no prefixed <command>cset</command> command.
    </para>
-<screen>&prompt.user;<command>bash</command>
+<screen><![CDATA[&prompt.user;]]><command>bash</command><![CDATA[
 
 
-&prompt.user;<command>cset</command> proc -l -s two
+&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s two
 cset: "two" cpuset of CPUSPEC(2) with 3 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
 root     20955 19253 Soth bash
 root     21118 20955 Soth bash
-root     21147 21118 Roth python ./cset proc -l two</screen>
+root     21147 21118 Roth python ./cset proc -l two]]></screen>
    <para>
     Here again we see that the second shell, PID <literal>21118</literal>,
     has a parent PID of <literal>20955</literal> which is the first shell.
@@ -356,7 +358,7 @@ root     21147 21118 Roth python ./cset proc -l two</screen>
      if the command you want to exec also takes options, separate them with
      the double dash as follows:
     </para>
-<screen>&prompt.user;<command>cset</command> proc -s myset -e mycommand -- -v</screen>
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -s myset -e mycommand -- -v]]></screen>
     <para>
      The <option>-v</option> will be passed to
      <replaceable>mycommand</replaceable>, and not to <option>cset</option>.
@@ -371,9 +373,9 @@ root     21147 21118 Roth python ./cset proc -l two</screen>
      execed, the result may be puzzling. For example:
     </para>
    </tip>
-<screen>&prompt.user;<command>cset</command> proc -s two -e blah-blah
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -s two -e blah-blah
 cset: --> last message, executed args into cpuset "/two", new pid is: 21655
-cset: **> [Errno 2] No such file or directory</screen>
+cset: **> [Errno 2] No such file or directory]]></screen>
    <para>
     The result is no new process even though a new PID is output. The reason
     for the message is of course that the <command>cset</command> process
@@ -382,7 +384,7 @@ cset: **> [Errno 2] No such file or directory</screen>
    </para>
   </sect2>
 
-  <sect2 id="sec.shielding.cpuset.proc.move" >
+  <sect2 xml:id="sec.shielding.cpuset.proc.move">
    <title>Moving Tasks with <command>proc</command></title>
    <para>
     Although the ability to exec a task into a cpuset is fundamental, you
@@ -447,21 +449,21 @@ cset: **> [Errno 2] No such file or directory</screen>
     <literal>root</literal> cpuset with the bash variable for the current
     PID.
    </para>
-<screen>&prompt.user;<command>cset</command> proc -l -s two
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s two
 cset: "two" cpuset of CPUSPEC(2) with 0 tasks running
 
 
-&prompt.user;<command>echo</command> $$
+&prompt.user;]]><command>echo</command><![CDATA[ $$
 19253
 
 
-&prompt.user;<command>cset</command> proc -m -p 19250-19260 -t two
+&prompt.user;]]><command>cset</command><![CDATA[ proc -m -p 19250-19260 -t two
 cset: moving following pidspec: 19253
 cset: moving 1 userspace tasks to /two
 cset: done
 
 
-&prompt.user;<command>cset</command> proc -l -s two
+&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s two
 cset: "two" cpuset of CPUSPEC(2) with 2 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
@@ -469,14 +471,14 @@ root     19253 16447 Roth bash
 root     29456 19253 Roth python ./cset proc -l -s two
 
 
-&prompt.user;<command>cset</command> proc -m -p $$ -t root
+&prompt.user;]]><command>cset</command><![CDATA[ proc -m -p $$ -t root
 cset: moving following pidspec: 19253
 cset: moving 1 userspace tasks to /
 cset: done
 
 
-&prompt.user;<command>cset</command> proc -l -s two
-cset: "two" cpuset of CPUSPEC(2) with 0 tasks running</screen>
+&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s two
+cset: "two" cpuset of CPUSPEC(2) with 0 tasks running]]></screen>
    <para>
     Use of the appropriate PIDSPEC can thus be handy to move tasks and
     groups of tasks. Additionally, there is one more option that can help
@@ -491,7 +493,7 @@ cset: "two" cpuset of CPUSPEC(2) with 0 tasks running</screen>
     <literal>three</literal> to cpuset <literal>two</literal> by using the
     <option>--threads</option> flag.
    </para>
-<screen>&prompt.user;<command>cset</command> set two three
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set two three
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
@@ -499,7 +501,7 @@ two          2 n          0 n       0     0    /two
 three        3 n          0 n       10    0    /three
 
 
-&prompt.user;<command>cset</command> proc -l -s three
+&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s three
 cset: "three" cpuset of CPUSPEC(3) with 10 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
@@ -515,20 +517,20 @@ alext    17244     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg -...
 alext    27133     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg -...
 
 
-&prompt.user;<command>cset</command> proc -m -p 16165 --threads -t two
+&prompt.user;]]><command>cset</command><![CDATA[ proc -m -p 16165 --threads -t two
 cset: moving following pidspec: 16491,16493,16492,16170,16165,16169,27133,17244,17243,16237
 cset: moving 10 userspace tasks to /two
 [==================================================]%
 cset: done
 
 
-&prompt.user;<command>cset</command> set two three
+&prompt.user;]]><command>cset</command><![CDATA[ set two three
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 two          2 n          0 n       10    0    /two
-three        3 n          0 n       0     0    /three</screen>
-   <sect3 id="sec.shielding.cpuset.proc.move.taskset">
+three        3 n          0 n       0     0    /three]]></screen>
+   <sect3 xml:id="sec.shielding.cpuset.proc.move.taskset">
     <title>Moving All Tasks From One Cpuset to Another</title>
     <para>
      There is a special case for moving all tasks currently running in one
@@ -541,7 +543,7 @@ three        3 n          0 n       0     0    /three</screen>
      In the following example, we move all 10 <literal>beagled</literal>
      threads back to cpuset <literal>three</literal> with this method.
     </para>
-<screen>&prompt.user;<command>cset</command> proc -l two three
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -l two three
 cset: "two" cpuset of CPUSPEC(2) with 10 tasks running
 USER      PID   PPID  SPPr TASK NAME
 --------  ----- ----- ---- ---------
@@ -558,21 +560,21 @@ alext     27133     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg -...
 cset: "three" cpuset of CPUSPEC(3) with 0 tasks running
 
 
-&prompt.user;<command>cset</command> proc -m -f two -t three
+&prompt.user;]]><command>cset</command><![CDATA[ proc -m -f two -t three
 cset: moving all tasks from two to /three
 cset: moving 10 userspace tasks to /three
 [==================================================]%
 cset: done
 
 
-&prompt.user;<command>cset</command> set two three
+&prompt.user;]]><command>cset</command><![CDATA[ set two three
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 two          2 n          0 n       0     0    /two
-three        3 n          0 n       10    0    /three</screen>
+three        3 n          0 n       10    0    /three]]></screen>
    </sect3>
-   <sect3 id="sec.shielding.cpuset.proc.move.threads">
+   <sect3 xml:id="sec.shielding.cpuset.proc.move.threads">
     <title>Moving Kernel Threads With <command>proc</command></title>
     <para>
      Kernel threads are special and <command>cset</command> detects tasks
@@ -606,12 +608,12 @@ three        3 n          0 n       10    0    /three</screen>
      the root cpuset to the cpuset named two by using the
      <option>-k</option> option.
     </para>
-<screen>&prompt.user;<command>cset</command> proc -k -f root -t two
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -k -f root -t two
 cset: moving all kernel threads from / to /two
 cset: moving 70 kernel threads to: /two
 cset: --> not moving 76 threads (not unbound, use --force)
 [==================================================]%
-cset: done</screen>
+cset: done]]></screen>
     <para>
      You will note that we used the fromset→toset facility of the
      <command>proc</command> subcommand and we only specified the
@@ -624,24 +626,24 @@ cset: done</screen>
      to specific CPUs. Now, let’s move those kernel threads back to
      <literal>root</literal>.
     </para>
-<screen>&prompt.user;<command>cset</command> proc -k -f two -t root
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -k -f two -t root
 cset: moving all kernel threads from /two to /
 cset: ** no task matched move criteria
 cset: **> kernel tasks are bound, use --force if ok
 
 
-&prompt.user;<command>cset</command> set -l -s two
+&prompt.user;]]><command>cset</command><![CDATA[ set -l -s two
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
-two          2 n          0 n       70    0    /two</screen>
+two          2 n          0 n       70    0    /two]]></screen>
     <para>
      <command>cset</command> refused to move the kernel threads back to
      <literal>root</literal> because it says that they are
      <quote>bound</quote>. Let’s check this with the
      <command>taskset</command> command.
     </para>
-<screen>&prompt.user;<command>cset</command> proc -l -s two | head -5
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -l -s two | head -5
 cset: "two" cpuset of CPUSPEC(2) with 70 tasks running
 USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
@@ -649,15 +651,15 @@ root         2     0 Soth [kthreadd]
 root        55     2 Soth [khelper]
 
 
-&prompt.user;<command>taskset</command> -p 2
+&prompt.user;]]><command>taskset</command><![CDATA[ -p 2
 pid 2's current affinity mask: 4
 
 
-&prompt.user;<command>cset</command> set -l -s two
+&prompt.user;]]><command>cset</command><![CDATA[ set -l -s two
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
-two          2 n          0 n       70    0    /two</screen>
+two          2 n          0 n       70    0    /two]]></screen>
     <para>
      Of course, since the cpuset named <literal>two</literal> only has CPU2
      assigned to it, once we moved the unbound kernel threads from
@@ -666,15 +668,15 @@ two          2 n          0 n       70    0    /two</screen>
      <command>taskset</command> output which is a hex value. To really move
      these threads back to root, we need to force the move as follows.
     </para>
-<screen>&prompt.user;<command>cset</command> proc -k -f two -t root --force
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -k -f two -t root --force
 cset: moving all kernel threads from /two to /
 cset: moving 70 kernel threads to: /
 [==================================================]%
-cset: done</screen>
+cset: done]]></screen>
    </sect3>
   </sect2>
 
-  <sect2 id="sec.shielding.cpuset.proc.destroy">
+  <sect2 xml:id="sec.shielding.cpuset.proc.destroy">
    <title>Destroying Tasks</title>
    <para>
     There actually is no <command>cset</command> subcommand or option to
@@ -686,7 +688,7 @@ cset: done</screen>
    </para>
   </sect2>
  </sect1>
- <sect1 id="sec.shielding.cpuset.shielding.set_proc">
+ <sect1 xml:id="sec.shielding.cpuset.shielding.set_proc">
   <title>Implementing <quote>Shielding</quote> With <command>set</command> and <command>proc</command></title>
 
   <para>
@@ -727,41 +729,41 @@ cset: done</screen>
    CPUs.
   </para>
 
-<screen>&prompt.user;<command>cset</command> set -c 0 -s system
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -c 0 -s system
 cset: --> created cpuset "system"
 
 
-&prompt.user;<command>cset</command> set -c 1-3 -s user
+&prompt.user;]]><command>cset</command><![CDATA[ set -c 1-3 -s user
 cset: --> created cpuset "user"
 
 
-&prompt.user;<command>cset</command> set -l
+&prompt.user;]]><command>cset</command><![CDATA[ set -l
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 root         0-3 y        0 y       333   2    /
 user         1-3 n        0 n       0     0    /user
-system       0 n          0 n       0     0    /system</screen>
+system       0 n          0 n       0     0    /system]]></screen>
 
   <para>
    Now, we need to move all running user processes into the
    <literal>system</literal> cpuset.
   </para>
 
-<screen>&prompt.user;<command>cset</command> proc -m -f root -t system
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -m -f root -t system
 cset: moving all tasks from root to /system
 cset: moving 188 userspace tasks to /system
 [==================================================]%
 cset: done
 
 
-&prompt.user;<command>cset</command> set -l
+&prompt.user;]]><command>cset</command><![CDATA[ set -l
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 root         0-3 y        0 y       146    2   /
 user         1-3 n        0 n       0      0   /user
-system       0 n          0 n       187    0   /system</screen>
+system       0 n          0 n       187    0   /system]]></screen>
 
   <para>
    We now have the basic shielding set up. Since all userspace tasks are
@@ -775,7 +777,7 @@ system       0 n          0 n       187    0   /system</screen>
    execute the following command as well:
   </para>
 
-<screen>&prompt.user;<command>cset</command> proc -k -f root -t system
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -k -f root -t system
 cset: moving all kernel threads from / to /system
 cset: moving 70 kernel threads to: /system
 cset: --> not moving 76 threads (not unbound, use --force)
@@ -783,13 +785,13 @@ cset: --> not moving 76 threads (not unbound, use --force)
 cset: done
 
 
-&prompt.user;<command>cset</command> set -l
+&prompt.user;]]><command>cset</command><![CDATA[ set -l
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 root         0-3 y        0 y       76    2    /
 user         1-3 n        0 n       0     0    /user
-system       0 n          0 n       257   0    /system</screen>
+system       0 n          0 n       257   0    /system]]></screen>
 
   <para>
    At this point, you have achieved the simple shielding model that the
@@ -798,7 +800,7 @@ system       0 n          0 n       257   0    /system</screen>
    model.
   </para>
  </sect1>
- <sect1 id="sec.shielding.cpuset.hierarchy.set_proc">
+ <sect1 xml:id="sec.shielding.cpuset.hierarchy.set_proc">
   <title>Implementing Hierarchy With set and proc</title>
 
   <para>
@@ -869,34 +871,34 @@ system       0 n          0 n       257   0    /system</screen>
    follows.
   </para>
 
-<screen>&prompt.user;<command>cset</command> set -r
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -r
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 root         0-3 y        0 y       344   0    /
 
 
-&prompt.user;<command>cset</command> set -c 0-3 prio_all
+&prompt.user;]]><command>cset</command><![CDATA[ set -c 0-3 prio_all
 cset: --> created cpuset "prio_all"
 
 
-&prompt.user;<command>cset</command> set -c 1-3 /prio_all/prio_high
+&prompt.user;]]><command>cset</command><![CDATA[ set -c 1-3 /prio_all/prio_high
 cset: --> created cpuset "/prio_all/prio_high"
 
 
-&prompt.user;<command>cset</command> set -c 2-3 /prio_all/prio_high/prio_med
+&prompt.user;]]><command>cset</command><![CDATA[ set -c 2-3 /prio_all/prio_high/prio_med
 cset: --> created cpuset "/prio_all/prio_high/prio_med"
 
 
-&prompt.user;<command>cset</command> set -c 3 /prio_all/prio_high/prio_med/prio_low
+&prompt.user;]]><command>cset</command><![CDATA[ set -c 3 /prio_all/prio_high/prio_med/prio_low
 cset: --> created cpuset "/prio_all/prio_high/prio_med/prio_low"
 
 
-&prompt.user;<command>cset</command> set -c 0 system
+&prompt.user;]]><command>cset</command><![CDATA[ set -c 0 system
 cset: --> created cpuset "system"
 
 
-&prompt.user;<command>cset</command> set -l -r
+&prompt.user;]]><command>cset</command><![CDATA[ set -l -r
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
@@ -905,7 +907,7 @@ system       0 n          0 n       0     0    /system
 prio_all     0-3 n        0 n       0     1    /prio_all
 prio_high    1-3 n        0 n       0     1    /prio_all/prio_high
 prio_med     2-3 n        0 n       0     1    /prio_all/prio_high/prio_med
-prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</screen>
+prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low]]></screen>
 
   <note>
    <title>Why <option>-r/--recurse</option> Is Needed in This Case</title>
@@ -923,7 +925,7 @@ prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</
    cpuset to activate the shield.
   </para>
 
-<screen>&prompt.user;<command>cset</command> proc -m -k -f root -t system
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ proc -m -k -f root -t system
 cset: moving all tasks from root to /system
 cset: moving 198 userspace tasks to /system
 cset: moving 70 kernel threads to: /system
@@ -932,7 +934,7 @@ cset: --> not moving 76 threads (not unbound, use --force)
 cset: done
 
 
-&prompt.user;<command>cset</command> set -l -r
+&prompt.user;]]><command>cset</command><![CDATA[ set -l -r
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
@@ -941,7 +943,7 @@ system       0 n          0 n       268   0    /system
 prio_all     0-3 n        0 n       0     1    /prio_all
 prio_high    1-3 n        0 n       0     1    /prio_all/prio_high
 prio_med     2-3 n        0 n       0     1    /prio_all/prio_high/prio_med
-prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</screen>
+prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low]]></screen>
 
   <para>
    The shield is now active. Since the <literal>prio_*</literal> cpuset
@@ -958,7 +960,7 @@ prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</
    <option>-v</option>/<option>--verbose</option> flag as follows:
   </para>
 
-<screen>&prompt.user;<command>cset</command> set -l -r -v
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ set -l -r -v
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
@@ -967,6 +969,6 @@ system       0 n          0 n       268   0    /system
 prio_all     0-3 n        0 n       0     1    /prio_all
 prio_high    1-3 n        0 n       0     1    /prio_all/prio_high
 prio_med     2-3 n        0 n       0     1    /prio_all/prio_high/prio_med
-prio_low     3 n          0 n       0     0    /prio_all/prio_high/prio_med/prio_low</screen>
+prio_low     3 n          0 n       0     0    /prio_all/prio_high/prio_med/prio_low]]></screen>
  </sect1>
 </chapter>

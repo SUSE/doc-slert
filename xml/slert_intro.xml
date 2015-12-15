@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd" [
- <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
- <!ENTITY % entities SYSTEM "entity-decl.ent">
- %entities;
+<!DOCTYPE chapter
+[
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
 ]>
-<chapter id="cha.shielding.intro">
+<!-- Converted by suse-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha.shielding.intro">
  <title>Introduction</title>
+ <info/>
  <para>
   In the Linux kernel, the cpuset facility provides a mechanism for creating
   logical entities called <quote>cpusets</quote> that encompass definitions
@@ -52,19 +54,19 @@
   <varlistentry>
    <term>For a full list of cset subcommands</term>
    <listitem>
-<screen>&prompt.user;<command>cset</command> <option>help</option></screen>
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ ]]><option>help</option></screen>
    </listitem>
   </varlistentry>
   <varlistentry>
    <term>For in-depth help on individual subcommands</term>
    <listitem>
-<screen>&prompt.user;<command>cset</command> <option>help</option> <replaceable>&lt;subcommand&gt;</replaceable></screen>
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ ]]><option>help</option><![CDATA[ ]]><replaceable>&lt;subcommand&gt;</replaceable></screen>
    </listitem>
   </varlistentry>
   <varlistentry>
    <term>For options on individual subcommands</term>
    <listitem>
-<screen>&prompt.user;<command>cset</command> <replaceable>&lt;subcommand&gt;</replaceable> <option>(-h | --help)</option></screen>
+<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ ]]><replaceable>&lt;subcommand&gt;</replaceable><![CDATA[ ]]><option>(-h | --help)</option></screen>
    </listitem>
   </varlistentry>
  </variablelist>
