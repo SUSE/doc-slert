@@ -34,8 +34,9 @@
     <para> To install &slerte; &productnumber;, start a regular &sls;
       &productnumber; installation. Select &slerte; &productnumber; as
       an add-on product during the installation. Alternately, if &sls;
-      is already installed, you can start the add-on Product
-      installation from YaST. However, in the YaST Boot Loader
+      is already installed, you can start the Add-on Product
+      installation from YaST or enable the extension in the &yast; &scc;
+      configuration. However, in the &yast; Boot Loader
       configurator you need to select the <literal>-rt</literal> kernel
       flavor as the default, as that is not done automatically in this
       case. </para>
@@ -72,28 +73,28 @@
 
     <!-- shield cpu -->
 
-    <screen><![CDATA[cset shield --cpu=3]]></screen>
+    <screen><![CDATA[cset shield shield --cpu=3]]></screen>
 
     <para> This will shield CPU3 and keep on a 4-way machine CPU0-CPU2
       unshielded. The argument of the <option>--cpu</option> parameter
       accepts comma separated lists of CPUs including range
       specifications: </para>
 
-    <screen><![CDATA[cset --cpu=1,3,5-7]]></screen>
+    <screen><![CDATA[cset shield --cpu=1,3,5-7]]></screen>
 
     <para> On a 8-way machine this command will shield CPU1, CPU3, CPU5,
       CPU6 and CPU7. CPU0, CPU2 and CPU4 will remain unshielded. Already
       existing CPU shields could be extended by the same command. For
       example, to add CPU4 to the mentioned CPU set: </para>
 
-    <screen><![CDATA[cset --cpu=1,3-7]]></screen>
+    <screen><![CDATA[cset shield --cpu=1,3-7]]></screen>
 
     <para> CPU1, CPU3, CPU5 to CPU6 were already shielded and only CPU4
       will additionally be shielded. Technically the command is updating
       the current CPU shield schema. To reduce the number of shielded
       CPUs and to unshield CPU1, for example, use the following command: </para>
 
-    <screen><![CDATA[cset --cpu=3-7]]></screen>
+    <screen><![CDATA[cset shield --cpu=3-7]]></screen>
 
     <para> Now only CPU3, CPU4, CPU5, CPU6 and CPU7 are shielded. CPU0,
       CPU1 and CPU2 are available for system usage. </para>
@@ -115,7 +116,7 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
     <para> By default, CPU shielding consists of at least of three
       cpusets: </para>
 
-    <itemizedlist mark="bullet" spacing="normal">
+    <itemizedlist>
       <listitem>
         <para>
           <literal>root</literal> exists always and contains all
@@ -139,13 +140,13 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
       process in the shielded CPU set use the <command>--exec</command>
       parameter: </para>
 
-    <screen><![CDATA[cset --exec &lt;application&gt;]]></screen>
+    <screen>cset shield --exec <replaceable>application</replaceable></screen>
 
     <para> To move already running processes to the shielded CPU set use
       the <command>--shield</command> parameter. It accepts a
       comma-separated list of PIDs as well as range specifications: </para>
 
-    <screen><![CDATA[cset --shield=1,2,600-700]]></screen>
+    <screen><![CDATA[cset shield --shield --pid=1,2,600-700]]></screen>
 
     <para> This moves processes with PID 1, 2 and from 600 to 700 to the
       shielded CPU set. If there is a gap in the range from 600 to 700,
@@ -197,7 +198,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
         <command>--shield</command> parameter, which accepts a
       comma-separated list of PIDs/TIDs and range specifications: </para>
 
-    <screen><![CDATA[cset --unshield=2,650-655]]></screen>
+    <screen><![CDATA[cset shield --unshield --pid=2,650-655]]></screen>
 
     <para> This command will unshield the process with the PID 2 and the
       processes in range of 650 and 655. </para>
@@ -266,7 +267,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
       and memory list, use the <option>-r</option> parameter. The
         <quote>-X</quote> column shows the exclusive state of CPU or
       memory. The <quote>path</quote> column shows the real path in the
-      virtual file system <literal>cpuset</literal>. </para>
+      virtual <literal>cpuset</literal> file system. </para>
 
     <screen><![CDATA[cpuset set -r]]></screen>
 
@@ -282,8 +283,9 @@ cset: "user" cpuset of:    3 cpu, with: 1
     <screen><![CDATA[cset set --mem=1,3-6 new_set]]></screen>
 
     <para>
-      <remark>mdejmek: are these two parameters or
-        one+argument?</remark> Additionally, with the
+      <remark>mdejmek: are these two parameters or one+argument?</remark>
+      <remark>libor: OS_COMMAND CSET_COMMAND CSET_COMMAND_OPTION CSET_COMMAND_ARGUMENT</remark>
+      Additionally, with the
         <option>--cpu_exclusive</option> and
         <option>--mem_exclusive</option> parameters (without any
       additional arguments) set the CPUs or memory nodes exclusive to a
@@ -1274,23 +1276,6 @@ rmdir /dev/cpuset/$1
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term>anticipatory</term>
-        <listitem>
-          <para> The main principle of <emphasis>anticipatory</emphasis>
-            scheduling is, that after a read, the scheduler expects
-            further reads from userspace. For this reason, after a read
-            completes, the anticipatory scheduler will do nothing for a
-            few milliseconds, giving userspace the possibility to ask
-            for another read. If such a read is requested, it will be
-            performed immediately. Otherwise, the scheduler continues
-            with doing writes after a short timeout. </para>
-          <para> The advantage of this procedure is a major reduction of
-            seeks and thus, a decreased read latency. This also
-            increases read and write bandwidth. </para>
-          <!-- http://www.cs.rice.edu/~ssiyer/r/antsched/antio.html -->
-        </listitem>
-      </varlistentry>
-      <varlistentry>
         <term>deadline</term>
         <listitem>
           <para> The main point of <emphasis>deadline</emphasis>
@@ -1333,7 +1318,7 @@ rmdir /dev/cpuset/$1
         <filename>/dev/sda</filename>, use the following command: </para>
 
     <screen><![CDATA[cat /sys/block/sda/queue/scheduler
-noop anticipatory deadline [cfq]]]></screen>
+noop deadline [cfq]]]></screen>
 
     <para> In this case, the scheduler for <filename>/dev/sda</filename>
       is set to <literal>cfq</literal>, the <literal>Completely Fair
@@ -1341,14 +1326,14 @@ noop anticipatory deadline [cfq]]]></screen>
       &slerte;. </para>
 
     <para> To change the schedulers, echo one of the names
-        <literal>noop</literal>, <literal>anticipatory</literal>,
-        <literal>deadline</literal>, or <literal>cfq</literal> into
+       <literal>noop</literal>, <literal>deadline</literal>, or
+       <literal>cfq</literal> into
         <filename>/sys/block/&lt;device&gt;/scheduler</filename>. For
       example, if you want to set the I/O scheduler of the device
         <filename>/dev/sda</filename> to <literal>noop</literal>, use
       the following command: </para>
 
-    <screen><![CDATA[echo "noop" &gt; /sys/block/sda/scheduler]]></screen>
+    <screen>echo "noop" &gt; /sys/block/sda/queue/scheduler</screen>
 
     <para> To set other variables in the <filename>/sys</filename> file
       system, use a similar approach. </para>
@@ -1373,38 +1358,6 @@ noop anticipatory deadline [cfq]]]></screen>
         <term>Anticipatory Scheduler</term>
         <listitem>
           <variablelist>
-            <varlistentry>
-              <term><option>antic_expire</option>
-              </term>
-              <listitem>
-                <para> Time in milliseconds that the
-                    <emphasis>anticipatory</emphasis> scheduler waits
-                  for another read request close to the last read
-                  request performed. If this value is set to zero, the
-                    <emphasis>anticipatory</emphasis> scheduler will not
-                  wait for upcoming read requests. </para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><option>read_expire</option>
-              </term>
-              <listitem>
-                <para> Deadline of a read request in milliseconds. This
-                  scheduler also controls the interval between expired
-                  requests. By default, <option>read_expire</option> is
-                  set to <literal>125</literal> milliseconds. Thus, it
-                  can take up to 250 milliseconds until the next read
-                  request on the list is served. </para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><option>write_expire</option>
-              </term>
-              <listitem>
-                <para> Similar to <option>read_expire</option> for write
-                  requests. </para>
-              </listitem>
-            </varlistentry>
             <varlistentry>
               <term><option>read_batch_expire</option>
               </term>
@@ -1526,18 +1479,19 @@ noop anticipatory deadline [cfq]]]></screen>
               <listitem>
                 <para> The <option>fifo_expire_*</option> variables
                   define the timeout in milliseconds for asynchronous
-                  and synchronous I/O requests. Typically,
-                    <option>fifo_expire_async</option> affects write and
-                    <option>fifo_expire_sync</option> affects both, read
-                  and write operations. </para>
+                  and synchronous I/O requests. In order to prefer
+                  synchronous operations over asynchronous ones, 
+                  <option>fifo_expire_sync</option> value should be lower
+                  than fifo_expire_async.</para>
               </listitem>
             </varlistentry>
             <varlistentry>
               <term><option>quantum</option>
               </term>
               <listitem>
-                <para> Defines the number of I/O requests to dispatch
-                  when the block device is idle. </para>
+                <para> Defines number of I/O requests to be dispatched at
+                  once by the block device. This parameter is used for
+                  synchronous requests.</para>
               </listitem>
             </varlistentry>
             <varlistentry>
@@ -1550,24 +1504,21 @@ noop anticipatory deadline [cfq]]]></screen>
                 <para> These variables define the time slices a block
                   device gets for synchronous or asynchronous
                   operations. </para>
-                <itemizedlist mark="bullet" spacing="normal">
+                <itemizedlist>
                   <listitem>
                     <para>
                       <option>slice_async</option> and
-                        <option>slice_sync</option> represent the length
-                      of an asynchronous or synchronous disk slice in
-                      milliseconds. </para>
+                        <option>slice_sync</option> serve as a base value
+                      in milliseconds for asynchronous or synchronous disk
+                      slice length calculations.</para>
                   </listitem>
                   <listitem>
-                    <para>
-                      <option>slice_async_rq</option> defines for how
-                      many requests an asynchronous disk slice lasts.
-                    </para>
+                    <para><option>slice_async_rq</option> for how many
+                      requests can an asynchronous disk slice accomodate.</para>
                   </listitem>
                   <listitem>
-                    <para>
-                      <option>slice_idle</option> defines how long a
-                      synchronisation slice may idle. </para>
+                    <para><option>slice_idle</option> defines how long I/O
+                      scheduler idles before servicing next thread.</para>
                   </listitem>
                 </itemizedlist>
               </listitem>
@@ -1617,7 +1568,7 @@ noop anticipatory deadline [cfq]]]></screen>
    -->
     </para>
 
-    <itemizedlist mark="bullet" spacing="normal">
+    <itemizedlist>
       <listitem>
         <para> More detailed information about the Real-Time Linux
           Development and an introduction how to write a Real-Time
@@ -1629,18 +1580,12 @@ noop anticipatory deadline [cfq]]]></screen>
       </listitem>
       <listitem>
         <para> The cpuset feature of the kernel is explained in
-            <filename>/usr/src/linux/Documentation/cpusets.txt</filename>.
+            <filename>/usr/src/linux/Documentation/cgroups/cpusets.txt</filename>.
           More detailed documentation is available from <link
-            xlink:href="http://techpubs.sgi.com/library/tpl/cgi-bin/getdoc.cgi/linux/bks/SGI_Admin/books/LX_Resource_AG/sgi_html/ch04.html"
+            xlink:href="http://techpubs.sgi.com/library/tpl/cgi-bin/getdoc.cgi/linux/bks/SGI_Admin/books/LX_Resource_AG/sgi_html/ch01.html"
           />, <link xlink:href="http://www.bullopensource.org/cpuset/"
           />, and <link xlink:href="http://lwn.net/Articles/127936/"/>.
         </para>
-      </listitem>
-      <listitem>
-        <para> An overview of CPU and I/O schedulers available in Linux
-          can be found at <link
-            xlink:href="http://aplawrence.com/Linux/linux26_features.html"
-          />. </para>
       </listitem>
       <!--
    <listitem>
@@ -1657,31 +1602,17 @@ noop anticipatory deadline [cfq]]]></screen>
       <listitem>
         <para> For more information about the deadline I/O scheduler,
           refer to <link
-            xlink:href="http://lwn.net/2002/0110/a/io-scheduler.php3"/>. <!--
-     <ulink
-       url="http://kerneltrap.org/node/431"/>
-     -->
-          <remark>mschnitzer: the link above does not work
-            anymore.</remark> In your installed system, find further
+            xlink:href="https://en.wikipedia.org/wiki/Deadline_scheduler."/>.
+          <!-- <link xlink:href="http://kerneltrap.org/node/431"/> -->
+          In your installed system, find further
           information in
             <filename>/usr/src/linux/Documentation/block/deadline-iosched.txt</filename>.
         </para>
       </listitem>
       <listitem>
         <para> The CFQ I/O scheduler is covered in detail in <link
-            xlink:href="http://en.wikipedia.org/wiki/CFQ"/>. </para>
-      </listitem>
-      <listitem>
-        <para> General information about I/O scheduling in Linux is
-          available at <!--
-     <ulink
-      url="http://www.linux-magazin.de/heft_abo/ausgaben/2005/04/kern_technik"/>,
-     -->
-          <link xlink:href="http://lwn.net/Articles/101029/"/> and <link
-            xlink:href="http://lwn.net/Articles/114273/"/>. <!-- <ulink url="http://donami.com/118"/>. -->
-          <remark>mschnitzer: the link above does not work
-            anymore.</remark>
-        </para>
+            xlink:href="http://en.wikipedia.org/wiki/CFQ"/>
+          and <filename>/usr/src/linux/Documentation/block/cfq-iosched.txt</filename>. </para>
       </listitem>
       <listitem>
         <para> A lot of information about real-time can be found at
