@@ -404,30 +404,30 @@ cset: **> [Errno 2] No such file or directory]]></screen>
    </para>
    <variablelist>
     <varlistentry>
-     <term><option>--shield --pid</option> 1234</term>
+     <term><option>--pid</option> 1234</term>
      <listitem>
       <para>
-       This PIDSPEC argument specifies that PID <literal>1234</literal> be
+       This PIDSPEC argument specifies that PID <literal>1234</literal> will be
        moved.
       </para>
      </listitem>
     </varlistentry>
     <varlistentry>
-     <term><option>--shield --pid</option> 1234,42,1934,15000,15001,15002</term>
+     <term><option>--pid</option> 1234,42,1934,15000,15001,15002</term>
      <listitem>
       <para>
-       This PIDSPEC argument specifies that this list of tasks only be
+       This PIDSPEC argument specifies that only listed tasks will be
        moved.
       </para>
      </listitem>
     </varlistentry>
     <varlistentry>
-     <term><option>--unshield -p</option> 5000,5100,6010-7000,9232</term>
+     <term><option>-p</option> 5000,5100,6010-7000,9232</term>
      <listitem>
       <para>
        This PIDSPEC argument specifies that tasks <literal>5000</literal>,
-       <literal>5100</literal> and <literal>9232</literal> be moved along
-       with any existing task that is in the range <literal>6010</literal>
+       <literal>5100</literal> and <literal>9232</literal> will be moved along
+       with any existing task with PID in the range <literal>6010</literal>
        through <literal>7000</literal> inclusive.
       </para>
      </listitem>

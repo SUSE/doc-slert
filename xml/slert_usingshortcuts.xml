@@ -342,9 +342,9 @@
   </informaltable>
 
   <remark>
-   mschnitzer: Where is the sense between "p -l one two" is equivalent to "p one
-   two". How can that be equivalent? Is -l a command which does nothing? :D
-   It would be nice if you can have a look on all of the "is equivalent to" tables. For double checking if the commands are really correct.
+   lpechacek: The concept of implicit commands and interchangeable options is
+   indeed weird.  Anyway, the above examples work according to the principle
+   mentioned at the beginning of <xref linkend="cha.shielding.shortcuts"/>.
   </remark>
 
   <para>
@@ -383,7 +383,7 @@
   </informaltable>
 
   <para>
-   Movement of tasks into and out of cpusets have the following shortcuts.
+   Moving tasks into and out of cpusets have the following shortcuts.
    To move a PIDSPEC into a cpuset:
   </para>
 

@@ -15,6 +15,9 @@
  </para>
  <para>
   <link xlink:href="https://code.google.com/p/cpuset/issues/list"/>
+  <remark>
+    lpechacek: This upstream project is dead.  Will be moved to GitHub.
+  </remark>
  </para>
  <para>
   If you are using <command>cset</command> on a supported operating system
