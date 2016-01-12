@@ -34,6 +34,7 @@
     <title>Quick Start Manuals</title>
     <xi:include href="art_slert_quickstart.xml"/>
     <xi:include href="art_slert_hw_testing.xml"/>
+    <xi:include href="art_slert_virtguide.xml"/>
     <xi:include href="common_legal.xml"/>
   </book>
 </set>
