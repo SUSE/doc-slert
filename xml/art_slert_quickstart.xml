@@ -278,7 +278,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
       memory. The <quote>path</quote> column shows the real path in the
       virtual <literal>cpuset</literal> file system. </para>
 
-    <screen><![CDATA[cpuset set -r]]></screen>
+    <screen><![CDATA[cpu set -r]]></screen>
 
     <!-- cset set .... assinging memory -->
 
