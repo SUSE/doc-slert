@@ -1,0 +1,23 @@
+## ---------------------------- 
+## Doc Config File for SLERTE
+## Quick Start
+## ----------------------------
+##
+## Basics
+MAIN="art_slert_virtguide.xml"
+
+##
+# ROOTID="art.slert.hwtest"
+
+## Profiling
+PROFOS="slerte"
+PROFARCH="x86;amd64;em64t"
+
+## Provo
+HTMLROOT="slerte11"
+
+## stylesheet location
+STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2013-ns"
+# FALLBACK_STYLEROOT="/usr/share/xml/docbook/stylesheet/suse"
+#HTML_CSS="/usr/share/xml/docbook/stylesheet/suse/html/susebooks.css"
+#EPUB_CSS="/usr/share/xml/docbook/stylesheet/suse/epub/susebooks.css"
