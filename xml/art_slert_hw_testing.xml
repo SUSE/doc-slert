@@ -119,8 +119,8 @@
       as histogram overflows. The histogram is dumped to STDOUT, but you
       can redirect it to a file: </para>
 
-    <screen><![CDATA[cyclictest --loops=1000 \
---histogram=1000 > histogram]]></screen>
+    <screen>cyclictest --loops=1000 \
+--histogram=1000 > histogram</screen>
 
     <para> The histogram file can be visualized with the
         <command>cyclictest_plot.sh</command> script. The result is a
@@ -148,8 +148,8 @@
     <para> To start using hardware latency detector, use (as
       &rootuser;): </para>
 
-    <screen><![CDATA[modprobe hwlat_detector enabled=1 \
-threshold=]]><replaceable>10</replaceable></screen>
+    <screen>modprobe hwlat_detector enabled=1 \
+threshold=<replaceable>10</replaceable></screen>
 
     <para> The <literal>threshold</literal> value is the minimum latency
       value to be considered in microseconds. Use the value that is
@@ -161,8 +161,7 @@ threshold=]]><replaceable>10</replaceable></screen>
 
     <variablelist>
       <varlistentry>
-        <term><filename>count</filename>
-        </term>
+        <term><filename>count</filename></term>
         <listitem>
           <para> Contains the number of latency spikes (larger than
               <literal>threshold</literal>) observed since the last
@@ -170,24 +169,21 @@ threshold=]]><replaceable>10</replaceable></screen>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>enable</filename>
-        </term>
+        <term><filename>enable</filename></term>
         <listitem>
           <para> The global enable/disable toggle
               (<literal>0/1</literal>), resets the count. </para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>max</filename>
-        </term>
+        <term><filename>max</filename></term>
         <listitem>
           <para> The maximum hardware latency that has been observed, in
             microseconds. </para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>sample</filename>
-        </term>
+        <term><filename>sample</filename></term>
         <listitem>
           <para> A pipe from which to read current raw sample data in
             the format <literal><replaceable>timestamp</replaceable>
@@ -197,16 +193,14 @@ threshold=]]><replaceable>10</replaceable></screen>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>threshold</filename>
-        </term>
+        <term><filename>threshold</filename></term>
         <listitem>
           <para> The minimum latency value to be considered, in
             microseconds. </para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>width</filename>
-        </term>
+        <term><filename>width</filename></term>
         <listitem>
           <para> The time period to sample with CPUs held, in
             microseconds. Must be less than the total window size
@@ -214,8 +208,7 @@ threshold=]]><replaceable>10</replaceable></screen>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>window</filename>
-        </term>
+        <term><filename>window</filename></term>
         <listitem>
           <para> The total size of the sampling window (including the
             width), in microseconds. </para>

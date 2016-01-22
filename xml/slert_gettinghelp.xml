@@ -34,7 +34,7 @@
   option with a file name as an argument to the main cset application. For
   example:
  </para>
-<screen><![CDATA[&prompt.user;]]><command>cset</command><![CDATA[ -l logfile.txt set -n ]]><replaceable>newname</replaceable><![CDATA[ ]]><replaceable>oldname</replaceable></screen>
+<screen>&prompt.user;<command>cset</command> -l logfile.txt set -n <replaceable>newname</replaceable> <replaceable>oldname</replaceable></screen>
  <para>
   If the issue persists and is reproducible, Including this report in your
   bug submission greatly reduces development time. This command saves
