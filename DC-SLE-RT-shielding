@@ -4,7 +4,8 @@
 ## ----------------------------
 ##
 ## Basics
-MAIN="book_slert_shielding.xml"
+MAIN="MAIN.SLERT.xml"
+ROOTID="book.slert.shielding"
 
 ## Profiling
 PROFOS="slerte"
