@@ -148,13 +148,13 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
       process in the shielded CPU set use the <option>--exec</option>
       option: </para>
 
-    <screen>cset shield --exec <replaceable>application</replaceable></screen>
+    <screen><command>cset</command> shield --exec <replaceable>application</replaceable></screen>
 
     <para> To move already running processes to the shielded CPU set use
       the <option>--shield</option> option. It accepts a
       comma-separated list of PIDs as well as range specifications: </para>
 
-    <screen>cset shield --shield --pid=1,2,600-700</screen>
+    <screen><command>cset</command> shield --shield --pid=1,2,600-700</screen>
 
     <para> This moves processes with PID 1, 2 and from 600 to 700 to the
       shielded CPU set. If there is a gap in the range from 600 to 700,
@@ -184,7 +184,7 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
       unshielded processes, add the <command>--verbose</command>
       option: </para>
 
-    <screen>cset shield --verbose
+    <screen><command>cset</command> shield --verbose
 cset: --> shielding system active with
 cset: "system" cpuset of: 0-2,4-15 cpu, with:
    USER       PID  PPID S TASK NAME
@@ -206,7 +206,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
         <command>--shield</command> option, which accepts a
       comma-separated list of PIDs/TIDs and range specifications: </para>
 
-    <screen>cset shield --unshield --pid=2,650-655</screen>
+    <screen><command>cset</command> shield --unshield --pid=2,650-655</screen>
 
     <para> This command will unshield the process with the PID 2 and the
       processes in range of 650 and 655. </para>
@@ -222,7 +222,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     <para> For more information about options and parameters of the
         <command>shield</command> subcommand, view the help by running: </para>
 
-    <screen>cset help shield</screen>
+    <screen><command>cset</command> help shield</screen>
 
     <!-- basic cset commands -->
 
@@ -248,14 +248,14 @@ cset: "user" cpuset of:    3 cpu, with: 1
       you have to specify the CPUs which should be used. Either use a
       comma-separated list or a range specification: </para>
 
-    <screen>cset set --cpu=1-7 "/one"</screen>
+    <screen><command>cset</command> set --cpu=1-7 "/one"</screen>
 
     <para> This command will create a cpuset called <systemitem>one</systemitem>
       with assigned CPUs from CPU1 to CPU7. To specify a new cpuset
       called <systemitem>two</systemitem> that is a subset of <systemitem>one</systemitem>,
       proceed as follows: </para>
 
-    <screen>cset set --cpu=6 "/one/two"</screen>
+    <screen><command>cset</command> set --cpu=6 "/one/two"</screen>
 
     <!-- stolen from "cset help set" -->
 
@@ -278,7 +278,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
       memory. The <quote>path</quote> column shows the real path in the
       virtual cpuset file system. </para>
 
-    <screen>cset set -r</screen>
+    <screen><command>cset</command> set -r</screen>
 
     <!-- cset set .... assinging memory -->
 
@@ -289,7 +289,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
       assign MEM1, MEM3, MEM4, MEM5 and MEM6 to the cpuset
         <systemitem>new_set</systemitem>: </para>
 
-    <screen>cset set --mem=1,3-6 new_set</screen>
+    <screen><command>cset</command> set --mem=1,3-6 new_set</screen>
 
     <para>
       Additionally, with the
@@ -298,7 +298,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
       additional arguments) set the CPUs or memory nodes exclusive to a
       cpuset: </para>
 
-    <screen>cset set --cpu_exclusive "/one"</screen>
+    <screen><command>cset</command> set --cpu_exclusive "/one"</screen>
 
     <para> The status of exclusive state of CPU or memory is shown in
       the <option>-X</option> column when running: </para>
@@ -311,7 +311,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
       the subcommand <command>set</command>, view the
         <command>cset</command> help: </para>
 
-    <screen>cset help set</screen>
+    <screen><command>cset</command> help set</screen>
 
     <!-- cset proc .... exec -->
 
@@ -321,7 +321,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
       start the application <systemitem>fastapp</systemitem> within the cpuset
         <systemitem>new_set</systemitem>: </para>
 
-    <screen>cset proc --exec --set new_set fastapp</screen>
+    <screen><command>cset</command> proc --exec --set new_set fastapp</screen>
 
     <!-- cset proc ... move -->
 
@@ -332,14 +332,14 @@ cset: "user" cpuset of:    3 cpu, with: 1
         2442 and within range of 3000 to 3200 into the
       cpuset <systemitem>new_set</systemitem>: </para>
 
-    <screen>cset proc --move 2442,3000-3200 new_set</screen>
+    <screen><command>cset</command> proc --move 2442,3000-3200 new_set</screen>
 
     <!-- cset proc ... list -->
 
     <para> Listing processes running within a specific cpuset can be
       done by using the option <option>--list</option>. </para>
 
-    <screen>cset proc --list new_set</screen>
+    <screen><command>cset</command> proc --list new_set</screen>
 
     <!-- cset proc ... fromset toset -->
 
@@ -350,7 +350,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
         <systemitem>old_set</systemitem> and assign them to
         <systemitem>new_set</systemitem>: </para>
 
-    <screen>cset proc --move --fromset old_set \
+    <screen><command>cset</command> proc --move --fromset old_set \
    --toset new_set</screen>
 
     <!-- cset help proc -->
@@ -358,7 +358,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     <para> For more detailed information about options and parameters of
       the subcommand <command>proc</command>, view the help: </para>
 
-    <screen>cset help proc</screen>
+    <screen><command>cset</command> help proc</screen>
   </sect1>
   <!-- man chrt(1) -->
   <sect1 xml:id="sec.quick.chrt">
@@ -382,7 +382,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
       shows the current scheduler policy and <literal>rtprio</literal>
       the real-time priority: </para>
 
-    <screen>ps -eo pid,tid,class,rtprio,comm
+    <screen><command>ps</command> -eo pid,tid,class,rtprio,comm
 ...
  1437  1437 FF      40  fastapp
 </screen>
@@ -408,13 +408,13 @@ cset: "user" cpuset of:    3 cpu, with: 1
       priority of single processes by specifying the PID of the process
       with the <option>-p</option> parameter. For example: </para>
 
-    <screen>chrt -p 1437</screen>
+    <screen><command>chrt</command> -p 1437</screen>
 
     <para> Scheduler policies have different minimum and maximum
       priority values. Minimum and maximum values for each available
       scheduler policy can be retrieved with <command>chrt</command>: </para>
 
-    <screen>chrt -m</screen>
+    <screen><command>chrt</command> -m</screen>
 
     <para> To change the scheduler policy and the priority of a running
       process, <command>chrt</command> provides the parameters
@@ -424,7 +424,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
       The following example will change the scheduler policy to
         <literal>SCHED_FIFO</literal> with priority 42 for PID 1437: </para>
 
-    <screen>chrt --fifo -p 42 1437</screen>
+    <screen><command>chrt</command> --fifo -p 42 1437</screen>
 
     <warning>
       <para> Handle changing of real-time attributes of processes with
@@ -1316,7 +1316,7 @@ rmdir /dev/cpuset/$1
     <para> To print the current scheduler of a block device like
         <filename>/dev/sda</filename>, use the following command: </para>
 
-    <screen>cat /sys/block/sda/queue/scheduler
+    <screen><command>cat</command> /sys/block/sda/queue/scheduler
 noop deadline [cfq]</screen>
 
     <para> In this case, the scheduler for <filename>/dev/sda</filename>
@@ -1332,7 +1332,7 @@ noop deadline [cfq]</screen>
         <filename>/dev/sda</filename> to <literal>noop</literal>, use
       the following command: </para>
 
-    <screen>echo "noop" &gt; /sys/block/sda/queue/scheduler</screen>
+    <screen><command>echo</command> "noop" &gt; /sys/block/sda/queue/scheduler</screen>
 
     <para> To set other variables in the <filename>/sys</filename> file
       system, use a similar approach. </para>
