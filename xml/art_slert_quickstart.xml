@@ -303,7 +303,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     <para> The status of exclusive state of CPU or memory is shown in
       the <option>-X</option> column when running: </para>
 
-    <screen>cset set -r </screen>
+    <screen><command>cset</command> set -r </screen>
 
     <!-- cset help set -->
 
