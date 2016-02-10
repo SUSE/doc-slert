@@ -4,10 +4,10 @@
 ## ----------------------------
 ##
 ## Basics
-MAIN="art_slert_virtguide.xml"
+MAIN="MAIN.SLERT.xml"
 
 ##
-# ROOTID="art.slert.hwtest"
+ROOTID="art.slert.virtguide"
 
 ## Profiling
 PROFOS="slerte"
