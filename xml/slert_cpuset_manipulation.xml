@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd" [
- <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
- <!ENTITY % entities SYSTEM "entity-decl.ent">
- %entities;
+<!DOCTYPE chapter
+[
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
 ]>
-<chapter id="cha.shielding.cpuset">
+<!-- Converted by suse-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha.shielding.cpuset">
  <title>Full Featured Cpuset Manipulation Commands</title>
+ <info/>
  <para>
   While basic shielding as described above is useful and a common use model
   for <command>cset</command>, there comes a time when more functionality
@@ -14,7 +16,7 @@
   which allows you to manipulate cpusets; and <command>proc</command>, which
   allows you to manipulate processes within those cpusets.
  </para>
- <sect1 id="sec.shielding.cpuset.set">
+ <sect1 xml:id="sec.shielding.cpuset.set">
   <title>The set Subcommand</title>
 
   <para>
@@ -23,7 +25,7 @@
    allows the management of cpusets in such a manner.
   </para>
 
-  <sect2 id="sec.shielding.cpuset.set.create_destroy">
+  <sect2 xml:id="sec.shielding.cpuset.set.create_destroy">
    <title>Creating and Destroying Cpusets with <command>set</command></title>
    <para>
     The basic syntax of <command>set</command> for cpuset creation is:
@@ -132,7 +134,7 @@ cset: --> modified cpuset "sub_set</screen>
    </para>
   </sect2>
 
-  <sect2 id="sec.shielding.cpuset.set.list">
+  <sect2 xml:id="sec.shielding.cpuset.set.list">
    <title>Listing Cpusets with set</title>
    <para>
     To list cpusets, use the <command>set</command> subcommand with the
@@ -186,7 +188,7 @@ three        3 n          0 n       0     0    /one/two/three</screen>
    </para>
   </sect2>
  </sect1>
- <sect1 id="sec.shielding.cpuset.proc">
+ <sect1 xml:id="sec.shielding.cpuset.proc">
   <title>The <command>proc</command> Subcommand</title>
 
   <para>
@@ -207,7 +209,7 @@ root         0-3 y        0 y       309   2    /
 two          2 n          0 n       3     0    /two
 three        3 n          0 n       10    0    /three</screen>
 
-  <sect2 id="sec.shielding.cpuset.proc.list">
+  <sect2 xml:id="sec.shielding.cpuset.proc.list">
    <title>Listing Tasks With <command>proc</command></title>
    <para>
     Operation of the <command>proc</command> subcommand follows the same
@@ -299,7 +301,7 @@ USER     PID   PPID  SPPr TASK NAME
 alext    16165     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg --autostarted --indexing-delay 300</screen>
   </sect2>
 
-  <sect2 id="sec.shielding.cpuset.proc.exec">
+  <sect2 xml:id="sec.shielding.cpuset.proc.exec">
    <title>Execing Tasks with <literal>proc</literal></title>
    <para>
     To exec a task into a cpuset, the <command>proc</command> subcommand
@@ -382,7 +384,7 @@ cset: **> [Errno 2] No such file or directory</screen>
    </para>
   </sect2>
 
-  <sect2 id="sec.shielding.cpuset.proc.move" >
+  <sect2 xml:id="sec.shielding.cpuset.proc.move">
    <title>Moving Tasks with <command>proc</command></title>
    <para>
     Although the ability to exec a task into a cpuset is fundamental, you
@@ -402,30 +404,30 @@ cset: **> [Errno 2] No such file or directory</screen>
    </para>
    <variablelist>
     <varlistentry>
-     <term><option>--shield --pid</option> 1234</term>
+     <term><option>--pid</option> 1234</term>
      <listitem>
       <para>
-       This PIDSPEC argument specifies that PID <literal>1234</literal> be
+       This PIDSPEC argument specifies that PID <literal>1234</literal> will be
        moved.
       </para>
      </listitem>
     </varlistentry>
     <varlistentry>
-     <term><option>--shield --pid</option> 1234,42,1934,15000,15001,15002</term>
+     <term><option>--pid</option> 1234,42,1934,15000,15001,15002</term>
      <listitem>
       <para>
-       This PIDSPEC argument specifies that this list of tasks only be
+       This PIDSPEC argument specifies that only listed tasks will be
        moved.
       </para>
      </listitem>
     </varlistentry>
     <varlistentry>
-     <term><option>--unshield -p</option> 5000,5100,6010-7000,9232</term>
+     <term><option>-p</option> 5000,5100,6010-7000,9232</term>
      <listitem>
       <para>
        This PIDSPEC argument specifies that tasks <literal>5000</literal>,
-       <literal>5100</literal> and <literal>9232</literal> be moved along
-       with any existing task that is in the range <literal>6010</literal>
+       <literal>5100</literal> and <literal>9232</literal> will be moved along
+       with any existing task with PID in the range <literal>6010</literal>
        through <literal>7000</literal> inclusive.
       </para>
      </listitem>
@@ -528,7 +530,7 @@ Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 two          2 n          0 n       10    0    /two
 three        3 n          0 n       0     0    /three</screen>
-   <sect3 id="sec.shielding.cpuset.proc.move.taskset">
+   <sect3 xml:id="sec.shielding.cpuset.proc.move.taskset">
     <title>Moving All Tasks From One Cpuset to Another</title>
     <para>
      There is a special case for moving all tasks currently running in one
@@ -572,7 +574,7 @@ Name         CPUs-X       MEMs-X    Tasks Subs Path
 two          2 n          0 n       0     0    /two
 three        3 n          0 n       10    0    /three</screen>
    </sect3>
-   <sect3 id="sec.shielding.cpuset.proc.move.threads">
+   <sect3 xml:id="sec.shielding.cpuset.proc.move.threads">
     <title>Moving Kernel Threads With <command>proc</command></title>
     <para>
      Kernel threads are special and <command>cset</command> detects tasks
@@ -674,7 +676,7 @@ cset: done</screen>
    </sect3>
   </sect2>
 
-  <sect2 id="sec.shielding.cpuset.proc.destroy">
+  <sect2 xml:id="sec.shielding.cpuset.proc.destroy">
    <title>Destroying Tasks</title>
    <para>
     There actually is no <command>cset</command> subcommand or option to
@@ -686,7 +688,7 @@ cset: done</screen>
    </para>
   </sect2>
  </sect1>
- <sect1 id="sec.shielding.cpuset.shielding.set_proc">
+ <sect1 xml:id="sec.shielding.cpuset.shielding.set_proc">
   <title>Implementing <quote>Shielding</quote> With <command>set</command> and <command>proc</command></title>
 
   <para>
@@ -798,7 +800,7 @@ system       0 n          0 n       257   0    /system</screen>
    model.
   </para>
  </sect1>
- <sect1 id="sec.shielding.cpuset.hierarchy.set_proc">
+ <sect1 xml:id="sec.shielding.cpuset.hierarchy.set_proc">
   <title>Implementing Hierarchy With set and proc</title>
 
   <para>

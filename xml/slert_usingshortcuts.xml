@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd" [
- <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
- <!ENTITY % entities SYSTEM "entity-decl.ent">
- %entities;
+<!DOCTYPE chapter
+[
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
 ]>
-<chapter id="cha.shielding.shortcuts">
+<!-- Converted by suse-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha.shielding.shortcuts">
  <title>Using Shortcuts</title>
+ <info/>
  <para>
   The commands listed in the previous sections always used all the required
   options. However, <command>cset</command> does have a shortcut facility
@@ -78,7 +80,7 @@
   <command>p</command>, while <command>shield</command> and
   <command>set</command> need two letters to disambiguate.
  </para>
- <sect1 id="sec.shielding.shortcuts.shield">
+ <sect1 xml:id="sec.shielding.shortcuts.shield">
   <title>shield Subcommand Shortcuts</title>
 
   <para>
@@ -179,7 +181,7 @@
    </tgroup>
   </informaltable>
  </sect1>
- <sect1 id="sec.shielding.shortcuts.set">
+ <sect1 xml:id="sec.shielding.shortcuts.set">
   <title>set Subcommand Shortcuts</title>
 
   <para>
@@ -266,7 +268,7 @@
 --> lists only cpusets prio_high, prio_med and prio_low
 --> the -l is optional in this case since list is default</screen>
  </sect1>
- <sect1 id="sec.shielding.shortcuts.proc">
+ <sect1 xml:id="sec.shielding.shortcuts.proc">
   <title>proc Subcommand Shortcuts</title>
 
   <para>
@@ -340,9 +342,9 @@
   </informaltable>
 
   <remark>
-   mschnitzer: Where is the sense between "p -l one two" is equivalent to "p one
-   two". How can that be equivalent? Is -l a command which does nothing? :D
-   It would be nice if you can have a look on all of the "is equivalent to" tables. For double checking if the commands are really correct.
+   lpechacek: The concept of implicit commands and interchangeable options is
+   indeed weird.  Anyway, the above examples work according to the principle
+   mentioned at the beginning of <xref linkend="cha.shielding.shortcuts"/>.
   </remark>
 
   <para>
@@ -381,7 +383,7 @@
   </informaltable>
 
   <para>
-   Movement of tasks into and out of cpusets have the following shortcuts.
+   Moving tasks into and out of cpusets have the following shortcuts.
    To move a PIDSPEC into a cpuset:
   </para>
 

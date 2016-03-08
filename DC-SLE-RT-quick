@@ -5,6 +5,7 @@
 ##
 ## Basics
 MAIN="MAIN.SLERT.xml"
+ROOTID="art.slert.quick"
 
 ## Profiling
 PROFOS="slerte"
@@ -14,7 +15,7 @@ PROFARCH="x86;amd64;em64t"
 HTMLROOT="slerte11"
 
 ## stylesheet location
-STYLEROOT="/usr/share/xml/docbook/stylesheet/suse/flyer"
-FALLBACK_STYLEROOT="/usr/share/xml/docbook/stylesheet/suse"
+STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2013-ns"
+# FALLBACK_STYLEROOT="/usr/share/xml/docbook/stylesheet/suse"
 #HTML_CSS="/usr/share/xml/docbook/stylesheet/suse/html/susebooks.css"
 #EPUB_CSS="/usr/share/xml/docbook/stylesheet/suse/epub/susebooks.css"

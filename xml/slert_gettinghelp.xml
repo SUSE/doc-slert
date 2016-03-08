@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd" [
- <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
- <!ENTITY % entities SYSTEM "entity-decl.ent">
- %entities;
+<!DOCTYPE chapter
+[
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
 ]>
-<chapter id="cha.shieldingt.help">
+<!-- Converted by suse-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha.shieldingt.help">
  <title>What to Do If There Are Problems</title>
+ <info/>
  <para>
   If you encounter any issues with the <command>cset</command> application,
   you can file a bug report on our <command>cset</command> bugzilla product
   found here:
  </para>
  <para>
-  <ulink url="https://code.google.com/p/cpuset/issues/list" />
+  <link xlink:href="https://code.google.com/p/cpuset/issues/list"/>
+  <remark>
+    lpechacek: This upstream project is dead.  Will be moved to GitHub.
+  </remark>
  </para>
  <para>
   If you are using <command>cset</command> on a supported operating system
-  such as &sls; &productnumber; or &slerte; &productnumber;, then should use
-  the following bugzilla product listing here:
+  such as &sls; &productnumber; or &slerte; &productnumber;,
+  then should use the following bugzilla product listing here:
  </para>
  <para>
-  <ulink url="https://bugzilla.suse.com" />
+  <link xlink:href="https://bugzilla.suse.com"/>
  </para>
  <para>
   <command>cset</command> contains a logging application that is invaluable

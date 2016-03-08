@@ -5,6 +5,12 @@
 
 <!ENTITY exampleuser    "tux">
 <!ENTITY exampleuserII  "wilber">
+<!ENTITY exampleuserIII "geeko">
+<!ENTITY exampleuserfull    "Tux Linux">
+<!-- Do not use Gimp as the last name, what with negative connotations etc.
+     Instead use "fox," even though Wilber is not a fox: http://gimp-savvy.com/ABOUT/index.html -->
+<!ENTITY exampleuserIIfull  "Wilber Fox">
+<!ENTITY exampleuserIIIfull "Suzanne Geeko">
 <!ENTITY examplegroup   "users">
 
 <!-- #######################################################################-->
@@ -30,72 +36,66 @@
 <!ENTITY exampleclientIIslip  "sl&exampleclientII;">
 <!ENTITY exampleclientIIuucp  "uu&exampleclientII;">
 
-<!ENTITY rootuser       '<systemitem class="username">root</systemitem>'>
-<!ENTITY grub           "GRUB">
-
-<!-- lilo will become obsolete with code 11 -->
-<!ENTITY lilo           "LILO">
+<!ENTITY rootuser       "<systemitem xmlns='http://docbook.org/ns/docbook' class='username'>root</systemitem>">
+<!ENTITY grub           "GRUB 2">
+<!ENTITY elilo           "ELILO">
+<!ENTITY gnome         "GNOME">
 
 <!ENTITY sax            "SaX2">
 <!ENTITY atomic-update  "Atomic Update">
 <!ENTITY suse           "SUSE">
 <!ENTITY novell         "Novell">
-<!ENTITY suseconfig     "SuSEconfig">
 <!ENTITY suselinux      "&suse; Linux">
 <!ENTITY suseonsite     "&suse; Studio Onsite">
 <!ENTITY suseonsitereg  "&suseonsite;&reg;">
 <!-- suse studio service as different from the Onsite product -->
 <!ENTITY susestudio     "&suse; Studio">
+<!ENTITY obs            "&opensuse; Build Server">
+<!ENTITY xgeneric       "X Window System">
 <!ENTITY xvendor        "X.Org">
 <!ENTITY yast           "YaST">
-<!ENTITY yastcc         "&yast; Control Center">
+<!ENTITY yastcc         "<guimenu xmlns='http://docbook.org/ns/docbook'>&yast; Control Center</guimenu>">
+<!ENTITY gnomecc        "&gnome; control center">
 <!ENTITY ay             "AutoYaST">
 <!ENTITY nm             "NetworkManager">
-<!ENTITY fspot          "f-spot">
-<!ENTITY digikam        "digiKam">
-<!ENTITY yelp           "Yelp">
-<!ENTITY khc            "KDE help center">
+<!ENTITY fspot          "F-Spot">
+<!ENTITY yelp           "Help">
 <!ENTITY umtsmon        "UMTSmon">
+<!-- deprecated - use &libo; instead -->
 <!ENTITY ooo            "&libo;">
 <!ENTITY libo           "LibreOffice">
-<!ENTITY aide		"AIDE">
-
-
+<!ENTITY aide	         "AIDE">
+<!ENTITY ovs            "<phrase role='productname' xmlns='http://docbook.org/ns/docbook'>Open vSwitch</phrase>">
 <!-- ============================================================= -->
 <!--                    Books                                      -->
 <!-- ============================================================= -->
 
-<!ENTITY deploy         "<emphasis>Deployment Guide</emphasis>"> 
-<!ENTITY kdeuser        "<emphasis>KDE User Guide</emphasis>">
-<!ENTITY gnomeuser      "<emphasis>GNOME User Guide</emphasis>">
-<!ENTITY moblinuser     "<emphasis>Moblin User Guide</emphasis>">
-<!ENTITY instquick      "<emphasis>Installation Quick Start</emphasis>">
-<!ENTITY gnomequick     "<emphasis>GNOME Quick Start</emphasis>">
-<!ENTITY kdequick       "<emphasis>KDE Quick Start</emphasis>">
-<!ENTITY moblinquick    "<emphasis>Moblin Quick Start</emphasis>">
-<!ENTITY oofficequick   "<emphasis>LibreOffice.org Quick Start</emphasis>">
-<!ENTITY apps           "<emphasis>Application Guide</emphasis>">
-<!ENTITY admin          "<emphasis>Administration Guide</emphasis>">
-<!ENTITY reference      "<emphasis>Reference</emphasis>">
-<!ENTITY startup       	"<emphasis>Start-Up</emphasis>"> 
-<!ENTITY aaadmin        "<emphasis>&aa; Administration Guide</emphasis>">
-<!ENTITY aaquick        "<emphasis>&aa; Quick Start</emphasis>">
-<!ENTITY lfl            "<emphasis>Lessons For Lizards</emphasis>">
-<!ENTITY storage        "<emphasis>Storage Administration Guide</emphasis>">
-<!ENTITY haguide        "<emphasis>High Availability Guide</emphasis>">
-<!ENTITY virtual        "<emphasis>Virtualization Guide</emphasis>">
-<!ENTITY xenguide       "<emphasis>Virtualization with &xen;</emphasis>">
-<!ENTITY kvmguide       "<emphasis>Virtualization with &kvm;</emphasis>">
-<!ENTITY auditguide     "<emphasis>The Linux Audit Framework</emphasis>">
-<!ENTITY auditquick     "<emphasis>Linux Audit Quick Start</emphasis>"> 
-<!ENTITY lxcquick     "<emphasis>Virtualization with Linux Containers (&lxc;)</emphasis>"> 
-<!ENTITY tuning         "<emphasis>System Analysis and Tuning Guide</emphasis>">
-<!ENTITY tuningsub      "<emphasis>Problem Detection, Resolution, and Optimization</emphasis>">
-<!ENTITY secguide       "<emphasis>Security Guide</emphasis>">
-<!ENTITY smtguide       "<emphasis>Subscription Management Tool Guide</emphasis>">
-<!ENTITY webyastconfguide       "<emphasis>WebYaST Configuration Guide</emphasis>"> 
-<!ENTITY studioadmin    "<emphasis>Administration Guide</emphasis>">
-<!ENTITY studioinstall  "<emphasis>Installation &amp; Deployment Guide</emphasis>">
+<!ENTITY deploy         "<citetitle xmlns='http://docbook.org/ns/docbook'>Deployment Guide</citetitle>">
+<!ENTITY gnomeuser      "<citetitle xmlns='http://docbook.org/ns/docbook'>&gnome; User Guide</citetitle>">
+<!ENTITY instquick      "<citetitle xmlns='http://docbook.org/ns/docbook'>Installation Quick Start</citetitle>">
+<!ENTITY gnomequick     "<citetitle xmlns='http://docbook.org/ns/docbook'>&gnome; Quick Start</citetitle>">
+<!ENTITY oofficequick   "<citetitle xmlns='http://docbook.org/ns/docbook'>LibreOffice Quick Start</citetitle>">
+<!ENTITY admin          "<citetitle xmlns='http://docbook.org/ns/docbook'>Administration Guide</citetitle>">
+<!ENTITY reference      "<citetitle xmlns='http://docbook.org/ns/docbook'>Reference</citetitle>">
+<!ENTITY startup       	"<citetitle xmlns='http://docbook.org/ns/docbook'>Start-Up</citetitle>">
+<!ENTITY aaquick        "<citetitle xmlns='http://docbook.org/ns/docbook'>&aa; Quick Start</citetitle>">
+<!ENTITY storage_guide  "<citetitle xmlns='http://docbook.org/ns/docbook'>Storage Administration Guide</citetitle>">
+<!ENTITY haguide        "<citetitle xmlns='http://docbook.org/ns/docbook'>Administration Guide</citetitle>">
+<!ENTITY geoquick       "<citetitle xmlns='http://docbook.org/ns/docbook'>Quick Start</citetitle>">
+<!ENTITY nfsquick       "<citetitle xmlns='http://docbook.org/ns/docbook'>Highly Available NFS Storage with DRBD and Pacemaker</citetitle>">
+<!ENTITY virtual        "<citetitle xmlns='http://docbook.org/ns/docbook'>Virtualization Guide</citetitle>">
+<!ENTITY xenguide       "<citetitle xmlns='http://docbook.org/ns/docbook'>Virtualization with &xen;</citetitle>">
+<!ENTITY kvmguide       "<citetitle xmlns='http://docbook.org/ns/docbook'>Virtualization with &kvm;</citetitle>">
+<!ENTITY auditguide     "<citetitle xmlns='http://docbook.org/ns/docbook'>The Linux Audit Framework</citetitle>">
+<!ENTITY auditquick     "<citetitle xmlns='http://docbook.org/ns/docbook'>Linux Audit Quick Start</citetitle>">
+<!ENTITY lxcquick       "<citetitle xmlns='http://docbook.org/ns/docbook'>Virtualization with Linux Containers (&lxc;)</citetitle>">
+<!ENTITY tuning         "<citetitle xmlns='http://docbook.org/ns/docbook'>System Analysis and Tuning Guide</citetitle>">
+<!ENTITY tuningsub      "<citetitle xmlns='http://docbook.org/ns/docbook'>Problem Detection, Resolution, and Optimization</citetitle>">
+<!ENTITY secguide       "<citetitle xmlns='http://docbook.org/ns/docbook'>Security Guide</citetitle>">
+<!ENTITY smtguide       "<citetitle xmlns='http://docbook.org/ns/docbook'>Subscription Management Tool Guide</citetitle>">
+<!ENTITY webyastconfguide       "<citetitle xmlns='http://docbook.org/ns/docbook'>WebYaST Configuration Guide</citetitle>">
+<!ENTITY studioadmin    "<citetitle xmlns='http://docbook.org/ns/docbook'>Administration Guide</citetitle>">
+<!ENTITY studioinstall  "<citetitle xmlns='http://docbook.org/ns/docbook'>Installation &amp; Deployment Guide</citetitle>">
 
 
 <!-- ============================================================= -->
@@ -104,13 +104,12 @@
 
 <!ENTITY x86           "x86">
 <!ENTITY amd64         "AMD64">
-<!ENTITY s390          "S/390">
 <!ENTITY zseries       "System z">
-<!ENTITY ipf           "Itanium">
 <!ENTITY ipseries      "POWER">
 <!ENTITY ppc           "POWER">
-<!ENTITY em64t         "Intel EM64T">
+<!ENTITY power         "POWER">
 <!ENTITY intel64       "Intel 64">
+<!ENTITY x86-64        "&amd64;/&intel64;">
 
 
 <!-- ============================================================= -->
@@ -119,25 +118,31 @@
 
 <!-- please change product to anything that makes sense in your current release -->
 
+<!ENTITY github.url   "https://github.com/SUSE/doc-slert">
+
 <!ENTITY opensuse      "openSUSE">
 <!ENTITY opensusereg   "openSUSE&reg;">
 <!ENTITY sle           "SUSE Linux Enterprise">
 <!ENTITY slea          "SLE">
 <!ENTITY sas           "&sle; Advanced Server">
 <!ENTITY slereg        "SUSE&reg; Linux Enterprise">
-<!ENTITY slerte        "&sle; Real Time Extension">
+<!ENTITY slert         "&sle; Real Time">
+<!ENTITY slerta        "&sle; RT">
+<!ENTITY slerte        "&slert; Extension">
+<!ENTITY slertreg      "&slereg; Real Time">
 <!ENTITY slertereg     "&slereg; Real Time Extension">
-<!ENTITY slertabbr   "SLE RT">
+<!ENTITY slertabbr     "SLE RT">
 <!ENTITY sls           "SUSE Linux Enterprise Server">
 <!ENTITY slsa          "SLES">
 <!ENTITY slsreg        "SUSE&reg; Linux Enterprise Server">
-<!ENTITY slemm         "&sle; 11 Maintenance Model">
+<!ENTITY slemm         "&sle; Maintenance Model">
 <!ENTITY sled          "SUSE Linux Enterprise Desktop">
 <!ENTITY sleda         "SLED">
 <!ENTITY sledreg       "SUSE&reg; Linux Enterprise Desktop">
-<!ENTITY productname   '<phrase role="productname"><phrase os="osuse">&opensuse;</phrase><phrase os="sles">&sls;</phrase><phrase os="sled">&sled;</phrase><phrase os="slerte">&slerte;</phrase></phrase>'>
-<!ENTITY productnamereg '<phrase role="productname"><phrase os="osuse">&opensusereg;</phrase><phrase os="sles">&slsreg;</phrase><phrase os="sled">&sledreg;</phrase><phrase os="slerte">&slertereg;</phrase></phrase>'>
-<!ENTITY productnumber '<phrase role="productname"><phrase os="osuse">12.2</phrase><phrase os="sles;sled;slerte">11 SP4</phrase></phrase>'>
+<!ENTITY productname   "<phrase xmlns='http://docbook.org/ns/docbook' role='productname'><phrase os='osuse'>&sls;</phrase><phrase os='slerte'>&slerte;</phrase></phrase>">
+<!ENTITY productnamereg "<phrase xmlns='http://docbook.org/ns/docbook' role='productname'><phrase os='sles'>&slsreg;</phrase><phrase os='sled'>&sledreg;</phrase><phrase os='slerte'>&slertereg;</phrase></phrase>">
+<!ENTITY productnameshort "<phrase xmlns='http://docbook.org/ns/docbook' role='productname'><phrase os='osuse'>&opensuse;</phrase><phrase os='sles'>&slsa;</phrase><phrase os='sled'>&sleda;</phrase><phrase os='slerte'>&slerta;</phrase></phrase>">
+<!ENTITY productnumber "<phrase xmlns='http://docbook.org/ns/docbook' role='productnumber'><phrase os='sles;sled;slerte'>12 SP1</phrase></phrase>">
 <!ENTITY sdk           "SUSE Software Development Kit">
 <!ENTITY slreg         "SUSE&reg; Linux">
 <!ENTITY slepos        "SUSE Linux Enterprise Point of Service">
@@ -149,7 +154,9 @@
 <!ENTITY susemgr       "&suse; Manager">
 <!ENTITY tc            "Thin Client">
 <!ENTITY nu            "NU">
-<!ENTITY ncc           "Novell Customer Center">
+<!ENTITY scc           "&suse; Customer Center">
+<!ENTITY sccurl        "https://scc.suse.com/">
+<!ENTITY ncc           "&scc;">
 <!ENTITY yup           "yup">
 <!ENTITY imgcreat      "Image Creator">
 <!ENTITY admserv       "Administration Server">
@@ -166,20 +173,23 @@
 <!ENTITY obsa          "OBS">
 <!ENTITY oes           "Open Enterprise Server">
 <!ENTITY rhel          "RedHat Enterprise Linux">
+<!ENTITY hageo         "GEO Clustering for &sle; &hasi;">
+<!ENTITY kg            "kGraft">
 
 <!-- ============================================================= -->
 <!--                    Applications                               -->
 <!-- ============================================================= -->
 
+<!ENTITY nautilus      "&gnome; Files">
 <!ENTITY musicplayer   "Banshee">
 <!ENTITY musicplayerreg   "Banshee&trade;">
 <!ENTITY zenup         "Software Updater">
-<!ENTITY updater       "openSUSE Updater">
+<!ENTITY updater       "&gnome; Update Applet">
 <!ENTITY gupdater      "Update Applet">    <!-- GNOME Updater-->
-<!ENTITY kupdater      "Software Updater"> <!-- KDE Updater -->
-<!ENTITY aa            "AppArmor">
-<!ENTITY aareg         "AppArmor&reg;">
+<!ENTITY aa            "<phrase xmlns='http://docbook.org/ns/docbook'>AppArmor</phrase>">
+<!ENTITY aareg         "<phrase xmlns='http://docbook.org/ns/docbook'>AppArmor&reg;</phrase>">
 <!ENTITY naa           "&aa;">
+<!ENTITY xenstore      "XenStore">
 <!ENTITY naareg        "&aareg;">
 <!ENTITY hb            "Heartbeat">
 <!ENTITY hbvs          "Heartbeat 2">
@@ -189,26 +199,35 @@
 <!ENTITY lxc           "LXC">
 <!ENTITY xen           "Xen">
 <!ENTITY xenreg        "Xen&reg;">
-<!ENTITY xenstore      "XenStore">
 <!ENTITY kvm           "KVM">
+<!ENTITY vmware        "VMware">
 <!ENTITY vmhost        "VM Host Server">
 <!ENTITY vmguest       "VM Guest">
-<!ENTITY dom0          "Domain0">
-<!ENTITY libvirt       '<systemitem class="library">libvirt</systemitem>'>
-<!ENTITY libvirtd      '<systemitem class="daemon">libvirtd</systemitem>'>
+<!ENTITY dom0          "Dom0">
+<!ENTITY libvirt       "<systemitem xmlns='http://docbook.org/ns/docbook' class='library'>libvirt</systemitem>">
+<!ENTITY libvirtd      "<systemitem xmlns='http://docbook.org/ns/docbook' class='daemon'>libvirtd</systemitem>">
 <!ENTITY vmm           "Virtual Machine Manager">
-<!ENTITY pk            "PolicyKit">
+<!ENTITY qemu          "QEMU">
+<!ENTITY qemusystemarch "<command xmlns='http://docbook.org/ns/docbook'>qemu-system-<replaceable>ARCH</replaceable></command>">
+<!ENTITY pk            "PolKit">
 <!ENTITY ha            "High Availability">
 <!ENTITY ais           "OpenAIS">
 <!ENTITY stonith       "STONITH">
 <!ENTITY susefirewall  "SuSEFirewall2">
+<!ENTITY suseconnect   "SUSEConnect">
+
+<!-- Not sure if the following is useful, but given that most Linux
+     commands are lowercased and SuSEfirewall2 is just an outlier it might
+     make sense to define this additionally... -->
+<!ENTITY susefirewallfiles  "SuSEfirewall2">
 <!ENTITY pciback       "PCI Pass-Through">
 <!ENTITY usbback       "USB Pass-Through">
 <!ENTITY vgaback       "VGA Pass-Through">
 <!ENTITY lvs           "Linux Virtual Server">
-<!ENTITY krandr        "KRandRTray">
-<!ENTITY amarok        "Amarok">
-<!ENTITY digikam       "digiKam">
+<!ENTITY selnx         "SELinux">
+<!ENTITY postgresql    "PostgreSQL">
+<!ENTITY mysql         "MariaDB">
+<!ENTITY jeos          "JeOS"><!-- Just enough OS -->
 <!ENTITY stap          "SystemTap">
 <!ENTITY oprof         "OProfile">
 <!ENTITY cpufreq       "CPUfreq">
@@ -216,48 +235,109 @@
 <!ENTITY gpg           "GPG"> <!-- or GnuGP -->
 <!-- oddities -->
 <!ENTITY thrdmrk       "*">
-<!ENTITY kexec         "kexec">
-<!ENTITY kdump         "kdump">
-<!ENTITY selnx         "SELinux">
+<!ENTITY kexec         "Kexec">
+<!ENTITY kdump         "Kdump">
+<!ENTITY kprobes       "Kprobes">
+<!ENTITY powerlinux    "PowerLinux">
+<!ENTITY powerkvm      "PowerKVM">
 
-<!-- ============================================================= -->
-<!--                    Prompts                              -->
-<!-- ============================================================= -->
+<!-- daemons -->
+<!ENTITY systemd       "<systemitem xmlns='http://docbook.org/ns/docbook' class='daemon'>systemd</systemitem>">
+<!ENTITY crond         "<systemitem xmlns='http://docbook.org/ns/docbook' class='daemon'>cron</systemitem>">
+<!ENTITY oprofd        "<systemitem xmlns='http://docbook.org/ns/docbook' class='daemon'>oprofile</systemitem>">
 
-<!ENTITY prompt.root     "<prompt>root # </prompt>">
-<!ENTITY prompt.user     "<prompt>&exampleuser; &gt; </prompt>">
-<!ENTITY prompt.user2    "<prompt>&exampleuserII; &gt; </prompt>">
 
 <!-- ============================================================= -->
 <!--                    yast desktop entities                      -->
 <!-- ============================================================= -->
 
-<!ENTITY ycc_runlevel  "System Services (Runlevel)">
+<!ENTITY ycc_runlevel  "Services Manager">
+<!ENTITY ycc_services_manager  "Services Manager">
 
 <!-- ============================================================= -->
 <!--                    Miscellaneous                              -->
 <!-- ============================================================= -->
 <!ENTITY kiwi            "KIWI">
+<!ENTITY ptp             "Precision Time Protocol">
+<!ENTITY ntp             "Network Time Protocol">
 <!ENTITY cdcreator       "CD Creator">
-<!ENTITY addoncreator    "Add-on Creator">
+<!ENTITY addoncreator    "Add-on Product Creator">
 <!ENTITY imgcreator      "Image Creator">
 <!ENTITY productcreator  "Product Creator">
 <!ENTITY nomad           "Nomad">
-<!ENTITY qemu            "QEMU">
-<!ENTITY altf2           '<keycombo><keycap function="alt"/><keycap>F2</keycap></keycombo>'>
-<!ENTITY note-key   '<note os="sles"><title>Registration Key</title>
-                                      <para>If add-ons are installed on your system, you might
-                                       need to enter your registration key in order to update the system. 
-                                       Be prepared to have the key available.</para></note>'>
-<!ENTITY wypublic          "/srv/www/yast/public/">
+<!ENTITY cpufreq         "CPUfreq">
+<!ENTITY altf2           "<keycombo xmlns='http://docbook.org/ns/docbook'><keycap function='alt'/><keycap>F2</keycap></keycombo>">
 
+<!ENTITY wypublic          "/srv/www/yast/public/">
+<!ENTITY mac               "<replaceable xmlns='http://docbook.org/ns/docbook'>MAC</replaceable>">
+<!ENTITY hwmac             "hwtype.<replaceable xmlns='http://docbook.org/ns/docbook'>MAC</replaceable>">
+<!ENTITY confmac           "config.<replaceable xmlns='http://docbook.org/ns/docbook'>MAC</replaceable>">
+
+
+<!-- ============================================================= -->
+<!--                    Prompts                              -->
+<!-- ============================================================= -->
+
+<!ENTITY prompt.root     "<prompt xmlns='http://docbook.org/ns/docbook'>root # </prompt>">
+<!ENTITY prompt.user     "<prompt xmlns='http://docbook.org/ns/docbook'>&exampleuser; &gt; </prompt>">
+<!ENTITY prompt.user2    "<prompt xmlns='http://docbook.org/ns/docbook'>&exampleuserII; &gt; </prompt>">
+
+<!-- ============================================================= -->
+<!--                    Book Abstracts                             -->
+<!-- ============================================================= -->
+
+<!ENTITY abstract_admin "Covers system administration tasks like maintaining,
+     monitoring and customizing an initially installed system.">
+<!ENTITY abstract_autoyast "&ay; is a system for installing one or more &sle;
+     systems automatically and without user intervention, using an &ay;
+     profile that contains installation and configuration data. The manual
+     guides you through the basic steps of auto-installation: preparation,
+     installation, and configuration.">
+<!ENTITY abstract_deployment "Shows how to install single or multiple systems
+     and how to exploit the product inherent capabilities for a deployment
+     infrastructure. Choose from various approaches, ranging from a local
+     installation or a network installation server to a mass deployment using
+     a remote-controlled, highly-customized, and automated installation
+     technique.">
+<!ENTITY abstract_gnomeuser "Introduces the &gnome; desktop of &productname;. It
+     guides you through using and configuring the desktop and helps you
+     perform key tasks. It is intended mainly for end users who want to make
+     efficient use of &gnome; as their default desktop.">
+<!ENTITY abstract_hardening "Deals with the particulars of installing and
+     setting up a secure &sls;, and additional post-installation processes
+     required to further secure and harden that installation. Supports the
+     administrator with security-related choices and decisions.">
+<!ENTITY abstract_installquick "Lists the system requirements and guides you
+     step-by-step through the installation of &productname; from DVD, or from
+     an ISO image.">
+<!ENTITY abstract_security "Introduces basic concepts of system security,
+     covering both local and network security aspects. Shows how to use
+     the product inherent security software like &aa; or the auditing system
+     that reliably collects information about any
+     security-relevant events.">
+<!ENTITY abstract_storage "Provides information about how to manage storage
+    devices on a &sls;.">
+<!ENTITY abstract_tuning "An administrator's guide for problem detection,
+     resolution and optimization. Find how to inspect and optimize your system
+     by means of monitoring tools and how to efficiently manage
+     resources. Also contains an overview of common problems and solutions and
+     of additional help and documentation resources.">
+<!ENTITY abstract_virtualization "Describes virtualization technology in
+    general, and introduces libvirt&mdash;the unified interface to
+    virtualization&mdash;and detailed information on specific
+    hypervisors.">
 
 <!-- Additional Entities                                           -->
 <!ENTITY euro            "&#x20AC;">
 
 
 <!ENTITY % network-entities SYSTEM "network-decl.ent">
-%network-entities; 
+%network-entities;
+
+<!ENTITY % sgml.features "IGNORE">
+<!ENTITY % xml.features "INCLUDE">
+<!ENTITY % dbcent PUBLIC "-//OASIS//ENTITIES DocBook Character Entities V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/dbcentx.mod">
+  %dbcent;
 
 <!--                             End of file                       -->
 <!-- ............................................................. -->

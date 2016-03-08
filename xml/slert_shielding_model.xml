@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//Novell//DTD NovDoc XML V1.0//EN" "novdocx.dtd" [
- <!ENTITY % NOVDOC.DEACTIVATE.IDREF "INCLUDE">
- <!ENTITY % entities SYSTEM "entity-decl.ent">
- %entities;
+<!DOCTYPE chapter
+[
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
 ]>
-<chapter id="cha.shielding.model">
+<!-- Converted by suse-upgrade version 1.1 -->
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha.shielding.model">
  <title>The Basic Shielding Model</title>
+ <info/>
  <para>
   Although any set up of cpusets can really be described as
   <emphasis>shielding</emphasis>, there is one prevalent shielding model in
@@ -51,7 +53,7 @@
   <command>proc</command> subcommands described in
   <xref linkend="cha.shielding.cpuset"/>.
  </para>
- <sect1 id="sec.shielding.model.ex">
+ <sect1 xml:id="sec.shielding.model.ex">
   <title>A Simple Shielding Example</title>
 
   <para>
@@ -78,7 +80,7 @@
    </para>
   </note>
 
-  <sect2 id="sec.shielding.model.ex.setup_teardown">
+  <sect2 xml:id="sec.shielding.model.ex.setup_teardown">
    <title>Setup and Teardown of the Shield</title>
    <para>
     To set up a shield of 3 CPUs with 1 CPU left for low priority system
@@ -216,7 +218,7 @@ cset: deleting "/user" and "/system" sets
 cset: done</screen>
   </sect2>
 
-  <sect2 id="sec.shielding.model.ex.move">
+  <sect2 xml:id="sec.shielding.model.ex.move">
    <title>Moving Interesting Tasks Into and Out of the Shield</title>
    <para>
     Now that we have a shield running, the objective is to run our
@@ -224,7 +226,7 @@ cset: done</screen>
     be anything, but usually they are directly related to the purpose of the
     machine. There are two ways to run tasks in the shield:
    </para>
-   <itemizedlist>
+   <itemizedlist mark="bullet" spacing="normal">
     <listitem>
      <para>
       Exec a process into the shield
@@ -236,7 +238,7 @@ cset: done</screen>
      </para>
     </listitem>
    </itemizedlist>
-   <sect3 id="sec.shielding.model.ex.move.exec">
+   <sect3 xml:id="sec.shielding.model.ex.move.exec">
     <title>Execing a Process Into the Shield</title>
     <para>
      Running a new process in the shield can be done with the
@@ -313,11 +315,11 @@ cset: done</screen>
     </para>
     <para>
      You may have noticed in the output above that both the new shell and
-     the status command are running as the &rootuser; user. This is because
-     cset needs to run as &rootuser; and so all it’s children will also
-     run as &rootuser;. If you need to run a process under a different user
-     and or group, you may use the <option>--user</option> and
-     <option>--group</option> options for execution as follows.
+     the status command are running as the &rootuser; user. This is
+     because cset needs to run as &rootuser; and so all it’s children
+     will also run as &rootuser;. If you need to run a process under a
+     different user and or group, you may use the <option>--user</option>
+     and <option>--group</option> options for execution as follows.
     </para>
 <screen>&prompt.user;<command>cset</command> shield --user=alext --group=users -e bash
 cset: --> last message, executed args into cpuset "/user", new pid is: 14212
@@ -330,7 +332,7 @@ USER     PID   PPID  SPPr TASK NAME
 alext    14212 8583  Soth bash
 alext    14241 14212 Roth python ./cset shield -s -v</screen>
    </sect3>
-   <sect3 id="sec.shielding.model.ex.move.shield_unshield">
+   <sect3 xml:id="sec.shielding.model.ex.move.shield_unshield">
     <title>Moving a Running Task Into and Out of the Shield</title>
     <para>
      While execing a process into the shield is undoubtably useful, most of
