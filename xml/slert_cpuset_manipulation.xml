@@ -766,7 +766,7 @@ user         1-3 n        0 n       0      0   /user
 system       0 n          0 n       187    0   /system</screen>
 
   <para>
-   We now have the basic shielding set up. Since all userspace tasks are
+   We now have the basic shielding set up. Since all user space tasks are
    running in <literal>system</literal>, anything that is spawned from them
    will also run in <literal>system</literal>. The <literal>user</literal>
    cpuset has nothing running in it unless you put tasks there with the
@@ -920,7 +920,7 @@ prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</
   </note>
 
   <para>
-   The strategy is now implemented and we now move all userspace tasks as
+   The strategy is now implemented and we now move all user space tasks as
    well as all movable kernel threads into the <literal>system</literal>
    cpuset to activate the shield.
   </para>

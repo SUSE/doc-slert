@@ -44,7 +44,7 @@
       &productnumber; installation. Select &slerte; &productnumber; as
       an add-on product during the installation. Alternately, if &sls;
       is already installed, you can start the Add-on Product
-      installation from YaST or enable &slerte; in the &yast; &scc;
+      installation from &yast; or enable &slerte; in the &yast; &scc;
       configuration. However, in the &yast; Boot Loader
       configurator you need to select the <filename>-rt</filename> kernel
       flavor as the default, as that is not done automatically in this
@@ -272,7 +272,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
     <!-- cset set ... list and destroy -->
 
-    <para> To show a table containing useful information, like cpu list
+    <para> To show a table containing useful information, like CPU list
       and memory list, use the <option>-r</option> parameter. The
         <quote>-X</quote> column shows the exclusive state of CPU or
       memory. The <quote>path</quote> column shows the real path in the
@@ -1513,7 +1513,7 @@ noop deadline [cfq]</screen>
                   </listitem>
                   <listitem>
                     <para><option>slice_async_rq</option> for how many
-                      requests can an asynchronous disk slice accomodate.</para>
+                      requests can an asynchronous disk slice accommodate.</para>
                   </listitem>
                   <listitem>
                     <para><option>slice_idle</option> defines how long I/O

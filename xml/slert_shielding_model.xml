@@ -99,8 +99,8 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
     specifies to use CPUs 1 through 3 inclusively. Next, the command creates
     a <literal>system</literal> cpuset with a CPUSPEC that is the inverse of
     the <option>-c</option> option for the current machine. On this machine
-    that cpuset will only contain the first CPU, CPU0. Next, all userspace
-    processes running in the <literal>root</literal> cpuset are transfered
+    that cpuset will only contain the first CPU, CPU0. Next, all user space
+    processes running in the <literal>root</literal> cpuset are transferred
     to the <literal>system</literal> cpuset. This makes all those processes
     run only on CPU0. The effect of this is that the shield consists of CPUs
     1 through 3 and they are now idling.
@@ -335,7 +335,7 @@ alext    14241 14212 Roth python ./cset shield -s -v</screen>
    <sect3 xml:id="sec.shielding.model.ex.move.shield_unshield">
     <title>Moving a Running Task Into and Out of the Shield</title>
     <para>
-     While execing a process into the shield is undoubtably useful, most of
+     While execing a process into the shield is undoubtedly useful, most of
      the time, you’ll want to move already running tasks into and out of
      the shield. The <command>cset</command> shield subcommand includes two
      options for doing this: <option>-s/--shield</option> and

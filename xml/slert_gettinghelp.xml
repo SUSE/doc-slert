@@ -10,7 +10,7 @@
  <info/>
  <para>
   If you encounter any issues with the <command>cset</command> application,
-  you can file a bug report on our <command>cset</command> bugzilla product
+  you can file a bug report on our <command>cset</command> Bugzilla product
   found here:
  </para>
  <para>
@@ -22,7 +22,7 @@
  <para>
   If you are using <command>cset</command> on a supported operating system
   such as &sls; &productnumber; or &slerte; &productnumber;,
-  then should use the following bugzilla product listing here:
+  then should use the following Bugzilla product listing here:
  </para>
  <para>
   <link xlink:href="https://bugzilla.suse.com"/>

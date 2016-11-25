@@ -85,7 +85,7 @@
     <title>Determining Latencies with cyclictest</title>
 
     <para> The <command>cyclictest</command> program is part of the
-      real-time kernel testsuite contained in the
+      real-time kernel test suite contained in the
         <systemitem>rt-tests</systemitem> RPM package (distributed as a
       part of &productname;). </para>
 
