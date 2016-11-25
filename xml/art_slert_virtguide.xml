@@ -37,7 +37,7 @@
     <para>All examples were carried out on a 48-core Xeon machine with 2
       NUMA nodes and 64GB of RAM running &slea;12 RT and the 3.12.49-rt
       kernel. The virtual machine was installed with <command>vm-install</command>, running
-      SLE12 SP1 on 4 CPUs and 2GB of memory. The disk used was physical
+      SLE12 SP2 on 4 CPUs and 2GB of memory. The disk used was physical
       disk <filename>/dev/sdb</filename> as recommended by the &suse;
       virtualization documentation.</para>
     <para>The <command>cpuset</command> utility was used to shield the
