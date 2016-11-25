@@ -31,8 +31,8 @@
  </para>
  <informaltable>
   <tgroup cols="2">
-   <colspec colnum="1" colname="1" colwidth="50%"/>
-   <colspec colnum="1" colname="1" colwidth="50%"/>
+   <colspec colnum="1" colname="c1" colwidth="50%"/>
+   <colspec colnum="2" colname="c2" colwidth="50%"/>
    <thead>
     <row>
      <entry>
@@ -99,20 +99,12 @@
 
   <informaltable>
    <tgroup cols="2">
-    <colspec colnum="1" colname="1" colwidth="50%"/>
-    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="c1" colwidth="50%"/>
+    <colspec colnum="2" colname="c2" colwidth="50%"/>
     <thead>
      <row>
-      <entry>
-       <para>
-        Long method
-       </para>
-      </entry>
-      <entry>
-       <para>
-        Short method
-       </para>
-      </entry>
+      <entry><para>Long method</para></entry>
+      <entry><para>Short method</para></entry>
      </row>
     </thead>
     <tbody>
@@ -144,8 +136,8 @@
 
   <informaltable>
    <tgroup cols="2">
-    <colspec colnum="1" colname="1" colwidth="50%"/>
-    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="c1" colwidth="50%"/>
+    <colspec colnum="2" colname="c2" colwidth="50%"/>
     <thead>
      <row>
       <entry>
@@ -186,15 +178,15 @@
 
   <para>
    The <command>set</command> subcommand has a limited number of shortcuts.
-   Basically, the <option>-s/--set</option> option is optional in most cases
-   and the <option>-l/--list</option> option is also optional if you want to
+   Basically, the <option>-s</option>/<option>--set</option> option is optional in most cases
+   and the <option>-l/</option>/<option>--list</option> option is also optional if you want to
    list sets. For example, these commands are equivalent.
   </para>
 
   <informaltable>
    <tgroup cols="2">
-    <colspec colnum="1" colname="1" colwidth="50%"/>
-    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="c1" colwidth="50%"/>
+    <colspec colnum="2" colname="c2" colwidth="50%"/>
     <thead>
      <row>
       <entry>
@@ -256,7 +248,7 @@
 
   <para>
    In fact, if you want to apply either the list or the destroy options to
-   multiple cpusets with one <command>cset</command> command, you will not
+   multiple &cpuset;s with one <command>cset</command> command, you will not
    need to use the <option>-s</option> option. For example:
   </para>
 
@@ -269,19 +261,19 @@
 --> the -l is optional in this case since list is default</screen>
  </sect1>
  <sect1 xml:id="sec.shielding.shortcuts.proc">
-  <title>proc Subcommand Shortcuts</title>
+  <title><command>proc</command> Subcommand Shortcuts</title>
 
   <para>
-   For the proc subcommand, the <option>-s</option>, <option>-t</option> and
-   <option>-f</option> options to specify the cpuset, the origination cpuset
-   and the destination cpuset can sometimes be optional. For example, the
-   following commands are equivalent. To list tasks in cpusets:
+   For the <command>proc</command> subcommand, the <option>-s</option>, <option>-t</option> and
+   <option>-f</option> options to specify the &cpuset;, the origination &cpuset;
+   and the destination &cpuset; can sometimes be optional. For example, the
+   following commands are equivalent. To list tasks in &cpuset;s:
   </para>
 
   <informaltable>
    <tgroup cols="2">
-    <colspec colnum="1" colname="1" colwidth="50%"/>
-    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="c1" colwidth="50%"/>
+    <colspec colnum="2" colname="c2" colwidth="50%"/>
     <thead>
      <row>
       <entry>
@@ -348,13 +340,13 @@
   </remark>
 
   <para>
-   To exec a process into a cpuset:
+   To exec a process into a &cpuset;:
   </para>
 
   <informaltable>
    <tgroup cols="2">
-    <colspec colnum="1" colname="1" colwidth="50%"/>
-    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="c1" colwidth="50%"/>
+    <colspec colnum="2" colname="c2" colwidth="50%"/>
     <thead>
      <row>
       <entry>
@@ -383,14 +375,14 @@
   </informaltable>
 
   <para>
-   Moving tasks into and out of cpusets have the following shortcuts.
-   To move a PIDSPEC into a cpuset:
+   Moving tasks into and out of &cpuset;s have the following shortcuts.
+   To move a PIDSPEC into a &cpuset;:
   </para>
 
   <informaltable>
    <tgroup cols="2">
-    <colspec colnum="1" colname="1" colwidth="50%"/>
-    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="c1" colwidth="50%"/>
+    <colspec colnum="2" colname="c2" colwidth="50%"/>
     <thead>
      <row>
       <entry>
@@ -427,13 +419,13 @@
   </informaltable>
 
   <para>
-   To move all tasks from one cpuset to another:
+   To move all tasks from one &cpuset; to another:
   </para>
 
   <informaltable>
    <tgroup cols="2">
-    <colspec colnum="1" colname="1" colwidth="50%"/>
-    <colspec colnum="1" colname="1" colwidth="50%"/>
+    <colspec colnum="1" colname="c1" colwidth="50%"/>
+    <colspec colnum="2" colname="c2" colwidth="50%"/>
     <thead>
      <row>
       <entry>

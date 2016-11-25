@@ -66,6 +66,8 @@
 <!ENTITY libo           "LibreOffice">
 <!ENTITY aide	         "AIDE">
 <!ENTITY ovs            "<phrase role='productname' xmlns='http://docbook.org/ns/docbook'>Open vSwitch</phrase>">
+
+
 <!-- ============================================================= -->
 <!--                    Books                                      -->
 <!-- ============================================================= -->
@@ -245,6 +247,9 @@
 <!ENTITY systemd       "<systemitem xmlns='http://docbook.org/ns/docbook' class='daemon'>systemd</systemitem>">
 <!ENTITY crond         "<systemitem xmlns='http://docbook.org/ns/docbook' class='daemon'>cron</systemitem>">
 <!ENTITY oprofd        "<systemitem xmlns='http://docbook.org/ns/docbook' class='daemon'>oprofile</systemitem>">
+
+<!-- SLERT -->
+<!ENTITY cpuset       "<systemitem xmlns='http://docbook.org/ns/docbook' class='resource'>cpuset</systemitem>">
 
 
 <!-- ============================================================= -->
