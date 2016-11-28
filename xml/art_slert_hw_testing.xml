@@ -113,7 +113,6 @@
   </sect1>
   <sect1 xml:id="sec.hwtest.cyct">
     <title>Determining Latencies with <command>cyclictest</command></title>
-
     <para> The <command>cyclictest</command> command is part of the
       real-time kernel test suite contained in the
         <package>rt-tests</package> RPM package (distributed as a
@@ -124,37 +123,54 @@
 
     <para> When <command>cyclictest</command> is running, it shows the
       number of cycles performed and the minimal, actual, average and
-      maximum latency measured. The values shown are in microseconds. To
-      use nanoseconds instead of microseconds, use the <!--<option>-N</option> or -->
-      <option>--nsec</option> option. By default,
-        <command>cyclictest</command> runs forever. The number of cycles
-      can be limited with the <!--<option>-l <replaceable>number_of_cycles</replaceable></option>
-   or -->
-      <option>--loops=<replaceable>NUMBER_OF_CYCLES</replaceable></option>
-      option. </para>
+      maximum latency measured. To change the behaviour of
+     <command>cyclictest</command>, the following list gives you an overview
+     of the available options:
+    </para>
 
-    <para> By default, only one thread is run. You can use the <!--<option>-t
-    <replaceable>number_of_threads</replaceable></option> or -->
+   <itemizedlist>
+    <listitem>
+     <para>
+      The values shown are in microseconds. To use nanoseconds instead
+      of microseconds, use the <!--<option>-N</option> or -->
+      <option>--nsec</option> option.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      By default, <command>cyclictest</command> runs forever. The number of
+      cycles can be limited with the
+      <option>--loops=<replaceable>NUMBER_OF_CYCLES</replaceable></option>
+      option.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      By default, only one thread is run. You can use the <!--<option>-t
+       <replaceable>NUMBER_OF_THREADS</replaceable></option> or -->
       <option>--threads=<replaceable>NUMBER_OF_THREADS</replaceable></option>
       option to set the number of threads used. Without specifying a
       number, all available processors are used. With the <!--<option>-a</option> or -->
       <option>--affinity</option> option, the threads are pinned to the
-      processors with the same number. </para>
-
-    <para> To create a histogram with the <!--measured--> latency
-      values, use the
-          <option>--histogram=<replaceable>NUMBER_OF_MICROSECONDS</replaceable></option>
+      processors with the same number.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      To create a histogram with the <!--measured--> latency
+      values, use the <option>--histogram=<replaceable>NUMBER_OF_MICROSECONDS</replaceable></option>
       option, where <replaceable>NUMBER_OF_MICROSECONDS</replaceable>
       determines the maximum tracking time. Larger values are reported
       as histogram overflows. The histogram is written to standard out (STDOUT),
-      but you can redirect it to a file: </para>
-
-    <screen><command>cyclictest</command> --loops=1000 \
+      but you can redirect it to a file:
+     </para>
+     <screen><command>cyclictest</command> --loops=1000 \
 --histogram=1000 > histogram</screen>
-
-    <para> The histogram file can be visualized with the
+     <para> The histogram file can be visualized with the
         <command>cyclictest_plot.sh</command> script. The result is a
       PNG file. </para>
+    </listitem>
+   </itemizedlist>
   </sect1>
   <sect1 xml:id="sec.hwtest.hwlat">
     <title>Determining Latencies with the Hardware Latency Detector</title>
