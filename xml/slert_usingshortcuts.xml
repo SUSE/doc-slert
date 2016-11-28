@@ -340,7 +340,7 @@
   </remark>
 
   <para>
-   To exec a process into a &cpuset;:
+   To execute a process into a &cpuset;:
   </para>
 
   <informaltable>

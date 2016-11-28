@@ -142,7 +142,8 @@
       the CPUs for configurable amounts of time (by calling
         <systemitem class="other" otherclass="function"
        >stop_machine()</systemitem>), polling the CPU Time
-      Stamp Counter for some period and then looking for gaps in the TSC
+      Stamp Counter (TSC) for some period and then looking for gaps in the TSC
+      (<emphasis>Time Stamp Counter</emphasis>)
       data. These gaps indicate times when the polling was interrupted
       because of SMIs. </para>
 
@@ -187,8 +188,9 @@
         <listitem>
           <para> A pipe from which to read current raw sample data in
             the format <literal><replaceable>timestamp</replaceable>
-              <replaceable>observed latency in microseconds</replaceable></literal> (can be opened
-            <literal>O_NONBLOCK</literal> for a single sample). </para>
+              <replaceable>observed latency in microseconds</replaceable></literal>
+           (can be opened with parameter <parameter>O_NONBLOCK</parameter>
+            for a single sample). </para>
         </listitem>
       </varlistentry>
       <varlistentry>
