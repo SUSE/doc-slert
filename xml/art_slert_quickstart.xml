@@ -1086,7 +1086,7 @@ rmdir /dev/cpuset/$1
       the shielded CPUs will not run any processes that do not have an
       affinity to the shielded CPUs. Another possibility to remove load
       from the other CPUs is to run all low priority tasks on a selected
-      CPU . </para>
+      CPU. </para>
 
     <para> If a task is running inside a specific &cpuset;, the affinity
       mask must match at least one of the CPUs available in this set.
@@ -1169,10 +1169,10 @@ rmdir /dev/cpuset/$1
     </variablelist>
 
     <para> For more detailed information about
-        <command>taskset</command>, see the man page: </para>
-
-    <screen>man 1 taskset</screen>
+        <command>taskset</command>, see the man page <command>man 1 taskset</command>.
+    </para>
   </sect1>
+
   <sect1 xml:id="sec.quick.ionice">
     <title>Changing I/O Priorities with <command>ionice</command></title>
     <para> Handling I/O is one of the critical issues for all
