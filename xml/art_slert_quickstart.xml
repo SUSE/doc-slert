@@ -58,7 +58,7 @@
       tools and possibilities of &slerte;. </para>
   </sect1>
 
-  <sect1 xml:id="sec.quick.cset">
+  <sect1 xml:id="sec.slert.quick.cset">
     <title>Managing CPU Sets with <command>cset</command></title>
     <para> In some circumstances, it is beneficial to be able to run
       specific tasks only on defined CPUs. For this reason, the Linux
@@ -67,53 +67,70 @@
         partitioning</quote> of the system. Dedicated CPUs, together
       with some predefined memory, work on several tasks. </para>
 
-    <para> The command <command>cset</command> provides the high level
-      functionality to set up and manipulate CPU Sets. </para>
-
     <para>
       <command>cset</command> consists of one <quote>super command</quote> called
         <command>shield</command> and the <quote>regular commands</quote>
         <command>set</command> and <command>proc</command>. The purpose
       of the super command <command>shield</command> is to create a
       common CPU shielding setup within one step by combining regular
-      commands. An example for setting up a CPU shield is: </para>
+      commands.
+    </para>
+    <para>
+     For more information about options and parameters of the
+     <command>shield</command> subcommand, view the help by running:
+    </para>
+    <screen><command>cset</command> help shield</screen>
 
+   <sect2 xml:id="sec.slert.quick.settingup-cpushield.single">
+    <title>Setting Up a CPU Shield for a Single CPU</title>
+    <para> The command <command>cset</command> provides the high level
+     functionality to set up and manipulate CPU Sets. An example for setting
+     up a CPU shield is: </para>
     <!-- shield cpu -->
 
     <screen><command>cset</command> shield --cpu=3</screen>
+    <para>This will shield CPU3. On a machine with 4 cores CPU0-CPU2 are
+      unshielded.</para>
+   </sect2>
 
-    <para> This will shield CPU3 and keep on a 4-way machine CPU0-CPU2
-      unshielded. The argument of the <option>--cpu</option> parameter
-      accepts comma separated lists of CPUs including range
-      specifications: </para>
-
+   <sect2 xml:id="sec.slert.quick.settingup-cpushield.multi">
+    <title>Setting up CPU Shields for Multiple CPUs</title>
+    <para>
+     If you need to shield more than one CPUs, the argument of the
+     <option>--cpu</option> option accepts comma separated lists of CPUs
+     including range specifications:
+    </para>
     <screen><command>cset</command> shield --cpu=1,3,5-7</screen>
-
-    <para> On a 8-way machine this command will shield CPU1, CPU3, CPU5,
-      CPU6 and CPU7. CPU0, CPU2 and CPU4 will remain unshielded. Already
-      existing CPU shields could be extended by the same command. For
-      example, to add CPU4 to the mentioned CPU set: </para>
+    <para>
+     On a a machine with 8 cores, this command will shield CPU1, CPU3, CPU5,
+     CPU6, and CPU7. The CPUs CPU0, CPU2 and CPU4 will remain unshielded.
+    </para>
+    <para>
+     Already existing CPU shields can be extended by the same command. For
+     example, to add CPU4 to the mentioned CPU set, use this command:
+    </para>
 
     <screen><command>cset</command> shield --cpu=1,3-7</screen>
-
-    <para> CPU1, CPU3, CPU5 to CPU6 were already shielded and only CPU4
-      will additionally be shielded. Technically the command is updating
-      the current CPU shield schema. To reduce the number of shielded
-      CPUs and to unshield CPU1, for example, use the following command: </para>
-
+    <para>
+     CPU1, CPU3, CPU5 to CPU6 were already shielded and only CPU4 will
+     additionally be shielded. Technically, the command is updating the current
+     CPU shield schema. To reduce the number of shielded CPUs and to unshield
+     CPU1, for example, use the following command:
+    </para>
     <screen><command>cset</command> shield --cpu=3-7</screen>
+    <para>
+     Now only CPU3, CPU4, CPU5, CPU6, and CPU7 are shielded. CPU0, CPU1, and
+     CPU2 are available for system usage.
+    </para>
+   </sect2>
 
-    <para> Now only CPU3, CPU4, CPU5, CPU6 and CPU7 are shielded. CPU0,
-      CPU1 and CPU2 are available for system usage. </para>
-
-    <!-- show shield CPUs  -->
-
-    <para> After the CPU shielding is set up you can display the current
+   <sect2 xml:id="sec.slert.quick.showing.cpu.shields">
+    <title>Showing CPU Shields</title>
+    <para>
+     After the CPU shielding is set up you can display the current
       configuration by running <command>cset shield</command> without
-      additional parameters: </para>
-
-    <!-- bg: sorry, screen too long for flyer layout -->
-
+      additional options:
+    </para>
     <screen><command>cset</command> shield
 cset: --> shielding system active with
 cset: "system" cpuset of: 0-2 cpu, with: 47
@@ -139,23 +156,29 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
          <systemitem class="resource">user</systemitem> is the &cpuset; of shielded CPUs </para>
       </listitem>
     </itemizedlist>
+   </sect2>
 
-    <!-- shield process -->
-
-    <para> Certain processes or groups of processes can be assigned to a
-      shielded &cpuset;, after the CPU set is created. To start a new
-      process in the shielded CPU set use the <option>--exec</option>
-      option: </para>
+   <sect2 xml:id="sec.slert.quick.shielding-processes">
+    <title>Shielding Processes</title>
+    <para>
+     Certain processes or groups of processes can be assigned to a
+     shielded &cpuset;, after the CPU set is created. To start a new
+     process in the shielded CPU set use the <option>--exec</option>
+     option:
+    </para>
 
     <screen><command>cset</command> shield --exec <replaceable>APPLICATION</replaceable></screen>
 
-    <para> To move already running processes to the shielded CPU set use
-      the <option>--shield</option> option. It accepts a
-      comma-separated list of PIDs as well as range specifications: </para>
+    <para>
+     To move already running processes to the shielded CPU set use
+     the <option>--shield</option> and <option>--pid</option> options. The
+     <option>--pid</option> option accepts a comma-separated list
+     of PIDs as well as range specifications:
+    </para>
 
     <screen><command>cset</command> shield --shield --pid=1,2,600-700</screen>
 
-    <para> This moves processes with PID 1, 2 and from 600 to 700 to the
+    <para> This moves processes with PID 1, 2, and from 600 to 700 to the
       shielded CPU set. If there is a gap in the range from 600 to 700,
       then only those available process will be moved to the shield
       without warning. <command>cset</command> handles threads like
@@ -163,9 +186,7 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
       required CPU set. </para>
 
     <!-- shield DANGER note -  stolen from "cset help shield" -->
-
     <!-- bg: modified -->
-
     <warning>
       <para> The <option>--shield</option> option does not check the
         processes you request to move into the shield. This means that
@@ -174,9 +195,10 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
         cause a complete system lockup by indiscriminately specifying
         arbitrary PIDs to the <option>--shield</option> command. </para>
     </warning>
-
-    <!-- show shield processes -->
-
+   </sect2>
+   
+   <sect2 xml:id="sec.slert.quick.showing.shielded-processes">
+    <title>Showing Shielded Processes</title>
     <para> Use the <command>cset shield</command> command to show the
       number of currently shielded processes (the same command can be
       used to show the current CPU shield setup). To list shielded and
@@ -196,32 +218,35 @@ cset: "user" cpuset of:    3 cpu, with: 1
       -------- ----- ----- - ---------
          root     10202 10170 S application 
 </screen>
+   </sect2>
 
-    <!-- unshield process -->
-
-    <para> To remove a process (or group of processes) from the CPU
-      shield use the <option>--unshield</option> option. The
-      argument for <option>--unshield</option> is similar to the
-        <option>--shield</option> option, which accepts a
-      comma-separated list of PIDs/TIDs and range specifications: </para>
+   <sect2 xml:id="sec.slert.quick.unshielding-processes">
+    <title>Unshielding Processes</title>
+    <para>
+     To remove a process (or group of processes) from the CPU shield use the
+     <option>--unshield</option> option. The argument for
+     <option>--unshield</option> is similar to the <option>--shield</option>
+     option. This option accepts a comma-separated list of PIDs/TIDs and
+     range specifications: </para>
 
     <screen><command>cset</command> shield --unshield --pid=2,650-655</screen>
 
     <para> This command will unshield the process with the PID 2 and the
       processes in range of 650 and 655. </para>
+   </sect2>
 
-    <!-- reset CPU set -->
+   <sect2 xml:id="sec.slert.quick.resetting-cpusets">
+    <title>Resetting CPU Sets</title>
+    <para>
+     To delete CPU sets use the <command>cset</command> option
+     <option>--reset</option>. This will unshield all CPUs and
+     migrate dedicated processes to all available CPUs again.
+    </para>
+   </sect2>
+ </sect1>
 
-    <para> To delete CPU sets use the <command>cset</command> option
-        <option>--reset</option>. This will unshield all CPUs and
-      migrate dedicated processes to all available CPUs again. </para>
-
-    <!-- cset help shield -->
-
-    <para> For more information about options and parameters of the
-        <command>shield</command> subcommand, view the help by running: </para>
-
-    <screen><command>cset</command> help shield</screen>
+ <sect1 xml:id="sec.slert.csets.tree">
+  <title>Managing Tree-like Structures with <command>cset</command></title>
 
     <!-- basic cset commands -->
 
@@ -241,7 +266,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
       tree-like structure, rooted at the <systemitem 
         class="resource">root</systemitem> &cpuset;. </para>
 
-    <!-- cset set .... assinging CPU -->
+    <!-- cset set .... assigning CPU -->
 
     <para> To create a &cpuset; with the subcommand <command>set</command>
       you have to specify the CPUs which should be used. Either use a
@@ -1061,7 +1086,7 @@ rmdir /dev/cpuset/$1
       the shielded CPUs will not run any processes that do not have an
       affinity to the shielded CPUs. Another possibility to remove load
       from the other CPUs is to run all low priority tasks on a selected
-      CPU . </para>
+      CPU. </para>
 
     <para> If a task is running inside a specific &cpuset;, the affinity
       mask must match at least one of the CPUs available in this set.
@@ -1144,10 +1169,10 @@ rmdir /dev/cpuset/$1
     </variablelist>
 
     <para> For more detailed information about
-        <command>taskset</command>, see the man page: </para>
-
-    <screen>man 1 taskset</screen>
+        <command>taskset</command>, see the man page <command>man 1 taskset</command>.
+    </para>
   </sect1>
+
   <sect1 xml:id="sec.quick.ionice">
     <title>Changing I/O Priorities with <command>ionice</command></title>
     <para> Handling I/O is one of the critical issues for all
