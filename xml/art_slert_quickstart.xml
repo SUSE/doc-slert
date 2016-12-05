@@ -37,7 +37,57 @@
     </dm:docmanager>
   </info>
   
-  <sect1 xml:id="sec.quick.install">
+  <sect1 xml:id="sec.slert.quick.overview">
+   <title>Product Overview</title>
+   <para>
+    If your business can respond more quickly to new information and changing
+    market conditions, you have a distinct advantage over those that cannot.
+    Running your time-sensitive mission-critical applications using &slert;
+    reduces process dispatch latencies and gives you the time advantage you
+    need to increase profits or avoid further financial losses, ahead of your
+    competitors.
+   </para>
+   <sect2>
+    <title>Key Features</title>
+    <itemizedlist>
+     <listitem>
+      <para>Pre-emptible real-time kernel.</para>
+     </listitem>
+     <listitem>
+      <para>Ability to assign high-priority processes.</para>
+     </listitem>
+     <listitem>
+      <para>Greater predictability to complete critical processes on time,
+       every time.</para>
+     <para>
+      In comparison to normal Linux kernel, which is optimized for
+      overall system performance regardless of individual process response
+      time, &slert; kernel is tuned towards predictable process response time.
+     </para>
+     </listitem>
+     <listitem>
+      <para>Increased reliability.</para>
+     </listitem>
+     <listitem>
+      <para>Lower infrastructure costs.</para>
+     </listitem>
+     <listitem>
+      <para>Tracing and debugging tools that help you analyze and identify
+       bottlenecks in mission-critical applications.</para>
+     </listitem>
+    </itemizedlist>
+   </sect2>
+   
+   <sect2>
+    <title>Specific Scenario</title>
+    <para>
+     &slert; Service Pack 2 supports Virtualization and Docker usage. 
+     Refer to separate guide for reference.
+    </para>
+   </sect2>
+  </sect1>
+  
+  <sect1 xml:id="sec.slert.quick.install">
     <title>Installing &slerte;</title>
 
     <para> To install &slerte; &productnumber;, start a regular &sls;
