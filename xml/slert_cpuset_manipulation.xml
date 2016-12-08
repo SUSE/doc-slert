@@ -20,8 +20,8 @@
   <title>The set Subcommand</title>
 
   <para>
-   In order to do anything with cpusets, you must be able to create, adjust,
-   rename, move and destroy them. The <command>set</command> subcommand
+   To do anything with cpusets, you must be able to create, adjust,
+   rename, move, and destroy them. The <command>set</command> subcommand
    allows the management of cpusets in such a manner.
   </para>
 
@@ -36,16 +36,16 @@ cset: --> created cpuset "my_cpuset1"</screen>
     This creates a cpuset named <literal>my_cpuset1</literal> with a CPUSPEC
     of CPU1, CPU2 and CPU3. The CPUSPEC is the same concept as described in
     the <xref linkend="sec.shielding.model.ex.setup_teardown"/>. The
-    <command>set</command> subcommand also takes a <option>-m/--mem</option>
+    <command>set</command> subcommand also takes a <option>-m</option>/<option>--mem</option>
     option that lets you specify the memory nodes the <command>set</command>
-    will use as well as flags to make the CPUs and MEMs exclusive to the
-    cpuset. If you are on a non-NUMA machine, just leave the
+    will use and flags to make the CPUs and MEMs exclusive to the
+    cpuset. If you are on a non-NUMA machine, leave the
     <option>-m</option> option out and the default memory node
     <literal>0</literal> will be used.
    </para>
    <para>
-    Just like with <command>shield</command>, you can adjust the CPUs and
-    MEMs with subsequent calls to set. If, for example, you wish to adjust
+    Like with <command>shield</command>, you can adjust the CPUs and
+    MEMs with subsequent calls to set. If, for example, you want to adjust
     the <literal>my_cpuset1</literal> cpuset to only use CPUs 1 and 3 (and
     omit CPU2), then issue the following command.
    </para>
@@ -86,14 +86,14 @@ cset: done</screen>
     <para>
      The <command>cset</command> subcommand creates the cpusets based on a
      mounted cpuset file system. You do not need to know where that file
-     system is mounted, although it is easy to figure out (by default it’s
+     system is mounted, although it is easy to figure out (by default it is
      on <filename>/cpusets</filename>). When you give the
      <command>set</command> subcommand a name for a new cpuset, it is
      created wherever the cpuset file system is mounted.
     </para>
    </note>
    <para>
-    If you want to create a cpuset hierarchy, then you must give a path to
+    To create a cpuset hierarchy, then you must give a path to
     the <command>cset set</command> subcommand. This path will always begin
     with the root cpuset, for which the path is <filename>/</filename>. For
     example:
@@ -109,7 +109,7 @@ cset: --> created cpuset "/top_set/sub_set"</screen>
     <literal>sub_set</literal>. The <literal>top_set</literal> uses CPU1 and
     CPU3. It has a subset of <literal>sub_set</literal> which only uses
     CPU3. Once you have created a subset with a path, then if the name is
-    unique, you do not have to specify the path in order to affect it. If
+    unique, you do not need to specify the path to affect it. If
     the name is not unique, then <command>cset</command> will complain and
     ask you to use the path. For example:
    </para>
@@ -242,10 +242,10 @@ root     16703 16171 Roth python ./cset proc -l two</screen>
     that the initial two tasks are stopped and running in timeshare
     priority, marked as <literal>oth</literal> (for
     <literal>other</literal>). The last task is marked as running,
-    <literal>R</literal> and also at timeshare priority,
+    <literal>R</literal> and at timeshare priority,
     <literal>oth</literal>. If any of these tasks would have been at real
-    time priority, then the policy would be shown as <literal>f</literal>
-    for FIFO or <literal>r</literal> for round robin, and the priority would
+    time priority, the policy would be shown as <literal>f</literal>
+    for FIFO or <literal>r</literal> for round robin. The priority would
     be a number from 1 to 99. See below for an example.
    </para>
 <screen>&prompt.user;<command>cset</command> proc -l -s root | head -7
@@ -330,7 +330,7 @@ root     20981 20955 Roth python ./cset proc -l two</screen>
     cpuset property of a running task is inherited by all its children.
     Since we executed the listing command from the new shell which was bound
     to cpuset two, the resulting process for the listing is also bound to
-    cpuset <literal>two</literal>. Let’s test that by just running a new
+    cpuset <literal>two</literal>. Let’s test that by running a new
     shell with no prefixed <command>cset</command> command.
    </para>
 <screen>&prompt.user;<command>bash</command>
@@ -346,8 +346,7 @@ root     21147 21118 Roth python ./cset proc -l two</screen>
    <para>
     Here again we see that the second shell, PID <literal>21118</literal>,
     has a parent PID of <literal>20955</literal> which is the first shell.
-    Both shells, as well as the listing command, are running in the two
-    cpuset.
+    Both shells, and the listing command, are running in the two cpuset.
    </para>
    <note>
     <title>Separating the Tool Options From the cset Command</title>
@@ -380,7 +379,7 @@ cset: **> [Errno 2] No such file or directory</screen>
     The result is no new process even though a new PID is output. The reason
     for the message is of course that the <command>cset</command> process
     forked in preparation for exec, but the command
-    <command>blah-blah</command> was not found in order to exec it.
+    <command>blah-blah</command> was not found to execute it.
    </para>
   </sect2>
 
@@ -436,7 +435,7 @@ cset: **> [Errno 2] No such file or directory</screen>
    <note>
     <title>Information About the Range In a PIDSPEC</title>
     <para>
-     A range in a PIDSPEC does not have to have running tasks for every
+     A range in a PIDSPEC does not need to have running tasks for every
      number in that range. In fact, it is not even an error if there are no
      tasks running in that range; none will be moved in that case. The range
      simply specifies to act on any tasks that have a PID or TID that is
@@ -446,7 +445,7 @@ cset: **> [Errno 2] No such file or directory</screen>
    <para>
     In the following example, we move the current shell into the cpuset
     named <literal>two</literal> with a range PIDSPEC and back out to the
-    <literal>root</literal> cpuset with the bash variable for the current
+    <literal>root</literal> cpuset with the Bash variable for the current
     PID.
    </para>
 <screen>&prompt.user;<command>cset</command> proc -l -s two
@@ -483,7 +482,7 @@ cset: "two" cpuset of CPUSPEC(2) with 0 tasks running</screen>
     Use of the appropriate PIDSPEC can thus be handy to move tasks and
     groups of tasks. Additionally, there is one more option that can help
     with multi-threaded processes, and that is the
-    <option>--threads</option> flag. If this flag is present in a
+    <option>--threads</option> flag. If this flag is be in a
     <command>proc</command> move command with a PIDSPEC and if any of the
     task IDs in the PIDSPEC belongs to a thread in a process container, then
     <emphasis>all</emphasis> the sibling threads in that process container
@@ -586,7 +585,7 @@ three        3 n          0 n       10    0    /three</screen>
      this is system protection.
     </para>
     <para>
-     A number of kernel threads, especially on the real-time Linux kernel,
+     Several kernel threads, especially on the real-time Linux kernel,
      are bound to specific CPUs and depend on per-CPU kernel variables. If
      you move these threads to a different CPU than what they are bound to,
      you risk at best that the system will become horribly slow, and at
@@ -694,18 +693,18 @@ cset: done</screen>
   <para>
    With the preceding material on the <command>set</command> and
    <command>proc</command> subcommands, we now have the background to
-   implement the basic shielding model, just like the shield subcommand.
+   implement the basic shielding model, like the <command>shield</command> subcommand.
   </para>
 
   <para>
-   One may pose the question as to why we want to do this, especially since
+   One may pose the question why we want to do this, especially since
    <command>shield</command> already does it? The answer is that sometimes
-   one needs more functionality than <command>shield</command> has to
+   one needs more functionality than <command>shield</command> need to
    implement one’s shielding strategy. In those cases you need to first
    stop using <command>shield</command> since that subcommand will interfere
    with the further application of <command>set</command> and
-   <command>proc</command>; however, you will still need to implement the
-   functionality of <command>shield</command> in order to implement
+   <command>proc</command>. However, you will still need to implement the
+   functionality of <command>shield</command> to implement
    successful shielding.
   </para>
 
@@ -766,14 +765,14 @@ user         1-3 n        0 n       0      0   /user
 system       0 n          0 n       187    0   /system</screen>
 
   <para>
-   We now have the basic shielding set up. Since all user space tasks are
+   We now have the basic shielding setup. Since all user space tasks are
    running in <literal>system</literal>, anything that is spawned from them
    will also run in <literal>system</literal>. The <literal>user</literal>
    cpuset has nothing running in it unless you put tasks there with the
    <command>proc</command> subcommand as described above. If you also want
    to move movable kernel threads from <literal>root</literal> to
-   <literal>system</literal> (in order to achieve a form of <quote>interrupt
-   shielding</quote> on a real time Linux kernel for example), you would
+   <literal>system</literal> (to achieve a form of <quote>interrupt
+   shielding</quote> on a real time Linux kernel, for example), you would
    execute the following command as well:
   </para>
 
@@ -820,12 +819,12 @@ system       0 n          0 n       257   0    /system</screen>
   </para>
 
   <para>
-   We define a shielding set up as in the previous section where we have a
-   <literal>system</literal> cpuset with just CPU0 that takes care of
+   We define a shielding setup as in the previous section where we have a
+   <literal>system</literal> cpuset with only CPU0 that takes care of
    <quote>unimportant</quote> system tasks. You will usually require this
    type of cpuset since it forms the basis of shielding. We modify the
-   strategy to not use a <literal>user</literal> cpuset; instead we create a
-   number of new cpusets each holding one more CPU than the other. These
+   strategy to not use a <literal>user</literal> cpuset; instead we create
+   several new cpusets each holding one more CPU than the other. These
    cpusets will be called <literal>prio_low</literal> with one CPU,
    <literal>prio_med</literal> with two CPUs, <literal>prio_high</literal>
    with three CPUs, and <literal>prio_all</literal> with all CPUs.
@@ -856,13 +855,13 @@ system       0 n          0 n       257   0    /system</screen>
   <para>
    There is a planned addition to the <command>proc</command> subcommand
    that will allow moving a specified PIDSPEC of tasks running in a
-   specified cpuset to its parent. This addition will ease the automation
+   specified cpuset to its parent. This addition will simplify the automation
    burden.
   </para>
 
   <para>
    If a cpuset has CPUs that are exclusive to it, then other cpusets may not
-   make use of those CPUs unless they are children of that cpuset. This has
+   use those CPUs unless they are children of that cpuset. This has
    more relevance to machines with many CPUs and more complex strategies.
   </para>
 
@@ -920,8 +919,8 @@ prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</
   </note>
 
   <para>
-   The strategy is now implemented and we now move all user space tasks as
-   well as all movable kernel threads into the <literal>system</literal>
+   The strategy is now implemented and we now move all user space tasks
+   and all movable kernel threads into the <literal>system</literal>
    cpuset to activate the shield.
   </para>
 
@@ -954,10 +953,10 @@ prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</
 
   <para>
    You may have noted that there is an ellipsis in the path of the
-   <literal>prio_low</literal> cpuset in the listing above. This is done in
-   order to fit the output onto an 80 character screen. If you want to see
-   the entire line, then you need to use the
-   <option>-v</option>/<option>--verbose</option> flag as follows:
+   <literal>prio_low</literal> cpuset in the listing above. This is done
+   to fit the output onto an 80 character screen. To see
+   the entire line, use the <option>-v</option>/<option>--verbose</option>
+   flag as follows:
   </para>
 
 <screen>&prompt.user;<command>cset</command> set -l -r -v
