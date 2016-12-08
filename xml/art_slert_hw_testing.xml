@@ -19,6 +19,7 @@
   <info>
     <productname>&productname;</productname>
     <productnumber>&productnumber;</productnumber>
+    <date><?dbtimestamp?></date>
     <abstract>
       <para> Using &productnamereg; needs real-time capable hardware.
         This paper describes the tools that can be used to determine if
@@ -93,9 +94,9 @@
         linkend="sec.hwtest.cyct"/> for details).
       </para>
       <para>
-       In a typical situation, when &productname; works without any problems,
-       the latencies measured with <command>cyclictest</command> should not
-       be very different from those measured by the hardware latency
+       In a typical situation<!--, when &productname; works without any problems,-->
+       the latencies measured with <command>cyclictest</command> should be
+       mostly the same from those measured by the hardware latency
        detector. Latencies measured by <command>cyclictest</command>
        include the latencies caused by the operating system and are thus
        closer to latencies measured in a real computing situation. 
@@ -104,19 +105,18 @@
     </procedure>
 
     <para>
-      If there is a significant difference between latencies
-      measured by both methods and thus a significant part of the
-      latency is caused by the operating system, not the hardware, there
-      might be a software bug involved. In such a case, contact &suse;
-      for support.
+      If you encounter a significant difference between latencies
+      measured by both methods there might be a software bug involved.
+      Such latencies are a significant part caused by the operating system,
+      not the hardware. In such a case, contact &suse; for support.
     </para>
   </sect1>
   <sect1 xml:id="sec.hwtest.cyct">
     <title>Determining Latencies with <command>cyclictest</command></title>
     <para> The <command>cyclictest</command> command is part of the
       real-time kernel test suite contained in the
-        <package>rt-tests</package> RPM package (distributed as a
-      part of &productname;). </para>
+        <package>rt-tests</package> RPM package. This package is distributed
+     as part of &productname;. </para>
 
     <para> Make sure to be &rootuser; or use <command>sudo</command> to
       run <command>cyclictest</command>.</para>
@@ -179,17 +179,17 @@
         (<filename>hwlat_detector.ko</filename>) is installed with the
       real-time kernel (the <package>kernel-rt</package> package).
       It is a special kernel module that is used to detect large system
-      latencies caused by the behavior of underlying hardware or
+      latencies. It is caused by the behavior of underlying hardware or
       firmware, independent of Linux itself (system management
       interrupts, SMIs). </para>
 
-    <para> The hardware latency detector module works by hogging all of
-      the CPUs for configurable amounts of time (by calling
-        <systemitem class="other" otherclass="function"
-       >stop_machine()</systemitem>), polling the CPU Time
-      Stamp Counter (TSC) for some period and then looking for gaps in the TSC
-      data. These gaps indicate times when the polling was interrupted
-      because of SMIs. </para>
+    <para> The hardware latency detector module works by demanding all of
+      the CPUs for configurable amounts of time. This is done by calling
+      <systemitem class="other" otherclass="function"
+       >stop_machine()</systemitem>, polling the CPU Time Stamp Counter (TSC)
+      for some period, and then looking for gaps in the TSC data.
+      These gaps indicate times when the polling was interrupted
+      because of SMIs.</para>
 
     <para> To start using hardware latency detector, use as
       &rootuser;: </para>
