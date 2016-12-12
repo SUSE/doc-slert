@@ -129,8 +129,7 @@ cset: --> modified cpuset "sub_set</screen>
    </para>
    <para>
     Moving a cpuset from under a certain cpuset to a different location is
-    currently not implemented and is planned for a later release of
-    <command>cset</command>.
+    not implemented.
    </para>
   </sect2>
 
