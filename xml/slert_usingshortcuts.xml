@@ -76,7 +76,7 @@
   </tgroup>
  </informaltable>
  <para>
-  Note that <command>proc</command> can be shortened to just
+  The <command>proc</command> command can be shortened to
   <command>p</command>, while <command>shield</command> and
   <command>set</command> need two letters to disambiguate.
  </para>
@@ -178,9 +178,9 @@
 
   <para>
    The <command>set</command> subcommand has a limited number of shortcuts.
-   Basically, the <option>-s</option>/<option>--set</option> option is optional in most cases
-   and the <option>-l/</option>/<option>--list</option> option is also optional if you want to
-   list sets. For example, these commands are equivalent.
+   The option <option>--set</option> is optional usually
+   and the <option>--list</option> option is also optional to
+   list sets. For example, these commands are equivalent:
   </para>
 
   <informaltable>

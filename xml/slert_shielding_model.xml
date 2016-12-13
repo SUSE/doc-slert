@@ -4,83 +4,103 @@
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
-<!-- Converted by suse-upgrade version 1.1 -->
-<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha.shielding.model">
+
+<chapter version="5.0" xml:id="cha.shielding.model"
+ xmlns="http://docbook.org/ns/docbook"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
  <title>The Basic Shielding Model</title>
  <info/>
  <para>
-  Although any set up of &cpuset;s can really be described as
+  Although any setup of &cpuset;s can really be described as
   <emphasis>shielding</emphasis>, there is one prevalent shielding model in
   use that is so common that cset has a subcommand that is dedicated to its
   use. This subcommand is called <command>shield</command>.
  </para>
  <para>
-  The concept behind this model is the use of three &cpuset;s. The
-  <literal>root</literal> &cpuset; which is always present in all
-  configurations and contains all CPUs. The <literal>system</literal> &cpuset;
-  which contains CPUs which are used for system tasks. These are the normal
-  tasks that are not important, but which need to run on the system. And
-  finally, the <literal>user</literal> &cpuset; which contains CPUs which are
-  used for important tasks. The <literal>user</literal> &cpuset; is the
-  shield. Only those tasks that are somehow important, usually tasks whose
-  performance determines the overall rating for the machine, are run in the
-  <literal>user</literal> &cpuset;.
+  The concept behind this model is the use of three &cpuset;s:
  </para>
+ 
+ <itemizedlist>
+  <listitem>
+   <formalpara>
+    <title>Root &cpuset;</title>
+    <para>is always present in all configurations and contains all CPUs.</para>
+   </formalpara>
+  </listitem>
+  <listitem>
+   <formalpara>
+    <title>System &cpuset;</title>
+    <para>contains CPUs which are used for system tasks. These are the normal
+     tasks that are not important, but which need to run on the system.
+    </para>
+   </formalpara>
+  </listitem>
+  <listitem>
+   <formalpara>
+    <title>User &cpuset;</title>
+    <para><quote>the shield</quote>, contains CPUs which are used for
+     important tasks. Only those tasks that are somehow important, usually
+     tasks whose performance determines the overall rating for the machine,
+     are run in the <systemitem>user</systemitem> &cpuset;.
+    </para>
+   </formalpara>
+  </listitem>
+ </itemizedlist>
+
  <para>
   The <command>shield</command> subcommand manages all of these &cpuset;s and
-  lets you define the CPUs and Memory Nodes that are in the
-  <literal>shielded</literal> and <literal>unshielded</literal> sets. The
-  subcommand automatically moves all movable tasks on the system into the
+  lets you define the CPUs and memory nodes that are in the
+  <literal>shielded</literal> and <literal>unshielded</literal> sets. 
+  The subcommand automatically moves all movable tasks on the system into the
   <literal>unshielded</literal> &cpuset; on shield activation, and back into
-  the <literal>root</literal> &cpuset; on shield tear down. The subcommand
+  the <systemitem>root</systemitem> &cpuset; on shield tear down. The subcommand
   lets you move tasks into and out of the shield. Additionally, you can move
   special tasks (kernel threads) which normally run in the
-  <literal>root</literal> &cpuset; into the <literal>unshielded </literal> set
-  so that your shield will have even less disturbance.
+  <systemitem>root</systemitem> &cpuset; into the <literal>unshielded</literal>
+  set. This makes your shield have even less disturbance.
  </para>
  <para>
-  The shield subcommand abstracts the management of these &cpuset;s away from
-  you and provides options that drive how the shield is set up, which tasks
-  are to be shielded and which tasks are not, and status of the shield. In
+  The <command>shield</command> subcommand abstracts the management of these &cpuset;s away from
+  you. It provides options that drive how the shield is set up, which tasks
+  are to be shielded or not, and the status of the shield. In
   fact, you need not be bothered with the naming of the required &cpuset;s or
   even where the &cpuset; file system is mounted. <command>cset</command> and
   the <command>shield</command> subcommand takes care of all that.
  </para>
  <para>
-  If you need to define more &cpuset;s for your application, then it is likely
-  that this simple shielding is not a rich enough model for you. In this
+  If you need to define more &cpuset;s for your application, it is likely
+  that this simple shielding is not rich enough for you. In this
   case, you should transition to using the <command>set</command> and
   <command>proc</command> subcommands described in
   <xref linkend="cha.shielding.cpuset"/>.
  </para>
+
  <sect1 xml:id="sec.shielding.model.ex">
   <title>A Simple Shielding Example</title>
-
-  <para>
-   Assume that we have a 4-way machine that is not NUMA. This means there
-   are 4 CPUs at our disposal and there is only one Memory Node available.
-   On such machines, we do not need to specify any memory node parameters to
-   cset, it sets up the only available memory node by default.
-  </para>
+  <para> Assume that we have a 4-core machine that has uniform memory access.
+   This means there are 4 CPUs at your disposal and there is only one memory node
+   available. On such machines, we do not need to specify any memory node
+   parameters to cset, it sets up the only available memory node by default. </para>
 
   <para>
    Usually, one wants to dedicate as many CPUs to the shield as possible and
    leave a minimal set of CPUs for normal system processing. The reasoning
-   for this is because the performance of the important tasks will rule the
-   performance of the installation as a whole and these important tasks need
+   for this is, the performance of the important tasks will rule the
+   performance of the installation as a whole. These important tasks need
    as many resources available to them as possible, exclusive of other,
    unimportant tasks that are running on the system.
   </para>
 
   <note>
-   <title>Definition of task</title>
+   <title>Definition of Task</title>
    <para>
     In this document <emphasis>task</emphasis> is used to represent either a
     process or a thread that is running on the system.
    </para>
   </note>
-
-  <sect2 xml:id="sec.shielding.model.ex.setup_teardown">
+</sect1>
+ 
+ <sect1 xml:id="sec.shielding.model.ex.setup_teardown">
    <title>Setup and Teardown of the Shield</title>
    <para>
     To set up a shield of 3 CPUs with 1 CPU left for low priority system
@@ -93,8 +113,8 @@ cset: moving 176 tasks from root into system cpuset...
 cset: "system" cpuset of CPUSPEC(0) with 176 tasks running
 cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
    <para>
-    This command does a number of things. First, it creates a
-    <literal>user</literal> &cpuset; with what’s called a CPUSPEC (CPU
+    This command does several things. First, it creates a
+    <literal>user</literal> &cpuset; with what is called a CPUSPEC (CPU
     specification) from the <option>-c/--cpu</option> option. This CPUSPEC
     specifies to use CPUs 1 through 3 inclusively. Next, the command creates
     a <literal>system</literal> &cpuset; with a CPUSPEC that is the inverse of
@@ -110,11 +130,11 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
     in the <literal>root</literal> &cpuset; to the <literal>system</literal>
     &cpuset;. This is because you may want these kernel threads to use all
     available CPUs. If you do not, then you can use the
-    <option>-k/--kthread</option> option as described below.
+    <option>-k</option>/<option>--kthread</option> option as described below.
    </para>
    <para>
     The shield setup command above outputs the information of which &cpuset;s
-    were created and how many tasks are running on each. If you want to see
+    were created and how many tasks are running on each. To see
     the current status of the shield again, issue this command:
    </para>
 <screen>&prompt.user;<command>cset</command> shield
@@ -143,7 +163,7 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
     <literal>system</literal> set because at worst it may hang the system
     and at best it will slow the system down significantly. These threads
     are usually the IRQ threads on a real time Linux kernel, for example,
-    and you may want to not move these kernel threads into
+    and you should not move these kernel threads into
     <literal>system</literal>. If you leave them in the
     <literal>root</literal> &cpuset;, then they will have access to all CPUs.
    </para>
@@ -159,10 +179,10 @@ cset: kthread shield activated, moving 70 tasks into system cpuset...
 cset: done</screen>
    <para>
     You can see that this moved an additional 70 tasks to the unshielded
-    <literal>system</literal> &cpuset;. Note that the <option>-k/--kthread
-    on</option> parameter can be given at the shield creation time as well
-    and you do not need to perform these two steps separately if you know
-    that you will want kernel thread shielding as well. Executing
+    <literal>system</literal> &cpuset;. Note that the <option>-k</option
+    >/<option>--kthread on</option> parameter can be given at the shield's
+    creation time. You do not need to perform these two steps separately if you know
+    you will want kernel thread shielding as well. Executing
     <command>cset shield</command> again shows us the current state of the
     shield.
    </para>
@@ -189,8 +209,8 @@ alext    31796 31789 Soth less
 root     32653 25222 Roth python ./cset shield --unshield -v</screen>
    <para>
     Note that the listing is abbreviated; we do have 251 tasks running in
-    the <literal>system</literal> set. The output is self-explanatory;
-    however, the <literal>SPPr</literal> field may need a little
+    the <literal>system</literal> set. However, the <literal>SPPr</literal>
+    field may need a little
     explanation. SPPr stands for <literal>State, Policy and
     Priority</literal>. You can see that the initial two tasks are Stopped
     and running in timeshare priority, marked as <literal>oth</literal> (for
@@ -216,9 +236,9 @@ cset: moving 250 tasks from "/system" system set to root set...
 [==================================================]%
 cset: deleting "/user" and "/system" sets
 cset: done</screen>
-  </sect2>
+  </sect1>
 
-  <sect2 xml:id="sec.shielding.model.ex.move">
+  <sect1 xml:id="sec.shielding.model.ex.move">
    <title>Moving Interesting Tasks Into and Out of the Shield</title>
    <para>
     Now that we have a shield running, the objective is to run our
@@ -238,13 +258,13 @@ cset: done</screen>
      </para>
     </listitem>
    </itemizedlist>
-   <sect3 xml:id="sec.shielding.model.ex.move.exec">
+   <sect2 xml:id="sec.shielding.model.ex.move.exec">
     <title>Execing a Process Into the Shield</title>
     <para>
      Running a new process in the shield can be done with the
      <option>-e/--exec</option> option to the <command>shield</command>
      subcommand. This is the simplest way to get a task to run in the
-     shield. For this example, let’s exec a new bash shell into the shield
+     shield. For this example, let’s exec a new Bash shell into the shield
      with the following commands.
     </para>
 <screen>&prompt.user;<command>cset</command> shield -s
@@ -276,7 +296,7 @@ cset: done</screen>
      are no tasks running in it.
     </para>
     <para>
-     The second command execs the bash shell into the shield with the
+     The second command execs the Bash shell into the shield with the
      <option>-e</option> option. The last message of <command>cset</command>
      lists the PID of the new process.
     </para>
@@ -316,7 +336,7 @@ cset: done</screen>
     <para>
      You may have noticed in the output above that both the new shell and
      the status command are running as the &rootuser; user. This is
-     because cset needs to run as &rootuser; and so all it’s children
+     because cset needs to run as &rootuser; and so all it is children
      will also run as &rootuser;. If you need to run a process under a
      different user and or group, you may use the <option>--user</option>
      and <option>--group</option> options for execution as follows.
@@ -331,12 +351,12 @@ USER     PID   PPID  SPPr TASK NAME
 -------- ----- ----- ---- ---------
 alext    14212 8583  Soth bash
 alext    14241 14212 Roth python ./cset shield -s -v</screen>
-   </sect3>
-   <sect3 xml:id="sec.shielding.model.ex.move.shield_unshield">
+   </sect2>
+   <sect2 xml:id="sec.shielding.model.ex.move.shield_unshield">
     <title>Moving a Running Task Into and Out of the Shield</title>
     <para>
      While execing a process into the shield is undoubtedly useful, most of
-     the time, you’ll want to move already running tasks into and out of
+     the time, you will want to move already running tasks into and out of
      the shield. The <command>cset</command> shield subcommand includes two
      options for doing this: <option>-s/--shield</option> and
      <option>-u/--unshield</option>. These options require a PIDSPEC
@@ -381,7 +401,7 @@ alext    14241 14212 Roth python ./cset shield -s -v</screen>
     <note>
      <title>Information About the Range In a PIDSPEC</title>
      <para>
-      A range in a PIDSPEC does not have to have tasks running for every
+      A range in a PIDSPEC does not need to have tasks running for every
       number in that range. In fact, it is not even an error if there are no
       tasks running in that range: none will be moved in that case. The
       range only specifies to act on any tasks that have a PID or TID that
@@ -392,9 +412,10 @@ alext    14241 14212 Roth python ./cset shield -s -v</screen>
      Use of the appropriate PIDSPEC can thus be handy to move tasks and
      groups of tasks into and out of the shield. Additionally, there is one
      more option that can help with multi-threaded processes, and that is
-     the <option>--threads</option> flag. If this flag is present in a
-     shield or unshield command with a PIDSPEC and if any of the task IDs in
-     the PIDSPEC belong to a thread in a process container, then all the
+     the <option>--threads</option> flag. If this flag is used together with a
+     <command>shield</command> or <command>unshield</command> command with a
+     PIDSPEC and if any of the task IDs in the PIDSPEC belong to a thread in
+     a process container, then all the
      sibling threads in that process container will get shielded or
      unshielded as well. This flag provides an easy mechanism to
      shield/unshield all threads of a process by simply specifying one
@@ -402,7 +423,7 @@ alext    14241 14212 Roth python ./cset shield -s -v</screen>
     </para>
     <para>
      In the following example, we move the current shell into the shield
-     with a range PIDSPEC and back out with the bash variable for the
+     with a range PIDSPEC and back out with the Bash variable for the
      current PID.
     </para>
 <screen>&prompt.user;<command>echo</command> $$
@@ -431,7 +452,7 @@ cset: done
 &prompt.user;<command>cset</command> shield -s
 cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running
 cset: done</screen>
-   </sect3>
-  </sect2>
- </sect1>
+   </sect2>
+  </sect1>
+ 
 </chapter>

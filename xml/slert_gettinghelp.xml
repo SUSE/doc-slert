@@ -30,7 +30,7 @@
  <para>
   <command>cset</command> contains a logging application that is invaluable
   for our developers to diagnose problems and find quick solutions. To
-  create a log of your issue, please use the <option>-l/--log</option>
+  create a log of your issue, use the <option>--log</option>
   option with a file name as an argument to the main cset application. For
   example:
  </para>
