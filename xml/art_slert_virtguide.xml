@@ -16,9 +16,12 @@
   <title>Virtualization Guide</title>
   <subtitle>&productname; &productnumber;</subtitle>
   <info>
-    <abstract>
-      <para>It is possible to achieve isolation of real time (RT)
-        workloads running alongside KVM by using standard methods, like
+   <productname>&productname;</productname>
+   <productnumber>&productnumber;</productnumber>
+   <date><?dbtimestamp?></date>
+   <abstract>
+      <para>It is possible to achieve isolation of real-time
+        workloads running alongside KVM by using standard methods. For example,
         cpusets and routing IRQs to dedicated CPUs, all of which can be
         achieved by using the <command>cset</command> utility. Both
         libvirtd and KVM work fine in such configurations.</para>
@@ -37,7 +40,7 @@
     <para>All examples were carried out on a 48-core Xeon machine with 2
       NUMA nodes and 64GB of RAM running &slea;12 RT and the 3.12.49-rt
       kernel. The virtual machine was installed with <command>vm-install</command>, running
-      SLE12 SP1 on 4 CPUs and 2GB of memory. The disk used was physical
+      SLE12 SP2 on 4 CPUs and 2GB of memory. The disk used was physical
       disk <filename>/dev/sdb</filename> as recommended by the &suse;
       virtualization documentation.</para>
     <para>The <command>cpuset</command> utility was used to shield the
@@ -46,9 +49,9 @@
       <xref linkend="book.slert.shielding"/>):
     </para>
     <screen>cset shield --kthread=on -c 8-47</screen>
-    <para>Affinity for the KVM vCPU tasks was modified via the <command>virsh</command>
-      <command>vcpupin</command> command, with a 1-1 mapping, for example,
-      vCPU 0 pinned to CPU 0, etc.</para>
+    <para>Affinity for the KVM vCPU tasks was modified via the <command>virsh
+     vcpupin</command> command, with a 1-1 mapping. For example, vCPU&nbsp;0
+     pinned to CPU&nbsp;0, etc.</para>
     <para>The CPUs were split into two groups. CPU 0-7 were allocated to
       the <systemitem>system</systemitem> cpuset and CPU 8-47 were allocated
       to the <systemitem>user</systemitem> group. Having CPUs on the same
@@ -60,24 +63,25 @@
   
   <sect1 xml:id="sec.virtguide.observations">
     <title>Observations</title>
+    <para>The following observations were made:</para>
     <orderedlist>
       <listitem xml:id="li.virtguide.observ.vmheavyio">
         <para>VM Heavy I/O</para>
         <para>The test for this was to do the following in a VM:</para>
         <screen>dd if=/dev/zero of=empty bs=4096 count=$(((80*1024*1024)/4096))</screen>
         <para>Doing large amounts of disk I/O in the VM guests has a
-          noticeable impact on the latency of RT tasks. This is due to
+          noticeable impact on the latency of RT tasks. This is because of
           the constant eviction of LLC data, resulting in more cache
           misses.</para>
-        <para>The maximum latencies in for the RT workload are seen on
+        <para>The maximum latencies in for the real-time workload are seen on
           those CPUs on the same socket as the CPUs available to the KVM
-          workload, for example, where the LLC is a shared resource between the
+          workload. For example, where the LLC is a shared resource between the
             <systemitem>system</systemitem> and
             <systemitem>user</systemitem> cpuset.</para>
       </listitem>
       <listitem>
         <para>cpufreq drivers incur timer latency</para>
-        <para>Drivers like <systemitem>intel_pstate</systemitem> will setup a
+        <para>Drivers like <systemitem>intel_pstate</systemitem> will set up a
           timer on each CPU to periodically sample and adjust the CPU's
           current P-state.
           If this fires at an inopportune time it can add delays to the
@@ -116,7 +120,7 @@
           avoids the issue from observation <xref
             linkend="li.virtguide.observ.vmheavyio"/> above where the LLC
           occupancy is churned by VMs doing lots of I/O operations. If
-          that is not an option some customers may want to look at
+          that is not an option some customers should look at
           Intel's Cache Allocation Technology to further enforce cache
           allocation policies.</para>
       </listitem>

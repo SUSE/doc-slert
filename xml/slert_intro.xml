@@ -16,12 +16,12 @@
   within that cpuset. These cpusets can then be arranged into a nested
   hierarchy visible in the <quote>cpuset</quote> virtual file system. Sets
   of tasks can be assigned to these cpusets to constrain the resources that
-  they use. The tasks can be moved from one cpuset to another to utilize
+  they use. The tasks can be moved from one cpuset to another to use
   other resources defined in those other cpusets.
  </para>
  <para>
   The <command>cset</command> command is a Python application that provides
-  a command line front end for the Linux cpusets functionality. Working with
+  a command line front-end for the Linux cpusets functionality. Working with
   cpusets directly can be confusing and slightly complex. The cset tool
   hides that complexity behind an easy-to-use command line interface.
  </para>

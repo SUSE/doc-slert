@@ -18,103 +18,171 @@
     <productname>&productname;</productname>
     <productnumber>&productnumber;</productnumber>
     <xi:include href="common_copyright_gfdl.xml" parse="xml"/>
+    <date><?dbtimestamp?></date>
     <abstract>
       <para> &slerte; is an add-on to &slereg;. It allows you to run
         tasks which require deterministic real-time processing in a
         &sle; environment.</para>
       <para> &slerte; meets this requirement by offering
-        several different options for CPU and I/O scheduling, CPU
+        several options for CPU and I/O scheduling, CPU
         shielding and for setting CPU affinities to processes. </para>
     </abstract>
     <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
         <dm:bugtracker>
           <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
           <dm:component>Documentation</dm:component>
-          <dm:product>SUSE Linux Enterprise Real Time Extension 12 SP1&#xa0;(SLE RT 12 SP1)</dm:product>
+          <dm:product>SUSE Linux Enterprise Real Time 12 SP2&#xa0;(SLE RT 12 SP2)</dm:product>
           <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
         </dm:bugtracker>
         <dm:translation>no</dm:translation>
     </dm:docmanager>
   </info>
   
-  <sect1 xml:id="sec.quick.install">
+  <sect1 xml:id="sec.slert.quick.overview">
+   <title>Product Overview</title>
+   <para>
+    If your business can respond more quickly to new information and changing
+    market conditions, you have a distinct advantage over those that cannot.
+    Running your time-sensitive mission-critical applications using &slert;
+    reduces process dispatch latencies and gives you the time advantage you
+    need to increase profits or avoid further financial losses, ahead of your
+    competitors.
+   </para>
+   <sect2 xml:id="sec.slert.quick.key-features">
+    <title>Key Features</title>
+    <para>Some of the key features for &slert; are:</para>
+    <itemizedlist>
+     <listitem>
+      <para>Pre-emptible real-time kernel.</para>
+     </listitem>
+     <listitem>
+      <para>Ability to assign high-priority processes.</para>
+     </listitem>
+     <listitem>
+      <para>Greater predictability to complete critical processes on time,
+       every time.</para>
+     <para>
+      In comparison to normal Linux kernel, which is optimized for
+      overall system performance regardless of individual process response
+      time, &slert; kernel is tuned toward predictable process response time.
+     </para>
+     </listitem>
+     <listitem>
+      <para>Increased reliability.</para>
+     </listitem>
+     <listitem>
+      <para>Lower infrastructure costs.</para>
+     </listitem>
+     <listitem>
+      <para>Tracing and debugging tools that help you analyze and identify
+       bottlenecks in mission-critical applications.</para>
+     </listitem>
+    </itemizedlist>
+   </sect2>
+   
+   <sect2 xml:id="sec.slert.quick.scenarios">
+    <title>Specific Scenario</title>
+    <para>
+     &slert; Service Pack 2 supports Virtualization and Docker usage. 
+     Refer to separate guide for reference.
+    </para>
+   </sect2>
+  </sect1>
+  
+  <sect1 xml:id="sec.slert.quick.install">
     <title>Installing &slerte;</title>
 
     <para> To install &slerte; &productnumber;, start a regular &sls;
       &productnumber; installation. Select &slerte; &productnumber; as
       an add-on product during the installation. Alternately, if &sls;
       is already installed, you can start the Add-on Product
-      installation from YaST or enable the extension in the &yast; &scc;
+      installation from &yast; or enable &slerte; in the &yast; &scc;
       configuration. However, in the &yast; Boot Loader
-      configurator you need to select the <filename>-rt</filename> kernel
-      flavor as the default, as that is not done automatically in this
-      case. </para>
+      configurator you need to manually select the <filename>-rt</filename> kernel
+      flavor as the default. </para>
 
     <para> &slerte; always needs a &sls; &productnumber; base, it cannot
       be installed in stand-alone mode. For information on how to
       install add-on products, see the &sle; &productnumber; &deploy;,
       available at <link xlink:href="http://www.suse.com/doc"/>. Refer
       to chapter <citetitle>Installing Add-On Products</citetitle>. </para>
-
     <para> The following sections provide a brief introduction to the
       tools and possibilities of &slerte;. </para>
   </sect1>
-  <sect1 xml:id="sec.quick.cset">
+
+  <sect1 xml:id="sec.slert.quick.cset">
     <title>Managing CPU Sets with <command>cset</command></title>
     <para> In some circumstances, it is beneficial to be able to run
       specific tasks only on defined CPUs. For this reason, the Linux
       kernel provides a feature called <emphasis>cpuset</emphasis>. 
-      The feature cpuset provides the means to do a so called <quote>soft
+     The &cpuset; feature provides the means to do a so called <quote>soft
         partitioning</quote> of the system. Dedicated CPUs, together
       with some predefined memory, work on several tasks. </para>
 
-    <para> The command <command>cset</command> provides the high level
-      functionality to set up and manipulate CPU Sets. </para>
-
     <para>
-      <command>cset</command> consists of one super command called
-        <command>shield</command> and the regular commands
+      <command>cset</command> consists of one <quote>super command</quote> called
+        <command>shield</command> and the <quote>regular commands</quote>
         <command>set</command> and <command>proc</command>. The purpose
       of the super command <command>shield</command> is to create a
       common CPU shielding setup within one step by combining regular
-      commands. An example for setting up a CPU shield is: </para>
+      commands.
+    </para>
+    <para>
+     For more information about options and parameters of the
+     <command>shield</command> subcommand, view the help by running:
+    </para>
+    <screen><command>cset</command> help shield</screen>
 
+   <sect2 xml:id="sec.slert.quick.settingup-cpushield.single">
+    <title>Setting Up a CPU Shield for a Single CPU</title>
+    <para> The command <command>cset</command> provides the high level
+     functionality to set up and manipulate CPU Sets. An example for setting
+     up a CPU shield is: </para>
     <!-- shield cpu -->
 
     <screen><command>cset</command> shield --cpu=3</screen>
+    <para>This will shield CPU3. On a machine with 4 cores CPU0-CPU2 are
+      unshielded.</para>
+   </sect2>
 
-    <para> This will shield CPU3 and keep on a 4-way machine CPU0-CPU2
-      unshielded. The argument of the <option>--cpu</option> parameter
-      accepts comma separated lists of CPUs including range
-      specifications: </para>
-
+   <sect2 xml:id="sec.slert.quick.settingup-cpushield.multi">
+    <title>Setting up CPU Shields for Multiple CPUs</title>
+    <para>
+     If you need to shield more than one CPUs, the argument of the
+     <option>--cpu</option> option accepts comma separated lists of CPUs
+     including range specifications:
+    </para>
     <screen><command>cset</command> shield --cpu=1,3,5-7</screen>
-
-    <para> On a 8-way machine this command will shield CPU1, CPU3, CPU5,
-      CPU6 and CPU7. CPU0, CPU2 and CPU4 will remain unshielded. Already
-      existing CPU shields could be extended by the same command. For
-      example, to add CPU4 to the mentioned CPU set: </para>
+    <para>
+     On a machine with 8 cores, this command will shield CPU1, CPU3, CPU5,
+     CPU6, and CPU7. The CPUs CPU0, CPU2 and CPU4 will remain unshielded.
+    </para>
+    <para>
+     Already existing CPU shields can be extended by the same command. For
+     example, to add CPU4 to the mentioned CPU set, use this command:
+    </para>
 
     <screen><command>cset</command> shield --cpu=1,3-7</screen>
-
-    <para> CPU1, CPU3, CPU5 to CPU6 were already shielded and only CPU4
-      will additionally be shielded. Technically the command is updating
-      the current CPU shield schema. To reduce the number of shielded
-      CPUs and to unshield CPU1, for example, use the following command: </para>
-
+    <para>
+     CPU1, CPU3, CPU5 to CPU6 were already shielded and only CPU4 will
+     additionally be shielded. Technically, the command is updating the current
+     CPU shield schema. To reduce the number of shielded CPUs and to unshield
+     CPU1, for example, use the following command:
+    </para>
     <screen><command>cset</command> shield --cpu=3-7</screen>
+    <para>
+     Now only CPU3, CPU4, CPU5, CPU6, and CPU7 are shielded. CPU0, CPU1, and
+     CPU2 are available for system usage.
+    </para>
+   </sect2>
 
-    <para> Now only CPU3, CPU4, CPU5, CPU6 and CPU7 are shielded. CPU0,
-      CPU1 and CPU2 are available for system usage. </para>
-
-    <!-- show shield CPUs  -->
-
-    <para> After the CPU shielding is set up you can display the current
+   <sect2 xml:id="sec.slert.quick.showing.cpu.shields">
+    <title>Showing CPU Shields</title>
+    <para>
+     After the CPU shielding is set up you can display the current
       configuration by running <command>cset shield</command> without
-      additional parameters: </para>
-
-    <!-- bg: sorry, screen too long for flyer layout -->
-
+      additional options:
+    </para>
     <screen><command>cset</command> shield
 cset: --> shielding system active with
 cset: "system" cpuset of: 0-2 cpu, with: 47
@@ -122,7 +190,7 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
 </screen>
 
     <para> By default, CPU shielding consists of at least of three
-      cpusets: </para>
+      &cpuset;s: </para>
 
     <itemizedlist>
       <listitem>
@@ -132,31 +200,37 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
       </listitem>
       <listitem>
         <para>
-          <systemitem class="resource">system</systemitem> is the cpuset of unshielded CPUs.
+          <systemitem class="resource">system</systemitem> is the &cpuset; of unshielded CPUs.
         </para>
       </listitem>
       <listitem>
         <para>
-          <systemitem class="resource">user</systemitem> is the cpuset of shielded CPUs </para>
+         <systemitem class="resource">user</systemitem> is the &cpuset; of shielded CPUs </para>
       </listitem>
     </itemizedlist>
+   </sect2>
 
-    <!-- shield process -->
+   <sect2 xml:id="sec.slert.quick.shielding-processes">
+    <title>Shielding Processes</title>
+    <para>
+     Certain processes or groups of processes can be assigned to a
+     shielded &cpuset;, after the CPU set is created. To start a new
+     process in the shielded CPU set use the <option>--exec</option>
+     option:
+    </para>
 
-    <para> Certain processes or groups of processes can be assigned to a
-      shielded cpuset, after the CPU set is created. To start a new
-      process in the shielded CPU set use the <option>--exec</option>
-      option: </para>
+    <screen><command>cset</command> shield --exec <replaceable>APPLICATION</replaceable></screen>
 
-    <screen><command>cset</command> shield --exec <replaceable>application</replaceable></screen>
-
-    <para> To move already running processes to the shielded CPU set use
-      the <option>--shield</option> option. It accepts a
-      comma-separated list of PIDs as well as range specifications: </para>
+    <para>
+     To move already running processes to the shielded CPU set use
+     the <option>--shield</option> and <option>--pid</option> options. The
+     <option>--pid</option> option accepts a comma-separated list
+     of PIDs and range specifications:
+    </para>
 
     <screen><command>cset</command> shield --shield --pid=1,2,600-700</screen>
 
-    <para> This moves processes with PID 1, 2 and from 600 to 700 to the
+    <para> This moves processes with PID 1, 2, and from 600 to 700 to the
       shielded CPU set. If there is a gap in the range from 600 to 700,
       then only those available process will be moved to the shield
       without warning. <command>cset</command> handles threads like
@@ -164,9 +238,7 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
       required CPU set. </para>
 
     <!-- shield DANGER note -  stolen from "cset help shield" -->
-
     <!-- bg: modified -->
-
     <warning>
       <para> The <option>--shield</option> option does not check the
         processes you request to move into the shield. This means that
@@ -175,10 +247,11 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
         cause a complete system lockup by indiscriminately specifying
         arbitrary PIDs to the <option>--shield</option> command. </para>
     </warning>
-
-    <!-- show shield processes -->
-
-    <para> Use the <command>cset shield </command> command to show the
+   </sect2>
+   
+   <sect2 xml:id="sec.slert.quick.showing.shielded-processes">
+    <title>Showing Shielded Processes</title>
+    <para> Use the <command>cset shield</command> command to show the
       number of currently shielded processes (the same command can be
       used to show the current CPU shield setup). To list shielded and
       unshielded processes, add the <command>--verbose</command>
@@ -197,32 +270,35 @@ cset: "user" cpuset of:    3 cpu, with: 1
       -------- ----- ----- - ---------
          root     10202 10170 S application 
 </screen>
+   </sect2>
 
-    <!-- unshield process -->
-
-    <para> To remove a process (or group of processes) from the CPU
-      shield use the <command>--unshield</command> option. The
-      argument for <command>--unshield</command> is similar to the
-        <command>--shield</command> option, which accepts a
-      comma-separated list of PIDs/TIDs and range specifications: </para>
+   <sect2 xml:id="sec.slert.quick.unshielding-processes">
+    <title>Unshielding Processes</title>
+    <para>
+     To remove a process (or group of processes) from the CPU shield use the
+     <option>--unshield</option> option. The argument for
+     <option>--unshield</option> is similar to the <option>--shield</option>
+     option. This option accepts a comma-separated list of PIDs/TIDs and
+     range specifications: </para>
 
     <screen><command>cset</command> shield --unshield --pid=2,650-655</screen>
 
     <para> This command will unshield the process with the PID 2 and the
       processes in range of 650 and 655. </para>
+   </sect2>
 
-    <!-- reset CPU set -->
+   <sect2 xml:id="sec.slert.quick.resetting-cpusets">
+    <title>Resetting CPU Sets</title>
+    <para>
+     To delete CPU sets use the <command>cset</command> option
+     <option>--reset</option>. This will unshield all CPUs and
+     migrate dedicated processes to all available CPUs again.
+    </para>
+   </sect2>
+ </sect1>
 
-    <para> To delete CPU sets use the <command>cset</command> option
-        <option>--reset</option>. This will unshield all CPUs and
-      migrate dedicated processes to all available CPUs again. </para>
-
-    <!-- cset help shield -->
-
-    <para> For more information about options and parameters of the
-        <command>shield</command> subcommand, view the help by running: </para>
-
-    <screen><command>cset</command> help shield</screen>
+ <sect1 xml:id="sec.slert.csets.tree">
+  <title>Managing Tree-like Structures with <command>cset</command></title>
 
     <!-- basic cset commands -->
 
@@ -233,25 +309,25 @@ cset: "user" cpuset of:    3 cpu, with: 1
     <!-- cset set -->
 
     <para> The subcommand <option>set</option> is used to create, modify
-      and destroy cpusets. Compared to the supercommand
+      and destroy &cpuset;s. Compared to the supercommand
         <option>shield</option>, the <option>set</option> subcommand can
       additionally assign memory nodes for NUMA machines. </para>
 
     <para> Besides assigning memory nodes, the subcommand
-        <command>set</command> can be used to create cpusets in a
+        <command>set</command> creates cpusets in a
       tree-like structure, rooted at the <systemitem 
-        class="resource">root</systemitem> cpuset. </para>
+        class="resource">root</systemitem> &cpuset;. </para>
 
-    <!-- cset set .... assinging CPU -->
+    <!-- cset set .... assigning CPU -->
 
-    <para> To create a cpuset with the subcommand <command>set</command>
-      you have to specify the CPUs which should be used. Either use a
+    <para> To create a &cpuset; with the subcommand <command>set</command>
+      you need to specify the CPUs which should be used. Either use a
       comma-separated list or a range specification: </para>
 
     <screen><command>cset</command> set --cpu=1-7 "/one"</screen>
 
-    <para> This command will create a cpuset called <systemitem>one</systemitem>
-      with assigned CPUs from CPU1 to CPU7. To specify a new cpuset
+    <para> This command will create a &cpuset; called <systemitem>one</systemitem>
+      with assigned CPUs from CPU1 to CPU7. To specify a new &cpuset;
       called <systemitem>two</systemitem> that is a subset of <systemitem>one</systemitem>,
       proceed as follows: </para>
 
@@ -263,30 +339,30 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
     <para> Cpusets follow certain rules. Children can only include CPUs
       that the parents already have. If you try to specify a different
-      cpuset, the kernel cpuset subsystem will not let you create that
-      cpuset. For example, if you create a cpuset that contains CPU3,
-      and then attempt to create a child of that cpuset with a CPU other
-      than 3, you will get an error, and the cpuset will not be created.
+      &cpuset;, the kernel &cpuset; subsystem will not let you create that
+      &cpuset;. For example, if you create a &cpuset; that contains CPU3,
+      and then attempt to create a child of that &cpuset; with a CPU other
+      than 3, you will get an error, and the &cpuset; will not be created.
       The resulting error is somewhat cryptic and is usually
         <quote>Permission denied</quote>. </para>
 
     <!-- cset set ... list and destroy -->
 
-    <para> To show a table containing useful information, like cpu list
+    <para> To show a table containing useful information, like CPU list
       and memory list, use the <option>-r</option> parameter. The
         <quote>-X</quote> column shows the exclusive state of CPU or
       memory. The <quote>path</quote> column shows the real path in the
-      virtual cpuset file system. </para>
+      virtual &cpuset; file system. </para>
 
     <screen><command>cset</command> set -r</screen>
 
     <!-- cset set .... assinging memory -->
 
-    <para> On NUMA machines memory nodes can be assigned to a cpuset
+    <para> On NUMA machines memory nodes can be assigned to a &cpuset;
       similar to CPUs. The <option>--mem</option> option of the
       subcommand <command>set</command> allows a comma-separated and
       inclusive range specification of memory nodes. This example will
-      assign MEM1, MEM3, MEM4, MEM5 and MEM6 to the cpuset
+      assign MEM1, MEM3, MEM4, MEM5 and MEM6 to the &cpuset;
         <systemitem>new_set</systemitem>: </para>
 
     <screen><command>cset</command> set --mem=1,3-6 new_set</screen>
@@ -296,7 +372,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
         <option>--cpu_exclusive</option> and
         <option>--mem_exclusive</option> options (without any
       additional arguments) set the CPUs or memory nodes exclusive to a
-      cpuset: </para>
+      &cpuset;: </para>
 
     <screen><command>cset</command> set --cpu_exclusive "/one"</screen>
 
@@ -315,10 +391,10 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
     <!-- cset proc .... exec -->
 
-    <para> After the cpuset is initialized, the subcommand
-        <command>proc</command> can start processes on certain cpusets
+    <para> After the &cpuset; is initialized, the subcommand
+        <command>proc</command> can start processes on certain &cpuset;s
       with the <option>--exec</option> option. The following will
-      start the application <systemitem>fastapp</systemitem> within the cpuset
+      start the application <systemitem>fastapp</systemitem> within the &cpuset;
         <systemitem>new_set</systemitem>: </para>
 
     <screen><command>cset</command> proc --exec --set new_set fastapp</screen>
@@ -326,17 +402,17 @@ cset: "user" cpuset of:    3 cpu, with: 1
     <!-- cset proc ... move -->
 
     <para> To move an already running process inside an already existing
-      cpuset use the option <option>--move</option>. It accepts a
+      &cpuset; use the option <option>--move</option>. It accepts a
       comma-separated list and range specifications of PIDs. The
       following command will move processes with PID
         2442 and within range of 3000 to 3200 into the
-      cpuset <systemitem>new_set</systemitem>: </para>
+      &cpuset; <systemitem>new_set</systemitem>: </para>
 
     <screen><command>cset</command> proc --move 2442,3000-3200 new_set</screen>
 
     <!-- cset proc ... list -->
 
-    <para> Listing processes running within a specific cpuset can be
+    <para> Listing processes running within a specific &cpuset; can be
       done by using the option <option>--list</option>. </para>
 
     <screen><command>cset</command> proc --list new_set</screen>
@@ -344,7 +420,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     <!-- cset proc ... fromset toset -->
 
     <para> The subcommand <command>proc</command> can also move the entire
-      list of processes within one cpuset to another cpuset by using the
+      list of processes within one cpuset to another &cpuset; by using the
       option <option>--fromset</option> and
       <option>--toset</option>. This will move all process assigned to
         <systemitem>old_set</systemitem> and assign them to
@@ -370,15 +446,15 @@ cset: "user" cpuset of:    3 cpu, with: 1
       scheduling policy and priority), or to execute a new process with
       specified real-time attributes. </para>
 
-    <para> It is highly recommend for applications which do not use
+    <para> It is highly recommended for applications which do not use
       real-time specific attributes by their own but should nevertheless
       experience the full advantages of real-time. To get full real-time
       experiences, call these applications with the
         <command>chrt</command> command and the right set of scheduler
       policy and priority parameters. </para>
 
-    <para> With the following command all running processes with their
-      real-time specific attributes are shown. <literal>class</literal>
+    <para> With the following command, all running processes with their
+      real-time specific attributes are shown. The selection <literal>class</literal>
       shows the current scheduler policy and <literal>rtprio</literal>
       the real-time priority: </para>
 
@@ -394,13 +470,13 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
     <itemizedlist>
       <listitem>
-        <para> TS - SCHED_OTHER </para>
+        <para> <literal>TS - SCHED_OTHER</literal> </para>
       </listitem>
       <listitem>
-        <para> FF - SCHED_FIFO </para>
+        <para> <literal>FF - SCHED_FIFO</literal> </para>
       </listitem>
       <listitem>
-        <para> RR - SCHED_RR </para>
+        <para> <literal>RR - SCHED_RR</literal> </para>
       </listitem>
     </itemizedlist>
 
@@ -417,7 +493,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     <screen><command>chrt</command> -m</screen>
 
     <para> To change the scheduler policy and the priority of a running
-      process, <command>chrt</command> provides the parameters
+      process, <command>chrt</command> provides the options
         <option>--fifo</option> for <literal>SCHED_FIFO</literal>,
         <option>--rr</option> for <literal>SCHED_RR</literal> and
         <option>--other</option> for <literal>SCHED_OTHER</literal>.
@@ -436,9 +512,8 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
     <!-- man chrt(1) -->
 
-    <para> For more information about chrt, see the chrt man page: </para>
-
-    <screen>man 1 chrt</screen>
+    <para> For more information about chrt, see the <command>chrt</command>
+     man page with <command>man 1 chrt</command>.</para>
   </sect1>
   <!--
  
@@ -903,7 +978,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
    cpusets.
   </para>
   <para> 
-   In order to make use of cpusets, you need detailed hardware information
+   To make use of cpusets, you need detailed hardware information
    for several reasons: on big machines, memory that is local to a CPU will be
    much faster than memory that is only available on a different node. If you
    want to create cpusets from several nodes, you should try to combine CPUs
@@ -1051,8 +1126,7 @@ rmdir /dev/cpuset/$1
  </sect1>
  -->
   <sect1 xml:id="sec.quick.taskset">
-    <title>Specifying a CPU Affinity with
-      <command>taskset</command></title>
+    <title>Specifying a CPU Affinity with <command>taskset</command></title>
 
     <para> The default behavior of the kernel is to keep a process
       running on the same CPU if the system load is balanced over the
@@ -1064,12 +1138,12 @@ rmdir /dev/cpuset/$1
       the shielded CPUs will not run any processes that do not have an
       affinity to the shielded CPUs. Another possibility to remove load
       from the other CPUs is to run all low priority tasks on a selected
-      CPU . </para>
+      CPU. </para>
 
-    <para> If a task is running inside a specific cpuset, the affinity
-      mask must match at least one of the CPUs available in this set.
+    <para> If a task is running inside a specific &cpuset;, the affinity
+      dialog must match at least one of the CPUs available in this set.
       The <command>taskset</command> command will not move a process
-      outside the cpuset it is running in. </para>
+      outside the &cpuset; it is running in. </para>
 
     <para> To set or retrieve the CPU affinity of a task a bitmask is
       used. It is represented by a hexadecimal number. If you count the
@@ -1108,18 +1182,18 @@ rmdir /dev/cpuset/$1
       </varlistentry>
     </variablelist>
 
-    <para> If a given mask does not contain any valid CPU on the system,
+    <para> If a given dialog does not contain any valid CPU on the system,
       an error is returned. If taskset returns without an error, the
       given program has been scheduled to the specified list of CPUs. </para>
 
-    <para> The command <command>taskset</command> can either be used to
-      start a new process with a given CPU affinity, or to redefine the
+    <para> The command <command>taskset</command> starts a new process with a
+     given CPU affinity, or to redefine the
       CPU affinity of an already running process. </para>
 
     <variablelist>
       <title>Examples</title>
       <varlistentry>
-        <term><option>taskset -p <replaceable>pid</replaceable></option>
+        <term><option>taskset -p <replaceable>PID</replaceable></option>
         </term>
         <listitem>
           <para> Retrieves the current CPU affinity of the process with
@@ -1128,11 +1202,11 @@ rmdir /dev/cpuset/$1
       </varlistentry>
       <varlistentry>
         <term><option>taskset -p
-              <replaceable>mask</replaceable><replaceable>pid</replaceable></option>
+              <replaceable>mask</replaceable><replaceable>PID</replaceable></option>
         </term>
         <listitem>
-          <para> Sets the CPU affinity of the process with PID
-              <replaceable>pid</replaceable> to <replaceable>mask</replaceable>. </para>
+          <para> Sets the CPU affinity of the process with the
+              <replaceable>PID</replaceable> to <replaceable>mask</replaceable>. </para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -1147,10 +1221,10 @@ rmdir /dev/cpuset/$1
     </variablelist>
 
     <para> For more detailed information about
-        <command>taskset</command>, see the man page: </para>
-
-    <screen>man 1 taskset</screen>
+        <command>taskset</command>, see the man page <command>man 1 taskset</command>.
+    </para>
   </sect1>
+
   <sect1 xml:id="sec.quick.ionice">
     <title>Changing I/O Priorities with <command>ionice</command></title>
     <para> Handling I/O is one of the critical issues for all
@@ -1245,9 +1319,7 @@ rmdir /dev/cpuset/$1
 
     <para> For more detailed information about
       <command>ionice</command>, see the <command>ionice</command> man
-      page: </para>
-
-    <screen>man 1 ionice</screen>
+      page with <command>man 1 ionice</command></para>
   </sect1>
   <sect1 xml:id="sec.quick.io.block.change">
     <title>Changing the I/O Scheduler for Block Devices</title>
@@ -1478,7 +1550,7 @@ noop deadline [cfq]</screen>
               <listitem>
                 <para> The <option>fifo_expire_*</option> variables
                   define the timeout in milliseconds for asynchronous
-                  and synchronous I/O requests. In order to prefer
+                  and synchronous I/O requests. To prefer
                   synchronous operations over asynchronous ones, 
                   <option>fifo_expire_sync</option> value should be lower
                   than fifo_expire_async.</para>
@@ -1513,7 +1585,7 @@ noop deadline [cfq]</screen>
                   </listitem>
                   <listitem>
                     <para><option>slice_async_rq</option> for how many
-                      requests can an asynchronous disk slice accomodate.</para>
+                      requests can an asynchronous disk slice accommodate.</para>
                   </listitem>
                   <listitem>
                     <para><option>slice_idle</option> defines how long I/O
@@ -1569,16 +1641,16 @@ noop deadline [cfq]</screen>
 
     <itemizedlist>
       <listitem>
-        <para> More detailed information about the Real-Time Linux
-          Development and an introduction how to write a Real-Time
-          application can be found in the Real-Time Linux Community
+        <para> More detailed information about the real-time Linux
+          development and an introduction how to write a real-time
+          application can be found in the real-time Linux community
           Wiki. <link xlink:href="http://rt.wiki.kernel.org"/>, <link
             xlink:href="http://rt.wiki.kernel.org/index.php/HOWTO:_Build_an_RT-application"
           />
         </para>
       </listitem>
       <listitem>
-        <para> The cpuset feature of the kernel is explained in
+        <para> The &cpuset; feature of the kernel is explained in
             <filename>/usr/src/linux/Documentation/cgroups/cpusets.txt</filename>.
           More detailed documentation is available from <link
             xlink:href="http://techpubs.sgi.com/library/tpl/cgi-bin/getdoc.cgi/linux/bks/SGI_Admin/books/LX_Resource_AG/sgi_html/ch01.html"
@@ -1603,8 +1675,7 @@ noop deadline [cfq]</screen>
           refer to <link
             xlink:href="https://en.wikipedia.org/wiki/Deadline_scheduler."/>.
           <!-- <link xlink:href="http://kerneltrap.org/node/431"/> -->
-          In your installed system, find further
-          information in
+          In your installed system, find further information in
             <filename>/usr/src/linux/Documentation/block/deadline-iosched.txt</filename>.
         </para>
       </listitem>
