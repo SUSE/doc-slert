@@ -149,4 +149,353 @@
       </listitem>
     </orderedlist>
   </sect1>
+ 
+  <sect1 xml:id="sec.virtguide.docker">
+   <title>Technical Guide of RT Applications within Docker Feasibility</title>
+   <para>
+    It is important to note that realtime processes will be affected by
+    container activity as there is insufficient isolation to guarantee zero
+    cross-talk. There are no special settings, nor container-specific
+    interactions to consider as from a RT prespective, nothing changes due to
+    containers. Whether a noise source in a container is irrelevant.
+    Interference may be considerably higher if multiple RT applications are
+    executed in separate containers. Also bear in mind that while worst-case
+    latency may be better than SLE, it will not necessarily performance better
+    than NOPREEMPT due to the overhead required for RT.
+   </para>
+   <para>
+    Some shielding is possible but there is no tool-based support for it.
+    There is a generic shield script attached that can move Docker contents
+    onto shielded cores once running. Launching of either KVM/Docker directly
+    into a shielded home did not appear to be possible but the Docker or
+    virtualisation team may be able to do better. The basic steps are
+   </para>
+   <procedure>
+    <step>
+     <para><xref linkend="sec.virtguide.docker.rt-env"/></para>
+    </step>
+    <step>
+     <para><xref linkend="sec.virtguide.docker.shielding"/></para>
+    </step>
+    <step>
+     <para><xref linkend="sec.virtguide.docker.scripts"/></para>
+    </step>
+   </procedure>
+   
+   <sect2 xml:id="sec.virtguide.docker.rt-env">
+    <title>Running Real-Time Applications in a Virtualized Environment</title>
+    <para>
+     Standard real-time dangers apply in that if the intention is to run a
+     compute intensive application with realtime priority, then the user must
+     ensure that kernel threads cannnot starve.  A simple precaution is to
+     use '<literal>'rtkthread=prio' 'rtworkqueues=prio</literal>' kernel boot
+     parameters, with priority set higher than anything that may dominate a
+     CPU. This is not strictly real-time capable, but it is safer overall.
+    </para>
+    <itemizedlist>
+     <title>Docker Prerequisites</title>
+     <listitem>
+      <para>kernel must be booted with <literal>nortsched</literal> commandline parameter</para>
+      <para>
+       This is to hide cgroup scheduling from Docker. If cgroup scheduling
+       is required then isolating docker is very problematic.</para>
+     </listitem>
+     <listitem>
+      <para>Docker run must be passed <option>--privileged=true</option></para>
+      <para>This is required for using the RT classes.</para>
+     </listitem>
+     <listitem>
+      <para>your container is equipped with the <command>chrt</command> system tool.</para>
+     </listitem>
+    </itemizedlist>
+    <para>
+     If no isolation is required for your use case then it's ready. Run
+     <command>docker run</command> your container, using <command>chrt</command>
+     to set RT class/priority of that which you execute upon startup of the
+     container. Example:
+    </para>
+    <screen>docker run --privileged=true ... /usr/bin/chrt -f 1 /usr/sbin/sshd -D</screen>
+    <para>
+     The above (with additional arguments of course) will start <systemitem
+      class="daemon">sshd</systemitem> within the container as a
+     <literal>SCHED_FIFO</literal> task of priority 1.  ssh into it, and
+     whatever you run therein will inherit scheduler RT class/priority.
+    </para>
+   </sect2>
+
+   <sect2 xml:id="sec.virtguide.docker.shielding">
+    <title>Docker Shielding</title>
+    <para>There is currently no facility withing docker to launch a container directly into an isolated cpuset, this must be done manually.</para>
+    <example>
+     <title>Pseudo Script</title>
+     <screen># note cpuset mount point
+cpuset_mnt=$(mount|grep cpuset|cut -d' ' -f3)
+
+# create an isolated cpuset for your container
+cset shield --userset=rtcpus --cpu=4-7 --kthread=on
+
+# note path and id of your container
+docker_path=$(docker run...)
+docker_id=$(docker ps -q)
+
+# move container content into the isolated cpuset
+for i in $(cat ${cpuset_mnt}/system/docker/${docker_path}/tasks);
+do
+		echo $i > ${cpuset_mnt}/rtcpus/tasks;
+done
+
+# stop/destroy the container
+docker stop ${docker_id}
+docker rm ${docker_id}
+
+# remove dir docker abandons in the shield system directory
+rmdir ${cpuset_mnt}/system/docker
+
+# tear down the shield, and you're done
+cset shield --userset=rtcpus --cpu=4-7 --reset</screen>
+    </example>
+   </sect2>
+
+   <sect2 xml:id="sec.virtguide.docker.scripts">
+    <title>Scripts</title>
+    <example>
+     <title>Sample Shield Script</title>
+     <screen language="bash">#!/bin/sh
+
+let START_CPU=4
+let END_CPU=63
+let ONLINE=1
+let SHIELD_UP=0
+GOVERNOR="performance"
+
+DEFAULT_MASK=ffffffff,ffffffff
+SHIELD_MASK=00000000,0000000f
+
+if [ -f /proc/sys/kernel/sched_rt_runtime_us ]; then
+	 RT_RUNTIME=$(cat /proc/sys/kernel/sched_rt_runtime_us)
+fi
+if [ -f /proc/sys/kernel/nmi_watchdog ]; then
+	 NMI_WATCHDOG=$(cat /proc/sys/kernel/nmi_watchdog)
+fi
+
+CPUSET_ROOT=$(grep cpuset /proc/mounts|cut -d ' ' -f2)
+if [ ! -z $CPUSET_ROOT ]; then
+	if [ -d ${CPUSET_ROOT}/rtcpus ]; then
+		let SHIELD_UP=1
+	fi
+	if [ -f ${CPUSET_ROOT}/cpuset.cpus ]; then
+		CPUSET_PREFIX=cpuset.
+	fi
+fi
+
+if [ $SHIELD_UP -eq 1 ]; then
+	# take it down
+	echo 1 > ${CPUSET_ROOT}/${CPUSET_PREFIX}sched_load_balance
+	cset shield --userset=rtcpus --reset
+
+	# restore default irq affinity
+	echo ${DEFAULT_MASK} > /proc/irq/default_smp_affinity
+	for irqlist in $(ls /proc/irq/*/smp_affinity)
+	do
+		echo ${DEFAULT_MASK} > $irqlist 2>/dev/null
+	done
+
+	if [ -f /proc/sys/kernel/timer_migration ]; then
+		echo 1 > /proc/sys/kernel/timer_migration
+	fi
+	if [ -f /proc/sys/kernel/sched_rt_runtime_us ]; then
+		echo ${RT_RUNTIME} > /proc/sys/kernel/sched_rt_runtime_us
+	fi
+	if [ -f /sys/kernel/debug/tracing/tracing_on ]; then
+		echo 1 > /sys/kernel/debug/tracing/tracing_on
+	fi
+	if [ -f /sys/kernel/mm/transparent_hugepage/enabled ]; then
+		echo always > /sys/kernel/mm/transparent_hugepage/enabled
+	fi
+	if [ -f /proc/sys/kernel/nmi_watchdog ]; then
+		echo ${NMI_WATCHDOG} > /proc/sys/kernel/nmi_watchdog
+	fi
+	if [ -f /sys/devices/system/machinecheck/machinecheck0/check_interval ]; then
+		echo 300 > /sys/devices/system/machinecheck/machinecheck0/check_interval
+	fi
+	if [ -f /sys/devices/virtual/workqueue/writeback/cpumask ]; then
+		echo ${DEFAULT_MASK} > /sys/devices/virtual/workqueue/writeback/cpumask
+	fi
+	if [ -f /sys/devices/virtual/workqueue/cpumask ]; then
+		echo ${DEFAULT_MASK} > /sys/devices/virtual/workqueue/cpumask
+	fi
+	if [ -f /proc/sys/vm/stat_interval ]; then
+		echo 1 > /proc/sys/vm/stat_interval
+	fi
+	if [ -f /sys/module/processor/parameters/latency_factor ]; then
+		echo 2 > /sys/module/processor/parameters/latency_factor
+	fi
+	if [ -f /sys/module/processor/parameters/ignore_ppc ]; then
+		echo 0 > /sys/module/processor/parameters/ignore_ppc
+	fi
+	if [ -f /sys/module/processor/parameters/ignore_tpc ]; then
+		echo 0 > /sys/module/processor/parameters/ignore_tpc
+	fi
+	if [ -f /etc/init.d/sgi_irqbalance ]; then
+		/etc/init.d/sgi_irqbalance start
+	fi
+else
+	# route irqs away from shielded cpus
+	if [ -f /etc/init.d/sgi_irqbalance ]; then
+		/etc/init.d/sgi_irqbalance stop
+	fi
+	echo $SHIELD_MASK > /proc/irq/default_smp_affinity
+	for irqlist in $(ls /proc/irq/*/smp_affinity)
+	do
+		echo $SHIELD_MASK > $irqlist 2>/dev/null
+	done
+
+	# poke some buttons..
+	if [ -f /proc/sys/kernel/sched_rt_runtime_us ]; then
+		echo -1 > /proc/sys/kernel/sched_rt_runtime_us
+	fi
+	if [ -f /sys/kernel/debug/tracing/tracing_on ]; then
+		echo 0 > /sys/kernel/debug/tracing/tracing_on
+	fi
+	if [ -f /sys/kernel/mm/transparent_hugepage/enabled ]; then
+		echo never > /sys/kernel/mm/transparent_hugepage/enabled
+	fi
+	if [ -f /proc/sys/kernel/nmi_watchdog ]; then
+		echo 0 > /proc/sys/kernel/nmi_watchdog
+	fi
+	if [ -f /sys/devices/system/machinecheck/machinecheck0/check_interval ]; then
+		echo 0 > /sys/devices/system/machinecheck/machinecheck0/check_interval
+	fi
+	if [ -f /sys/devices/virtual/workqueue/writeback/cpumask ]; then
+		echo ${SHIELD_MASK} > /sys/devices/virtual/workqueue/writeback/cpumask
+	fi
+	if [ -f /sys/devices/virtual/workqueue/cpumask ]; then
+		echo ${SHIELD_MASK} > /sys/devices/virtual/workqueue/cpumask
+	fi
+	if [ -f /proc/sys/vm/stat_interval ]; then
+		echo 999999 > /proc/sys/vm/stat_interval
+	fi
+	if [ -f /sys/module/processor/parameters/latency_factor ]; then
+		echo 1 > /sys/module/processor/parameters/latency_factor
+	fi
+	if [ -f /sys/module/processor/parameters/ignore_ppc ]; then
+		echo 1 > /sys/module/processor/parameters/ignore_ppc
+	fi
+	if [ -f /sys/module/processor/parameters/ignore_tpc ]; then
+		echo 1 > /sys/module/processor/parameters/ignore_tpc
+	fi
+
+	# ...and fire up the shield
+	cset shield --userset=rtcpus --cpu=${START_CPU}-${END_CPU} --kthread=on
+
+	# If cpuset wasn't previously mounted (systemd will, like it or not),
+	# we just mounted it.  Find the mount point.
+	if [ -z $CPUSET_ROOT ]; then
+		CPUSET_ROOT=$(grep cpuset /proc/mounts|cut -d ' ' -f2)
+		if [ -z $CPUSET_ROOT ]; then
+			# If it's not mounted now, bail.
+			echo EEK, cupset is not mounted!
+			exit
+		else
+			# ok, check for cgroup mount
+			if [ -f ${CPUSET_ROOT}/cpuset.cpus ]; then
+				CPUSET_PREFIX=cpuset.
+			fi
+		fi
+	fi
+
+	echo 0 > ${CPUSET_ROOT}/${CPUSET_PREFIX}sched_load_balance
+	echo 1 > ${CPUSET_ROOT}/system/${CPUSET_PREFIX}sched_load_balance
+	echo 0 > ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_relax_domain_level
+	# this ain't gonna happen in -rt kernels, but...
+	if [ -f ${CPUSET_ROOT}/rtcpus/cpu.rt_runtime_us ]; then
+		echo 300000 > ${CPUSET_ROOT}/system/cpu.rt_runtime_us
+		echo 300000 > ${CPUSET_ROOT}/rtcpus/cpu.rt_runtime_us
+	fi
+	echo 0 > ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_load_balance
+
+	# wait a bit for sched_domain rebuild
+	sleep 1
+
+	# now we can go to hpc
+	if [ -f ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_hpc_rt ]; then
+		echo 1 > ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_hpc_rt
+	fi
+
+	# offline/online to migrate timers and whatnot
+	if [ $ONLINE -eq 1 ]; then
+		for i in `seq ${START_CPU} ${END_CPU}`; do
+			echo 0 > /sys/devices/system/cpu/cpu$i/online
+		done
+		for i in `seq ${START_CPU} ${END_CPU}`; do
+			echo 1 > /sys/devices/system/cpu/cpu$i/online
+		done
+
+		# re-add CPUs the kernel removed on offline
+		echo ${START_CPU}-${END_CPU} > ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}cpus
+
+		# and prioritize re-initialized kthreads
+		systenctl restart set_kthread_prio
+	fi
+	if [ -f /proc/sys/kernel/timer_migration ]; then
+		echo 0 > /proc/sys/kernel/timer_migration
+	fi
+	GOVERNOR="performance"
+fi
+
+if [ -f /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]; then
+	CURRENT_GOVERNOR=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor)
+	if ! [ $GOVERNOR = $CURRENT_GOVERNOR ]; then
+		for i in $(ls /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor);
+		do
+			echo $GOVERNOR > $i;
+		done
+	fi
+fi</screen>
+    </example>
+
+    <example>
+     <title>Patch to sysjitter to Use the User Affinity Instead of Whole Box</title>
+     <screen> sysjitter.c |   10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+--- a/sysjitter.c
++++ b/sysjitter.c
+@@ -412,7 +412,7 @@ static void write_raw(struct thread *thr
+ 	FILE *f;
+ 	int i;
+ 	for (i = 0; i &lt; g.n_threads; ++i) {
+-		sprintf(fname, "%s.%d", outf, i);
++		sprintf(fname, "%s.%d", outf, threads[i].core_i);
+ 		if ((f = fopen(fname, "w")) == NULL) {
+ 			fprintf(stderr, "ERROR: Could not open '%s' for writing\n", fname);
+ 			fprintf(stderr, "ERROR: %s\n", strerror(errno));
+@@ -578,6 +578,7 @@ int main(int argc, char *argv[])
+ 	const char *outf = NULL;
+ 	char dummy;
+ 	int i, n_cores, runtime = 70;
++	cpu_set_t cpus;
+ 
+ 	g.max_interruptions = 1000000;
+ 
+@@ -609,10 +610,13 @@ int main(int argc, char *argv[])
+ 	    sscanf(argv[0], "%u%c", &amp;g.threshold_nsec, &amp;dummy) != 1)
+ 		usage(app);
+ 
++	CPU_ZERO(&amp;cpus);
++	sched_getaffinity(0, sizeof(cpus), &amp;cpus);
++
+ 	n_cores = sysconf(_SC_NPROCESSORS_ONLN);
+-	TEST(threads = malloc(n_cores * sizeof(threads[0])));
++	TEST(threads = malloc(CPU_COUNT(&amp;cpus) * sizeof(threads[0])));
+ 	for (i = 0; i &lt; n_cores; ++i)
+-		if (move_to_core(i) == 0)
++		if (CPU_ISSET(i, &amp;cpus) &amp;&amp; move_to_core(i) == 0)
+ 			threads[g.n_threads++].core_i = i;
+ 
+ 	signal(SIGALRM, handle_alarm);
+</screen>
+    </example>
+   </sect2>
+  </sect1>
 </article>
