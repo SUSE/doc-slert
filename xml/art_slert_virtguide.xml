@@ -20,18 +20,6 @@
    <productnumber>&productnumber;</productnumber>
    <date><?dbtimestamp?></date>
    <abstract>
-      <para>It is possible to achieve isolation of real-time
-        workloads running alongside KVM by using standard methods. For example,
-        &cpuset;s and routing IRQs to dedicated CPUs, all of which can be
-        achieved by using the <command>cset</command> utility. Both
-        libvirtd and KVM work fine in such configurations.</para>
-      <para>System configurations that share CPUs between both RT and
-        KVM workloads are not supported; proper isolation of workloads
-        is imperative for achieving RT deadline constraints. </para>
-      <para>None of the below observations and recommendations are
-        specific to virtualization. Nevertheless, they can be considered
-          <quote>best-effort</quote> for isolating RT and KVM
-        workloads.</para>
       <para>&productname; SP2 supports virtualization and Docker usage. The
        following text describes how to do so.
       </para>
