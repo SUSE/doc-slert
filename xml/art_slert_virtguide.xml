@@ -22,7 +22,7 @@
    <abstract>
       <para>It is possible to achieve isolation of real-time
         workloads running alongside KVM by using standard methods. For example,
-        cpusets and routing IRQs to dedicated CPUs, all of which can be
+        &cpuset;s and routing IRQs to dedicated CPUs, all of which can be
         achieved by using the <command>cset</command> utility. Both
         libvirtd and KVM work fine in such configurations.</para>
       <para>System configurations that share CPUs between both RT and
@@ -32,137 +32,164 @@
         specific to virtualization. Nevertheless, they can be considered
           <quote>best-effort</quote> for isolating RT and KVM
         workloads.</para>
+      <para>&productname; SP2 supports virtualization and Docker usage. The
+       following text describes how to do so.
+      </para>
     </abstract>
   </info>
-  
-  <sect1 xml:id="sec.virtguide.setup">
+
+  <sect1 xml:id="sec.virtguide.rtapp">
+   <title>Technical Guide to Support for RT Applications Running in Conjunction
+    with non-rt KVM Guests</title>
+   <para>It is possible to achieve isolation of real-time workloads running
+    alongside KVM by using standard methods. For example, cpusets and routing
+    IRQs to dedicated CPUs, all of which can be achieved by using the cset
+    utility. Both libvirtd and KVM work fine in such configurations. System
+    configurations that share CPUs between both RT and KVM workloads are not
+    supported; proper isolation of workloads is imperative for achieving RT
+    deadline constraints. None of the below observations and recommendations
+    are specific to virtualization. Nevertheless, they can be considered
+    <quote>best-effort</quote> for isolating RT and KVM workloads.
+    The basic steps are:</para>
+   <procedure>
+    <step>
+     <para><xref linkend="sec.virtguide.setup"/></para>
+    </step>
+    <step>
+     <para><xref linkend="sec.virtguide.observations"/></para>
+    </step>
+    <step>
+     <para><xref linkend="sec.virtguide.rec"/></para>
+    </step>
+   </procedure>
+
+   <sect2 xml:id="sec.virtguide.setup">
     <title>Setup</title>
     <para>All examples were carried out on a 48-core Xeon machine with 2
-      NUMA nodes and 64GB of RAM running &slea;12 RT and the 3.12.49-rt
-      kernel. The virtual machine was installed with <command>vm-install</command>, running
-      SLE12 SP2 on 4 CPUs and 2GB of memory. The disk used was physical
-      disk <filename>/dev/sdb</filename> as recommended by the &suse;
-      virtualization documentation.</para>
+     NUMA nodes and 64GB of RAM running &slea;12 RT and the 3.12.49-rt
+     kernel. The virtual machine was installed with <command>vm-install</command>, running
+     SLE12 SP2 on 4 CPUs and 2GB of memory. The disk used was physical
+     disk <filename>/dev/sdb</filename> as recommended by the &suse;
+     virtualization documentation.</para>
     <para>The <command>cpuset</command> utility was used to shield the
-      RT workload from KVM as described in the
-      <citetitle>&slea; RT Shielding Guide</citetitle> (see
-      <xref linkend="book.slert.shielding"/>):
+     RT workload from KVM as described in the
+     <citetitle>&slea; RT Shielding Guide</citetitle> (see
+     <xref linkend="book.slert.shielding"/>):
     </para>
     <screen>cset shield --kthread=on -c 8-47</screen>
     <para>Affinity for the KVM vCPU tasks was modified via the <command>virsh
      vcpupin</command> command, with a 1-1 mapping. For example, vCPU&nbsp;0
      pinned to CPU&nbsp;0, etc.</para>
     <para>The CPUs were split into two groups. CPU 0-7 were allocated to
-      the <systemitem>system</systemitem> cpuset and CPU 8-47 were allocated
-      to the <systemitem>user</systemitem> group. Having CPUs on the same
-      socket in two groups was done intentionally to monitor the effects on
-      shared CPU resources, such as LLC.</para>
+     the <systemitem>system</systemitem> cpuset and CPU 8-47 were allocated
+     to the <systemitem>user</systemitem> group. Having CPUs on the same
+     socket in two groups was done intentionally to monitor the effects on
+     shared CPU resources, such as LLC.</para>
     <para>The RT workload used throughout is cyclictest, executed like so:</para>
     <screen>cset shield --exec cyclictest -- -a 8-47 -t 40 -n -m -p99 -d 0 -D 120 --quiet</screen>
-  </sect1>
-  
-  <sect1 xml:id="sec.virtguide.observations">
+   </sect2>
+
+   <sect2 xml:id="sec.virtguide.observations">
     <title>Observations</title>
     <para>The following observations were made:</para>
     <orderedlist>
-      <listitem xml:id="li.virtguide.observ.vmheavyio">
-        <para>VM Heavy I/O</para>
-        <para>The test for this was to do the following in a VM:</para>
-        <screen>dd if=/dev/zero of=empty bs=4096 count=$(((80*1024*1024)/4096))</screen>
-        <para>Doing large amounts of disk I/O in the VM guests has a
-          noticeable impact on the latency of RT tasks. This is because of
-          the constant eviction of LLC data, resulting in more cache
-          misses.</para>
-        <para>The maximum latencies in for the real-time workload are seen on
-          those CPUs on the same socket as the CPUs available to the KVM
-          workload. For example, where the LLC is a shared resource between the
-            <systemitem>system</systemitem> and
-            <systemitem>user</systemitem> cpuset.</para>
-      </listitem>
-      <listitem>
-        <para>cpufreq drivers incur timer latency</para>
-        <para>Drivers like <systemitem>intel_pstate</systemitem> will set up a
-          timer on each CPU to periodically sample and adjust the CPU's
-          current P-state.
-          If this fires at an inopportune time it can add delays to the
-          scheduling of RT tasks, particularly because lots of the
-          IRQ/timer code paths run with interrupts disabled.</para>
-      </listitem>
-      <listitem>
-        <para>Interrupt handling introduces delays</para>
-        <para>The handling of interrupts can result in latencies that
-          affect RT workloads. Interrupts should be routed to
-          <quote>housekeeping</quote> CPUs that are not running RT
-          applications.</para>
-      </listitem>
-      <listitem>
-        <para>Some kernel threads cannot be controlled with cpuset</para>
-        <para>Performing heavy I/O in the VM may cause kthreads to be
-          scheduled on the CPUs dedicated for RT. This can occur, for
-          example, when a kthread is flushing dirty pages to disk.
-        </para>
-        <para>While it is impossible to move some kworker threads into
-          the <systemitem>system</systemitem> cpuset, the above issue can be
-          mitigated by setting the CPU affinity for those threads via:</para>
-        <screen>/sys/devices/virtual/workqueue/writeback/cpumask</screen>
-      </listitem>
+     <listitem xml:id="li.virtguide.observ.vmheavyio">
+      <para>VM Heavy I/O</para>
+      <para>The test for this was to do the following in a VM:</para>
+      <screen>dd if=/dev/zero of=empty bs=4096 count=$(((80*1024*1024)/4096))</screen>
+      <para>Doing large amounts of disk I/O in the VM guests has a
+       noticeable impact on the latency of RT tasks. This is because of
+       the constant eviction of LLC data, resulting in more cache
+       misses.</para>
+      <para>The maximum latencies in for the real-time workload are seen on
+       those CPUs on the same socket as the CPUs available to the KVM
+       workload. For example, where the LLC is a shared resource between the
+       <systemitem>system</systemitem> and
+       <systemitem>user</systemitem> cpuset.</para>
+     </listitem>
+     <listitem>
+      <para>cpufreq drivers incur timer latency</para>
+      <para>Drivers like <systemitem>intel_pstate</systemitem> will set up a
+       timer on each CPU to periodically sample and adjust the CPU's
+       current P-state.
+       If this fires at an inopportune time it can add delays to the
+       scheduling of RT tasks, particularly because lots of the
+       IRQ/timer code paths run with interrupts disabled.</para>
+     </listitem>
+     <listitem>
+      <para>Interrupt handling introduces delays</para>
+      <para>The handling of interrupts can result in latencies that
+       affect RT workloads. Interrupts should be routed to
+       <quote>housekeeping</quote> CPUs that are not running RT
+       applications.</para>
+     </listitem>
+     <listitem>
+      <para>Some kernel threads cannot be controlled with cpuset</para>
+      <para>Performing heavy I/O in the VM may cause kthreads to be
+       scheduled on the CPUs dedicated for RT. This can occur, for
+       example, when a kthread is flushing dirty pages to disk.
+      </para>
+      <para>While it is impossible to move some kworker threads into
+       the <systemitem>system</systemitem> cpuset, the above issue can be
+       mitigated by setting the CPU affinity for those threads via:</para>
+      <screen>/sys/devices/virtual/workqueue/writeback/cpumask</screen>
+     </listitem>
     </orderedlist>
-  </sect1>
-  
-  <sect1 xml:id="sec.virtguide.rec">
+   </sect2>
+
+   <sect2 xml:id="sec.virtguide.rec">
     <title>Recommendations</title>
     <para>Suggestions for tuning machines running both RT and KVM
-      workloads are as follows:</para>
+     workloads are as follows:</para>
     <orderedlist>
-      <listitem>
-        <para>Affinitize RT tasks to their own CPUs, and if possible, to
-          CPUs on their own dedicated socket. Using a dedicated socket
-          avoids the issue from observation <xref
-            linkend="li.virtguide.observ.vmheavyio"/> above where the LLC
-          occupancy is churned by VMs doing lots of I/O operations. If
-          that is not an option some customers should look at
-          Intel's Cache Allocation Technology to further enforce cache
-          allocation policies.</para>
-      </listitem>
-      <listitem>
-        <para>Disable drivers that arm per-cpu timers such as cpufreq
-          drivers, for example, <code>intel_pstate=disable</code>.</para>
-      </listitem>
-      <listitem>
-        <para>Set IRQ affinity to CPUs that are not running RT workloads
-          and disable irqbalance.</para>
-      </listitem>
-      <listitem>
-        <para>Set IRQ affinity to CPUs that are not running RT workloads.
-          This can be achieved by setting the <envar>IRQBALANCE_BANNED_CPUS</envar>
-          environment variable used by <command>irqbalance</command>(1) with
-          a bitmask of banned CPUs. For the examples used throughout this
-          document the following setting was used:</para>
-        <screen>IRQBALANCE_BANNED_CPUS="ffff,ffffff00"</screen>
-      </listitem>
-      <listitem>
-        <para>Search for cpumask control files in 
-          <filename>/sys</filename> and set them
-          appropriately for those cases that cannot be controlled via
-          cpuset. The following command will list those files:</para>
-        <screen>find /sys -name cpumask</screen>
-      </listitem>
+     <listitem>
+      <para>Affinitize RT tasks to their own CPUs, and if possible, to
+       CPUs on their own dedicated socket. Using a dedicated socket
+       avoids the issue from observation <xref
+        linkend="li.virtguide.observ.vmheavyio"/> above where the LLC
+       occupancy is churned by VMs doing lots of I/O operations. If
+       that is not an option some customers should look at
+       Intel's Cache Allocation Technology to further enforce cache
+       allocation policies.</para>
+     </listitem>
+     <listitem>
+      <para>Disable drivers that arm per-cpu timers such as cpufreq
+       drivers, for example, <code>intel_pstate=disable</code>.</para>
+     </listitem>
+     <listitem>
+      <para>Set IRQ affinity to CPUs that are not running RT workloads
+       and disable irqbalance.</para>
+     </listitem>
+     <listitem>
+      <para>Set IRQ affinity to CPUs that are not running RT workloads.
+       This can be achieved by setting the <envar>IRQBALANCE_BANNED_CPUS</envar>
+       environment variable used by <command>irqbalance</command>(1) with
+       a bitmask of banned CPUs. For the examples used throughout this
+       document the following setting was used:</para>
+      <screen>IRQBALANCE_BANNED_CPUS="ffff,ffffff00"</screen>
+     </listitem>
+     <listitem>
+      <para>Search for cpumask control files in
+       <filename>/sys</filename> and set them
+       appropriately for those cases that cannot be controlled via
+       cpuset. The following command will list those files:</para>
+      <screen>find /sys -name cpumask</screen>
+     </listitem>
     </orderedlist>
+   </sect2>
   </sect1>
- 
+
   <sect1 xml:id="sec.virtguide.docker">
    <title>Technical Guide of RT Applications within Docker Feasibility</title>
-   <para>
-    It is important to note that realtime processes will be affected by
-    container activity as there is insufficient isolation to guarantee zero
-    cross-talk. There are no special settings, nor container-specific
-    interactions to consider as from a RT prespective, nothing changes due to
-    containers. Whether a noise source in a container is irrelevant.
-    Interference may be considerably higher if multiple RT applications are
-    executed in separate containers. Also bear in mind that while worst-case
-    latency may be better than SLE, it will not necessarily performance better
-    than NOPREEMPT due to the overhead required for RT.
-   </para>
+   <para> It is important to note that real-time processes will be affected by
+   container activity as there is insufficient isolation to guarantee zero
+   cross-talk. There are no special settings, nor container-specific
+   interactions to consider as from a RT prespective, nothing changes due to
+   containers. Whether a noise source in a container is irrelevant.
+   Interference may be considerably higher if multiple RT applications are
+   executed in separate containers. Also bear in mind that while worst-case
+   latency may be better than &slea;, it will not necessarily perform better
+   than NOPREEMPT due to the overhead required for RT. </para>
    <para>
     Some shielding is possible but there is no tool-based support for it.
     There is a generic shield script attached that can move Docker contents
@@ -188,7 +215,7 @@
      Standard real-time dangers apply in that if the intention is to run a
      compute intensive application with realtime priority, then the user must
      ensure that kernel threads cannnot starve.  A simple precaution is to
-     use '<literal>'rtkthread=prio' 'rtworkqueues=prio</literal>' kernel boot
+     use <literal>'rtkthread=prio'</literal> <literal>'rtworkqueues=prio'</literal> kernel boot
      parameters, with priority set higher than anything that may dominate a
      CPU. This is not strictly real-time capable, but it is safer overall.
     </para>
@@ -225,7 +252,7 @@
 
    <sect2 xml:id="sec.virtguide.docker.shielding">
     <title>Docker Shielding</title>
-    <para>There is currently no facility withing docker to launch a container directly into an isolated cpuset, this must be done manually.</para>
+    <para>There is currently no facility withing Docker to launch a container directly into an isolated cpuset, this must be done manually.</para>
     <example>
      <title>Pseudo Script</title>
      <screen># note cpuset mount point
@@ -456,7 +483,7 @@ fi</screen>
 
     <example>
      <title>Patch to sysjitter to Use the User Affinity Instead of Whole Box</title>
-     <screen> sysjitter.c |   10 +++++++---
+     <screen language="diff">sysjitter.c |   10 +++++++---
  1 file changed, 7 insertions(+), 3 deletions(-)
 
 --- a/sysjitter.c
