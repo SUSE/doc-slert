@@ -20,23 +20,23 @@
    <productnumber>&productnumber;</productnumber>
    <date><?dbtimestamp?></date>
    <abstract>
-      <para>&productname; SP2 supports virtualization and Docker usage. The
+      <para>&productname; &productnumber; supports virtualization and Docker usage. The
        following text describes how to do so.
       </para>
     </abstract>
   </info>
 
   <sect1 xml:id="sec.virtguide.rtapp">
-   <title>Running RT Applications with non-RT KVM Guests</title>
+   <title>Running RT Applications with non-RT &kvm; Guests</title>
    <para>It is possible to achieve isolation of real-time workloads running
-    alongside KVM by using standard methods. For example, cpusets and routing
+    alongside &kvm; by using standard methods. For example, cpusets and routing
     IRQs to dedicated CPUs, all of which can be achieved by using the cset
-    utility. Both libvirtd and KVM work fine in such configurations. System
-    configurations that share CPUs between both RT and KVM workloads are not
+    utility. Both libvirtd and &kvm; work fine in such configurations. System
+    configurations that share CPUs between both RT and &kvm; workloads are not
     supported; proper isolation of workloads is imperative for achieving RT
     deadline constraints. None of the below observations and recommendations
     are specific to virtualization. Nevertheless, they can be considered
-    <quote>best-effort</quote> for isolating RT and KVM workloads.
+    <quote>best-effort</quote> for isolating RT and &kvm; workloads.
     The basic steps are:</para>
    <procedure>
     <step>
@@ -59,12 +59,12 @@
      disk <filename>/dev/sdb</filename> as recommended by the &suse;
      virtualization documentation.</para>
     <para>The <command>cpuset</command> utility was used to shield the
-     RT workload from KVM as described in the
+     RT workload from &kvm; as described in the
      <citetitle>&slea; RT Shielding Guide</citetitle> (see
      <xref linkend="book.slert.shielding"/>):
     </para>
-    <screen>cset shield --kthread=on -c 8-47</screen>
-    <para>Affinity for the KVM vCPU tasks was modified via the <command>virsh
+    <screen><command>cset</command> shield --kthread=on -c 8-47</screen>
+    <para>Affinity for the &kvm; vCPU tasks was modified via the <command>virsh
      vcpupin</command> command, with a 1-1 mapping. For example, vCPU&nbsp;0
      pinned to CPU&nbsp;0, etc.</para>
     <para>The CPUs were split into two groups. CPU 0-7 were allocated to
@@ -89,7 +89,7 @@
        the constant eviction of LLC data, resulting in more cache
        misses.</para>
       <para>The maximum latencies in for the real-time workload are seen on
-       those CPUs on the same socket as the CPUs available to the KVM
+       those CPUs on the same socket as the CPUs available to the &kvm;
        workload. For example, where the LLC is a shared resource between the
        <systemitem>system</systemitem> and
        <systemitem>user</systemitem> cpuset.</para>
@@ -126,7 +126,7 @@
 
    <sect2 xml:id="sec.virtguide.rec">
     <title>Recommendations</title>
-    <para>Suggestions for tuning machines running both RT and KVM
+    <para>Suggestions for tuning machines running both RT and &kvm;
      workloads are as follows:</para>
     <orderedlist>
      <listitem>
@@ -140,7 +140,7 @@
        allocation policies.</para>
      </listitem>
      <listitem>
-      <para>Disable drivers that arm per-cpu timers such as cpufreq
+      <para>Disable drivers that arm per-CPU timers such as cpufreq
        drivers, for example, <code>intel_pstate=disable</code>.</para>
      </listitem>
      <listitem>
@@ -167,7 +167,7 @@
   </sect1>
 
   <sect1 xml:id="sec.virtguide.rtkvmguests">
-   <title>Running RT Applications with RT KVM Guests</title>
+   <title>Running RT Applications with RT &kvm; Guests</title>
    <para>
     In <xref linkend="sec.virtguide.rtapp"/>, we see that it is possible
     to isolate real-time workloads running alongside &kvm;
@@ -197,8 +197,6 @@
      </listitem>
      <listitem>
       <para>
-       <remark>carla 2017-11-09: It is better to not use "etc.". List only the items you are
-          teaching</remark>
        libvirt supports CPU Allocation, CPU Tuning, and Memory Backing, which
        allows you to control RT parameters <remark>carla 2017-11-09: In what configuration file?</remark>.
       </para>
@@ -215,7 +213,7 @@
         <listitem>
          <itemizedlist>
           <listitem>
-          <para>Pinning is a tuning option for the virtual CPUs in KVM guests.
+          <para>Pinning is a tuning option for the virtual CPUs in &kvm; guests.
            With pinning we can control where the guest runs in order to reduce 
            the overhead of scheduler switches, pin vCPUs to physical CPUs 
            that have low utilization, and improve the data cache performance. 
@@ -225,10 +223,10 @@
           </listitem>
           <listitem>
           <para>We can specify the vCPU scheduler type (values batch, idle, 
-              fifo, rr), and priority for particular vCPU threads. Priority ‘99’ 
+              fifo, rr), and priority for particular vCPU threads. Priority <literal>99</literal>
               is too high, and it will massively interfere with the host's 
               ability to function properly. There are host-side per-CPU threads 
-              that must be always be able to preempt, e.g. timer sirq threads.</para>
+              that must be always be able to preempt, for example, timer sirq threads.</para>
           </listitem>
          </itemizedlist>
         </listitem>
@@ -316,7 +314,7 @@
     </orderedlist>
    <para>
     The above settings are just part of the configurations for the RT
-    &kvm; to run at the “best-effort” performance. Other factors must be 
+    &kvm; to run at the <quote>best-effort</quote> performance. Other factors must be
     considered, such as storage and network. The overall &kvm;
     performance is dependent on the host hardware, firmware, BIOS settings, and
     the guest OS and application charactistics. </para>
@@ -337,7 +335,7 @@
    <para>
     Some shielding is possible but there is no tool-based support for it.
     There is a generic shield script attached that can move Docker contents
-    onto shielded cores once running. Launching of either KVM/Docker directly
+    onto shielded cores once running. Launching of either &kvm;/Docker directly
     into a shielded home did not appear to be possible but the Docker or
     virtualisation team may be able to do better. The basic steps are
    </para>
@@ -359,14 +357,14 @@
      Standard real-time dangers apply in that if the intention is to run a
      compute intensive application with realtime priority, then the user must
      ensure that kernel threads cannnot starve.  A simple precaution is to
-     use <literal>'rtkthread=prio'</literal> <literal>'rtworkqueues=prio'</literal> kernel boot
+     use <option>rtkthread=prio</option> and <option>rtworkqueues=prio</option> kernel boot
      parameters, with priority set higher than anything that may dominate a
      CPU. This is not strictly real-time capable, but it is safer overall.
     </para>
     <itemizedlist>
      <title>Docker Prerequisites</title>
      <listitem>
-      <para>kernel must be booted with <literal>nortsched</literal> commandline parameter</para>
+      <para>kernel must be booted with <option>nortsched</option> commandline parameter</para>
       <para>
        This is to hide cgroup scheduling from Docker. If cgroup scheduling
        is required then isolating docker is very problematic.</para>
@@ -664,8 +662,7 @@ fi</screen>
 +		if (CPU_ISSET(i, &amp;cpus) &amp;&amp; move_to_core(i) == 0)
  			threads[g.n_threads++].core_i = i;
  
- 	signal(SIGALRM, handle_alarm);
-</screen>
+ 	signal(SIGALRM, handle_alarm);</screen>
     </example>
    </sect2>
   </sect1>
