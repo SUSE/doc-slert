@@ -27,8 +27,7 @@
   </info>
 
   <sect1 xml:id="sec.virtguide.rtapp">
-   <title>Technical Guide to Support for RT Applications Running in Conjunction
-    with non-rt KVM Guests</title>
+   <title>Running RT Applications with non-RT KVM Guests</title>
    <para>It is possible to achieve isolation of real-time workloads running
     alongside KVM by using standard methods. For example, cpusets and routing
     IRQs to dedicated CPUs, all of which can be achieved by using the cset
