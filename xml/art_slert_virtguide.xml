@@ -166,161 +166,6 @@
    </sect2>
   </sect1>
 
-  <sect1 xml:id="sec.virtguide.rtkvmguests">
-   <title>Running RT Applications with RT &kvm; Guests</title>
-   <para>
-    In <xref linkend="sec.virtguide.rtapp"/>, we see that it is possible
-    to isolate real-time workloads running alongside &kvm;
-    by using standard methods. In &slea;12 RT SP3 this can be done in user space 
-    using libvirt/qemu.
-   </para>
-   <para>
-    Applications and guest operating systems run inside &kvm; guests similarly to 
-    how they run on bare metal. The guest interfaces with emulated hardware presented 
-    by &qemu;, which submits I/O requests to the host on behalf of the guest. 
-    Then the host kernel treats the guest I/Os like any user-space application.
-   </para>
-   <para>
-    In &slea;12 SP3, both &qemu; and libvirt support isolating the CPUs, 
-    partitioning the memory for guests, and setting the vCPU/iothread scheduler 
-    policy and priority for running both non-RT &kvm; and RT &kvm;.
-   </para>
-   <sect2 xml:id="sec.virtguide.rtkvmguests.suport">
-    <title>Support of &qemu;/libvirt</title>
-    <orderedlist>
-     <listitem>
-     <para>&qemu; includes the <option>-realtime mlock=on|off</option> option. 
-         Mlocking &qemu; and guest memory is enabled with 
-         <option>mlock=on</option> (which is enabled by default) <!--where is it
-         enabled?-->.
-     </para>
-     </listitem>
-     <listitem>
-      <para>
-       libvirt supports CPU Allocation, CPU Tuning, and Memory Backing, which
-       allows you to control RT parameters <remark>carla 2017-11-09: In what configuration file?</remark>.
-      </para>
-      <variablelist>
-       <varlistentry>
-        <term>CPU Allocation</term>
-        <listitem>
-         <para>We can define the maximum number of virtual CPUs allocated for
-          the guest OS.</para>
-        </listitem>
-       </varlistentry>
-       <varlistentry>
-        <term>CPU Tuning</term>
-        <listitem>
-         <itemizedlist>
-          <listitem>
-          <para>Pinning is a tuning option for the virtual CPUs in &kvm; guests.
-           With pinning we can control where the guest runs in order to reduce 
-           the overhead of scheduler switches, pin vCPUs to physical CPUs 
-           that have low utilization, and improve the data cache performance. 
-           Overall performance is improved when the memory that an
-           application uses is local to the physical CPU, and the guest vCPU
-           is pinned to this physical CPU.</para>
-          </listitem>
-          <listitem>
-          <para>We can specify the vCPU scheduler type (values batch, idle, 
-              fifo, rr), and priority for particular vCPU threads. Priority <literal>99</literal>
-              is too high, and it will massively interfere with the host's 
-              ability to function properly. There are host-side per-CPU threads 
-              that must be always be able to preempt, for example, timer sirq threads.</para>
-          </listitem>
-         </itemizedlist>
-        </listitem>
-       </varlistentry>
-       <varlistentry>
-        <term>Memory Backing</term>
-        <listitem>
-         <para>
-             Use memory backing to allocate enough memory in the guest to avoid 
-             memory overcommit, and to lock the guest page memory in host memory 
-             to prevent it from being swapped out. This will show a performance 
-             improvement in some workloads.
-         </para>
-        </listitem>
-       </varlistentry>
-      </variablelist>
-     </listitem>
-    </orderedlist>
-   </sect2>
-   <sect2 xml:id="sec.virtguide.rtkvmguests.sample">
-    <title>Sample of <filename>libvirt.xml</filename></title>
-    <screen language="xml"><![CDATA[<domain>
-   …
-   <vcpu placement='static' cpuset="1-4,^3,6" current="1">4</vcpu>
-   …
-   <cputune>
-       <vcpupin vcpu="0" cpuset="1-5,^2"/>
-       <vcpupin vcpu="1" cpuset="0,1"/>
-       <vcpupin vcpu="2" cpuset="2,3"/>
-       <vcpupin vcpu="3" cpuset="0,4"/>
-       <vcpusched '0-4,^3' scheduler='fifo' priority='1'/>
-   </cputune>
-   …
-   <memoryBacking>
-       <locked/>
-   <memoryBacking/>
-   …
-</domain>]]></screen>
-   </sect2>
-   <sect2 xml:id="sec.virtguide.rtkvmguests.othersettings">
-    <title>Other Host Settings</title>
-    <orderedlist>
-     <listitem>
-      <formalpara>
-       <title>Power Management</title>
-      <para>Intel processors have a power management feature that puts the system
-       into power-saving mode when the system is under-utilized. The system 
-       should be configured for maximum performance, rather than allowing 
-       power-saving mode.</para>
-      </formalpara>
-     </listitem>
-     <listitem>
-      <formalpara>
-       <title>Turboboost and Speedstep</title>
-       <para>Turboboost overclocks a core when CPU demand is high,
-        whereas Speedstep dynamically adjusts the frequency of processor to meet 
-        processing needs. Turboboost requires Speedstep to be enabled, as it is 
-        an extension of Speedstep. For maximum performance, enable both Turboboost 
-        and Speedstep <remark>carla 2017-11-09: How?</remark>. The host OS may also need configuration 
-        to support running at higher clock speeds. For example:</para>
-      </formalpara>
-      <screen><command>cpupower</command> -c all frequency-set -g performance</screen>
-     </listitem>
-     <listitem>
-      <formalpara>
-       <title>Disable Interrupt Balancing (irqbalance)</title>
-      <para>The irqbalance daemon is enabled by default. It distributes hardware 
-          interrupts across CPUs in a multi-core system to increase performance. 
-          When irqbalance is disabled, all interrupts will be handled by cpu0, 
-          and therefore the guest should NOT run on cpu0.
-      </para>
-      </formalpara>
-     </listitem>
-     <listitem>
-      <formalpara>
-       <title>RT Throttling</title>
-      <para>The default values for the realtime throttling mechanism allocate
-       95% of the CPU time to realtime tasks, and the remaining 5% to 
-       non-realtime tasks. If RT throttling is disabled, realtime tasks may use 
-       up to 100% of CPU time. Hence, programming failures in real-time 
-       applications can cause the entire system to hang because no other task 
-       can preempt the realtime tasks.</para>
-      </formalpara>
-     </listitem>
-    </orderedlist>
-   <para>
-    The above settings are just part of the configurations for the RT
-    &kvm; to run at the <quote>best-effort</quote> performance. Other factors must be
-    considered, such as storage and network. The overall &kvm;
-    performance is dependent on the host hardware, firmware, BIOS settings, and
-    the guest OS and application charactistics. </para>
-   </sect2>
-  </sect1>
-
   <sect1 xml:id="sec.virtguide.docker">
    <title>RT Applications within Docker Feasibility</title>
    <para> It is important to note that real-time processes will be affected by
@@ -663,4 +508,159 @@ fi</screen>
     </example>
    </sect2>
   </sect1>
+
+ <sect1 xml:id="sec.virtguide.rtkvmguests">
+  <title>Running RT Applications with RT &kvm; Guests</title>
+  <para>
+   In <xref linkend="sec.virtguide.rtapp"/>, we see that it is possible
+   to isolate real-time workloads running alongside &kvm;
+   by using standard methods. In &slea;12 RT SP3 this can be done in user space 
+   using libvirt/qemu.
+  </para>
+  <para>
+   Applications and guest operating systems run inside &kvm; guests similarly to 
+   how they run on bare metal. The guest interfaces with emulated hardware presented 
+   by &qemu;, which submits I/O requests to the host on behalf of the guest. 
+   Then the host kernel treats the guest I/Os like any user-space application.
+  </para>
+  <para>
+   In &slea;12 SP3, both &qemu; and libvirt support isolating the CPUs, 
+   partitioning the memory for guests, and setting the vCPU/iothread scheduler 
+   policy and priority for running both non-RT &kvm; and RT &kvm;.
+  </para>
+  <sect2 xml:id="sec.virtguide.rtkvmguests.suport">
+   <title>Support of &qemu;/libvirt</title>
+   <orderedlist>
+    <listitem>
+     <para>&qemu; includes the <option>-realtime mlock=on|off</option> option. 
+      Mlocking &qemu; and guest memory is enabled with 
+      <option>mlock=on</option> (which is enabled by default) <!--where is it
+         enabled?-->.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      libvirt supports CPU Allocation, CPU Tuning, and Memory Backing, which
+      allows you to control RT parameters <remark>carla 2017-11-09: In what configuration file?</remark>.
+     </para>
+     <variablelist>
+      <varlistentry>
+       <term>CPU Allocation</term>
+       <listitem>
+        <para>We can define the maximum number of virtual CPUs allocated for
+         the guest OS.</para>
+       </listitem>
+      </varlistentry>
+      <varlistentry>
+       <term>CPU Tuning</term>
+       <listitem>
+        <itemizedlist>
+         <listitem>
+          <para>Pinning is a tuning option for the virtual CPUs in &kvm; guests.
+           With pinning we can control where the guest runs in order to reduce 
+           the overhead of scheduler switches, pin vCPUs to physical CPUs 
+           that have low utilization, and improve the data cache performance. 
+           Overall performance is improved when the memory that an
+           application uses is local to the physical CPU, and the guest vCPU
+           is pinned to this physical CPU.</para>
+         </listitem>
+         <listitem>
+          <para>We can specify the vCPU scheduler type (values batch, idle, 
+           fifo, rr), and priority for particular vCPU threads. Priority <literal>99</literal>
+           is too high, and it will massively interfere with the host's 
+           ability to function properly. There are host-side per-CPU threads 
+           that must be always be able to preempt, for example, timer sirq threads.</para>
+         </listitem>
+        </itemizedlist>
+       </listitem>
+      </varlistentry>
+      <varlistentry>
+       <term>Memory Backing</term>
+       <listitem>
+        <para>
+         Use memory backing to allocate enough memory in the guest to avoid 
+         memory overcommit, and to lock the guest page memory in host memory 
+         to prevent it from being swapped out. This will show a performance 
+         improvement in some workloads.
+        </para>
+       </listitem>
+      </varlistentry>
+     </variablelist>
+    </listitem>
+   </orderedlist>
+  </sect2>
+  <sect2 xml:id="sec.virtguide.rtkvmguests.sample">
+   <title>Sample of <filename>libvirt.xml</filename></title>
+   <screen language="xml"><![CDATA[<domain>
+   …
+   <vcpu placement='static' cpuset="1-4,^3,6" current="1">4</vcpu>
+   …
+   <cputune>
+       <vcpupin vcpu="0" cpuset="1-5,^2"/>
+       <vcpupin vcpu="1" cpuset="0,1"/>
+       <vcpupin vcpu="2" cpuset="2,3"/>
+       <vcpupin vcpu="3" cpuset="0,4"/>
+       <vcpusched '0-4,^3' scheduler='fifo' priority='1'/>
+   </cputune>
+   …
+   <memoryBacking>
+       <locked/>
+   <memoryBacking/>
+   …
+</domain>]]></screen>
+  </sect2>
+  <sect2 xml:id="sec.virtguide.rtkvmguests.othersettings">
+   <title>Other Host Settings</title>
+   <orderedlist>
+    <listitem>
+     <formalpara>
+      <title>Power Management</title>
+      <para>Intel processors have a power management feature that puts the system
+       into power-saving mode when the system is under-utilized. The system 
+       should be configured for maximum performance, rather than allowing 
+       power-saving mode.</para>
+     </formalpara>
+    </listitem>
+    <listitem>
+     <formalpara>
+      <title>Turboboost and Speedstep</title>
+      <para>Turboboost overclocks a core when CPU demand is high,
+       whereas Speedstep dynamically adjusts the frequency of processor to meet 
+       processing needs. Turboboost requires Speedstep to be enabled, as it is 
+       an extension of Speedstep. For maximum performance, enable both Turboboost 
+       and Speedstep <remark>carla 2017-11-09: How?</remark>. The host OS may also need configuration 
+       to support running at higher clock speeds. For example:</para>
+     </formalpara>
+     <screen><command>cpupower</command> -c all frequency-set -g performance</screen>
+    </listitem>
+    <listitem>
+     <formalpara>
+      <title>Disable Interrupt Balancing (irqbalance)</title>
+      <para>The irqbalance daemon is enabled by default. It distributes hardware 
+       interrupts across CPUs in a multi-core system to increase performance. 
+       When irqbalance is disabled, all interrupts will be handled by cpu0, 
+       and therefore the guest should NOT run on cpu0.
+      </para>
+     </formalpara>
+    </listitem>
+    <listitem>
+     <formalpara>
+      <title>RT Throttling</title>
+      <para>The default values for the realtime throttling mechanism allocate
+       95% of the CPU time to realtime tasks, and the remaining 5% to 
+       non-realtime tasks. If RT throttling is disabled, realtime tasks may use 
+       up to 100% of CPU time. Hence, programming failures in real-time 
+       applications can cause the entire system to hang because no other task 
+       can preempt the realtime tasks.</para>
+     </formalpara>
+    </listitem>
+   </orderedlist>
+   <para>
+    The above settings are just part of the configurations for the RT
+    &kvm; to run at the <quote>best-effort</quote> performance. Other factors must be
+    considered, such as storage and network. The overall &kvm;
+    performance is dependent on the host hardware, firmware, BIOS settings, and
+    the guest OS and application charactistics. </para>
+  </sect2>
+ </sect1>
 </article>
