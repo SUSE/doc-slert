@@ -197,10 +197,10 @@
      </listitem>
      <listitem>
       <para>
-          <!--It is better to not use "etc.". List only the items you are
-          teaching-->
+       <remark>carla 2017-11-09: It is better to not use "etc.". List only the items you are
+          teaching</remark>
        libvirt supports CPU Allocation, CPU Tuning, and Memory Backing, which
-       allows you to control RT parameters <!--In what configuration file?-->.
+       allows you to control RT parameters <remark>carla 2017-11-09: In what configuration file?</remark>.
       </para>
       <variablelist>
        <varlistentry>
@@ -287,7 +287,7 @@
         whereas Speedstep dynamically adjusts the frequency of processor to meet 
         processing needs. Turboboost requires Speedstep to be enabled, as it is 
         an extension of Speedstep. For maximum performance, enable both Turboboost 
-        and Speedstep <!--How?-->. The host OS may also need configuration 
+        and Speedstep <remark>carla 2017-11-09: How?</remark>. The host OS may also need configuration 
         to support running at higher clock speeds. For example:</para>
       </formalpara>
       <screen><command>cpupower</command> -c all frequency-set -g performance</screen>
