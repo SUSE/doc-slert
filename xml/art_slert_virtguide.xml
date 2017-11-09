@@ -324,7 +324,7 @@
   </sect1>
 
   <sect1 xml:id="sec.virtguide.docker">
-   <title>Technical Guide of RT Applications within Docker Feasibility</title>
+   <title>RT Applications within Docker Feasibility</title>
    <para> It is important to note that real-time processes will be affected by
    container activity as there is insufficient isolation to guarantee zero
    cross-talk. There are no special settings, nor container-specific
