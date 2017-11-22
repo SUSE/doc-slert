@@ -84,7 +84,7 @@
     <title>Specific Scenario</title>
     <para>
      &slert; Service Pack 2 supports Virtualization and Docker usage. 
-     Refer to separate guide for reference.
+     Refer to <xref linkend="art.slert.virtguide"/> for reference.
     </para>
    </sect2>
   </sect1>
