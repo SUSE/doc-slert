@@ -83,7 +83,7 @@
    <sect2 xml:id="sec.slert.quick.scenarios">
     <title>Specific Scenario</title>
     <para>
-     &slert; Service Pack 2 supports Virtualization and Docker usage. 
+     &slert; Service Pack 3 supports Virtualization and Docker usage.
      Refer to <xref linkend="art.slert.virtguide"/> for reference.
     </para>
    </sect2>
