@@ -664,4 +664,6 @@ fi</screen>
     the guest OS and application charactistics. </para>
   </sect2>
  </sect1>
+
+ <xi:include href="common_legal.xml"/>
 </article>
