@@ -18,7 +18,7 @@ https://www.suse.com/documentation/.
 |================================================
 | Name             | Purpose
 | `master`         | Latest stable doc
-| `develop`        | SLERT 12 SP1 doc development
+| `develop`        | SLERT 12 SP3 doc development
 |================================================
 
 
