@@ -14,7 +14,7 @@
   xmlns="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
- <title>How to Shield Your Linux Resources</title>
+ <title>Shielding Linux Resources</title>
   <info>
     <productname>&productname;</productname>
     <productname role="abbrev">&slertabbr;</productname>
