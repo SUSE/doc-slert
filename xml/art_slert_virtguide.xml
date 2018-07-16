@@ -61,7 +61,7 @@
   <sect1 xml:id="sec.virtguide.observations">
     <title>Observations</title>
     <orderedlist>
-      <listitem xml:id="li.virtguide.observ.vmheavyio">
+      <listitem>
         <para>VM Heavy I/O</para>
         <para>The test for this was to do the following in a VM:</para>
         <screen>dd if=/dev/zero of=empty bs=4096 count=$(((80*1024*1024)/4096))</screen>
@@ -113,8 +113,8 @@
       <listitem>
         <para>Affinitize RT tasks to their own CPUs, and if possible, to
           CPUs on their own dedicated socket. Using a dedicated socket
-          avoids the issue from observation <xref
-            linkend="li.virtguide.observ.vmheavyio"/> above where the LLC
+          avoids the issue from observation in <xref
+           linkend="sec.virtguide.observations"/> above where the LLC
           occupancy is churned by VMs doing lots of I/O operations. If
           that is not an option some customers may want to look at
           Intel's Cache Allocation Technology to further enforce cache
