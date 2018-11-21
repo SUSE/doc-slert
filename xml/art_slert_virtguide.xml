@@ -61,12 +61,11 @@
 
    <sect2 xml:id="sec.virtguide.setup">
     <title>Setup</title>
-    <para>All examples were carried out on a 48-core Xeon machine with 2
-     NUMA nodes and 64GB of RAM running &slea;12 RT and the 3.12.49-rt
-     kernel. The virtual machine was installed with <command>vm-install</command>, running
-     SLE12 SP3 on 4 CPUs and 2GB of memory. The disk used was physical
-     disk <filename>/dev/sdb</filename> as recommended by the &suse;
-     virtualization documentation.</para>
+    <para>All examples were carried out on a 48-core Xeon machine with 2 NUMA
+    nodes and 64GB of RAM running &slea;. The virtual machine was installed
+    with <command>vm-install</command>, running &sls; on 4 CPUs and 2GB of
+    memory. The disk was a physical disk <filename>/dev/sdb</filename> as
+    recommended by the &suse; virtualization documentation.</para>
     <para>The <command>cpuset</command> utility was used to shield the
      RT workload from &kvm; as described in the
      <citetitle>&slea; RT Shielding Guide</citetitle> (see
