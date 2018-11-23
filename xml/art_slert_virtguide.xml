@@ -62,10 +62,10 @@
    <sect2 xml:id="sec.virtguide.setup">
     <title>Setup</title>
     <para>All examples were carried out on a 48-core Xeon machine with 2 NUMA
-    nodes and 64GB of RAM running &slea;. The virtual machine was installed
+    nodes and 64GB of RAM running &slert;. The virtual machine was installed
     with <command>vm-install</command>, running &sls; on 4 CPUs and 2GB of
     memory. The disk was a physical disk <filename>/dev/sdb</filename> as
-    recommended by the &suse; virtualization documentation.</para>
+    recommended by the &sls; &virtual;.</para>
     <para>The <command>cpuset</command> utility was used to shield the
      RT workload from &kvm; as described in the
      <citetitle>&slea; RT Shielding Guide</citetitle> (see
