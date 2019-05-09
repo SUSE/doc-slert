@@ -91,21 +91,14 @@
   
   <sect1 xml:id="sec.slert.quick.install">
     <title>Installing &slerte;</title>
-
-    <para> To install &slerte; &productnumber;, start a regular &sls;
-      &productnumber; installation. Select &slerte; &productnumber; as
-      an add-on product during the installation. Alternately, if &sls;
-      is already installed, you can start the Add-on Product
-      installation from &yast; or enable &slerte; in the &yast; &scc;
-      configuration. However, in the &yast; Boot Loader
-      configurator you need to manually select the <filename>-rt</filename> kernel
-      flavor as the default. </para>
-
-    <para> &slerte; always needs a &sls; &productnumber; base, it cannot
-      be installed in stand-alone mode. For information on how to
-      install add-on products, see the &sle; &productnumber; &deploy;,
-      available at <link xlink:href="http://www.suse.com/doc"/>. Refer
-      to chapter <citetitle>Installing Add-On Products</citetitle>. </para>
+    <para>To install &slerte; &productnumber;, refer to the
+     &instquick; of &sls;&nbsp;&productnumber;
+     <link xlink:href="https://www.suse.com/documentation/sles-15/book_quickstarts/data/sec_sle_installquick.html"/>
+    </para>
+    <para>The product requires the additional package DVD for installation as
+    described in &deploy;, chapter <citetitle>Extension and Module
+    Selection</citetitle> in section <citetitle>Selecting Extensions and
+    Modules without Registration</citetitle>. </para>
     <para> The following sections provide a brief introduction to the
       tools and possibilities of &slerte;. </para>
   </sect1>
