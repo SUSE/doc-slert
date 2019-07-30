@@ -5,7 +5,7 @@
 ##
 ## Basics
 MAIN="MAIN.SLERT.xml"
-ROOTID="art.slert.quick"
+ROOTID=art-slert-quick
 
 ## Profiling
 PROFOS="slerte"

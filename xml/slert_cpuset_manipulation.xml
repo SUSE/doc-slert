@@ -5,7 +5,7 @@
   %entities;
 ]>
 <!-- Converted by suse-upgrade version 1.1 -->
-<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha.shielding.cpuset">
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-cpuset">
  <title>Full Featured Cpuset Manipulation Commands</title>
  <info/>
  <para>
@@ -16,7 +16,7 @@
   which allows you to manipulate cpusets; and <command>proc</command>, which
   allows you to manipulate processes within those cpusets.
  </para>
- <sect1 xml:id="sec.shielding.cpuset.set">
+ <sect1 xml:id="sec-shielding-cpuset-set">
   <title>The set Subcommand</title>
 
   <para>
@@ -25,7 +25,7 @@
    allows the management of cpusets in such a manner.
   </para>
 
-  <sect2 xml:id="sec.shielding.cpuset.set.create_destroy">
+  <sect2 xml:id="sec-shielding-cpuset-set-create-destroy">
    <title>Creating and Destroying Cpusets with <command>set</command></title>
    <para>
     The basic syntax of <command>set</command> for cpuset creation is:
@@ -35,7 +35,7 @@ cset: --> created cpuset "my_cpuset1"</screen>
    <para>
     This creates a cpuset named <literal>my_cpuset1</literal> with a CPUSPEC
     of CPU1, CPU2 and CPU3. The CPUSPEC is the same concept as described in
-    the <xref linkend="sec.shielding.model.ex.setup_teardown"/>. The
+    the <xref linkend="sec-shielding-model-ex-setup-teardown"/>. The
     <command>set</command> subcommand also takes a <option>-m</option>/<option>--mem</option>
     option that lets you specify the memory nodes the <command>set</command>
     will use and flags to make the CPUs and MEMs exclusive to the
@@ -133,7 +133,7 @@ cset: --> modified cpuset "sub_set</screen>
    </para>
   </sect2>
 
-  <sect2 xml:id="sec.shielding.cpuset.set.list">
+  <sect2 xml:id="sec-shielding-cpuset-set-list">
    <title>Listing Cpusets with set</title>
    <para>
     To list cpusets, use the <command>set</command> subcommand with the
@@ -187,7 +187,7 @@ three        3 n          0 n       0     0    /one/two/three</screen>
    </para>
   </sect2>
  </sect1>
- <sect1 xml:id="sec.shielding.cpuset.proc">
+ <sect1 xml:id="sec-shielding-cpuset-proc">
   <title>The <command>proc</command> Subcommand</title>
 
   <para>
@@ -208,7 +208,7 @@ root         0-3 y        0 y       309   2    /
 two          2 n          0 n       3     0    /two
 three        3 n          0 n       10    0    /three</screen>
 
-  <sect2 xml:id="sec.shielding.cpuset.proc.list">
+  <sect2 xml:id="sec-shielding-cpuset-proc-list">
    <title>Listing Tasks With <command>proc</command></title>
    <para>
     Operation of the <command>proc</command> subcommand follows the same
@@ -300,7 +300,7 @@ USER     PID   PPID  SPPr TASK NAME
 alext    16165     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg --autostarted --indexing-delay 300</screen>
   </sect2>
 
-  <sect2 xml:id="sec.shielding.cpuset.proc.exec">
+  <sect2 xml:id="sec-shielding-cpuset-proc-exec">
    <title>Execing Tasks with <literal>proc</literal></title>
    <para>
     To exec a task into a cpuset, the <command>proc</command> subcommand
@@ -382,7 +382,7 @@ cset: **> [Errno 2] No such file or directory</screen>
    </para>
   </sect2>
 
-  <sect2 xml:id="sec.shielding.cpuset.proc.move">
+  <sect2 xml:id="sec-shielding-cpuset-proc-move">
    <title>Moving Tasks with <command>proc</command></title>
    <para>
     Although the ability to exec a task into a cpuset is fundamental, you
@@ -528,7 +528,7 @@ Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
 two          2 n          0 n       10    0    /two
 three        3 n          0 n       0     0    /three</screen>
-   <sect3 xml:id="sec.shielding.cpuset.proc.move.taskset">
+   <sect3 xml:id="sec-shielding-cpuset-proc-move-taskset">
     <title>Moving All Tasks From One Cpuset to Another</title>
     <para>
      There is a special case for moving all tasks currently running in one
@@ -572,7 +572,7 @@ Name         CPUs-X       MEMs-X    Tasks Subs Path
 two          2 n          0 n       0     0    /two
 three        3 n          0 n       10    0    /three</screen>
    </sect3>
-   <sect3 xml:id="sec.shielding.cpuset.proc.move.threads">
+   <sect3 xml:id="sec-shielding-cpuset-proc-move-threads">
     <title>Moving Kernel Threads With <command>proc</command></title>
     <para>
      Kernel threads are special and <command>cset</command> detects tasks
@@ -674,7 +674,7 @@ cset: done</screen>
    </sect3>
   </sect2>
 
-  <sect2 xml:id="sec.shielding.cpuset.proc.destroy">
+  <sect2 xml:id="sec-shielding-cpuset-proc-destroy">
    <title>Destroying Tasks</title>
    <para>
     There actually is no <command>cset</command> subcommand or option to
@@ -686,7 +686,7 @@ cset: done</screen>
    </para>
   </sect2>
  </sect1>
- <sect1 xml:id="sec.shielding.cpuset.shielding.set_proc">
+ <sect1 xml:id="sec-shielding-cpuset-shielding-set-proc">
   <title>Implementing <quote>Shielding</quote> With <command>set</command> and <command>proc</command></title>
 
   <para>
@@ -798,7 +798,7 @@ system       0 n          0 n       257   0    /system</screen>
    model.
   </para>
  </sect1>
- <sect1 xml:id="sec.shielding.cpuset.hierarchy.set_proc">
+ <sect1 xml:id="sec-shielding-cpuset-hierarchy-set-proc">
   <title>Implementing Hierarchy With set and proc</title>
 
   <para>
@@ -951,7 +951,7 @@ prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</
    The shield is now active. Since the <literal>prio_*</literal> cpuset
    names are unique, you can assign tasks to them either via their simple
    name, or their full path (as described in
-   <xref linkend="sec.shielding.cpuset.proc.exec"/>).
+   <xref linkend="sec-shielding-cpuset-proc-exec"/>).
   </para>
 
   <para>
