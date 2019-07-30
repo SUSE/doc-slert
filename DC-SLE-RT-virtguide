@@ -7,7 +7,7 @@
 MAIN="MAIN.SLERT.xml"
 
 ##
-ROOTID="art.slert.virtguide"
+ROOTID=art-slert-virtguide
 
 ## Profiling
 PROFOS="slerte"

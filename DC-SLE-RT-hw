@@ -4,7 +4,7 @@
 ##
 ## Basics
 MAIN="MAIN.SLERT.xml"
-ROOTID="art.slert.hwtest"
+ROOTID=art-slert-hwtest
 
 ## Profiling
 PROFOS="slerte"
