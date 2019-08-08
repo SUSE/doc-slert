@@ -10,14 +10,8 @@
  <info/>
  <para>
   If you encounter any issues with the <command>cset</command> application,
-  you can file a bug report on our <command>cset</command> Bugzilla product
-  found here:
- </para>
- <para>
-  <link xlink:href="https://code.google.com/p/cpuset/issues/list"/>
-  <remark>
-    lpechacek: This upstream project is dead.  Will be moved to GitHub.
-  </remark>
+  you can file a bug report here:
+  <link xlink:href="https://github.com/lpechacek/cpuset/issues"/>
  </para>
  <para>
   If you are using <command>cset</command> on a supported operating system
