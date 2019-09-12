@@ -1,5 +1,7 @@
 = SUSE Linux Enterprise Real Time Documentation
 
+image:https://travis-ci.org/SUSE/doc-slert.svg?branch=master["Build Status", link="https://travis-ci.org/SUSE/doc-slert"]
+
 This is the source for the official SUSE Linux Enterprise Real Time documentation.
 
 This repository hosts the documentation sources including translations (if
@@ -13,12 +15,14 @@ https://www.suse.com/documentation/.
 
 == Branches
 
+**On Sep 12, 2019, we changed to a new branching model. We have
+switched the default branch from `develop` to `master`.**
+
 .Overview of important branches
 [options="header"]
 |================================================
 | Name             | Purpose
-| `master`         | Latest stable doc
-| `develop`        | SLERT 12 SP3 doc development
+| `master`         | doc development (latest development version)
 | `maintenance/*`  | maintenance for released versions
 | `trans`          | n/a
 |================================================
@@ -27,14 +31,34 @@ https://www.suse.com/documentation/.
 == Contributing
 
 If you would like to contribute, please fork this repository and send
-pull requests. Always use the `develop` branch for your edits! +
-Contributors with direct access to the repository are encouraged to use the
-git-flow-avh workflow (package `git-flow-avh`). However, this is not a must
-;-).
+pull requests.
 
-.*No commits to master*
-NOTE: Please do not make any commits to the `master` branch. `master` is
-reserved for releases only. Always commit to `develop`.
+* *Use the master branch* as the basis of your commits/of new feature branches.
+
+* The *develop branch has been deleted* on the server. Do not to push to the `develop` branch.
+  Your changes may go lost in the medium term and never make it to the proper branch.
+
+
+=== How to Update Your Local Repository
+
+If you *created* a local clone or GitHub fork of this repo *before Sep 12, 2019, do the following*:
+
+1. Make sure that your `master` and `develop` branches do not contain any important changes.
+  If there are changes on either branch, export them using `git format-patch` or put them on a
+  different branch.
+
+1. Go to the master branch: `git checkout master`.
+
+
+1. To pull the latest changes from the remote repository and to delete references to branches
+   that do not exist anymore on the server, run the following command: `git pull --prune`.
+
+1. Delete your local develop branch: `git branch -D develop`.
+
+1. To check for stale local branches, run: `git branch -v`.
+   For any branches marked as `[gone]`, check if you still need them. If not, delete them:
+   `git branch -D BRANCHNAME`
+
 
 == Writing DocBook
 
