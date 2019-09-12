@@ -5,7 +5,7 @@
   %entities;
 ]>
 <!-- Converted by suse-upgrade version 1.1 -->
-<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha.shielding.shortcuts">
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-shortcuts">
  <title>Using Shortcuts</title>
  <info/>
  <para>
@@ -80,7 +80,7 @@
   <command>p</command>, while <command>shield</command> and
   <command>set</command> need two letters to disambiguate.
  </para>
- <sect1 xml:id="sec.shielding.shortcuts.shield">
+ <sect1 xml:id="sec-shielding-shortcuts-shield">
   <title>shield Subcommand Shortcuts</title>
 
   <para>
@@ -173,7 +173,7 @@
    </tgroup>
   </informaltable>
  </sect1>
- <sect1 xml:id="sec.shielding.shortcuts.set">
+ <sect1 xml:id="sec-shielding-shortcuts-set">
   <title>set Subcommand Shortcuts</title>
 
   <para>
@@ -260,7 +260,7 @@
 --> lists only cpusets prio_high, prio_med and prio_low
 --> the -l is optional in this case since list is default</screen>
  </sect1>
- <sect1 xml:id="sec.shielding.shortcuts.proc">
+ <sect1 xml:id="sec-shielding-shortcuts-proc">
   <title><command>proc</command> Subcommand Shortcuts</title>
 
   <para>
@@ -336,7 +336,7 @@
   <remark>
    lpechacek: The concept of implicit commands and interchangeable options is
    indeed weird.  Anyway, the above examples work according to the principle
-   mentioned at the beginning of <xref linkend="cha.shielding.shortcuts"/>.
+   mentioned at the beginning of <xref linkend="cha-shielding-shortcuts"/>.
   </remark>
 
   <para>

@@ -5,7 +5,7 @@
   %entities;
 ]>
 
-<chapter version="5.0" xml:id="cha.shielding.model"
+<chapter version="5.0" xml:id="cha-shielding-model"
  xmlns="http://docbook.org/ns/docbook"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <title>The Basic Shielding Model</title>
@@ -72,10 +72,10 @@
   that this simple shielding is not rich enough for you. In this
   case, you should transition to using the <command>set</command> and
   <command>proc</command> subcommands described in
-  <xref linkend="cha.shielding.cpuset"/>.
+  <xref linkend="cha-shielding-cpuset"/>.
  </para>
 
- <sect1 xml:id="sec.shielding.model.ex">
+ <sect1 xml:id="sec-shielding-model-ex">
   <title>A Simple Shielding Example</title>
   <para> Assume that we have a 4-core machine that has uniform memory access.
    This means there are 4 CPUs at your disposal and there is only one memory node
@@ -100,7 +100,7 @@
   </note>
 </sect1>
  
- <sect1 xml:id="sec.shielding.model.ex.setup_teardown">
+ <sect1 xml:id="sec-shielding-model-ex-setup-teardown">
    <title>Setup and Teardown of the Shield</title>
    <para>
     To set up a shield of 3 CPUs with 1 CPU left for low priority system
@@ -238,7 +238,7 @@ cset: deleting "/user" and "/system" sets
 cset: done</screen>
   </sect1>
 
-  <sect1 xml:id="sec.shielding.model.ex.move">
+  <sect1 xml:id="sec-shielding-model-ex-move">
    <title>Moving Interesting Tasks Into and Out of the Shield</title>
    <para>
     Now that we have a shield running, the objective is to run our
@@ -258,7 +258,7 @@ cset: done</screen>
      </para>
     </listitem>
    </itemizedlist>
-   <sect2 xml:id="sec.shielding.model.ex.move.exec">
+   <sect2 xml:id="sec-shielding-model-ex-move-exec">
     <title>Execing a Process Into the Shield</title>
     <para>
      Running a new process in the shield can be done with the
@@ -352,7 +352,7 @@ USER     PID   PPID  SPPr TASK NAME
 alext    14212 8583  Soth bash
 alext    14241 14212 Roth python ./cset shield -s -v</screen>
    </sect2>
-   <sect2 xml:id="sec.shielding.model.ex.move.shield_unshield">
+   <sect2 xml:id="sec-shielding-model-ex-move-shield-unshield">
     <title>Moving a Running Task Into and Out of the Shield</title>
     <para>
      While execing a process into the shield is undoubtedly useful, most of

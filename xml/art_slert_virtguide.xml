@@ -8,7 +8,7 @@
   %entities;
 ]>
 
-<article version="5.0" xml:id="art.slert.virtguide" xml:lang="en"
+<article version="5.0" xml:id="art-slert-virtguide" xml:lang="en"
   xmlns="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -35,7 +35,7 @@
     </dm:docmanager>
   </info>
 
-  <sect1 xml:id="sec.virtguide.rtapp">
+  <sect1 xml:id="sec-virtguide-rtapp">
    <title>Running RT Applications with non-RT &kvm; Guests</title>
    <para>It is possible to achieve isolation of real-time workloads running
     alongside &kvm; by using standard methods. For example, cpusets and routing
@@ -49,17 +49,17 @@
     The basic steps are:</para>
    <procedure>
     <step>
-     <para><xref linkend="sec.virtguide.setup"/></para>
+     <para><xref linkend="sec-virtguide-setup"/></para>
     </step>
     <step>
-     <para><xref linkend="sec.virtguide.observations"/></para>
+     <para><xref linkend="sec-virtguide-observations"/></para>
     </step>
     <step>
-     <para><xref linkend="sec.virtguide.rec"/></para>
+     <para><xref linkend="sec-virtguide-rec"/></para>
     </step>
    </procedure>
 
-   <sect2 xml:id="sec.virtguide.setup">
+   <sect2 xml:id="sec-virtguide-setup">
     <title>Setup</title>
     <para>All examples were carried out on a 48-core Xeon machine with 2 NUMA
     nodes and 64GB of RAM running &slert;. The virtual machine was installed
@@ -69,7 +69,7 @@
     <para>The <command>cpuset</command> utility was used to shield the
      RT workload from &kvm; as described in the
      <citetitle>&slea; RT Shielding Guide</citetitle> (see
-     <xref linkend="book.slert.shielding"/>):
+     <xref linkend="book-slert-shielding"/>):
     </para>
     <screen><command>cset</command> shield --kthread=on -c 8-47</screen>
     <para>Affinity for the &kvm; vCPU tasks was modified via the <command>virsh
@@ -84,11 +84,11 @@
     <screen>cset shield --exec cyclictest -- -a 8-47 -t 40 -n -m -p99 -d 0 -D 120 --quiet</screen>
    </sect2>
 
-   <sect2 xml:id="sec.virtguide.observations">
+   <sect2 xml:id="sec-virtguide-observations">
     <title>Observations</title>
     <para>The following observations were made:</para>
     <orderedlist>
-     <listitem><!-- xml:id="li.virtguide.observ.vmheavyio" -->
+     <listitem><!-- xml:id="li-virtguide-observ-vmheavyio" -->
       <para>VM Heavy I/O</para>
       <para>The test for this was to do the following in a VM:</para>
       <screen>dd if=/dev/zero of=empty bs=4096 count=$(((80*1024*1024)/4096))</screen>
@@ -132,7 +132,7 @@
     </orderedlist>
    </sect2>
 
-   <sect2 xml:id="sec.virtguide.rec">
+   <sect2 xml:id="sec-virtguide-rec">
     <title>Recommendations</title>
     <para>Suggestions for tuning machines running both RT and &kvm;
      workloads are as follows:</para>
@@ -141,7 +141,7 @@
       <para>Affinitize RT tasks to their own CPUs, and if possible, to
        CPUs on their own dedicated socket. Using a dedicated socket
        avoids the issue from <xref
-        linkend="sec.virtguide.observations"/> above where the LLC
+        linkend="sec-virtguide-observations"/> above where the LLC
        occupancy is churned by VMs doing lots of I/O operations. If
        that is not an option some customers should look at
        Intel's Cache Allocation Technology to further enforce cache
@@ -174,7 +174,7 @@
    </sect2>
   </sect1>
 
-  <sect1 xml:id="sec.virtguide.docker">
+  <sect1 xml:id="sec-virtguide-docker">
    <title>RT Applications within Docker Feasibility</title>
    <para> It is important to note that real-time processes will be affected by
    container activity as there is insufficient isolation to guarantee zero
@@ -194,17 +194,17 @@
    </para>
    <procedure>
     <step>
-     <para><xref linkend="sec.virtguide.docker.rt-env"/></para>
+     <para><xref linkend="sec-virtguide-docker-rt-env"/></para>
     </step>
     <step>
-     <para><xref linkend="sec.virtguide.docker.shielding"/></para>
+     <para><xref linkend="sec-virtguide-docker-shielding"/></para>
     </step>
     <step>
-     <para><xref linkend="sec.virtguide.docker.scripts"/></para>
+     <para><xref linkend="sec-virtguide-docker-scripts"/></para>
     </step>
    </procedure>
    
-   <sect2 xml:id="sec.virtguide.docker.rt-env">
+   <sect2 xml:id="sec-virtguide-docker-rt-env">
     <title>Running Real-Time Applications in a Virtualized Environment</title>
     <para>
      Standard real-time dangers apply in that if the intention is to run a
@@ -245,7 +245,7 @@
     </para>
    </sect2>
 
-   <sect2 xml:id="sec.virtguide.docker.shielding">
+   <sect2 xml:id="sec-virtguide-docker-shielding">
     <title>Docker Shielding</title>
     <para>There is currently no facility withing Docker to launch a container directly into an isolated cpuset, this must be done manually.</para>
     <example>
@@ -278,7 +278,7 @@ cset shield --userset=rtcpus --cpu=4-7 --reset</screen>
     </example>
    </sect2>
 
-   <sect2 xml:id="sec.virtguide.docker.scripts">
+   <sect2 xml:id="sec-virtguide-docker-scripts">
     <title>Scripts</title>
     <example>
      <title>Sample Shield Script</title>
@@ -517,10 +517,10 @@ fi</screen>
    </sect2>
   </sect1>
 
- <sect1 xml:id="sec.virtguide.rtkvmguests">
+ <sect1 xml:id="sec-virtguide-rtkvmguests">
   <title>Running RT Applications with RT &kvm; Guests</title>
   <para>
-   In <xref linkend="sec.virtguide.rtapp"/>, we see that it is possible
+   In <xref linkend="sec-virtguide-rtapp"/>, we see that it is possible
    to isolate real-time workloads running alongside &kvm;
    by using standard methods. In &slea;12 RT SP3 this can be done in user space 
    using libvirt/qemu.
@@ -536,7 +536,7 @@ fi</screen>
    partitioning the memory for guests, and setting the vCPU/iothread scheduler 
    policy and priority for running both non-RT &kvm; and RT &kvm;.
   </para>
-  <sect2 xml:id="sec.virtguide.rtkvmguests.suport">
+  <sect2 xml:id="sec-virtguide-rtkvmguests-suport">
    <title>Support of &qemu;/libvirt</title>
    <orderedlist>
     <listitem>
@@ -550,7 +550,7 @@ fi</screen>
      <para>
       libvirt supports CPU Allocation, CPU Tuning, and Memory Backing, which
       allows you to control RT parameters, see <xref
-       linkend="sec.virtguide.rtkvmguests.sample"/>.
+       linkend="sec-virtguide-rtkvmguests-sample"/>.
      </para>
      <variablelist>
       <varlistentry>
@@ -598,7 +598,7 @@ fi</screen>
     </listitem>
    </orderedlist>
   </sect2>
-  <sect2 xml:id="sec.virtguide.rtkvmguests.sample">
+  <sect2 xml:id="sec-virtguide-rtkvmguests-sample">
    <title>Sample of <filename>libvirt.xml</filename></title>
    <screen language="xml"><![CDATA[<domain>
    …
@@ -618,7 +618,7 @@ fi</screen>
    …
 </domain>]]></screen>
   </sect2>
-  <sect2 xml:id="sec.virtguide.rtkvmguests.othersettings">
+  <sect2 xml:id="sec-virtguide-rtkvmguests-othersettings">
    <title>Other Host Settings</title>
    <orderedlist>
     <listitem>
