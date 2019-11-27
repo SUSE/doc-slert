@@ -155,6 +155,12 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
     that means that any new tasks that are spawned will also run in the
     unshielded <literal>system</literal> &cpuset;.
    </para>
+  <formalpara>
+   <title>Note</title>
+   <para>There is a minor chance that a task forks during move and its
+    child remains in the root &cpuset;.
+   </para>
+  </formalpara>
    <para>
     Some kernel threads can be moved into the unshielded
     <literal>system</literal> &cpuset; as well. These are the threads that are
