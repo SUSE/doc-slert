@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
-                 type="text/xml" 
+                 type="text/xml"
                  title="Profiling step"?>
 <!DOCTYPE article
 [
@@ -36,7 +36,7 @@
         <dm:bugtracker>
           <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
           <dm:component>Documentation</dm:component>
-          <dm:product>SUSE Linux Enterprise Real Time 12 SP3&#xa0;(SLE RT 12 SP3)</dm:product>
+          <dm:product>SUSE Linux Enterprise Real Time 12 SP5</dm:product>
           <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
         </dm:bugtracker>
         <dm:translation>no</dm:translation>
@@ -99,7 +99,7 @@
        mostly the same from those measured by the hardware latency
        detector. Latencies measured by <command>cyclictest</command>
        include the latencies caused by the operating system and are thus
-       closer to latencies measured in a real computing situation. 
+       closer to latencies measured in a real computing situation.
       </para>
      </step>
     </procedure>

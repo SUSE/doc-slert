@@ -31,13 +31,13 @@
         <dm:bugtracker>
           <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
           <dm:component>Documentation</dm:component>
-          <dm:product>SUSE Linux Enterprise Real Time 12 SP3&#xa0;(SLE RT 12 SP3)</dm:product>
+          <dm:product>SUSE Linux Enterprise Real Time 12 SP5</dm:product>
           <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
         </dm:bugtracker>
         <dm:translation>no</dm:translation>
     </dm:docmanager>
   </info>
-  
+
   <sect1 xml:id="sec-slert-quick-overview">
    <title>Product Overview</title>
    <para>
@@ -79,7 +79,7 @@
      </listitem>
     </itemizedlist>
    </sect2>
-   
+
    <sect2 xml:id="sec-slert-quick-scenarios">
     <title>Specific Scenario</title>
     <para>
@@ -88,7 +88,7 @@
     </para>
    </sect2>
   </sect1>
-  
+
   <sect1 xml:id="sec-slert-quick-install">
     <title>Installing &slerte;</title>
 
@@ -114,7 +114,7 @@
     <title>Managing CPU Sets with <command>cset</command></title>
     <para> In some circumstances, it is beneficial to be able to run
       specific tasks only on defined CPUs. For this reason, the Linux
-      kernel provides a feature called <emphasis>cpuset</emphasis>. 
+      kernel provides a feature called <emphasis>cpuset</emphasis>.
      The &cpuset; feature provides the means to do a so called <quote>soft
         partitioning</quote> of the system. Dedicated CPUs, together
       with some predefined memory, work on several tasks. </para>
@@ -248,7 +248,7 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
         arbitrary PIDs to the <option>--shield</option> command. </para>
     </warning>
    </sect2>
-   
+
    <sect2 xml:id="sec-slert-quick-showing-shielded-processes">
     <title>Showing Shielded Processes</title>
     <para> Use the <command>cset shield</command> command to show the
@@ -262,13 +262,13 @@ cset: --> shielding system active with
 cset: "system" cpuset of: 0-2,4-15 cpu, with:
    USER       PID  PPID S TASK NAME
       -------- ----- ----- - ---------
-         root         1     0 S init [3]   
+         root         1     0 S init [3]
 [...]
 
-cset: "user" cpuset of:    3 cpu, with: 1 
+cset: "user" cpuset of:    3 cpu, with: 1
    USER       PID  PPID S TASK NAME
       -------- ----- ----- - ---------
-         root     10202 10170 S application 
+         root     10202 10170 S application
 </screen>
    </sect2>
 
@@ -315,7 +315,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
     <para> Besides assigning memory nodes, the subcommand
         <command>set</command> creates cpusets in a
-      tree-like structure, rooted at the <systemitem 
+      tree-like structure, rooted at the <systemitem
         class="resource">root</systemitem> &cpuset;. </para>
 
     <!-- cset set .... assigning CPU -->
@@ -516,7 +516,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
      man page with <command>man 1 chrt</command>.</para>
   </sect1>
   <!--
- 
+
   <sect1>
   <title>Executing Processes with <command>run</command></title>
 
@@ -531,7 +531,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
   <variablelist>
    <varlistentry>
-  
+
     <term><option>bias=<replaceable>CPULIST</replaceable></option></term>
   <listitem>
      <para>
@@ -542,7 +542,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>policy=<replaceable>policy</replaceable></option></term>
     <listitem>
      <para>
@@ -553,7 +553,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
- 
+
   <term><option>priority=<replaceable>priority</replaceable></option>
     </term>
     <listitem>
@@ -564,7 +564,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
- 
+
   <term><option>quantum=<replaceable>quantum</replaceable></option></term>
     <listitem>
      <para>
@@ -573,14 +573,14 @@ cset: "user" cpuset of:    3 cpu, with: 1
       <literal>nice</literal> value
       generally known from <literal>SCHED_OTHER</literal>. To obtain a table
       of nice values and their respective values in milliseconds, run the
-      command 
-  
+      command
+
   <command>run quantum=list</command>.
      </para>
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
     <term><option>info</option></term>
     <listitem>
      <para>
@@ -596,8 +596,8 @@ cset: "user" cpuset of:    3 cpu, with: 1
   </variablelist>
 
   <para>
-   For Non-Uniform Memory Access (NUMA) architectures, the  
-  
+   For Non-Uniform Memory Access (NUMA) architectures, the
+
   <command>run mempolicy=MEMPOLICY_SPECIFIER</command> command can
    also be used to set memory specific options. Choose one of the
    following options:
@@ -610,7 +610,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
      <para>
       Use the memory local to the CPUs in the given list. If
       <literal>list</literal> is omitted, use the CPUs given in
-  
+
   <literal>bias</literal> which is required in this case.
      </para>
     </listitem>
@@ -620,7 +620,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     <listitem>
      <para>
       Use memory that is attached with optimized bandwidth instead of
-      optimized latency. 
+      optimized latency.
      </para>
     </listitem>
    </varlistentry>
@@ -660,7 +660,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
   </variablelist>
- 
+
   <para>
    All of the above commands may be used when starting new commands, but also
    to change the environment of processes already running. To change the
@@ -670,7 +670,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
   <variablelist>
    <varlistentry>
-  
+
   <term><option>all</option></term>
     <listitem>
      <para>
@@ -679,7 +679,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
- 
+
   <term><option>pid=<replaceable>list</replaceable></option></term>
     <listitem>
      <para>
@@ -690,7 +690,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
- 
+
   <term><option>tid=<replaceable>list</replaceable></option></term>
     <listitem>
      <para>
@@ -701,7 +701,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-    
+
   <term><option>group=<replaceable>list</replaceable></option></term>
     <listitem>
      <para>
@@ -711,7 +711,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>user=<replaceable>list</replaceable></option></term>
     <listitem>
      <para>
@@ -721,7 +721,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>name=<replaceable>list</replaceable></option></term>
     <listitem>
      <para>
@@ -744,19 +744,19 @@ cset: "user" cpuset of:    3 cpu, with: 1
    which tasks may run on a specified CPU.
    To prevent interrupts
    from being executed on this CPU, the CPU may be shielded.
-   Furthermore, if you intend to only run defined processes on 
+   Furthermore, if you intend to only run defined processes on
    selected CPUs, you can shield this set of CPUs from
    all processes. To run processes on those CPUs, the processes must
    set a CPU affinity to the shielded CPUs.
   </para>
 
   <para>
-  To mark one or several CPUs as shielded, use the  
-   <command>shield</command> command and specify a list of CPUs. 
+  To mark one or several CPUs as shielded, use the
+   <command>shield</command> command and specify a list of CPUs.
    The numbers to use in CPULIST can be obtained from the <literal>processor
     :</literal> entry in the <filename>/proc/cpuinfo</filename> file. To
    define ranges of several CPUs, use a <quote>&mdash;</quote> between the
-   numbers as in <literal>2&mdash;7</literal>. 
+   numbers as in <literal>2&mdash;7</literal>.
   </para>
   <para>
    This approach is only useful on systems with at least two virtual CPUs. The
@@ -765,7 +765,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
   </para>
   <variablelist>
    <varlistentry>
-   
+
   <term><option>irq=<replaceable>CPULIST</replaceable></option></term>
     <listitem>
      <para>
@@ -777,7 +777,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>loc=<replaceable>CPULIST</replaceable></option></term>
     <listitem>
      <para>
@@ -789,11 +789,11 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>proc=<replaceable>CPULIST</replaceable></option></term>
     <listitem>
      <para>
-      Use the CPUs in <literal>CPULIST</literal> only for 
+      Use the CPUs in <literal>CPULIST</literal> only for
       processes that have a defined affinity to those CPUs. If several
       processes have this affinity, they may still have different
       priorities to define background and high priority
@@ -804,7 +804,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>all=<replaceable>CPULIST</replaceable></option></term>
     <listitem>
      <para>
@@ -814,7 +814,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>reset</option></term>
     <listitem>
      <para>
@@ -823,7 +823,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
- 
+
   <term><option>current</option></term>
     <listitem>
      <para>
@@ -838,9 +838,9 @@ cset: "user" cpuset of:    3 cpu, with: 1
    CPU. For example, if you want to run a process as the only process on
    processor <literal>#1</literal>, use the following commands:
   </para>
-  
+
   <screen>shield proc=1
-  run  bias=1 &lt;command&gt;  
+  run  bias=1 &lt;command&gt;
   </screen>
   </sect1>-->
   <!--
@@ -895,7 +895,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
     <term>mems</term>
     <listitem>
      <para>
-      A list of memory nodes available to the current cpuset. 
+      A list of memory nodes available to the current cpuset.
      </para>
     </listitem>
    </varlistentry>
@@ -977,7 +977,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
    <literal>memory_pressure</literal> entries in the different
    cpusets.
   </para>
-  <para> 
+  <para>
    To make use of cpusets, you need detailed hardware information
    for several reasons: on big machines, memory that is local to a CPU will be
    much faster than memory that is only available on a different node. If you
@@ -1006,7 +1006,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
    <varlistentry>
     <term>Create a Cpuset</term>
     <listitem>
-     <para> 
+     <para>
       To create a cpuset with the name <literal>exampleset</literal>, just
       run <command>mkdir /dev/cpuset/exampleset</command> to create the
       respective directory. The newly created set will contain several entries that
@@ -1104,7 +1104,7 @@ logger cpuset: releasing $1
 rmdir /dev/cpuset/$1
      </screen>
 
-     <para>After adding the script to your system, run 
+     <para>After adding the script to your system, run
       <command>chmod 755 /sbin/cpuset_release_agent</command> to make the script
       executable.
      </para>
@@ -1117,7 +1117,7 @@ rmdir /dev/cpuset/$1
       All processes with the process id <literal>PID</literal> have an entry
       in <filename>/proc/PID/cpuset</filename>. If you run the command
       <command>cat /proc/PID/cpuset</command> on a PID that runs in
-      the cpuset <literal>exampleset</literal>, you will find the results in 
+      the cpuset <literal>exampleset</literal>, you will find the results in
       <literal>/exampleset</literal>.
      </para>
     </listitem>
@@ -1551,7 +1551,7 @@ noop deadline [cfq]</screen>
                 <para> The <option>fifo_expire_*</option> variables
                   define the timeout in milliseconds for asynchronous
                   and synchronous I/O requests. To prefer
-                  synchronous operations over asynchronous ones, 
+                  synchronous operations over asynchronous ones,
                   <option>fifo_expire_sync</option> value should be lower
                   than fifo_expire_async.</para>
               </listitem>
@@ -1602,7 +1602,7 @@ noop deadline [cfq]</screen>
     <!--
   TIP: versucht requests so anzuordnen, dass möglichst wenig
       kopfbewegung gemacht wird
-      Storage: 
+      Storage:
       cat /sys/block/hda/queue/scheduler
   bg: should be in there ...
   -->
@@ -1617,7 +1617,7 @@ noop deadline [cfq]</screen>
   <title>Interrupt Priorities</title>
 
   <para>
-    
+
    interrupt inheritance -> was ist denn das????
    - softirq
    /usr/src/linux/Documentation/DocBook/kernel-hacking.tmpl, line 191
@@ -1652,9 +1652,9 @@ noop deadline [cfq]</screen>
       <listitem>
         <para> The &cpuset; feature of the kernel is explained in
             <filename>/usr/src/linux/Documentation/cgroups/cpusets.txt</filename>.
-	    More detailed documentation is available from <!-- <link
+            More detailed documentation is available from <!-- <link
             xlink:href="http://techpubs.sgi.com/library/tpl/cgi-bin/getdoc.cgi/linux/bks/SGI_Admin/books/LX_Resource_AG/sgi_html/ch01.html"
-	    />, <link xlink:href="http://www.bullopensource.org/cpuset/"/>, and -->
+            />, <link xlink:href="http://www.bullopensource.org/cpuset/"/>, and -->
             <link xlink:href="http://lwn.net/Articles/127936/"/>.
            -->
         </para>

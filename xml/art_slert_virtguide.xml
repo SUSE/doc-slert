@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
-                 type="text/xml" 
+                 type="text/xml"
                  title="Profiling step"?>
 <!DOCTYPE article
 [
@@ -28,7 +28,7 @@
       <dm:bugtracker>
         <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
         <dm:component>Documentation</dm:component>
-        <dm:product>SUSE Linux Enterprise Real Time 12 SP3&#xa0;(SLE RT 12 SP3)</dm:product>
+        <dm:product>SUSE Linux Enterprise Real Time 12 SP5</dm:product>
         <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
       </dm:bugtracker>
       <dm:translation>no</dm:translation>
@@ -204,7 +204,7 @@
      <para><xref linkend="sec-virtguide-docker-scripts"/></para>
     </step>
    </procedure>
-   
+
    <sect2 xml:id="sec-virtguide-docker-rt-env">
     <title>Running Real-Time Applications in a Virtualized Environment</title>
     <para>
@@ -482,38 +482,38 @@ fi</screen>
 --- a/sysjitter.c
 +++ b/sysjitter.c
 @@ -412,7 +412,7 @@ static void write_raw(struct thread *thr
- 	FILE *f;
- 	int i;
- 	for (i = 0; i &lt; g.n_threads; ++i) {
--		sprintf(fname, "%s.%d", outf, i);
-+		sprintf(fname, "%s.%d", outf, threads[i].core_i);
- 		if ((f = fopen(fname, "w")) == NULL) {
- 			fprintf(stderr, "ERROR: Could not open '%s' for writing\n", fname);
- 			fprintf(stderr, "ERROR: %s\n", strerror(errno));
+        FILE *f;
+        int i;
+        for (i = 0; i &lt; g.n_threads; ++i) {
+-               sprintf(fname, "%s.%d", outf, i);
++               sprintf(fname, "%s.%d", outf, threads[i].core_i);
+                if ((f = fopen(fname, "w")) == NULL) {
+                        fprintf(stderr, "ERROR: Could not open '%s' for writing\n", fname);
+                        fprintf(stderr, "ERROR: %s\n", strerror(errno));
 @@ -578,6 +578,7 @@ int main(int argc, char *argv[])
- 	const char *outf = NULL;
- 	char dummy;
- 	int i, n_cores, runtime = 70;
-+	cpu_set_t cpus;
- 
- 	g.max_interruptions = 1000000;
- 
+        const char *outf = NULL;
+        char dummy;
+        int i, n_cores, runtime = 70;
++       cpu_set_t cpus;
+
+        g.max_interruptions = 1000000;
+
 @@ -609,10 +610,13 @@ int main(int argc, char *argv[])
- 	    sscanf(argv[0], "%u%c", &amp;g.threshold_nsec, &amp;dummy) != 1)
- 		usage(app);
- 
-+	CPU_ZERO(&amp;cpus);
-+	sched_getaffinity(0, sizeof(cpus), &amp;cpus);
+            sscanf(argv[0], "%u%c", &amp;g.threshold_nsec, &amp;dummy) != 1)
+                usage(app);
+
++       CPU_ZERO(&amp;cpus);
++       sched_getaffinity(0, sizeof(cpus), &amp;cpus);
 +
- 	n_cores = sysconf(_SC_NPROCESSORS_ONLN);
--	TEST(threads = malloc(n_cores * sizeof(threads[0])));
-+	TEST(threads = malloc(CPU_COUNT(&amp;cpus) * sizeof(threads[0])));
- 	for (i = 0; i &lt; n_cores; ++i)
--		if (move_to_core(i) == 0)
-+		if (CPU_ISSET(i, &amp;cpus) &amp;&amp; move_to_core(i) == 0)
- 			threads[g.n_threads++].core_i = i;
- 
- 	signal(SIGALRM, handle_alarm);</screen>
+        n_cores = sysconf(_SC_NPROCESSORS_ONLN);
+-       TEST(threads = malloc(n_cores * sizeof(threads[0])));
++       TEST(threads = malloc(CPU_COUNT(&amp;cpus) * sizeof(threads[0])));
+        for (i = 0; i &lt; n_cores; ++i)
+-               if (move_to_core(i) == 0)
++               if (CPU_ISSET(i, &amp;cpus) &amp;&amp; move_to_core(i) == 0)
+                        threads[g.n_threads++].core_i = i;
+
+        signal(SIGALRM, handle_alarm);</screen>
     </example>
    </sect2>
   </sect1>
@@ -523,26 +523,26 @@ fi</screen>
   <para>
    In <xref linkend="sec-virtguide-rtapp"/>, we see that it is possible
    to isolate real-time workloads running alongside &kvm;
-   by using standard methods. In &slea;12 RT SP3 this can be done in user space 
+   by using standard methods. In &slea;12 RT SP3 this can be done in user space
    using libvirt/qemu.
   </para>
   <para>
-   Applications and guest operating systems run inside &kvm; guests similarly to 
-   how they run on bare metal. The guest interfaces with emulated hardware presented 
-   by &qemu;, which submits I/O requests to the host on behalf of the guest. 
+   Applications and guest operating systems run inside &kvm; guests similarly to
+   how they run on bare metal. The guest interfaces with emulated hardware presented
+   by &qemu;, which submits I/O requests to the host on behalf of the guest.
    Then the host kernel treats the guest I/Os like any user-space application.
   </para>
   <para>
-   In &slea;12 SP3, both &qemu; and libvirt support isolating the CPUs, 
-   partitioning the memory for guests, and setting the vCPU/iothread scheduler 
+   In &slea;12 SP3, both &qemu; and libvirt support isolating the CPUs,
+   partitioning the memory for guests, and setting the vCPU/iothread scheduler
    policy and priority for running both non-RT &kvm; and RT &kvm;.
   </para>
   <sect2 xml:id="sec-virtguide-rtkvmguests-suport">
    <title>Support of &qemu;/libvirt</title>
    <orderedlist>
     <listitem>
-     <para>&qemu; includes the <option>-realtime mlock=on|off</option> option. 
-      Mlocking &qemu; and guest memory is enabled with 
+     <para>&qemu; includes the <option>-realtime mlock=on|off</option> option.
+      Mlocking &qemu; and guest memory is enabled with
       <option>mlock=on</option> (which is enabled by default) <!--where is it
          enabled?-->.
      </para>
@@ -567,18 +567,18 @@ fi</screen>
         <itemizedlist>
          <listitem>
           <para>Pinning is a tuning option for the virtual CPUs in &kvm; guests.
-           With pinning we can control where the guest runs in order to reduce 
-           the overhead of scheduler switches, pin vCPUs to physical CPUs 
-           that have low utilization, and improve the data cache performance. 
+           With pinning we can control where the guest runs in order to reduce
+           the overhead of scheduler switches, pin vCPUs to physical CPUs
+           that have low utilization, and improve the data cache performance.
            Overall performance is improved when the memory that an
            application uses is local to the physical CPU, and the guest vCPU
            is pinned to this physical CPU.</para>
          </listitem>
          <listitem>
-          <para>We can specify the vCPU scheduler type (values batch, idle, 
+          <para>We can specify the vCPU scheduler type (values batch, idle,
            fifo, rr), and priority for particular vCPU threads. Priority <literal>99</literal>
-           is too high, and it will massively interfere with the host's 
-           ability to function properly. There are host-side per-CPU threads 
+           is too high, and it will massively interfere with the host's
+           ability to function properly. There are host-side per-CPU threads
            that must be always be able to preempt, for example, timer sirq threads.</para>
          </listitem>
         </itemizedlist>
@@ -588,9 +588,9 @@ fi</screen>
        <term>Memory Backing</term>
        <listitem>
         <para>
-         Use memory backing to allocate enough memory in the guest to avoid 
-         memory overcommit, and to lock the guest page memory in host memory 
-         to prevent it from being swapped out. This will show a performance 
+         Use memory backing to allocate enough memory in the guest to avoid
+         memory overcommit, and to lock the guest page memory in host memory
+         to prevent it from being swapped out. This will show a performance
          improvement in some workloads.
         </para>
        </listitem>
@@ -626,8 +626,8 @@ fi</screen>
      <formalpara>
       <title>Power Management</title>
       <para>Intel processors have a power management feature that puts the system
-       into power-saving mode when the system is under-utilized. The system 
-       should be configured for maximum performance, rather than allowing 
+       into power-saving mode when the system is under-utilized. The system
+       should be configured for maximum performance, rather than allowing
        power-saving mode.</para>
      </formalpara>
     </listitem>
@@ -635,9 +635,9 @@ fi</screen>
      <formalpara>
       <title>Turboboost and Speedstep</title>
       <para>Turboboost overclocks a core when CPU demand is high,
-       whereas Speedstep dynamically adjusts the frequency of processor to meet 
-       processing needs. Turboboost requires Speedstep to be enabled, as it is 
-       an extension of Speedstep. For maximum performance, enable both Turboboost 
+       whereas Speedstep dynamically adjusts the frequency of processor to meet
+       processing needs. Turboboost requires Speedstep to be enabled, as it is
+       an extension of Speedstep. For maximum performance, enable both Turboboost
        and Speedstep in BIOS. The host OS may also need configuration
        to support running at higher clock speeds. For example:</para>
      </formalpara>
@@ -646,9 +646,9 @@ fi</screen>
     <listitem>
      <formalpara>
       <title>Disable Interrupt Balancing (irqbalance)</title>
-      <para>The irqbalance daemon is enabled by default. It distributes hardware 
-       interrupts across CPUs in a multi-core system to increase performance. 
-       When irqbalance is disabled, all interrupts will be handled by cpu0, 
+      <para>The irqbalance daemon is enabled by default. It distributes hardware
+       interrupts across CPUs in a multi-core system to increase performance.
+       When irqbalance is disabled, all interrupts will be handled by cpu0,
        and therefore the guest should NOT run on cpu0.
       </para>
      </formalpara>
@@ -657,10 +657,10 @@ fi</screen>
      <formalpara>
       <title>RT Throttling</title>
       <para>The default values for the realtime throttling mechanism allocate
-       95% of the CPU time to realtime tasks, and the remaining 5% to 
-       non-realtime tasks. If RT throttling is disabled, realtime tasks may use 
-       up to 100% of CPU time. Hence, programming failures in real-time 
-       applications can cause the entire system to hang because no other task 
+       95% of the CPU time to realtime tasks, and the remaining 5% to
+       non-realtime tasks. If RT throttling is disabled, realtime tasks may use
+       up to 100% of CPU time. Hence, programming failures in real-time
+       applications can cause the entire system to hang because no other task
        can preempt the realtime tasks.</para>
      </formalpara>
     </listitem>

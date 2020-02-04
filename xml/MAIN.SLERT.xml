@@ -21,7 +21,7 @@
         <dm:bugtracker>
           <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
           <dm:component>Documentation</dm:component>
-          <dm:product>SUSE Linux Enterprise Real Time 12 SP3&#xa0;(SLE RT 12 SP3)</dm:product>
+          <dm:product>SUSE Linux Enterprise Real Time 12 SP5</dm:product>
           <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
         </dm:bugtracker>
         <dm:translation>no</dm:translation>
@@ -29,7 +29,7 @@
   </info>
 
   <xi:include href="book_slert_shielding.xml"/>
-  
+
   <book version="5.0" xml:lang="en" xml:id="book-slert-qs">
     <title>Quick Start Manuals</title>
     <xi:include href="art_slert_quickstart.xml"/>
