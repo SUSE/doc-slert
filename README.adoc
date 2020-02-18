@@ -1,0 +1,2 @@
+SLE-RT 15 GA does not exist.
+There are SLE-RT 12 SP5 and SLE-RT 15 SP1, with nothing in between.
