@@ -7,10 +7,10 @@ This is the source for the official SUSE Linux Enterprise Real Time documentatio
 This repository hosts the documentation sources including translations (if
 available) for the following products:
 
-* SUSE Linux Enterprise Real Time Extension (SLERT)
+* SUSE Linux Enterprise Real Time Extension (SLE-RT)
 
 Released versions of the documentation have been published at
-https://www.suse.com/documentation/.
+https://documentation.suse.com/.
 
 
 == Branches
