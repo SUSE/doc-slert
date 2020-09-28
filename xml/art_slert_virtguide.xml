@@ -28,7 +28,7 @@
       <dm:bugtracker>
         <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
         <dm:component>Documentation</dm:component>
-        <dm:product>SUSE Linux Enterprise Real Time 12 SP3&#xa0;(SLE RT 12 SP3)</dm:product>
+        <dm:product>SUSE Linux Enterprise Real Time 15 SP1&#xa0;(SLE RT 15 SP1)</dm:product>
         <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
       </dm:bugtracker>
       <dm:translation>no</dm:translation>
@@ -522,7 +522,7 @@ fi</screen>
   <para>
    In <xref linkend="sec-virtguide-rtapp"/>, we see that it is possible
    to isolate real-time workloads running alongside &kvm;
-   by using standard methods. In &slea;12 RT SP3 this can be done in user space 
+   by using standard methods. In &slea;15 RT SP1 this can be done in user space 
    using libvirt/qemu.
   </para>
   <para>
@@ -532,7 +532,7 @@ fi</screen>
    Then the host kernel treats the guest I/Os like any user-space application.
   </para>
   <para>
-   In &slea;12 SP3, both &qemu; and libvirt support isolating the CPUs, 
+   In &slea;15 RT SP1, both &qemu; and libvirt support isolating the CPUs, 
    partitioning the memory for guests, and setting the vCPU/iothread scheduler 
    policy and priority for running both non-RT &kvm; and RT &kvm;.
   </para>
