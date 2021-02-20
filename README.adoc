@@ -1,66 +1,63 @@
 = SUSE Linux Enterprise Real Time Documentation
 
-image:https://travis-ci.org/SUSE/doc-slert.svg?branch=master["Build Status", link="https://travis-ci.org/SUSE/doc-slert"]
+image:https://travis-ci.org/SUSE/doc-slert.svg?branch=main["Build Status", link="https://travis-ci.org/SUSE/doc-slert"]
 
 This is the source for the official SUSE Linux Enterprise Real Time documentation.
 
-This repository hosts the documentation sources including translations (if
-available) for the following products:
+This repository hosts the documentation sources for SUSE Linux Enterprise Real Time Extension (SLE-RT)
 
-* SUSE Linux Enterprise Real Time Extension (SLE-RT)
-
-Released versions of the documentation have been published at
-https://documentation.suse.com/.
+Released versions of the documentation are published at https://documentation.suse.com/sle-rt.
 
 
 == Branches
-
-**On Sep 12, 2019, we changed to a new branching model. We have
-switched the default branch from `develop` to `master`.**
 
 .Overview of important branches
 [options="header"]
 |================================================
 | Name             | Purpose
-| `master`         | doc development (latest development version)
+| `main`           | doc development (latest development version)
 | `maintenance/*`  | maintenance for released versions
-| `trans`          | n/a
 |================================================
+
+***On Feb 20, 2021, we switched to a new default branch.***
+***The default branch is now called `main`.***
+
+*Use the main branch* as the basis of your commits/of new feature branches.
+
+
+=== How to update your local repository
+
+If you *created* a local clone or GitHub fork of this repo *before Feb 20, 2021, do the following*:
+
+[code]
+====
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git pull -r
+====
 
 
 == Contributing
 
-If you would like to contribute, please fork this repository and send
-pull requests.
+Thank you for contributing to this repo. Please adhere to the following guidelines when creating a pull request:
 
-* *Use the master branch* as the basis of your commits/of new feature branches.
+. Make your pull request against the __main__ branch if you are contributing to the most recent release. This branch is is protected.
 
-* The *develop branch has been deleted* on the server. Do not to push to the `develop` branch.
-  Your changes may go lost in the medium term and never make it to the proper branch.
+. If you are contributing to a previous release, please see _maintenance/_<RELEASENUMBER>_. These branches are also protected.
 
+. Make sure all validation (Travis CI) checks are passed, and tag relevant SMEs from the development team (if applicable)
+  and members of the SLE-RT doc team: Thomas Schraitle (@tomschr).
 
-=== How to Update Your Local Repository
+  **NOTE:** If your pull request has multiple files and reorganisation changes, please build locally using DAPS or daps2docker
+  (see instructions below) to verify and build the files. Travis CI only validates, and does not ensure the XML builds
+  are correct.
 
-If you *created* a local clone or GitHub fork of this repo *before Sep 12, 2019, do the following*:
-
-1. Make sure that your `master` and `develop` branches do not contain any important changes.
-  If there are changes on either branch, export them using `git format-patch` or put them on a
-  different branch.
-
-1. Go to the master branch: `git checkout master`.
+. Implement any required changes, or fix any merge conflicts if relevant. If you have any questions, ping a documentation team
+  member in #susedoc on RocketChat.
 
 
-1. To pull the latest changes from the remote repository and to delete references to branches
-   that do not exist anymore on the server, run the following command: `git pull --prune`.
-
-1. Delete your local develop branch: `git branch -D develop`.
-
-1. To check for stale local branches, run: `git branch -v`.
-   For any branches marked as `[gone]`, check if you still need them. If not, delete them:
-   `git branch -D BRANCHNAME`
-
-
-== Writing DocBook
+== Editing DocBook
 
 To contribute to the documentation, you need to write DocBook.
 
@@ -69,9 +66,31 @@ To contribute to the documentation, you need to write DocBook.
   SUSE XSL Stylesheets (package `suse-xsl-stylesheets`). Ideally, you should
   get these from the repository `Documentation:Tools`. However, slightly
   older versions are also available from the SLE and openSUSE repositories.
-* Basic daps usage:
+
+
+== Building documentation
+
+If you are interested in building DAPS documentation (defaulting to HTML and PDF), you can utilize
+either DAPS directly or use daps2docker. Both tools only work on Linux.
+
+* Use daps2docker if you use any Linux distribution that includes Docker and Systemd and only want to
+  build HTML, PDF, or EPUB and want to be set up as quickly as possible.
+* Use DAPS directly if you are using a recent version of openSUSE, and want to use any of the advanced
+  features of DAPS, such as building Mobipocket or spell-checking documents.
+
+
+=== Using daps2docker
+
+1. Install Docker
+2. Clone the daps2docker repository from https://github.com/openSUSE/daps2docker.
+3. Within the cloned repository, run  `./daps2docker.sh /PATH/TO/DOC-DIR`
+   This builds HTML and PDF documents.
+
+
+=== Using DAPS directly
+
 ** `$ daps -d DC-<YOUR_BOOK> validate`: Make sure what you have written is
     well-formed XML and valid DocBook 5
-** `$ daps -d DC-<YOUR_BOOK> pdf`: Build a PDF
-** `$ daps -d DC-<YOUR_BOOK> html`: Build a HTML
+** `$ daps -d DC-<YOUR_BOOK> pdf`: Build a PDF document
+** `$ daps -d DC-<YOUR_BOOK> html`: Build muliti-page HTML document
 ** Learn more at https://opensuse.github.io/daps
