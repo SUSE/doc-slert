@@ -225,7 +225,7 @@
 
   <variablelist>
    <varlistentry>
-    <term><filename>--duration="time"{s,m,d}</filename></term>
+    <term><literal>--duration="time"{s,m,d}</literal></term>
     <listitem>
      <para>
       Run the detector logic in for the specified duration. The duration is a
@@ -235,7 +235,7 @@
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><filename>--threshold="microsecond"</filename></term>
+    <term><literal>--threshold="microsecond"</literal></term>
     <listitem>
      <para>
       Specify the TSC gap used to detect an SMI. Any gap value greater than
@@ -244,7 +244,7 @@
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><filename>--hardlimit="microsecond"</filename></term>
+    <term><literal>--hardlimit="microsecond"</literal></term>
     <listitem>
      <para>
       The test is considered to fail if a value above the hardlimit occurs.
@@ -252,7 +252,7 @@
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><filename>--window="time"{us,ms,s,m,d}</filename></term>
+    <term><literal>--window="time"{us,ms,s,m,d}</literal></term>
     <listitem>
      <para>
       Specify the size of the sample window. Converted to microseconds when
@@ -261,7 +261,7 @@
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><filename>--width="time"{us,ms,s,m,d}</filename></term>
+    <term><literal>--width="time"{us,ms,s,m,d}</literal></term>
     <listitem>
      <para>
       The amount of time within the sample window where the detector is
@@ -270,7 +270,7 @@
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><filename>--report=FILENAME</filename></term>
+    <term><literal>--report=<replaceable>FILE_NAME</replaceable></literal></term>
     <listitem>
      <para>
       Specify the output filename of the detector report. Default behavior is
@@ -279,7 +279,7 @@
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><filename>--debug</filename></term>
+    <term><literal>--debug</literal></term>
     <listitem>
      <para>
       Turn on debug output
@@ -287,7 +287,7 @@
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><filename>--quiet</filename></term>
+    <term><literal>--quiet</literal></term>
     <listitem>
      <para>
       Turn off information output.
@@ -295,7 +295,7 @@
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><filename>--watch</filename></term>
+    <term><literal>--watch</literal></term>
     <listitem>
      <para>
       Print sample data to stdout as it arrives.
