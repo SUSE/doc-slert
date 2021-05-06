@@ -190,20 +190,20 @@
   <para>
    The <emphasis>hardware latency detector</emphasis>
    (<command>hwlatdetect</command>) is a program that controls the kernel
-   latency detector module (hwlat_detector.ko), installed with the real-time
-   debug kernel (the <package>kernel-rt_debug</package> package). It is a
-   special kernel module that is used to detect large system latencies. It is
-   caused by the behavior of underlying hardware or firmware, independent of
-   Linux itself (system management interrupts, SMIs).
+   latency detector module (<filename>hwlat_detector.ko</filename>), installed
+   with the real-time debug kernel (the <package>kernel-rt_debug</package>
+   package). This is a special kernel module that is used to detect large
+   system latencies, caused by the behavior of the underlying hardware or
+   firmware, independent of Linux itself (system management interrupts, SMIs).
   </para>
 
   <para>
-   The hardware latency detector module works by making all CPUs busy for a
+   The hardware latency detector module works by making all CPUs busy for
    configurable amounts of time. This is done by calling
    <systemitem class="other" otherclass="function">stop_machine()</systemitem>,
    polling the CPU Time Stamp Counter (TSC) for some period, and then looking
    for gaps in the TSC data. These gaps indicate times when the polling was
-   disturbed by System Management Interrupts (SMI).
+   disturbed by SMIs.
   </para>
 
   <para>
@@ -228,9 +228,9 @@
     <term><literal>--duration="time"{s,m,d}</literal></term>
     <listitem>
      <para>
-      Run the detector logic in for the specified duration. The duration is a
-      base 10 integer number that defaults to a value in seconds. An optional
-      suffix may be specified to indicate minutes, hours or days.
+      Run the detector logic for the specified duration. The duration is a base
+      10 integer number that defaults to a value in seconds. An optional suffix
+      may be specified to indicate minutes, hours, or days.
      </para>
     </listitem>
    </varlistentry>
@@ -247,7 +247,8 @@
     <term><literal>--hardlimit="microsecond"</literal></term>
     <listitem>
      <para>
-      The test is considered to fail if a value above the hardlimit occurs.
+      The test is considered to have failed if a value above the hardlimit
+      occurs.
      </para>
     </listitem>
    </varlistentry>
@@ -265,7 +266,8 @@
     <listitem>
      <para>
       The amount of time within the sample window where the detector is
-      actually sampling. Must be less than the --window value.
+      actually sampling. Must be less than the <literal>--window</literal>
+      value.
      </para>
     </listitem>
    </varlistentry>
@@ -273,8 +275,8 @@
     <term><literal>--report=<replaceable>FILE_NAME</replaceable></literal></term>
     <listitem>
      <para>
-      Specify the output filename of the detector report. Default behavior is
-      to print to standard output.
+      Specify the output file name of the detector report. The default behavior
+      is to print to standard output.
      </para>
     </listitem>
    </varlistentry>
