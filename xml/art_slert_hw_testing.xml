@@ -225,51 +225,63 @@
 
   <variablelist>
    <varlistentry>
-    <term><literal>--duration="<replaceable>VALUE</replaceable>"{s,m,h,d}</literal></term>
+    <term><literal>--duration="<replaceable>VALUE</replaceable>"{s,m,h,d,w}</literal></term>
     <listitem>
      <para>
       Run the detector logic for the specified duration.
       Provide the duration as a decimal integer value.
-      The default duration unit is seconds.
+      The default duration unit for this value is seconds.
       To use a different unit, append <literal>m</literal> (minutes),
-      <literal>h</literal> (hours), or <literal>d</literal> (days) to the value.
+      <literal>h</literal> (hours), <literal>d</literal> (days), or
+      <literal>w</literal> (weeks) to the value.
      </para>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><literal>--threshold="<replaceable>VALUE_IN_MICROSECONDS</replaceable>"</literal></term>
+    <term><literal>--threshold="<replaceable>VALUE</replaceable>"{us,ms,s}</literal></term>
     <listitem>
      <para>
       Specify the TSC gap used to detect an SMI. Any gap value greater than
       threshold value is considered to be the result of an SMI occurring.
+      The default duration unit for this value is microseconds.
+      To use a different unit, append <literal>ms</literal> (milliseconds) or
+      <literal>s</literal> (seconds) to the value.
      </para>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><literal>--hardlimit="<replaceable>VALUE_IN_MICROSECONDS</replaceable>"</literal></term>
+    <term><literal>--hardlimit="<replaceable>VALUE</replaceable>"{us,ms,s}</literal></term>
     <listitem>
      <para>
       The test is considered to have failed if a value above the hard limit
       value occurs.
+      The default duration unit for this value is microseconds.
+      To use a different unit, append <literal>ms</literal> (milliseconds) or
+      <literal>s</literal> (seconds) to the value.
      </para>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><literal>--window="<replaceable>VALUE</replaceable>"{us,ms,s,m,h,d}</literal></term>
+    <term><literal>--window="<replaceable>VALUE</replaceable>"{us,ms,s}</literal></term>
     <listitem>
      <para>
-      Specify the size of the sample window. Converted to microseconds when
-      passed to the kernel module.
+      Specify the size of the sample window.
+      The default duration unit for this value is microseconds.
+      To use a different unit, append <literal>ms</literal> (milliseconds) or
+      <literal>s</literal> (seconds) to the value.
      </para>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><literal>--width="<replaceable>VALUE</replaceable>"{us,ms,s,m,h,d}</literal></term>
+    <term><literal>--width="<replaceable>VALUE</replaceable>"{us,ms,s}</literal></term>
     <listitem>
      <para>
       The amount of time within the sample window where the detector is
       actually sampling. Must be less than the <literal>--window</literal>
       value.
+      The default duration unit for this value is microseconds.
+      To use a different unit, append <literal>ms</literal> (milliseconds) or
+      <literal>s</literal> (seconds) to the value.
      </para>
     </listitem>
    </varlistentry>
