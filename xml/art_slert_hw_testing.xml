@@ -7,275 +7,319 @@
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
-<!-- Converted by suse-upgrade version 1.1 -->
-
 <article version="5.0" xml:id="art-slert-hwtest" xml:lang="en"
   xmlns="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
-  <?suse-quickstart color="suse"?>
-  <title>&slertabbr; Hardware Testing</title>
-  <subtitle>&productname; &productnumber;</subtitle>
-  <info>
-    <productname>&productname;</productname>
-    <productnumber>&productnumber;</productnumber>
-    <date><?dbtimestamp?></date>
-    <abstract>
-      <para> Using &productnamereg; needs real-time capable hardware.
-        This paper describes the tools that can be used to determine if
-        a specific hardware has the needed real-time capabilities.
-        Specifically, we describe <systemitem>cyclictest</systemitem> and
-          <quote>hardware latency detector</quote> and the ways to
-        analyze their results. </para>
-
-      <para> Both the <systemitem>cyclictest</systemitem> and the
-       <quote>hardware latency detector</quote> are
-        parts of the &productname; product. </para>
-    </abstract>
-    <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
-        <dm:bugtracker>
-          <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
-          <dm:component>Documentation</dm:component>
-          <dm:product>SUSE Linux Enterprise Real Time 15 SP2&#xa0;(SLE RT 15 SP2)</dm:product>
-          <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
-        </dm:bugtracker>
-        <dm:translation>no</dm:translation>
-    </dm:docmanager>
-  </info>
-  <!--FIXME-->
-  <sect1 xml:id="sec-hwtest-basics">
-   <title>General Testing Procedure and Analysis</title>
+ <title>&slertabbr; Hardware Testing</title>
+ <subtitle>&productname; &productnumber;</subtitle>
+ <info><productname>&productname;</productname>
+  <productnumber>&productnumber;</productnumber>
+  <date><?dbtimestamp?></date>
+  <abstract>
    <para>
-    The first task you need to do when evaluating hardware for real-time
-    is described in the following procedure:
+    Using &productnamereg; needs real-time capable hardware. This paper
+    describes the tools that can be used to determine if a specific hardware
+    has the needed real-time capabilities. Specifically, we describe
+    <systemitem>cyclictest</systemitem> and <quote>hardware latency
+    detector</quote> and the ways to analyze their results.
    </para>
-    <procedure>
-     <step>
-      <para>Determine the largest allowable latency of the system using
-       the hardware latency detector:</para>
-      <substeps>
-       <step>
-        <para>
-          Set the machine for real-time performance.
-        </para>
-        <para> Some servers have special settings for real-time, but they are
-        strictly vendor specific. </para>
-       </step>
-       <step>
-        <para>
-         Set everything to lowest possible latency.
-        </para>
-       </step>
-       <step>
-        <para>
-         Turn memory scrubbing down to as little as possible.
-        </para>
-       </step>
-       <step>
-        <para>
-          Use the hardware latency detector (see <xref
-           linkend="sec-hwtest-hwlat"/> for details).
-        </para>
-       </step>
-      </substeps>
-     </step>
-     <step>
-      <para>Check the latencies measured by the hardware latency detector. </para>
-      <para>The latencies should be low enough to support your real-time
-       application with enough of a margin to meet its deadlines. If it is
-       not the case, even after tweaking the machine setting for better
-       real-time performance, the hardware is not good enough for your
-       application. Use a different hardware.
-      </para>
-     </step>
-     <step>
-      <para>
-       Measure latencies using <command>cyclictest</command> (see <xref
-        linkend="sec-hwtest-cyct"/> for details).
-      </para>
-      <para>
-       In a typical situation<!--, when &productname; works without any problems,-->
-       the latencies measured with <command>cyclictest</command> should be
-       mostly the same from those measured by the hardware latency
-       detector. Latencies measured by <command>cyclictest</command>
-       include the latencies caused by the operating system and are thus
-       closer to latencies measured in a real computing situation. 
-      </para>
-     </step>
-    </procedure>
 
+   <para>
+    Both the <systemitem>cyclictest</systemitem> and the <quote>hardware
+    latency detector</quote> are parts of the &productname; product.
+   </para>
+  </abstract>
+  <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
+   <dm:bugtracker>
+    <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
+    <dm:component>Documentation</dm:component>
+    <dm:product>SUSE Linux Enterprise Real Time 15 SP2&#xa0;(SLE RT 15 SP2)</dm:product>
+    <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
+   </dm:bugtracker>
+   <dm:translation>no</dm:translation>
+  </dm:docmanager>
+ </info>
+
+ <sect1 xml:id="sec-hwtest-basics">
+  <title>General Testing Procedure and Analysis</title>
+
+  <para>
+   The first task you need to do when evaluating hardware for real-time is
+   described in the following procedure:
+  </para>
+
+  <procedure>
+   <step>
     <para>
-      If you encounter a significant difference between latencies
-      measured by both methods there might be a software bug involved.
-      Such latencies are a significant part caused by the operating system,
-      not the hardware. In such a case, contact &suse; for support.
+     Determine the largest allowable latency of the system using the hardware
+     latency detector:
     </para>
-  </sect1>
-  <sect1 xml:id="sec-hwtest-cyct">
-    <title>Determining Latencies with <command>cyclictest</command></title>
-    <para> The <command>cyclictest</command> command is part of the
-      real-time kernel test suite contained in the
-        <package>rt-tests</package> RPM package. This package is distributed
-     as part of &productname;. </para>
-
-    <para> Make sure to be &rootuser; or use <command>sudo</command> to
-      run <command>cyclictest</command>.</para>
-
-    <para> When <command>cyclictest</command> is running, it shows the
-      number of cycles performed and the minimal, actual, average and
-      maximum latency measured. To change the behaviour of
-     <command>cyclictest</command>, the following list gives you an overview
-     of the available options:
+    <substeps>
+     <step>
+      <para>
+       Set the machine for real-time performance.
+      </para>
+      <para>
+       Some servers have special settings for real-time, but they are strictly
+       vendor specific.
+      </para>
+     </step>
+     <step>
+      <para>
+       Set everything to lowest possible latency.
+      </para>
+     </step>
+     <step>
+      <para>
+       Turn memory scrubbing down to as little as possible.
+      </para>
+     </step>
+     <step>
+      <para>
+       Use the hardware latency detector (see
+       <xref linkend="sec-hwtest-hwlat"/> for details).
+      </para>
+     </step>
+    </substeps>
+   </step>
+   <step>
+    <para>
+     Check the latencies measured by the hardware latency detector.
     </para>
+    <para>
+     The latencies should be low enough to support your real-time application
+     with enough of a margin to meet its deadlines. If it is not the case, even
+     after tweaking the machine setting for better real-time performance, the
+     hardware is not good enough for your application. Use a different
+     hardware.
+    </para>
+   </step>
+   <step>
+    <para>
+     Measure latencies using <command>cyclictest</command> (see
+     <xref linkend="sec-hwtest-cyct"/> for details).
+    </para>
+    <para>
+     In a typical situation <!--, when &productname; works without any problems,-->
+     the latencies measured with <command>cyclictest</command> should be mostly
+     the same from those measured by the hardware latency detector. Latencies
+     measured by <command>cyclictest</command> include the latencies caused by
+     the operating system and are thus closer to latencies measured in a real
+     computing situation.
+    </para>
+   </step>
+  </procedure>
 
-   <itemizedlist>
-    <listitem>
-     <para>
-      The values shown are in microseconds. To use nanoseconds instead
-      of microseconds, use the <!--<option>-N</option> or -->
-      <option>--nsec</option> option.
-     </para>
-    </listitem>
-    <listitem>
-     <para>
-      By default, <command>cyclictest</command> runs forever. The number of
-      cycles can be limited with the
-      <option>--loops=<replaceable>NUMBER_OF_CYCLES</replaceable></option>
-      option.
-     </para>
-    </listitem>
-    <listitem>
-     <para>
-      By default, only one thread is run. You can use the <!--<option>-t
+  <para>
+   If you encounter a significant difference between latencies measured by both
+   methods there might be a software bug involved. Such latencies are a
+   significant part caused by the operating system, not the hardware. In such a
+   case, contact &suse; for support.
+  </para>
+ </sect1>
+ <sect1 xml:id="sec-hwtest-cyct">
+  <title>Determining Latencies with <command>cyclictest</command></title>
+
+  <para>
+   The <command>cyclictest</command> command is part of the real-time kernel
+   test suite contained in the <package>rt-tests</package> RPM package. This
+   package is distributed as part of &productname;.
+  </para>
+
+  <para>
+   Make sure to be &rootuser; or use <command>sudo</command> to run
+   <command>cyclictest</command>.
+  </para>
+
+  <para>
+   When <command>cyclictest</command> is running, it shows the number of cycles
+   performed and the minimal, actual, average and maximum latency measured. To
+   change the behaviour of <command>cyclictest</command>, the following list
+   gives you an overview of the available options:
+  </para>
+
+  <itemizedlist>
+   <listitem>
+    <para>
+     The values shown are in microseconds. To use nanoseconds instead of
+     microseconds, use the <!--<option>-N</option> or -->
+     <option>--nsec</option> option.
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     By default, <command>cyclictest</command> runs forever. The number of
+     cycles can be limited with the
+     <option>--loops=<replaceable>NUMBER_OF_CYCLES</replaceable></option>
+     option.
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     By default, only one thread is run. You can use the <!--<option>-t
        <replaceable>NUMBER_OF_THREADS</replaceable></option> or -->
-      <option>--threads=<replaceable>NUMBER_OF_THREADS</replaceable></option>
-      option to set the number of threads used. Without specifying a
-      number, all available processors are used. With the <!--<option>-a</option> or -->
-      <option>--affinity</option> option, the threads are pinned to the
-      processors with the same number.
-     </para>
-    </listitem>
+     <option>--threads=<replaceable>NUMBER_OF_THREADS</replaceable></option>
+     option to set the number of threads used. Without specifying a number, all
+     available processors are used. With the <!--<option>-a</option> or -->
+     <option>--affinity</option> option, the threads are pinned to the
+     processors with the same number.
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     To create a histogram with the <!--measured--> latency values, use the
+     <option>--histogram=<replaceable>NUMBER_OF_MICROSECONDS</replaceable></option>
+     option, where <replaceable>NUMBER_OF_MICROSECONDS</replaceable> determines
+     the maximum tracking time. Larger values are reported as histogram
+     overflows. The histogram is written to standard out (STDOUT), but you can
+     redirect it to a file:
+    </para>
+<screen><command>cyclictest</command> --loops=1000 \
+--histogram=1000 > histogram</screen>
+    <para>
+     The histogram file can be visualized with the
+     <command>cyclictest_plot.sh</command> script. The result is a PNG file.
+    </para>
+   </listitem>
+  </itemizedlist>
+ </sect1>
+ <sect1 xml:id="sec-hwtest-hwlat">
+  <title>Determining Latencies with the Hardware Latency Detector</title>
+
+  <para>
+   The <emphasis>hardware latency detector</emphasis>
+   (<command>hwlatdetect</command>) is a program that controls the kernel
+   latency detector module (<filename>hwlat_detector.ko</filename>), installed
+   with the real-time debug kernel (the <package>kernel-rt_debug</package>
+   package). This is a special kernel module that is used to detect large
+   system latencies, caused by the behavior of the underlying hardware or
+   firmware, independent of Linux itself (system management interrupts, SMIs).
+  </para>
+
+  <para>
+   The hardware latency detector module works by making all CPUs busy for
+   configurable amounts of time. This is done by calling
+   <systemitem class="other" otherclass="function">stop_machine()</systemitem>,
+   polling the CPU Time Stamp Counter (TSC) for some period, and then looking
+   for gaps in the TSC data. These gaps indicate times when the polling was
+   disturbed by SMIs.
+  </para>
+
+  <para>
+   To start using hardware latency detector, use as
+   <systemitem class="username">root</systemitem>:
+  </para>
+
+<screen>hwlatdetect threshold=10</screen>
+
+  <para>
+   The <literal>threshold</literal> value is the minimum latency value to be
+   considered in microseconds. Use the value which is relevant for your
+   particular situation.
+  </para>
+
+  <para>
+   <command>hwlatdetect</command> has the below options:
+  </para>
+
+  <variablelist>
+   <varlistentry>
+    <term><literal>--duration="time"{s,m,d}</literal></term>
     <listitem>
      <para>
-      To create a histogram with the <!--measured--> latency
-      values, use the <option>--histogram=<replaceable>NUMBER_OF_MICROSECONDS</replaceable></option>
-      option, where <replaceable>NUMBER_OF_MICROSECONDS</replaceable>
-      determines the maximum tracking time. Larger values are reported
-      as histogram overflows. The histogram is written to standard out (STDOUT),
-      but you can redirect it to a file:
+      Run the detector logic for the specified duration. The duration is a base
+      10 integer number that defaults to a value in seconds. An optional suffix
+      may be specified to indicate minutes, hours, or days.
      </para>
-     <screen><command>cyclictest</command> --loops=1000 \
---histogram=1000 > histogram</screen>
-     <para> The histogram file can be visualized with the
-        <command>cyclictest_plot.sh</command> script. The result is a
-      PNG file. </para>
     </listitem>
-   </itemizedlist>
-  </sect1>
-  <sect1 xml:id="sec-hwtest-hwlat">
-    <title>Determining Latencies with the Hardware Latency Detector</title>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>--threshold="microsecond"</literal></term>
+    <listitem>
+     <para>
+      Specify the TSC gap used to detect an SMI. Any gap value greater than
+      "threshold" is considered to be the result of an SMI occurring.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>--hardlimit="microsecond"</literal></term>
+    <listitem>
+     <para>
+      The test is considered to have failed if a value above the hardlimit
+      occurs.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>--window="time"{us,ms,s,m,d}</literal></term>
+    <listitem>
+     <para>
+      Specify the size of the sample window. Converted to microseconds when
+      passed to the kernel module.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>--width="time"{us,ms,s,m,d}</literal></term>
+    <listitem>
+     <para>
+      The amount of time within the sample window where the detector is
+      actually sampling. Must be less than the <literal>--window</literal>
+      value.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>--report=<replaceable>FILE_NAME</replaceable></literal></term>
+    <listitem>
+     <para>
+      Specify the output file name of the detector report. The default behavior
+      is to print to standard output.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>--debug</literal></term>
+    <listitem>
+     <para>
+      Turn on debug output
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>--quiet</literal></term>
+    <listitem>
+     <para>
+      Turn off information output.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>--watch</literal></term>
+    <listitem>
+     <para>
+      Print sample data to stdout as it arrives.
+     </para>
+    </listitem>
+   </varlistentry>
+  </variablelist>
+ </sect1>
 
-    <para> The <emphasis>hardware latency detector</emphasis>
-        (<filename>hwlat_detector.ko</filename>) is installed with the
-      real-time kernel (the <package>kernel-rt</package> package).
-      It is a special kernel module that is used to detect large system
-      latencies. It is caused by the behavior of underlying hardware or
-      firmware, independent of Linux itself (system management
-      interrupts, SMIs). </para>
+ <sect1 xml:id="sec-hwtest-more">
+  <title>For More Information</title>
 
-    <para> The hardware latency detector module works by making all CPUs
-      busy for a configurable amounts of time. This is done by calling
-      <systemitem class="other" otherclass="function"
-       >stop_machine()</systemitem>, polling the CPU Time Stamp Counter (TSC)
-      for some period, and then looking for gaps in the TSC data.
-      These gaps indicate times when the polling was disturbed by
-      System Management Interrupts (SMI).</para>
+  <para>
+   For more information on <command>cyclictest</command>, see <command>man 8
+   cyclictest</command>.
+  </para>
+  <para>
+   For more information on the hardware latency detector, see
+   <filename>/usr/src/linux/Documentation/hwlat_detector.txt</filename>.
+  </para>
+ </sect1>
 
-    <para> To start using hardware latency detector, use as
-      &rootuser;: </para>
-
-    <screen>modprobe hwlat_detector enabled=1 threshold=10</screen>
-
-    <para> The <literal>threshold</literal> value is the minimum latency
-      value to be considered in microseconds. Use the value that is
-      relevant for your particular situation. </para>
-
-    <para> After the module is loaded, the
-        <filename>/sys/kernel/debug/hwlat_detector/</filename> directory
-      is created. The directory contains several files: </para>
-
-    <variablelist>
-      <varlistentry>
-        <term><filename>count</filename></term>
-        <listitem>
-          <para> Contains the number of latency spikes (larger than
-              <literal>threshold</literal>) observed since the last
-            reset. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><filename>enable</filename></term>
-        <listitem>
-          <para> The global enable/disable toggle
-              (<literal>0/1</literal>), resets the count. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><filename>max</filename></term>
-        <listitem>
-          <para> The maximum hardware latency that has been observed, in
-            microseconds. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><filename>sample</filename></term>
-        <listitem>
-          <para> A pipe from which to read current raw sample data in
-            the format <literal><replaceable>timestamp</replaceable>
-              <replaceable>observed latency in microseconds</replaceable></literal>
-           (can be opened with parameter <parameter>O_NONBLOCK</parameter>
-            for a single sample). </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><filename>threshold</filename></term>
-        <listitem>
-          <para> The minimum latency value to be considered, in
-            microseconds. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><filename>width</filename></term>
-        <listitem>
-          <para> The time period to sample with CPUs held, in
-            microseconds. Must be less than the total window size
-            (enforced). </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><filename>window</filename></term>
-        <listitem>
-          <para> The total size of the sampling window (including the
-            width), in microseconds. </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
-
-    <para> After running the hardware latency detector for a significant
-      amount of time, check the values of <systemitem>count</systemitem>
-      and <systemitem>max</systemitem>. For a detailed analysis, you can
-      use the output from <systemitem>sample</systemitem>. </para>
-  </sect1>
-  <sect1 xml:id="sec-hwtest-more">
-    <title>For More Information</title>
-
-    <para> For more information on <command>cyclictest</command>, see <command>man 8
-        cyclictest</command>. </para>
-
-    <para> For more information on the hardware latency detector, see
-        <filename>/usr/src/linux/Documentation/hwlat_detector.txt</filename>.
-    </para>
-  </sect1>
-  <xi:include href="common_copyright_quick.xml" parse="xml"/>
-  <xi:include href="common_gfdl1.2_i.xml" parse="xml"/>
+ <xi:include href="common_copyright_quick.xml" parse="xml"/>
+ <xi:include href="common_gfdl1.2_i.xml" parse="xml"/>
 </article>
