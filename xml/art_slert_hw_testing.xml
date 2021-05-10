@@ -220,40 +220,42 @@
   </para>
 
   <para>
-   <command>hwlatdetect</command> has the below options:
+   <command>hwlatdetect</command> has the following options:
   </para>
 
   <variablelist>
    <varlistentry>
-    <term><literal>--duration="time"{s,m,d}</literal></term>
+    <term><literal>--duration="<replaceable>VALUE</replaceable>"{s,m,h,d}</literal></term>
     <listitem>
      <para>
-      Run the detector logic for the specified duration. The duration is a base
-      10 integer number that defaults to a value in seconds. An optional suffix
-      may be specified to indicate minutes, hours, or days.
+      Run the detector logic for the specified duration.
+      Provide the duration as a decimal integer value.
+      The default duration unit is seconds.
+      To use a different unit, append <literal>m</literal> (minutes),
+      <literal>h</literal> (hours), or <literal>d</literal> (days) to the value.
      </para>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><literal>--threshold="microsecond"</literal></term>
+    <term><literal>--threshold="<replaceable>VALUE_IN_MICROSECONDS</replaceable>"</literal></term>
     <listitem>
      <para>
       Specify the TSC gap used to detect an SMI. Any gap value greater than
-      "threshold" is considered to be the result of an SMI occurring.
+      threshold value is considered to be the result of an SMI occurring.
      </para>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><literal>--hardlimit="microsecond"</literal></term>
+    <term><literal>--hardlimit="<replaceable>VALUE_IN_MICROSECONDS</replaceable>"</literal></term>
     <listitem>
      <para>
-      The test is considered to have failed if a value above the hardlimit
-      occurs.
+      The test is considered to have failed if a value above the hard limit
+      value occurs.
      </para>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><literal>--window="time"{us,ms,s,m,d}</literal></term>
+    <term><literal>--window="<replaceable>VALUE</replaceable>"{us,ms,s,m,h,d}</literal></term>
     <listitem>
      <para>
       Specify the size of the sample window. Converted to microseconds when
@@ -262,7 +264,7 @@
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><literal>--width="time"{us,ms,s,m,d}</literal></term>
+    <term><literal>--width="<replaceable>VALUE</replaceable>"{us,ms,s,m,h,d}</literal></term>
     <listitem>
      <para>
       The amount of time within the sample window where the detector is
