@@ -211,7 +211,7 @@
    <systemitem class="username">root</systemitem>:
   </para>
 
-<screen>hwlatdetect threshold=10</screen>
+<screen>hwlatdetect --threshold=10</screen>
 
   <para>
    The <literal>threshold</literal> value is the minimum latency value to be
