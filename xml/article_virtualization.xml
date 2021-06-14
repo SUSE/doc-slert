@@ -8,7 +8,7 @@
   %entities;
 ]>
 
-<article version="5.0" xml:id="art-slert-virtguide" xml:lang="en"
+<article version="5.0" xml:id="article-virtualization" xml:lang="en"
   xmlns="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -69,7 +69,7 @@
     <para>The <command>cpuset</command> utility was used to shield the
      RT workload from &kvm; as described in the
      <citetitle>&slea; RT Shielding Guide</citetitle> (see
-     <xref linkend="book-slert-shielding"/>):
+     <xref linkend="book-shielding"/>):
     </para>
     <screen><command>cset</command> shield --kthread=on -c 8-47</screen>
     <para>Affinity for the &kvm; vCPU tasks was modified via the <command>virsh

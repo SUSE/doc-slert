@@ -8,7 +8,7 @@
   %entities;
 ]>
 <!-- Converted by suse-upgrade version 1.1 -->
-<article version="5.0" xml:lang="en" xml:id="art-slert-quick"
+<article version="5.0" xml:lang="en" xml:id="article-installation"
   xmlns="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -84,7 +84,7 @@
     <title>Specific Scenario</title>
     <para>
      &slert; Service Pack 3 supports Virtualization and Docker usage.
-     Refer to <xref linkend="art-slert-virtguide"/> for reference.
+     Refer to <xref linkend="article-virtualization"/> for reference.
     </para>
    </sect2>
   </sect1>

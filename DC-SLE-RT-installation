@@ -1,10 +1,11 @@
 ## ---------------------------- 
-## Doc Config File for SLERTE HW GUide
+## Doc Config File for SLERTE
+## Quick Start
 ## ----------------------------
 ##
 ## Basics
 MAIN="MAIN.SLERT.xml"
-ROOTID=art-slert-hwtest
+ROOTID=article-installation
 
 ## Profiling
 PROFOS="slerte"
@@ -15,5 +16,6 @@ HTMLROOT="slerte11"
 
 ## stylesheet location
 STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2021-ns"
+# FALLBACK_STYLEROOT="/usr/share/xml/docbook/stylesheet/suse"
 #HTML_CSS="/usr/share/xml/docbook/stylesheet/suse/html/susebooks.css"
 #EPUB_CSS="/usr/share/xml/docbook/stylesheet/suse/epub/susebooks.css"
