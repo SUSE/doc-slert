@@ -69,7 +69,7 @@
     <para>The <command>cpuset</command> utility was used to shield the
      RT workload from &kvm; as described in the
      <citetitle>&slea; RT Shielding Guide</citetitle> (see
-     <xref linkend="book-slert-shielding"/>):
+     <xref linkend="book-shielding"/>):
     </para>
     <screen><command>cset</command> shield --kthread=on -c 8-47</screen>
     <para>Affinity for the &kvm; vCPU tasks was modified via the <command>virsh
