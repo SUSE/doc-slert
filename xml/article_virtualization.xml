@@ -20,15 +20,20 @@
    <productnumber>&productnumber;</productnumber>
    <date><?dbtimestamp?></date>
    <abstract>
-      <para>&productname; &productnumber; supports virtualization and Docker usage. The
-       following text describes how to do so.
-      </para>
+      <para>&productname; &productnumber; supports virtualization and Docker usage as a Technology Preview ( best-effort support ). </para>
+
+<para>Keep in minds that each RT application would have to be individually accessed to see what degree of interference it experiences when running within a particular KVM configuration versus running on bare metal metal configuration. We 
+do not give any specific guarantees on performance or deadlines been missed.</para>
+
+<para>Generally speaking, one would expect it to be worse because some virtualisation overhead is inevitable but have no rule of thumb on how much worse it is. It's up to each RT application developer to set the performance and deadline requirements and evaluate if those requirements are met.</para>
+   
+<para>This guide provides the following 3 examples for user reference only.</para>
    </abstract>
    <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
       <dm:bugtracker>
         <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
         <dm:component>Documentation</dm:component>
-        <dm:product>SUSE Linux Enterprise Real Time 15 SP2&#xa0;(SLE RT 15 SP2)</dm:product>
+        <dm:product>SUSE Linux Enterprise Real Time 15 SP3&#xa0;(SLE RT 15 SP3)</dm:product>
         <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
       </dm:bugtracker>
       <dm:translation>no</dm:translation>
@@ -532,7 +537,7 @@ fi</screen>
    Then the host kernel treats the guest I/Os like any user-space application.
   </para>
   <para>
-   In &slea;15 SP2, both &qemu; and libvirt support isolating the CPUs, 
+   In &slea;15 SP3, both &qemu; and libvirt support isolating the CPUs, 
    partitioning the memory for guests, and setting the vCPU/iothread scheduler 
    policy and priority for running both non-RT &kvm; and RT &kvm;.
   </para>
