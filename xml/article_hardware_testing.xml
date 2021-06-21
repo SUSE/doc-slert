@@ -34,7 +34,7 @@
    <dm:bugtracker>
     <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
     <dm:component>Documentation</dm:component>
-    <dm:product>SUSE Linux Enterprise Real Time 15 SP2&#xa0;(SLE RT 15 SP2)</dm:product>
+    <dm:product>SUSE Linux Enterprise Real Time 15 SP3&#xa0;(SLE RT 15 SP3)</dm:product>
     <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
    </dm:bugtracker>
    <dm:translation>no</dm:translation>
@@ -177,10 +177,6 @@
     </para>
 <screen><command>cyclictest</command> --loops=1000 \
 --histogram=1000 > histogram</screen>
-    <para>
-     The histogram file can be visualized with the
-     <command>cyclictest_plot.sh</command> script. The result is a PNG file.
-    </para>
    </listitem>
   </itemizedlist>
  </sect1>
