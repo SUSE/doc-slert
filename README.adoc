@@ -1,7 +1,5 @@
 = SUSE Linux Enterprise Real Time Documentation
 
-image:https://travis-ci.org/SUSE/doc-slert.svg?branch=main["Build Status", link="https://travis-ci.org/SUSE/doc-slert"]
-
 This is the source for the official SUSE Linux Enterprise Real Time documentation.
 
 This repository hosts the documentation sources for SUSE Linux Enterprise Real Time Extension (SLE-RT)
@@ -19,23 +17,7 @@ Released versions of the documentation are published at https://documentation.su
 | `maintenance/*`  | maintenance for released versions
 |================================================
 
-***On Feb 20, 2021, we switched to a new default branch.***
-***The default branch is now called `main`.***
-
 *Use the main branch* as the basis of your commits/of new feature branches.
-
-
-=== How to update your local repository
-
-If you *created* a local clone or GitHub fork of this repo *before Feb 20, 2021, do the following*:
-
-[code]
-====
-git branch -m master main
-git fetch origin
-git branch -u origin/main main
-git pull -r
-====
 
 
 == Contributing
@@ -81,7 +63,7 @@ either DAPS directly or use daps2docker. Both tools only work on Linux.
 
 === Using daps2docker
 
-1. Install Docker
+1. Install Docker.
 2. Clone the daps2docker repository from https://github.com/openSUSE/daps2docker.
 3. Within the cloned repository, run `./daps2docker.sh /PATH/TO/DOC-DIR`
    This builds HTML and PDF documents.
