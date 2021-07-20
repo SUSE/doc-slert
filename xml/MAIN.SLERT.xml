@@ -32,7 +32,7 @@
 
   <book xml:id="book-slert-qs">
     <title>Quick Start Manuals</title>
-    <xi:include href="article_installation.xml"/>
+    <xi:include href="article_setup.xml"/>
     <xi:include href="article_hardware_testing.xml"/>
     <xi:include href="article_virtualization.xml"/>
     <xi:include href="common_legal.xml"/>

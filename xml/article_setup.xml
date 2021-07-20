@@ -7,11 +7,11 @@
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
-<article version="5.0" xml:lang="en" xml:id="article-installation"
+<article version="5.0" xml:lang="en" xml:id="article-setup"
   xmlns="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
-  <title>Quick Start</title>
+  <title>Setup Guide</title>
   <subtitle>&productname; &productnumber;</subtitle>
   <info>
     <productname>&productname;</productname>
