@@ -19,14 +19,26 @@
    <productnumber>&productnumber;</productnumber>
    <date><?dbtimestamp?></date>
    <abstract>
-      <para>&productname; &productnumber; supports virtualization and Docker usage as a Technology Preview ( best-effort support ). </para>
-
-<para>Keep in minds that each RT application would have to be individually accessed to see what degree of interference it experiences when running within a particular KVM configuration versus running on bare metal metal configuration. We 
-do not give any specific guarantees on performance or deadlines been missed.</para>
-
-<para>Generally speaking, one would expect it to be worse because some virtualisation overhead is inevitable but have no rule of thumb on how much worse it is. It's up to each RT application developer to set the performance and deadline requirements and evaluate if those requirements are met.</para>
-   
-<para>This guide provides the following 3 examples for user reference only.</para>
+    <para>
+     &productname; &productnumber; supports virtualization and Docker usage
+     as a technology preview only (best-effort support).
+    </para>
+    <para>
+     To see the degree of interference from running within a particular &kvm;
+     configuration versus running on bare-metal configuration, Each RT
+     application has to be assessed individually.
+     We do not give any specific guarantees on performance or deadlines been
+     missed.
+    </para>
+    <para>
+     Virtualization inevitably introduces overhead but there is currently no
+     rule of thumb for the performance penalty incurred.
+     It is up to each RT application developer to set performance and
+     deadline requirements and evaluate if those requirements are met.
+    </para>
+    <para>
+     This guide provides the following 3 examples for user reference only.
+    </para>
    </abstract>
   </info>
 
