@@ -1,23 +1,11 @@
-## ---------------------------- 
-## Doc Config File for SLERTE
-## Shielding HowTo
-## ----------------------------
-##
-## Basics
-MAIN="MAIN.SLERT.xml"
+## Doc Config File for SLE-RT
+## Shielding Guide
+
+MAIN=MAIN.SLERT.xml
 ROOTID=book-shielding
 
-## Profiling
-PROFOS="slerte"
-PROFARCH="x86;amd64;em64t"
+# Profiling
+PROFOS="slert"
 
-## Provo
-HTMLROOT="slerte11"
-
-## stylesheet location
+# Stylesheets
 STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2021-ns"
-#HTML_CSS="/usr/share/xml/docbook/stylesheet/suse/html/susebooks.css"
-#EPUB_CSS="/usr/share/xml/docbook/stylesheet/suse/epub/susebooks.css"
-
-## enable sourcing
-export DOCCONF=$BASH_SOURCE

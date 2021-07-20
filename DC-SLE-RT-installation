@@ -1,21 +1,11 @@
-## ---------------------------- 
-## Doc Config File for SLERTE
+## Doc Config File for SLE-RT
 ## Quick Start
-## ----------------------------
-##
-## Basics
-MAIN="MAIN.SLERT.xml"
+
+MAIN=MAIN.SLERT.xml
 ROOTID=article-installation
 
-## Profiling
-PROFOS="slerte"
-PROFARCH="x86;amd64;em64t"
+# Profiling
+PROFOS="slert"
 
-## Provo
-HTMLROOT="slerte11"
-
-## stylesheet location
+# Stylesheets
 STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2021-ns"
-# FALLBACK_STYLEROOT="/usr/share/xml/docbook/stylesheet/suse"
-#HTML_CSS="/usr/share/xml/docbook/stylesheet/suse/html/susebooks.css"
-#EPUB_CSS="/usr/share/xml/docbook/stylesheet/suse/epub/susebooks.css"
