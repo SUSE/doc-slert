@@ -24,15 +24,6 @@
        following text describes how to do so.
       </para>
    </abstract>
-   <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
-      <dm:bugtracker>
-        <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
-        <dm:component>Documentation</dm:component>
-        <dm:product>SUSE Linux Enterprise Real Time 12 SP3&#xa0;(SLE RT 12 SP3)</dm:product>
-        <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
-      </dm:bugtracker>
-      <dm:translation>no</dm:translation>
-    </dm:docmanager>
   </info>
 
   <sect1 xml:id="sec-virtguide-rtapp">
