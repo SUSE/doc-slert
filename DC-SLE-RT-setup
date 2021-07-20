@@ -2,7 +2,7 @@
 ## Quick Start
 
 MAIN=MAIN.SLERT.xml
-ROOTID=article-installation
+ROOTID=article-setup
 
 # Profiling
 PROFOS="slert"
