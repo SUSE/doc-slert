@@ -224,7 +224,7 @@
     <itemizedlist>
      <title>Docker Prerequisites</title>
      <listitem>
-      <para>kernel must be booted with <option>nortsched</option> commandline parameter</para>
+      <para>kernel must be booted with <option>nortsched</option> command-line parameter</para>
       <para>
        This is to hide cgroup scheduling from Docker. If cgroup scheduling
        is required then isolating docker is very problematic.</para>
