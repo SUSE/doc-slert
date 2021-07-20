@@ -29,7 +29,7 @@
   </info>
   
   <sect1 xml:id="sec-slert-quick-overview">
-   <title>Product Overview</title>
+   <title>Product overview</title>
    <para>
     If your business can respond more quickly to new information and changing
     market conditions, you have a distinct advantage over those that cannot.
@@ -39,7 +39,7 @@
     competitors.
    </para>
    <sect2 xml:id="sec-slert-quick-key-features">
-    <title>Key Features</title>
+    <title>Key features</title>
     <para>Some of the key features for &slert; are:</para>
     <itemizedlist>
      <listitem>
@@ -71,7 +71,7 @@
    </sect2>
    
    <sect2 xml:id="sec-slert-quick-scenarios">
-    <title>Specific Scenario</title>
+    <title>Specific scenario</title>
     <para>&productname; &productnumber; supports virtualization and Docker usage as a Technology Preview ( best-effort support ). Refer to <xref linkend="article-virtualization"/> for reference.
     </para>
    </sect2>
@@ -88,7 +88,7 @@
   </sect1>
 
   <sect1 xml:id="sec-slert-quick-cset">
-    <title>Managing CPU Sets with <command>cset</command></title>
+    <title>Managing CPU sets with <command>cset</command></title>
     <para> In some circumstances, it is beneficial to be able to run
       specific tasks only on defined CPUs. For this reason, the Linux
       kernel provides a feature called <emphasis>cpuset</emphasis>. 
@@ -111,7 +111,7 @@
     <screen><command>cset</command> help shield</screen>
 
    <sect2 xml:id="sec-slert-quick-settingup-cpushield-single">
-    <title>Setting Up a CPU Shield for a Single CPU</title>
+    <title>Setting up a CPU shield for a single CPU</title>
     <para> The command <command>cset</command> provides the high level
      functionality to set up and manipulate CPU Sets. An example for setting
      up a CPU shield is: </para>
@@ -123,7 +123,7 @@
    </sect2>
 
    <sect2 xml:id="sec-slert-quick-settingup-cpushield-multi">
-    <title>Setting up CPU Shields for Multiple CPUs</title>
+    <title>Setting up CPU shields for multiple CPUs</title>
     <para>
      If you need to shield more than one CPUs, the argument of the
      <option>--cpu</option> option accepts comma separated lists of CPUs
@@ -154,7 +154,7 @@
    </sect2>
 
    <sect2 xml:id="sec-slert-quick-showing-cpu-shields">
-    <title>Showing CPU Shields</title>
+    <title>Showing CPU shields</title>
     <para>
      After the CPU shielding is set up you can display the current
       configuration by running <command>cset shield</command> without
@@ -188,7 +188,7 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
    </sect2>
 
    <sect2 xml:id="sec-slert-quick-shielding-processes">
-    <title>Shielding Processes</title>
+    <title>Shielding processes</title>
     <para>
      Certain processes or groups of processes can be assigned to a
      shielded &cpuset;, after the CPU set is created. To start a new
@@ -227,7 +227,7 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
    </sect2>
    
    <sect2 xml:id="sec-slert-quick-showing-shielded-processes">
-    <title>Showing Shielded Processes</title>
+    <title>Showing shielded processes</title>
     <para> Use the <command>cset shield</command> command to show the
       number of currently shielded processes (the same command can be
       used to show the current CPU shield setup). To list shielded and
@@ -250,7 +250,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
    </sect2>
 
    <sect2 xml:id="sec-slert-quick-unshielding-processes">
-    <title>Unshielding Processes</title>
+    <title>Unshielding processes</title>
     <para>
      To remove a process (or group of processes) from the CPU shield use the
      <option>--unshield</option> option. The argument for
@@ -265,7 +265,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
    </sect2>
 
    <sect2 xml:id="sec-slert-quick-resetting-cpusets">
-    <title>Resetting CPU Sets</title>
+    <title>Resetting CPU sets</title>
     <para>
      To delete CPU sets use the <command>cset</command> option
      <option>--reset</option>. This will unshield all CPUs and
@@ -275,7 +275,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
  </sect1>
 
  <sect1 xml:id="sec-slert-csets-tree">
-  <title>Managing Tree-like Structures with <command>cset</command></title>
+  <title>Managing tree-like structures with <command>cset</command></title>
 
     <!-- basic cset commands -->
 
@@ -495,7 +495,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
   <!--
  
   <sect1>
-  <title>Executing Processes with <command>run</command></title>
+  <title>Executing processes with <command>run</command></title>
 
   <para>
    The command <command>run</command> creates an environment
@@ -822,7 +822,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
   </sect1>-->
   <!--
  <sect1>
-  <title>Using CPU Sets</title>
+  <title>Using CPU sets</title>
   <para>
    In some circumstances, it is beneficial to be able to run specific
    tasks only on defined CPUs. For this reason, the linux kernel
@@ -981,7 +981,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
   </para>
   <variablelist>
    <varlistentry>
-    <term>Create a Cpuset</term>
+    <term>Create a cpuset</term>
     <listitem>
      <para> 
       To create a cpuset with the name <literal>exampleset</literal>, just
@@ -991,7 +991,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term>Remove a Cpuset</term>
+    <term>Remove a cpuset</term>
     <listitem>
      <para> To remove a cpuset, you only need to remove the cpuset directory.
       For example, use <command>rmdir /dev/cpuset/exampleset</command> to
@@ -1007,7 +1007,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term>Add CPUs to a Cpuset</term>
+    <term>Add CPUs to a cpuset</term>
     <listitem>
      <para>
       To add CPUs to a set, you may either specify a comma separated
@@ -1021,7 +1021,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term>Add Memory to a Cpuset</term>
+    <term>Add memory to a cpuset</term>
     <listitem>
      <para>
       You cannot move tasks to a cpuset without giving the cpuset
@@ -1032,7 +1032,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term>Moving Tasks to Cpusets</term>
+    <term>Moving tasks to cpusets</term>
     <listitem>
      <para>
       A cpuset is just a useless structure, unless it handles some
@@ -1067,7 +1067,7 @@ echo $pid > tasks; done</screen>
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term>Automatically Remove Unused Cpusets</term>
+    <term>Automatically remove unused cpusets</term>
     <listitem>
      <para> In case a cpuset is not used any longer by any process, you might
       want to clean up such unused cpusets automatically. To initialize the
@@ -1088,7 +1088,7 @@ rmdir /dev/cpuset/$1
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term>Determine the Cpuset of a Specific Process</term>
+    <term>Determine the cpuset of a specific process</term>
     <listitem>
      <para>
       All processes with the process id <literal>PID</literal> have an entry
@@ -1103,7 +1103,7 @@ rmdir /dev/cpuset/$1
  </sect1>
  -->
   <sect1 xml:id="sec-quick-taskset">
-    <title>Specifying a CPU Affinity with <command>taskset</command></title>
+    <title>Specifying a CPU affinity with <command>taskset</command></title>
 
     <para> The default behavior of the kernel is to keep a process
       running on the same CPU if the system load is balanced over the
@@ -1203,7 +1203,7 @@ rmdir /dev/cpuset/$1
   </sect1>
 
   <sect1 xml:id="sec-quick-ionice">
-    <title>Changing I/O Priorities with <command>ionice</command></title>
+    <title>Changing I/O priorities with <command>ionice</command></title>
     <para> Handling I/O is one of the critical issues for all
       high-performance systems. If a task has lots of CPU power
       available, but must wait for the disk, it will not work as
@@ -1213,7 +1213,7 @@ rmdir /dev/cpuset/$1
 
     <variablelist>
       <varlistentry>
-        <term>The <emphasis>Best Effort</emphasis> Scheduler</term>
+        <term>The <emphasis>Best Effort</emphasis> scheduler</term>
         <listitem>
           <para> The <emphasis>Best Effort</emphasis> scheduler is the
             default I/O scheduler, and is used for all processes that do
@@ -1227,7 +1227,7 @@ rmdir /dev/cpuset/$1
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term>The <emphasis>Real Time</emphasis> Scheduler</term>
+        <term>The <emphasis>Real Time</emphasis> scheduler</term>
         <listitem>
           <para> The real-time I/O class always gets the highest
             priority for disk access. The other schedulers will only be
@@ -1240,7 +1240,7 @@ rmdir /dev/cpuset/$1
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term>The <emphasis>Idle</emphasis> Scheduler</term>
+        <term>The <emphasis>Idle</emphasis> scheduler</term>
         <listitem>
           <para> The <emphasis>Idle</emphasis> scheduler does not define
             any nice levels. I/O is only done in this class if no other
@@ -1299,7 +1299,7 @@ rmdir /dev/cpuset/$1
       page with <command>man 1 ionice</command></para>
   </sect1>
   <sect1 xml:id="sec-quick-io-block-change">
-    <title>Changing the I/O Scheduler for Block Devices</title>
+    <title>Changing the I/O scheduler for block devices</title>
 
     <para> The Linux kernel provides several block device schedulers
       that can be selected individually for each block device. All but
@@ -1310,7 +1310,7 @@ rmdir /dev/cpuset/$1
         <literal>noop</literal> scheduler. </para>
 
     <variablelist>
-      <title>The Linux I/O Schedulers</title>
+      <title>The Linux I/O schedulers</title>
       <varlistentry>
         <term>noop</term>
         <listitem>
@@ -1387,7 +1387,7 @@ noop deadline [cfq]</screen>
       system, use a similar approach. </para>
   </sect1>
   <sect1 xml:id="sec-quick-io-block-tune">
-    <title>Tuning the Block Device I/O Scheduler</title>
+    <title>Tuning the block device I/O scheduler</title>
 
     <para> All schedulers, except for the <emphasis>noop</emphasis>
       scheduler, have several common parameters that may be tuned for
@@ -1403,7 +1403,7 @@ noop deadline [cfq]</screen>
 
     <variablelist>
       <varlistentry>
-        <term>Anticipatory Scheduler</term>
+        <term>Anticipatory scheduler</term>
         <listitem>
           <variablelist>
             <varlistentry>
@@ -1429,7 +1429,7 @@ noop deadline [cfq]</screen>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term>Deadline Scheduler</term>
+        <term>Deadline scheduler</term>
         <listitem>
           <variablelist>
             <varlistentry>
@@ -1591,7 +1591,7 @@ noop deadline [cfq]</screen>
   </sect1>
   <!--
  <sect1>
-  <title>Interrupt Priorities</title>
+  <title>Interrupt priorities</title>
 
   <para>
     
@@ -1603,7 +1603,7 @@ noop deadline [cfq]</screen>
  </sect1>
  -->
   <sect1 xml:id="sec-quick-more">
-    <title>For More Information</title>
+    <title>More information</title>
 
     <para> A lot of information about real-time implementations and
       administration can be found on the Internet. The following list

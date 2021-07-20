@@ -33,7 +33,7 @@
  </info>
 
  <sect1 xml:id="sec-hwtest-basics">
-  <title>General Testing Procedure and Analysis</title>
+  <title>General testing procedure and analysis</title>
 
   <para>
    The first task you need to do when evaluating hardware for real-time is
@@ -110,7 +110,7 @@
   </para>
  </sect1>
  <sect1 xml:id="sec-hwtest-cyct">
-  <title>Determining Latencies with <command>cyclictest</command></title>
+  <title>Determining latencies with <command>cyclictest</command></title>
 
   <para>
    The <command>cyclictest</command> command is part of the real-time kernel
@@ -172,7 +172,7 @@
   </itemizedlist>
  </sect1>
  <sect1 xml:id="sec-hwtest-hwlat">
-  <title>Determining Latencies with the Hardware Latency Detector</title>
+  <title>Determining latencies with the hardware latency detector</title>
 
   <para>
    The <emphasis>hardware latency detector</emphasis>
@@ -309,7 +309,7 @@
  </sect1>
 
  <sect1 xml:id="sec-hwtest-more">
-  <title>For More Information</title>
+  <title>More information</title>
 
   <para>
    For more information on <command>cyclictest</command>, see <command>man 8

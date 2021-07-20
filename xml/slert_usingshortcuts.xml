@@ -5,7 +5,7 @@
   %entities;
 ]>
 <chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-shortcuts">
- <title>Using Shortcuts</title>
+ <title>Using shortcuts</title>
  <para>
   The commands listed in the previous sections always used all the required
   options. However, <command>cset</command> does have a shortcut facility
@@ -79,7 +79,7 @@
   <command>set</command> need two letters to disambiguate.
  </para>
  <sect1 xml:id="sec-shielding-shortcuts-shield">
-  <title>shield Subcommand Shortcuts</title>
+  <title><command>shield</command> subcommand shortcuts</title>
 
   <para>
    The <command>shield</command> subcommand supports two areas with
@@ -172,7 +172,7 @@
   </informaltable>
  </sect1>
  <sect1 xml:id="sec-shielding-shortcuts-set">
-  <title>set Subcommand Shortcuts</title>
+  <title><command>set</command> subcommand shortcuts</title>
 
   <para>
    The <command>set</command> subcommand has a limited number of shortcuts.
@@ -259,7 +259,7 @@
 --> the -l is optional in this case since list is default</screen>
  </sect1>
  <sect1 xml:id="sec-shielding-shortcuts-proc">
-  <title><command>proc</command> Subcommand Shortcuts</title>
+  <title><command>proc</command> subcommand shortcuts</title>
 
   <para>
    For the <command>proc</command> subcommand, the <option>-s</option>, <option>-t</option> and

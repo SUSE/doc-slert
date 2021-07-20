@@ -8,7 +8,7 @@
 <chapter version="5.0" xml:id="cha-shielding-model"
  xmlns="http://docbook.org/ns/docbook"
  xmlns:xlink="http://www.w3.org/1999/xlink">
- <title>The Basic Shielding Model</title>
+ <title>The basic shielding model</title>
  <info/>
  <para>
   Although any setup of &cpuset;s can really be described as
@@ -76,7 +76,7 @@
  </para>
 
  <sect1 xml:id="sec-shielding-model-ex">
-  <title>A Simple Shielding Example</title>
+  <title>A simple shielding example</title>
   <para> Assume that we have a 4-core machine that has uniform memory access.
    This means there are 4 CPUs at your disposal and there is only one memory node
    available. On such machines, we do not need to specify any memory node
@@ -92,7 +92,7 @@
   </para>
 
   <note>
-   <title>Definition of Task</title>
+   <title>Definition of task</title>
    <para>
     In this document <emphasis>task</emphasis> is used to represent either a
     process or a thread that is running on the system.
@@ -101,7 +101,7 @@
 </sect1>
  
  <sect1 xml:id="sec-shielding-model-ex-setup-teardown">
-   <title>Setup and Teardown of the Shield</title>
+   <title>Setup and teardown of the shield</title>
    <para>
     To set up a shield of 3 CPUs with 1 CPU left for low priority system
     processing, issue the following command.
@@ -245,7 +245,7 @@ cset: done</screen>
   </sect1>
 
   <sect1 xml:id="sec-shielding-model-ex-move">
-   <title>Moving Interesting Tasks Into and Out of the Shield</title>
+   <title>Moving interesting tasks into and out of the shield</title>
    <para>
     Now that we have a shield running, the objective is to run our
     <quote>important</quote> processes in that shield. These processes can
@@ -265,7 +265,7 @@ cset: done</screen>
     </listitem>
    </itemizedlist>
    <sect2 xml:id="sec-shielding-model-ex-move-exec">
-    <title>Execing a Process Into the Shield</title>
+    <title>Execing a process into the shield</title>
     <para>
      Running a new process in the shield can be done with the
      <option>-e/--exec</option> option to the <command>shield</command>
@@ -307,7 +307,7 @@ cset: done</screen>
      lists the PID of the new process.
     </para>
     <note>
-     <title>Separating the Tool Options From the cset Command</title>
+     <title>Separating the tool options from the <command>cset</command> command</title>
      <para>
       <command>cset</command> follows the tradition of separating the tool
       options from the command to be execed options with a double dash
@@ -328,7 +328,7 @@ cset: done</screen>
      the status command, also ran in the shield.
     </para>
     <tip>
-     <title>Execing a Shell Into the Shield Is Useful</title>
+     <title>Execing a shell into the shield is useful</title>
      <para>
       Execing a shell into the shield is a useful way to experiment with
       running tasks in the shield since all children of the shell will also
@@ -359,7 +359,7 @@ alext    14212 8583  Soth bash
 alext    14241 14212 Roth python ./cset shield -s -v</screen>
    </sect2>
    <sect2 xml:id="sec-shielding-model-ex-move-shield-unshield">
-    <title>Moving a Running Task Into and Out of the Shield</title>
+    <title>Moving a running task into and out of the shield</title>
     <para>
      While execing a process into the shield is undoubtedly useful, most of
      the time, you will want to move already running tasks into and out of
@@ -405,7 +405,7 @@ alext    14241 14212 Roth python ./cset shield -s -v</screen>
      </varlistentry>
     </variablelist>
     <note>
-     <title>Information About the Range In a PIDSPEC</title>
+     <title>Information about the range in a PIDSPEC</title>
      <para>
       A range in a PIDSPEC does not need to have tasks running for every
       number in that range. In fact, it is not even an error if there are no
