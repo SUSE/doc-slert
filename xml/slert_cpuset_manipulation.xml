@@ -302,7 +302,7 @@ alext    16165     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg --auto
    <title>Execing Tasks with <literal>proc</literal></title>
    <para>
     To exec a task into a cpuset, the <command>proc</command> subcommand
-    needs to be employed with the <option>-e/--exec</option> option. Let’s
+    needs to be employed with the <option>-e/--exec</option> option. Let us
     exec a shell into the cpuset named <literal>two</literal> in our set.
     First we check to see what is running that set:
    </para>
@@ -327,7 +327,7 @@ root     20981 20955 Roth python ./cset proc -l two</screen>
     cpuset property of a running task is inherited by all its children.
     Since we executed the listing command from the new shell which was bound
     to cpuset two, the resulting process for the listing is also bound to
-    cpuset <literal>two</literal>. Let’s test that by running a new
+    cpuset <literal>two</literal>. Let us test that by running a new
     shell with no prefixed <command>cset</command> command.
    </para>
 <screen>&prompt.user;<command>bash</command>
@@ -619,7 +619,7 @@ cset: done</screen>
     <para>
      Note that only 70 actual kernel threads were moved and 76 were not. The
      reason that 76 kernel threads were not moved was because they are bound
-     to specific CPUs. Now, let’s move those kernel threads back to
+     to specific CPUs. Now, let us move those kernel threads back to
      <literal>root</literal>.
     </para>
 <screen>&prompt.user;<command>cset</command> proc -k -f two -t root
@@ -636,7 +636,7 @@ two          2 n          0 n       70    0    /two</screen>
     <para>
      <command>cset</command> refused to move the kernel threads back to
      <literal>root</literal> because it says that they are
-     <quote>bound</quote>. Let’s check this with the
+     <quote>bound</quote>. Let us check this with the
      <command>taskset</command> command.
     </para>
 <screen>&prompt.user;<command>cset</command> proc -l -s two | head -5
@@ -676,7 +676,7 @@ cset: done</screen>
    <title>Destroying Tasks</title>
    <para>
     There actually is no <command>cset</command> subcommand or option to
-    destroy tasks—it’s not really needed. Tasks exist and are accessible
+    destroy tasks—it is not really needed. Tasks exist and are accessible
     on the system as normal, even if they happen to be running in one cpuset
     or another. To destroy tasks, use the usual
     <keycombo><keycap function="control"/> <keycap>C</keycap></keycombo>
@@ -719,7 +719,7 @@ cset: done</screen>
 
   <para>
    You start first by creating the <literal>system</literal> and
-   <literal>user</literal> cpusets as follows. Let's assume that the machine
+   <literal>user</literal> cpusets as follows. Let us assume that the machine
    is a four-CPU machine without NUMA memory features. The system cpuset
    should hold only CPU0 while the user cpuset should hold the rest of the
    CPUs.
