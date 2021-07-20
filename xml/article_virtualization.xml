@@ -12,7 +12,6 @@
   xmlns="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
-  <?suse-quickstart color="suse"?>
   <title>Virtualization Guide</title>
   <subtitle>&productname; &productnumber;</subtitle>
   <info>
@@ -29,15 +28,6 @@ do not give any specific guarantees on performance or deadlines been missed.</pa
    
 <para>This guide provides the following 3 examples for user reference only.</para>
    </abstract>
-   <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
-      <dm:bugtracker>
-        <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
-        <dm:component>Documentation</dm:component>
-        <dm:product>SUSE Linux Enterprise Real Time 15 SP3&#xa0;(SLE RT 15 SP3)</dm:product>
-        <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
-      </dm:bugtracker>
-      <dm:translation>no</dm:translation>
-    </dm:docmanager>
   </info>
 
   <sect1 xml:id="sec-virtguide-rtapp">

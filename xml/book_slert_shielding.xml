@@ -4,12 +4,9 @@
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
-<!-- Converted by suse-upgrade version 1.1 -->
-
 <!-- ##################################################################### -->
 <!-- SLERT Shielding HowTo-->
 <!-- ##################################################################### -->
-<?provo dirname="slerte/"?>
 <book version="5.0" xml:lang="en" xml:id="book-shielding"
   xmlns="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -26,15 +23,6 @@
         <personname><firstname>Alex</firstname><surname>Tsariounov</surname></personname>
       </author>
     </authorgroup>
-    <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
-        <dm:bugtracker>
-          <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
-          <dm:component>Documentation</dm:component>
-          <dm:product>SUSE Linux Enterprise Real Time 15 SP3&#xa0;(SLE RT 15 SP3)</dm:product>
-          <dm:assignee>thomas.schraitle@suse.com</dm:assignee>
-        </dm:bugtracker>
-        <dm:translation>no</dm:translation>
-    </dm:docmanager>
   </info>
  <xi:include href="slert_intro.xml" parse="xml"/>
  <xi:include href="slert_shielding_model.xml" parse="xml"/>
