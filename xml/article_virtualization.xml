@@ -43,7 +43,7 @@
   </info>
 
   <sect1 xml:id="sec-virtguide-rtapp">
-   <title>Running RT Applications with non-RT &kvm; Guests</title>
+   <title>Running RT applications with non-RT &kvm; guests</title>
    <para>It is possible to achieve isolation of real-time workloads running
     alongside &kvm; by using standard methods. For example, cpusets and routing
     IRQs to dedicated CPUs, all of which can be achieved by using the cset
@@ -182,7 +182,7 @@
   </sect1>
 
   <sect1 xml:id="sec-virtguide-docker">
-   <title>RT Applications within Docker Feasibility</title>
+   <title>Running real-time applications within Docker</title>
    <para> It is important to note that real-time processes will be affected by
    container activity as there is insufficient isolation to guarantee zero
    cross-talk. There are no special settings, nor container-specific
@@ -212,7 +212,7 @@
    </procedure>
    
    <sect2 xml:id="sec-virtguide-docker-rt-env">
-    <title>Running Real-Time Applications in a Virtualized Environment</title>
+    <title>Running real-time applications in a virtualized environment</title>
     <para>
      Standard real-time dangers apply in that if the intention is to run a
      compute intensive application with realtime priority, then the user must
@@ -253,10 +253,10 @@
    </sect2>
 
    <sect2 xml:id="sec-virtguide-docker-shielding">
-    <title>Docker Shielding</title>
+    <title>Docker shielding</title>
     <para>There is currently no facility withing Docker to launch a container directly into an isolated cpuset, this must be done manually.</para>
     <example>
-     <title>Pseudo Script</title>
+     <title>Pseudo script</title>
      <screen language="bash"># note cpuset mount point
 cpuset_mnt=$(mount|grep cpuset|cut -d' ' -f3)
 
@@ -288,7 +288,7 @@ cset shield --userset=rtcpus --cpu=4-7 --reset</screen>
    <sect2 xml:id="sec-virtguide-docker-scripts">
     <title>Scripts</title>
     <example>
-     <title>Sample Shield Script</title>
+     <title>Sample shield script</title>
      <screen language="bash">#!/bin/sh
 
 let START_CPU=4
@@ -481,7 +481,7 @@ fi</screen>
     </example>
 
     <example>
-     <title>Patch to sysjitter to Use the User Affinity Instead of Whole Box</title>
+     <title>Patch to <literal>sysjitter</literal> to use the user affinity instead of whole box</title>
      <screen language="diff">sysjitter.c |   10 +++++++---
  1 file changed, 7 insertions(+), 3 deletions(-)
 
@@ -525,11 +525,11 @@ fi</screen>
   </sect1>
 
  <sect1 xml:id="sec-virtguide-rtkvmguests">
-  <title>Running RT Applications with RT &kvm; Guests</title>
+  <title>Running RT applications with RT &kvm; guests</title>
   <para>
    In <xref linkend="sec-virtguide-rtapp"/>, we see that it is possible
    to isolate real-time workloads running alongside &kvm;
-   by using standard methods. In &slea;15 RT SP2 this can be done in user space 
+   by using standard methods. In &slea; RT 15 SP2 this can be done in user space 
    using libvirt/qemu.
   </para>
   <para>
@@ -539,7 +539,7 @@ fi</screen>
    Then the host kernel treats the guest I/Os like any user-space application.
   </para>
   <para>
-   In &slea;15 SP3, both &qemu; and libvirt support isolating the CPUs, 
+   In &slea; RT 15 SP3, both &qemu; and libvirt support isolating the CPUs, 
    partitioning the memory for guests, and setting the vCPU/iothread scheduler 
    policy and priority for running both non-RT &kvm; and RT &kvm;.
   </para>
@@ -561,14 +561,14 @@ fi</screen>
      </para>
      <variablelist>
       <varlistentry>
-       <term>CPU Allocation</term>
+       <term>CPU allocation</term>
        <listitem>
         <para>We can define the maximum number of virtual CPUs allocated for
          the guest OS.</para>
        </listitem>
       </varlistentry>
       <varlistentry>
-       <term>CPU Tuning</term>
+       <term>CPU tuning</term>
        <listitem>
         <itemizedlist>
          <listitem>
@@ -591,7 +591,7 @@ fi</screen>
        </listitem>
       </varlistentry>
       <varlistentry>
-       <term>Memory Backing</term>
+       <term>Memory backing</term>
        <listitem>
         <para>
          Use memory backing to allocate enough memory in the guest to avoid 
@@ -626,11 +626,11 @@ fi</screen>
 </domain>]]></screen>
   </sect2>
   <sect2 xml:id="sec-virtguide-rtkvmguests-othersettings">
-   <title>Other Host Settings</title>
+   <title>Other host settings</title>
    <orderedlist>
     <listitem>
      <formalpara>
-      <title>Power Management</title>
+      <title>Power management</title>
       <para>Intel processors have a power management feature that puts the system
        into power-saving mode when the system is under-utilized. The system 
        should be configured for maximum performance, rather than allowing 
@@ -651,7 +651,7 @@ fi</screen>
     </listitem>
     <listitem>
      <formalpara>
-      <title>Disable Interrupt Balancing (irqbalance)</title>
+      <title>Disable interrupt balancing (irqbalance)</title>
       <para>The irqbalance daemon is enabled by default. It distributes hardware 
        interrupts across CPUs in a multi-core system to increase performance. 
        When irqbalance is disabled, all interrupts will be handled by cpu0, 
@@ -661,7 +661,7 @@ fi</screen>
     </listitem>
     <listitem>
      <formalpara>
-      <title>RT Throttling</title>
+      <title>RT throttling</title>
       <para>The default values for the realtime throttling mechanism allocate
        95% of the CPU time to realtime tasks, and the remaining 5% to 
        non-realtime tasks. If RT throttling is disabled, realtime tasks may use 

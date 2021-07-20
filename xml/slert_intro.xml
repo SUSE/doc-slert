@@ -48,7 +48,7 @@
   <command>proc</command> subcommands.
  </para>
  <variablelist>
-  <title>Obtaining Online Help</title>
+  <title>Obtaining online help</title>
   <varlistentry>
    <term>For a full list of cset subcommands</term>
    <listitem>

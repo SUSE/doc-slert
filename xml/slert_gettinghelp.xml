@@ -5,7 +5,7 @@
   %entities;
 ]>
 <chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shieldingt-help">
- <title>What to Do If There Are Problems</title>
+ <title>What to do if there are problems</title>
  <info/>
  <para>
   If you encounter any issues with the <command>cset</command> application,

@@ -5,7 +5,7 @@
   %entities;
 ]>
 <chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-cpuset">
- <title>Full Featured Cpuset Manipulation Commands</title>
+ <title>Full-featured cpuset manipulation commands</title>
  <para>
   While basic shielding as described above is useful and a common use model
   for <command>cset</command>, there comes a time when more functionality
@@ -15,7 +15,7 @@
   allows you to manipulate processes within those cpusets.
  </para>
  <sect1 xml:id="sec-shielding-cpuset-set">
-  <title>The set Subcommand</title>
+  <title>The set subcommand</title>
 
   <para>
    To do anything with cpusets, you must be able to create, adjust,
@@ -24,7 +24,7 @@
   </para>
 
   <sect2 xml:id="sec-shielding-cpuset-set-create-destroy">
-   <title>Creating and Destroying Cpusets with <command>set</command></title>
+   <title>Creating and destroying cpusets with <command>set</command></title>
    <para>
     The basic syntax of <command>set</command> for cpuset creation is:
    </para>
@@ -80,7 +80,7 @@ cset: done</screen>
     destroy.
    </para>
    <note>
-    <title>Information About the Mounted Cpuset File System</title>
+    <title>Information about the mounted cpuset file system</title>
     <para>
      The <command>cset</command> subcommand creates the cpusets based on a
      mounted cpuset file system. You do not need to know where that file
@@ -132,7 +132,7 @@ cset: --> modified cpuset "sub_set</screen>
   </sect2>
 
   <sect2 xml:id="sec-shielding-cpuset-set-list">
-   <title>Listing Cpusets with set</title>
+   <title>Listing cpusets with set</title>
    <para>
     To list cpusets, use the <command>set</command> subcommand with the
     <option>-l/--list</option> option. For example:
@@ -186,7 +186,7 @@ three        3 n          0 n       0     0    /one/two/three</screen>
   </sect2>
  </sect1>
  <sect1 xml:id="sec-shielding-cpuset-proc">
-  <title>The <command>proc</command> Subcommand</title>
+  <title>The <command>proc</command> subcommand</title>
 
   <para>
    Now that you know how to create, rename and destroy cpusets with the
@@ -207,7 +207,7 @@ two          2 n          0 n       3     0    /two
 three        3 n          0 n       10    0    /three</screen>
 
   <sect2 xml:id="sec-shielding-cpuset-proc-list">
-   <title>Listing Tasks With <command>proc</command></title>
+   <title>Listing tasks with <command>proc</command></title>
    <para>
     Operation of the <command>proc</command> subcommand follows the same
     model as the <command>set</command> subcommand. For example, to list
@@ -299,7 +299,7 @@ alext    16165     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg --auto
   </sect2>
 
   <sect2 xml:id="sec-shielding-cpuset-proc-exec">
-   <title>Execing Tasks with <literal>proc</literal></title>
+   <title>Execing tasks with <literal>proc</literal></title>
    <para>
     To exec a task into a cpuset, the <command>proc</command> subcommand
     needs to be employed with the <option>-e/--exec</option> option. Let us
@@ -381,7 +381,7 @@ cset: **> [Errno 2] No such file or directory</screen>
   </sect2>
 
   <sect2 xml:id="sec-shielding-cpuset-proc-move">
-   <title>Moving Tasks with <command>proc</command></title>
+   <title>Moving tasks with <command>proc</command></title>
    <para>
     Although the ability to exec a task into a cpuset is fundamental, you
     will most likely be moving tasks between cpusets more often. Moving
@@ -430,7 +430,7 @@ cset: **> [Errno 2] No such file or directory</screen>
     </varlistentry>
    </variablelist>
    <note>
-    <title>Information About the Range In a PIDSPEC</title>
+    <title>Information about the range in a PIDSPEC</title>
     <para>
      A range in a PIDSPEC does not need to have running tasks for every
      number in that range. In fact, it is not even an error if there are no
@@ -527,7 +527,7 @@ Name         CPUs-X       MEMs-X    Tasks Subs Path
 two          2 n          0 n       10    0    /two
 three        3 n          0 n       0     0    /three</screen>
    <sect3 xml:id="sec-shielding-cpuset-proc-move-taskset">
-    <title>Moving All Tasks From One Cpuset to Another</title>
+    <title>Moving all tasks from one cpuset to another</title>
     <para>
      There is a special case for moving all tasks currently running in one
      cpuset to another. This can be a common use case, and when you need to
@@ -571,7 +571,7 @@ two          2 n          0 n       0     0    /two
 three        3 n          0 n       10    0    /three</screen>
    </sect3>
    <sect3 xml:id="sec-shielding-cpuset-proc-move-threads">
-    <title>Moving Kernel Threads With <command>proc</command></title>
+    <title>Moving kernel threads with <command>proc</command></title>
     <para>
      Kernel threads are special and <command>cset</command> detects tasks
      that are kernel threads and will refuse to move them unless you also
@@ -592,7 +592,7 @@ three        3 n          0 n       10    0    /three</screen>
      option.
     </para>
     <warning>
-     <title>Use <option>--force</option> With Care</title>
+     <title>Use <option>--force</option> with care</title>
      <para>
       Overriding a task move command with <option>--force</option> can have
       dire consequences for the system. Be sure of the command before you
@@ -673,7 +673,7 @@ cset: done</screen>
   </sect2>
 
   <sect2 xml:id="sec-shielding-cpuset-proc-destroy">
-   <title>Destroying Tasks</title>
+   <title>Destroying tasks</title>
    <para>
     There actually is no <command>cset</command> subcommand or option to
     destroy tasks—it is not really needed. Tasks exist and are accessible
@@ -685,7 +685,7 @@ cset: done</screen>
   </sect2>
  </sect1>
  <sect1 xml:id="sec-shielding-cpuset-shielding-set-proc">
-  <title>Implementing <quote>Shielding</quote> With <command>set</command> and <command>proc</command></title>
+  <title>Implementing shielding with <command>set</command> and <command>proc</command></title>
 
   <para>
    With the preceding material on the <command>set</command> and
@@ -797,7 +797,7 @@ system       0 n          0 n       257   0    /system</screen>
   </para>
  </sect1>
  <sect1 xml:id="sec-shielding-cpuset-hierarchy-set-proc">
-  <title>Implementing Hierarchy With set and proc</title>
+  <title>Implementing hierarchy with set and proc</title>
 
   <para>
    One popular extended <emphasis>shielding</emphasis> model is based on
@@ -828,7 +828,7 @@ system       0 n          0 n       257   0    /system</screen>
   </para>
 
   <note>
-   <title>The Sense Behind Creating a prio_all Cpuset With All CPUs</title>
+   <title>The sense behind creating a prio_all cpuset with all CPUs</title>
    <para>
     You may ask, why create a <literal>prio_all</literal> with all CPUs when
     that is substantially the definition of the <literal>root</literal>
@@ -910,7 +910,7 @@ prio_med     2-3 n        0 n       0     1    /prio_all/prio_high/prio_med
 prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</screen>
 
   <note>
-   <title>Why <option>-r/--recurse</option> Is Needed in This Case</title>
+   <title>Why <option>-r/--recurse</option> is needed in this case</title>
    <para>
     The option <option>-r</option>/<option>--recurse</option> lists all the
     sets in the last command above. If you execute that command without
