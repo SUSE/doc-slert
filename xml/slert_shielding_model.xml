@@ -77,8 +77,8 @@
 
  <sect1 xml:id="sec-shielding-model-ex">
   <title>A simple shielding example</title>
-  <para> Assume that we have a 4-core machine that has uniform memory access.
-   This means there are 4 CPUs at your disposal and there is only one memory node
+  <para> Assume that we have a four-core machine that has uniform memory access.
+   This means there are four CPUs at your disposal and there is only one memory node
    available. On such machines, we do not need to specify any memory node
    parameters to cset, it sets up the only available memory node by default. </para>
 
@@ -103,7 +103,7 @@
  <sect1 xml:id="sec-shielding-model-ex-setup-teardown">
    <title>Setup and teardown of the shield</title>
    <para>
-    To set up a shield of 3 CPUs with 1 CPU left for low priority system
+    To set up a shield of three CPUs with one CPU left for low priority system
     processing, issue the following command.
    </para>
 <screen>&prompt.user;<command>cset</command> shield -c 1-3
