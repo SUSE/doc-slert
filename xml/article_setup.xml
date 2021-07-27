@@ -11,233 +11,256 @@
   xmlns="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
-  <title>Setup Guide</title>
-  <subtitle>&productname; &productnumber;</subtitle>
-  <info>
-    <productname>&productname;</productname>
-    <productnumber>&productnumber;</productnumber>
-    <xi:include href="common_copyright_gfdl.xml" parse="xml"/>
-    <date><?dbtimestamp?></date>
-    <abstract>
-      <para> &slerte; is part of &slereg; family. It allows you to run
-        tasks which require deterministic real-time processing in a
-        &sle; environment.</para>
-      <para> To meets this requirement, &slerte; offers
-        several options for CPU and I/O scheduling, CPU
-        shielding and for setting CPU affinities to processes. </para>
-    </abstract>
-  </info>
-  
-  <sect1 xml:id="sec-slert-quick-overview">
-   <title>Product overview</title>
+ <title>Setup Guide</title>
+ <subtitle>&productname; &productnumber;</subtitle>
+ <info><productname>&productname;</productname>
+  <productnumber>&productnumber;</productnumber>
+  <xi:include href="common_copyright_gfdl.xml" parse="xml"/><date>
+<?dbtimestamp?></date>
+  <abstract>
    <para>
-    If your business can respond more quickly to new information and changing
-    market conditions, you have a distinct advantage over those that cannot.
-    Running your time-sensitive mission-critical applications using &slert;
-    reduces process dispatch latencies and gives you the time advantage you
-    need to increase profits or avoid further financial losses, ahead of your
-    competitors.
+    &slerte; is part of &slereg; family. It allows you to run tasks which
+    require deterministic real-time processing in a &sle; environment.
    </para>
-   <sect2 xml:id="sec-slert-quick-key-features">
-    <title>Key features</title>
-    <para>Some of the key features for &slert; are:</para>
-    <itemizedlist>
-     <listitem>
-      <para>Pre-emptible real-time kernel.</para>
-     </listitem>
-     <listitem>
-      <para>Ability to assign high-priority processes.</para>
-     </listitem>
-     <listitem>
-      <para>Greater predictability to complete critical processes on time,
-       every time.</para>
+
+   <para>
+    To meets this requirement, &slerte; offers several options for CPU and I/O
+    scheduling, CPU shielding and for setting CPU affinities to processes.
+   </para>
+  </abstract>
+ </info>
+ <sect1 xml:id="sec-slert-quick-overview">
+  <title>Product overview</title>
+
+  <para>
+   If your business can respond more quickly to new information and changing
+   market conditions, you have a distinct advantage over those that cannot.
+   Running your time-sensitive mission-critical applications using &slert;
+   reduces process dispatch latencies and gives you the time advantage you need
+   to increase profits or avoid further financial losses, ahead of your
+   competitors.
+  </para>
+
+  <sect2 xml:id="sec-slert-quick-key-features">
+   <title>Key features</title>
+   <para>
+    Some of the key features for &slert; are:
+   </para>
+   <itemizedlist>
+    <listitem>
      <para>
-      In comparison to normal Linux kernel, which is optimized for
-      overall system performance regardless of individual process response
-      time, &slert; kernel is tuned toward predictable process response time.
+      Pre-emptible real-time kernel.
      </para>
-     </listitem>
-     <listitem>
-      <para>Increased reliability.</para>
-     </listitem>
-     <listitem>
-      <para>Lower infrastructure costs.</para>
-     </listitem>
-     <listitem>
-      <para>Tracing and debugging tools that help you analyze and identify
-       bottlenecks in mission-critical applications.</para>
-     </listitem>
-    </itemizedlist>
-   </sect2>
-   
-   <sect2 xml:id="sec-slert-quick-scenarios">
-    <title>Specific scenario</title>
-    <para>
-     &productname; &productnumber; supports virtualization and Docker
-     usage as a Technology Preview (best-effort support). For reference,
-     see <xref linkend="article-virtualization"/>.
-    </para>
-   </sect2>
-  </sect1>
-  
-  <sect1 xml:id="sec-slert-quick-install">
-    <title>Installing &slerte;</title>
-    <para>To install &slerte; &productnumber;, refer to the
-     &instquick; of &sls;&nbsp;&productnumber;
-     <link xlink:href="https://documentation.suse.com/sles/15-SP3/#redirectmsg"/>
-    </para>
-    <para> The following sections provide a brief introduction to the
-      tools and possibilities of &slerte;. </para>
-  </sect1>
+    </listitem>
+    <listitem>
+     <para>
+      Ability to assign high-priority processes.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Greater predictability to complete critical processes on time, every
+      time.
+     </para>
+     <para>
+      In comparison to normal Linux kernel, which is optimized for overall
+      system performance regardless of individual process response time,
+      &slert; kernel is tuned toward predictable process response time.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Increased reliability.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Lower infrastructure costs.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Tracing and debugging tools that help you analyze and identify
+      bottlenecks in mission-critical applications.
+     </para>
+    </listitem>
+   </itemizedlist>
+  </sect2>
 
-  <sect1 xml:id="sec-slert-quick-cset">
-    <title>Managing CPU sets with <command>cset</command></title>
-    <para> In some circumstances, it is beneficial to be able to run
-      specific tasks only on defined CPUs. For this reason, the Linux
-      kernel provides a feature called <emphasis>cpuset</emphasis>. 
-     The &cpuset; feature provides the means to do a so called <quote>soft
-        partitioning</quote> of the system. Dedicated CPUs, together
-      with some predefined memory, work on several tasks. </para>
+  <sect2 xml:id="sec-slert-quick-scenarios">
+   <title>Specific scenario</title>
+   <para>
+    &productname; &productnumber; supports virtualization and Docker usage as a
+    Technology Preview (best-effort support). For reference, see
+    <xref linkend="article-virtualization"/>.
+   </para>
+  </sect2>
+ </sect1>
+ <sect1 xml:id="sec-slert-quick-install">
+  <title>Installing &slerte;</title>
 
-    <para>
-      <command>cset</command> consists of one <quote>super command</quote> called
-        <command>shield</command> and the <quote>regular commands</quote>
-        <command>set</command> and <command>proc</command>. The purpose
-      of the super command <command>shield</command> is to create a
-      common CPU shielding setup within one step by combining regular
-      commands.
-    </para>
-    <para>
-     For more information about options and parameters of the
-     <command>shield</command> subcommand, view the help by running:
-    </para>
-    <screen><command>cset</command> help shield</screen>
+  <para>
+   To install &slerte; &productnumber;, refer to the &instquick; of
+   &sls;&nbsp;&productnumber;
+   <link xlink:href="https://documentation.suse.com/sles/15-SP3/#redirectmsg"/>
+  </para>
 
-   <sect2 xml:id="sec-slert-quick-settingup-cpushield-single">
-    <title>Setting up a CPU shield for a single CPU</title>
-    <para> The command <command>cset</command> provides the high level
-     functionality to set up and manipulate CPU Sets. An example for setting
-     up a CPU shield is: </para>
-    <!-- shield cpu -->
+  <para>
+   The following sections provide a brief introduction to the tools and
+   possibilities of &slerte;.
+  </para>
+ </sect1>
+ <sect1 xml:id="sec-slert-quick-cset">
+  <title>Managing CPU sets with <command>cset</command></title>
 
-    <screen><command>cset</command> shield --cpu=3</screen>
-    <para>This will shield CPU3. On a machine with 4 cores CPU0-CPU2 are
-      unshielded.</para>
-   </sect2>
+  <para>
+   In some circumstances, it is beneficial to be able to run specific tasks
+   only on defined CPUs. For this reason, the Linux kernel provides a feature
+   called <emphasis>cpuset</emphasis>. The &cpuset; feature provides the means
+   to do a so called <quote>soft partitioning</quote> of the system. Dedicated
+   CPUs, together with some predefined memory, work on several tasks.
+  </para>
 
-   <sect2 xml:id="sec-slert-quick-settingup-cpushield-multi">
-    <title>Setting up CPU shields for multiple CPUs</title>
-    <para>
-     If you need to shield more than one CPUs, the argument of the
-     <option>--cpu</option> option accepts comma separated lists of CPUs
-     including range specifications:
-    </para>
-    <screen><command>cset</command> shield --cpu=1,3,5-7</screen>
-    <para>
-     On a machine with 8 cores, this command will shield CPU1, CPU3, CPU5,
-     CPU6, and CPU7. The CPUs CPU0, CPU2 and CPU4 will remain unshielded.
-    </para>
-    <para>
-     Already existing CPU shields can be extended by the same command. For
-     example, to add CPU4 to the mentioned CPU set, use this command:
-    </para>
+  <para>
+   <command>cset</command> consists of one <quote>super command</quote> called
+   <command>shield</command> and the <quote>regular commands</quote>
+   <command>set</command> and <command>proc</command>. The purpose of the super
+   command <command>shield</command> is to create a common CPU shielding setup
+   within one step by combining regular commands.
+  </para>
 
-    <screen><command>cset</command> shield --cpu=1,3-7</screen>
-    <para>
-     CPU1, CPU3, CPU5 to CPU6 were already shielded and only CPU4 will
-     additionally be shielded. Technically, the command is updating the current
-     CPU shield schema. To reduce the number of shielded CPUs and to unshield
-     CPU1, for example, use the following command:
-    </para>
-    <screen><command>cset</command> shield --cpu=3-7</screen>
-    <para>
-     Now only CPU3, CPU4, CPU5, CPU6, and CPU7 are shielded. CPU0, CPU1, and
-     CPU2 are available for system usage.
-    </para>
-   </sect2>
+  <para>
+   For more information about options and parameters of the
+   <command>shield</command> subcommand, view the help by running:
+  </para>
 
-   <sect2 xml:id="sec-slert-quick-showing-cpu-shields">
-    <title>Showing CPU shields</title>
-    <para>
-     After the CPU shielding is set up you can display the current
-      configuration by running <command>cset shield</command> without
-      additional options:
-    </para>
-    <screen><command>cset</command> shield
+<screen><command>cset</command> help shield</screen>
+
+  <sect2 xml:id="sec-slert-quick-settingup-cpushield-single">
+   <title>Setting up a CPU shield for a single CPU</title>
+   <para>
+    The command <command>cset</command> provides the high level functionality
+    to set up and manipulate CPU Sets. An example for setting up a CPU shield
+    is:
+   </para>
+<!-- shield cpu -->
+<screen><command>cset</command> shield --cpu=3</screen>
+   <para>
+    This will shield CPU3. On a machine with 4 cores CPU0-CPU2 are unshielded.
+   </para>
+  </sect2>
+
+  <sect2 xml:id="sec-slert-quick-settingup-cpushield-multi">
+   <title>Setting up CPU shields for multiple CPUs</title>
+   <para>
+    If you need to shield more than one CPUs, the argument of the
+    <option>--cpu</option> option accepts comma separated lists of CPUs
+    including range specifications:
+   </para>
+<screen><command>cset</command> shield --cpu=1,3,5-7</screen>
+   <para>
+    On a machine with 8 cores, this command will shield CPU1, CPU3, CPU5, CPU6,
+    and CPU7. The CPUs CPU0, CPU2 and CPU4 will remain unshielded.
+   </para>
+   <para>
+    Already existing CPU shields can be extended by the same command. For
+    example, to add CPU4 to the mentioned CPU set, use this command:
+   </para>
+<screen><command>cset</command> shield --cpu=1,3-7</screen>
+   <para>
+    CPU1, CPU3, CPU5 to CPU6 were already shielded and only CPU4 will
+    additionally be shielded. Technically, the command is updating the current
+    CPU shield schema. To reduce the number of shielded CPUs and to unshield
+    CPU1, for example, use the following command:
+   </para>
+<screen><command>cset</command> shield --cpu=3-7</screen>
+   <para>
+    Now only CPU3, CPU4, CPU5, CPU6, and CPU7 are shielded. CPU0, CPU1, and
+    CPU2 are available for system usage.
+   </para>
+  </sect2>
+
+  <sect2 xml:id="sec-slert-quick-showing-cpu-shields">
+   <title>Showing CPU shields</title>
+   <para>
+    After the CPU shielding is set up you can display the current configuration
+    by running <command>cset shield</command> without additional options:
+   </para>
+<screen><command>cset</command> shield
 cset: --> shielding system active with
 cset: "system" cpuset of: 0-2 cpu, with: 47
 cset: "user" cpuset of:  3-7 cpu,  with: 0
 </screen>
+   <para>
+    By default, CPU shielding consists of at least of three &cpuset;s:
+   </para>
+   <itemizedlist>
+    <listitem>
+     <para>
+      <systemitem class="resource">root</systemitem> exists always and contains
+      all available CPUs.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      <systemitem class="resource">system</systemitem> is the &cpuset; of
+      unshielded CPUs.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      <systemitem class="resource">user</systemitem> is the &cpuset; of
+      shielded CPUs
+     </para>
+    </listitem>
+   </itemizedlist>
+  </sect2>
 
-    <para> By default, CPU shielding consists of at least of three
-      &cpuset;s: </para>
-
-    <itemizedlist>
-      <listitem>
-        <para>
-          <systemitem class="resource">root</systemitem> exists always and contains all
-          available CPUs. </para>
-      </listitem>
-      <listitem>
-        <para>
-          <systemitem class="resource">system</systemitem> is the &cpuset; of unshielded CPUs.
-        </para>
-      </listitem>
-      <listitem>
-        <para>
-         <systemitem class="resource">user</systemitem> is the &cpuset; of shielded CPUs </para>
-      </listitem>
-    </itemizedlist>
-   </sect2>
-
-   <sect2 xml:id="sec-slert-quick-shielding-processes">
-    <title>Shielding processes</title>
+  <sect2 xml:id="sec-slert-quick-shielding-processes">
+   <title>Shielding processes</title>
+   <para>
+    Certain processes or groups of processes can be assigned to a shielded
+    &cpuset;, after the CPU set is created. To start a new process in the
+    shielded CPU set use the <option>--exec</option> option:
+   </para>
+<screen><command>cset</command> shield --exec <replaceable>APPLICATION</replaceable></screen>
+   <para>
+    To move already running processes to the shielded CPU set use the
+    <option>--shield</option> and <option>--pid</option> options. The
+    <option>--pid</option> option accepts a comma-separated list of PIDs and
+    range specifications:
+   </para>
+<screen><command>cset</command> shield --shield --pid=1,2,600-700</screen>
+   <para>
+    This moves processes with PID 1, 2, and from 600 to 700 to the shielded CPU
+    set. If there is a gap in the range from 600 to 700, then only those
+    available process will be moved to the shield without warning.
+    <command>cset</command> handles threads like processes and will also
+    interpret TIDs and assign them to the required CPU set.
+   </para>
+<!-- shield DANGER note -  stolen from "cset help shield" -->
+<!-- bg: modified -->
+   <warning>
     <para>
-     Certain processes or groups of processes can be assigned to a
-     shielded &cpuset;, after the CPU set is created. To start a new
-     process in the shielded CPU set use the <option>--exec</option>
-     option:
+     The <option>--shield</option> option does not check the processes you
+     request to move into the shield. This means that the command will move
+     <emphasis>any</emphasis> processes that are bound to specific
+     CPUs&mdash;even kernel threads. You can cause a complete system lockup by
+     indiscriminately specifying arbitrary PIDs to the
+     <option>--shield</option> command.
     </para>
+   </warning>
+  </sect2>
 
-    <screen><command>cset</command> shield --exec <replaceable>APPLICATION</replaceable></screen>
-
-    <para>
-     To move already running processes to the shielded CPU set use
-     the <option>--shield</option> and <option>--pid</option> options. The
-     <option>--pid</option> option accepts a comma-separated list
-     of PIDs and range specifications:
-    </para>
-
-    <screen><command>cset</command> shield --shield --pid=1,2,600-700</screen>
-
-    <para> This moves processes with PID 1, 2, and from 600 to 700 to the
-      shielded CPU set. If there is a gap in the range from 600 to 700,
-      then only those available process will be moved to the shield
-      without warning. <command>cset</command> handles threads like
-      processes and will also interpret TIDs and assign them to the
-      required CPU set. </para>
-
-    <!-- shield DANGER note -  stolen from "cset help shield" -->
-    <!-- bg: modified -->
-    <warning>
-      <para> The <option>--shield</option> option does not check the
-        processes you request to move into the shield. This means that
-        the command will move <emphasis>any</emphasis> processes that
-        are bound to specific CPUs&mdash;even kernel threads. You can
-        cause a complete system lockup by indiscriminately specifying
-        arbitrary PIDs to the <option>--shield</option> command. </para>
-    </warning>
-   </sect2>
-   
-   <sect2 xml:id="sec-slert-quick-showing-shielded-processes">
-    <title>Showing shielded processes</title>
-    <para> Use the <command>cset shield</command> command to show the
-      number of currently shielded processes. (The same command can be
-      used to show the current CPU shield setup.) To list shielded and
-      unshielded processes, add the <command>--verbose</command>
-      option: </para>
-
-    <screen><command>cset</command> shield --verbose
+  <sect2 xml:id="sec-slert-quick-showing-shielded-processes">
+   <title>Showing shielded processes</title>
+   <para>
+    Use the <command>cset shield</command> command to show the number of
+    currently shielded processes. (The same command can be used to show the
+    current CPU shield setup.) To list shielded and unshielded processes, add
+    the <command>--verbose</command> option:
+   </para>
+<screen><command>cset</command> shield --verbose
 cset: --> shielding system active with
 cset: "system" cpuset of: 0-2,4-15 cpu, with:
    USER       PID  PPID S TASK NAME
@@ -250,252 +273,295 @@ cset: "user" cpuset of:    3 cpu, with: 1
       -------- ----- ----- - ---------
          root     10202 10170 S application 
 </screen>
-   </sect2>
+  </sect2>
 
-   <sect2 xml:id="sec-slert-quick-unshielding-processes">
-    <title>Unshielding processes</title>
-    <para>
-     To remove a process (or group of processes) from the CPU shield use the
-     <option>--unshield</option> option. The argument for
-     <option>--unshield</option> is similar to the <option>--shield</option>
-     option. This option accepts a comma-separated list of PIDs/TIDs and
-     range specifications: </para>
+  <sect2 xml:id="sec-slert-quick-unshielding-processes">
+   <title>Unshielding processes</title>
+   <para>
+    To remove a process (or group of processes) from the CPU shield use the
+    <option>--unshield</option> option. The argument for
+    <option>--unshield</option> is similar to the <option>--shield</option>
+    option. This option accepts a comma-separated list of PIDs/TIDs and range
+    specifications:
+   </para>
+<screen><command>cset</command> shield --unshield --pid=2,650-655</screen>
+   <para>
+    This command will unshield the process with the PID 2 and the processes in
+    range of 650 and 655.
+   </para>
+  </sect2>
 
-    <screen><command>cset</command> shield --unshield --pid=2,650-655</screen>
-
-    <para> This command will unshield the process with the PID 2 and the
-      processes in range of 650 and 655. </para>
-   </sect2>
-
-   <sect2 xml:id="sec-slert-quick-resetting-cpusets">
-    <title>Resetting CPU sets</title>
-    <para>
-     To delete CPU sets use the <command>cset</command> option
-     <option>--reset</option>. This will unshield all CPUs and
-     migrate dedicated processes to all available CPUs again.
-    </para>
-   </sect2>
+  <sect2 xml:id="sec-slert-quick-resetting-cpusets">
+   <title>Resetting CPU sets</title>
+   <para>
+    To delete CPU sets use the <command>cset</command> option
+    <option>--reset</option>. This will unshield all CPUs and migrate dedicated
+    processes to all available CPUs again.
+   </para>
+  </sect2>
  </sect1>
-
  <sect1 xml:id="sec-slert-csets-tree">
   <title>Managing tree-like structures with <command>cset</command></title>
 
-    <!-- basic cset commands -->
+<!-- basic cset commands -->
 
-    <para> More detailed configuration of cpusets can be done with the
-        <command>cset</command> commands <option>set</option> and
-        <option>proc</option>. </para>
+  <para>
+   More detailed configuration of cpusets can be done with the
+   <command>cset</command> commands <option>set</option> and
+   <option>proc</option>.
+  </para>
 
-    <!-- cset set -->
+<!-- cset set -->
 
-    <para> The subcommand <option>set</option> is used to create, modify
-      and destroy &cpuset;s. Compared to the supercommand
-        <option>shield</option>, the <option>set</option> subcommand can
-      additionally assign memory nodes for NUMA machines. </para>
+  <para>
+   The subcommand <option>set</option> is used to create, modify and destroy
+   &cpuset;s. Compared to the supercommand <option>shield</option>, the
+   <option>set</option> subcommand can additionally assign memory nodes for
+   NUMA machines.
+  </para>
 
-    <para> Besides assigning memory nodes, the subcommand
-        <command>set</command> creates cpusets in a
-      tree-like structure, rooted at the <systemitem 
-        class="resource">root</systemitem> &cpuset;. </para>
+  <para>
+   Besides assigning memory nodes, the subcommand <command>set</command>
+   creates cpusets in a tree-like structure, rooted at the
+   <systemitem 
+        class="resource">root</systemitem> &cpuset;.
+  </para>
 
-    <!-- cset set .... assigning CPU -->
+<!-- cset set .... assigning CPU -->
 
-    <para> To create a &cpuset; with the subcommand <command>set</command>
-      you need to specify the CPUs which should be used. Either use a
-      comma-separated list or a range specification: </para>
+  <para>
+   To create a &cpuset; with the subcommand <command>set</command> you need to
+   specify the CPUs which should be used. Either use a comma-separated list or
+   a range specification:
+  </para>
 
-    <screen><command>cset</command> set --cpu=1-7 "/one"</screen>
+<screen><command>cset</command> set --cpu=1-7 "/one"</screen>
 
-    <para> This command will create a &cpuset; called <systemitem>one</systemitem>
-      with assigned CPUs from CPU1 to CPU7. To specify a new &cpuset;
-      called <systemitem>two</systemitem> that is a subset of <systemitem>one</systemitem>,
-      proceed as follows: </para>
+  <para>
+   This command will create a &cpuset; called <systemitem>one</systemitem> with
+   assigned CPUs from CPU1 to CPU7. To specify a new &cpuset; called
+   <systemitem>two</systemitem> that is a subset of
+   <systemitem>one</systemitem>, proceed as follows:
+  </para>
 
-    <screen><command>cset</command> set --cpu=6 "/one/two"</screen>
+<screen><command>cset</command> set --cpu=6 "/one/two"</screen>
 
-    <!-- stolen from "cset help set" -->
+<!-- stolen from "cset help set" -->
 
-    <!-- bg: modified -->
+<!-- bg: modified -->
 
-    <para> Cpusets follow certain rules. Children can only include CPUs
-      that the parents already have. If you try to specify a different
-      &cpuset;, the kernel &cpuset; subsystem will not let you create that
-      &cpuset;. For example, if you create a &cpuset; that contains CPU3,
-      and then attempt to create a child of that &cpuset; with a CPU other
-      than 3, you will get an error, and the &cpuset; will not be created.
-      The resulting error is somewhat cryptic and is usually
-        <quote>Permission denied</quote>. </para>
+  <para>
+   Cpusets follow certain rules. Children can only include CPUs that the
+   parents already have. If you try to specify a different &cpuset;, the kernel
+   &cpuset; subsystem will not let you create that &cpuset;. For example, if
+   you create a &cpuset; that contains CPU3, and then attempt to create a child
+   of that &cpuset; with a CPU other than 3, you will get an error, and the
+   &cpuset; will not be created. The resulting error is somewhat cryptic and is
+   usually <quote>Permission denied</quote>.
+  </para>
 
-    <!-- cset set ... list and destroy -->
+<!-- cset set ... list and destroy -->
 
-    <para> To show a table containing useful information, like CPU list
-      and memory list, use the <option>-r</option> parameter. The
-        <quote>-X</quote> column shows the exclusive state of CPU or
-      memory. The <quote>path</quote> column shows the real path in the
-      virtual &cpuset; file system. </para>
+  <para>
+   To show a table containing useful information, like CPU list and memory
+   list, use the <option>-r</option> parameter. The <quote>-X</quote> column
+   shows the exclusive state of CPU or memory. The <quote>path</quote> column
+   shows the real path in the virtual &cpuset; file system.
+  </para>
 
-    <screen><command>cset</command> set -r</screen>
+<screen><command>cset</command> set -r</screen>
 
-    <!-- cset set .... assinging memory -->
+<!-- cset set .... assinging memory -->
 
-    <para> On NUMA machines memory nodes can be assigned to a &cpuset;
-      similar to CPUs. The <option>--mem</option> option of the
-      subcommand <command>set</command> allows a comma-separated and
-      inclusive range specification of memory nodes. This example will
-      assign MEM1, MEM3, MEM4, MEM5 and MEM6 to the &cpuset;
-        <systemitem>new_set</systemitem>: </para>
+  <para>
+   On NUMA machines memory nodes can be assigned to a &cpuset; similar to CPUs.
+   The <option>--mem</option> option of the subcommand <command>set</command>
+   allows a comma-separated and inclusive range specification of memory nodes.
+   This example will assign MEM1, MEM3, MEM4, MEM5 and MEM6 to the &cpuset;
+   <systemitem>new_set</systemitem>:
+  </para>
 
-    <screen><command>cset</command> set --mem=1,3-6 new_set</screen>
+<screen><command>cset</command> set --mem=1,3-6 new_set</screen>
 
-    <para>
-      Additionally, with the
-        <option>--cpu_exclusive</option> and
-        <option>--mem_exclusive</option> options (without any
-      additional arguments) set the CPUs or memory nodes exclusive to a
-      &cpuset;: </para>
+  <para>
+   Additionally, with the <option>--cpu_exclusive</option> and
+   <option>--mem_exclusive</option> options (without any additional arguments)
+   set the CPUs or memory nodes exclusive to a &cpuset;:
+  </para>
 
-    <screen><command>cset</command> set --cpu_exclusive "/one"</screen>
+<screen><command>cset</command> set --cpu_exclusive "/one"</screen>
 
-    <para> The status of exclusive state of CPU or memory is shown in
-      the <option>-X</option> column when running: </para>
+  <para>
+   The status of exclusive state of CPU or memory is shown in the
+   <option>-X</option> column when running:
+  </para>
 
-    <screen><command>cset</command> set -r </screen>
+<screen><command>cset</command> set -r </screen>
 
-    <!-- cset help set -->
+<!-- cset help set -->
 
-    <para> For more detailed information about options and parameters of
-      the subcommand <command>set</command>, view the
-        <command>cset</command> help: </para>
+  <para>
+   For more detailed information about options and parameters of the subcommand
+   <command>set</command>, view the <command>cset</command> help:
+  </para>
 
-    <screen><command>cset</command> help set</screen>
+<screen><command>cset</command> help set</screen>
 
-    <!-- cset proc .... exec -->
+<!-- cset proc .... exec -->
 
-    <para> After the &cpuset; is initialized, the subcommand
-        <command>proc</command> can start processes on certain &cpuset;s
-      with the <option>--exec</option> option. The following will
-      start the application <systemitem>fastapp</systemitem> within the &cpuset;
-        <systemitem>new_set</systemitem>: </para>
+  <para>
+   After the &cpuset; is initialized, the subcommand <command>proc</command>
+   can start processes on certain &cpuset;s with the <option>--exec</option>
+   option. The following will start the application
+   <systemitem>fastapp</systemitem> within the &cpuset;
+   <systemitem>new_set</systemitem>:
+  </para>
 
-    <screen><command>cset</command> proc --exec --set new_set fastapp</screen>
+<screen><command>cset</command> proc --exec --set new_set fastapp</screen>
 
-    <!-- cset proc ... move -->
+<!-- cset proc ... move -->
 
-    <para> To move an already running process inside an already existing
-      &cpuset; use the option <option>--move</option>. It accepts a
-      comma-separated list and range specifications of PIDs. The
-      following command will move processes with PID
-        2442 and within range of 3000 to 3200 into the
-      &cpuset; <systemitem>new_set</systemitem>: </para>
+  <para>
+   To move an already running process inside an already existing &cpuset; use
+   the option <option>--move</option>. It accepts a comma-separated list and
+   range specifications of PIDs. The following command will move processes with
+   PID 2442 and within range of 3000 to 3200 into the &cpuset;
+   <systemitem>new_set</systemitem>:
+  </para>
 
-    <screen><command>cset</command> proc --move 2442,3000-3200 new_set</screen>
+<screen><command>cset</command> proc --move 2442,3000-3200 new_set</screen>
 
-    <!-- cset proc ... list -->
+<!-- cset proc ... list -->
 
-    <para> Listing processes running within a specific &cpuset; can be
-      done by using the option <option>--list</option>. </para>
+  <para>
+   Listing processes running within a specific &cpuset; can be done by using
+   the option <option>--list</option>.
+  </para>
 
-    <screen><command>cset</command> proc --list new_set</screen>
+<screen><command>cset</command> proc --list new_set</screen>
 
-    <!-- cset proc ... fromset toset -->
+<!-- cset proc ... fromset toset -->
 
-    <para> The subcommand <command>proc</command> can also move the entire
-      list of processes within one cpuset to another &cpuset; by using the
-      option <option>--fromset</option> and
-      <option>--toset</option>. This will move all process assigned to
-        <systemitem>old_set</systemitem> and assign them to
-        <systemitem>new_set</systemitem>: </para>
+  <para>
+   The subcommand <command>proc</command> can also move the entire list of
+   processes within one cpuset to another &cpuset; by using the option
+   <option>--fromset</option> and <option>--toset</option>. This will move all
+   process assigned to <systemitem>old_set</systemitem> and assign them to
+   <systemitem>new_set</systemitem>:
+  </para>
 
-    <screen><command>cset</command> proc --move --fromset old_set \
+<screen><command>cset</command> proc --move --fromset old_set \
    --toset new_set</screen>
 
-    <!-- cset help proc -->
+<!-- cset help proc -->
 
-    <para> For more detailed information about options and parameters of
-      the subcommand <command>proc</command>, view the help: </para>
+  <para>
+   For more detailed information about options and parameters of the subcommand
+   <command>proc</command>, view the help:
+  </para>
 
-    <screen><command>cset</command> help proc</screen>
-  </sect1>
-  <!-- man chrt(1) -->
-  <sect1 xml:id="sec-quick-chrt">
-    <title>Setting Real-time Attributes of a Process with
-        <command>chrt</command></title>
+<screen><command>cset</command> help proc</screen>
+ </sect1>
+<!-- man chrt(1) -->
+ <sect1 xml:id="sec-quick-chrt">
+  <title>Setting Real-time Attributes of a Process with <command>chrt</command></title>
 
-    <para> Use the <command>chrt</command> command to manipulate the
-      real-time attributes of an already running process (like
-      scheduling policy and priority), or to execute a new process with
-      specified real-time attributes. </para>
+  <para>
+   Use the <command>chrt</command> command to manipulate the real-time
+   attributes of an already running process (like scheduling policy and
+   priority), or to execute a new process with specified real-time attributes.
+  </para>
 
-    <para> It is highly recommended for applications which do not use
-      real-time specific attributes by their own but should nevertheless
-      experience the full advantages of real-time. To get full real-time
-      experiences, call these applications with the
-        <command>chrt</command> command and the right set of scheduler
-      policy and priority parameters. </para>
+  <para>
+   It is highly recommended for applications which do not use real-time
+   specific attributes by their own but should nevertheless experience the full
+   advantages of real-time. To get full real-time experiences, call these
+   applications with the <command>chrt</command> command and the right set of
+   scheduler policy and priority parameters.
+  </para>
 
-    <para> With the following command, all running processes with their
-      real-time specific attributes are shown. The selection <literal>class</literal>
-      shows the current scheduler policy and <literal>rtprio</literal>
-      the real-time priority: </para>
+  <para>
+   With the following command, all running processes with their real-time
+   specific attributes are shown. The selection <literal>class</literal> shows
+   the current scheduler policy and <literal>rtprio</literal> the real-time
+   priority:
+  </para>
 
-    <screen><command>ps</command> -eo pid,tid,class,rtprio,comm
+<screen><command>ps</command> -eo pid,tid,class,rtprio,comm
 ...
  1437  1437 FF      40  fastapp
 </screen>
 
-    <para> The truncated example above shows the
-        <systemitem>fastapp</systemitem> process with PID
-        1437 running and with scheduler policy <literal>SCHED_FIFO</literal> and priority
-      40. Scheduler policy abbreviations are: </para>
+  <para>
+   The truncated example above shows the <systemitem>fastapp</systemitem>
+   process with PID 1437 running and with scheduler policy
+   <literal>SCHED_FIFO</literal> and priority 40. Scheduler policy
+   abbreviations are:
+  </para>
 
-    <itemizedlist>
-      <listitem>
-        <para> <literal>TS - SCHED_OTHER</literal> </para>
-      </listitem>
-      <listitem>
-        <para> <literal>FF - SCHED_FIFO</literal> </para>
-      </listitem>
-      <listitem>
-        <para> <literal>RR - SCHED_RR</literal> </para>
-      </listitem>
-    </itemizedlist>
+  <itemizedlist>
+   <listitem>
+    <para>
+     <literal>TS - SCHED_OTHER</literal>
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     <literal>FF - SCHED_FIFO</literal>
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     <literal>RR - SCHED_RR</literal>
+    </para>
+   </listitem>
+  </itemizedlist>
 
-    <para> It is also possible to get the current scheduler policy and
-      priority of single processes by specifying the PID of the process
-      with the <option>-p</option> parameter. For example: </para>
+  <para>
+   It is also possible to get the current scheduler policy and priority of
+   single processes by specifying the PID of the process with the
+   <option>-p</option> parameter. For example:
+  </para>
 
-    <screen><command>chrt</command> -p 1437</screen>
+<screen><command>chrt</command> -p 1437</screen>
 
-    <para> Scheduler policies have different minimum and maximum
-      priority values. Minimum and maximum values for each available
-      scheduler policy can be retrieved with <command>chrt</command>: </para>
+  <para>
+   Scheduler policies have different minimum and maximum priority values.
+   Minimum and maximum values for each available scheduler policy can be
+   retrieved with <command>chrt</command>:
+  </para>
 
-    <screen><command>chrt</command> -m</screen>
+<screen><command>chrt</command> -m</screen>
 
-    <para> To change the scheduler policy and the priority of a running
-      process, <command>chrt</command> provides the options
-        <option>--fifo</option> for <literal>SCHED_FIFO</literal>,
-        <option>--rr</option> for <literal>SCHED_RR</literal> and
-        <option>--other</option> for <literal>SCHED_OTHER</literal>.
-      The following example will change the scheduler policy to
-        <literal>SCHED_FIFO</literal> with priority 42 for PID 1437: </para>
+  <para>
+   To change the scheduler policy and the priority of a running process,
+   <command>chrt</command> provides the options <option>--fifo</option> for
+   <literal>SCHED_FIFO</literal>, <option>--rr</option> for
+   <literal>SCHED_RR</literal> and <option>--other</option> for
+   <literal>SCHED_OTHER</literal>. The following example will change the
+   scheduler policy to <literal>SCHED_FIFO</literal> with priority 42 for PID
+   1437:
+  </para>
 
-    <screen><command>chrt</command> --fifo -p 42 1437</screen>
+<screen><command>chrt</command> --fifo -p 42 1437</screen>
 
-    <warning>
-      <para> Handle changing of real-time attributes of processes with
-        care. Increasing the priority of certain processes can harm the
-        entire system, depending on the behavior of the process. In some
-        cases, this can lead to a complete system lockup or bad
-        influence on certain devices. </para>
-    </warning>
+  <warning>
+   <para>
+    Handle changing of real-time attributes of processes with care. Increasing
+    the priority of certain processes can harm the entire system, depending on
+    the behavior of the process. In some cases, this can lead to a complete
+    system lockup or bad influence on certain devices.
+   </para>
+  </warning>
 
-    <!-- man chrt(1) -->
+<!-- man chrt(1) -->
 
-    <para> For more information about chrt, see the <command>chrt</command>
-     man page with <command>man 1 chrt</command>.</para>
-  </sect1>
-  <!--
+  <para>
+   For more information about chrt, see the <command>chrt</command> man page
+   with <command>man 1 chrt</command>.
+  </para>
+ </sect1>
+<!--
  
   <sect1>
   <title>Executing processes with <command>run</command></title>
@@ -823,7 +889,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
   run  bias=1 &lt;command&gt;  
   </screen>
   </sect1>-->
-  <!--
+<!--
  <sect1>
   <title>Using CPU sets</title>
   <para>
@@ -847,7 +913,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
   </para><screen>mkdir /dev/cpuset
 mount -t cpuset none /dev/cpuset</screen>
 -->
-  <!--
+<!--
 <para>
    By default, this directory will look like this:
   </para>
@@ -856,7 +922,7 @@ cpu_exclusive  memory_migrate           memory_spread_page  notify_on_release
 cpus           memory_pressure          memory_spread_slab  tasks
 mem_exclusive  memory_pressure_enabled  mems</screen>
 -->
-  <!--
+<!--
   <para>
    Every cpuset has the following entries:
   </para>
@@ -891,8 +957,8 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
    <varlistentry>
     <term>cpu_exclusive</term>
     -->
-  <!-- http://lwn.net/Articles/80911/ -->
-  <!--
+<!-- http://lwn.net/Articles/80911/ -->
+<!--
     <listitem>
      <para>
       Defines if this cpuset becomes a scheduling domain, that shares
@@ -1105,481 +1171,515 @@ rmdir /dev/cpuset/$1
   </variablelist>
  </sect1>
  -->
-  <sect1 xml:id="sec-quick-taskset">
-    <title>Specifying a CPU affinity with <command>taskset</command></title>
+ <sect1 xml:id="sec-quick-taskset">
+  <title>Specifying a CPU affinity with <command>taskset</command></title>
 
-    <para> The default behavior of the kernel is to keep a process
-      running on the same CPU if the system load is balanced over the
-      available CPUs. Otherwise, the kernel tries to improve the load
-      balancing by moving processes to an idling CPU. In some
-      situations, however, it is desirable to set a CPU affinity for a
-      given process. In this case, the kernel will not move the process
-      away from the selected CPUs. For example, if you use shielding,
-      the shielded CPUs will not run any processes that do not have an
-      affinity to the shielded CPUs. Another possibility to remove load
-      from the other CPUs is to run all low priority tasks on a selected
-      CPU. </para>
+  <para>
+   The default behavior of the kernel is to keep a process running on the same
+   CPU if the system load is balanced over the available CPUs. Otherwise, the
+   kernel tries to improve the load balancing by moving processes to an idling
+   CPU. In some situations, however, it is desirable to set a CPU affinity for
+   a given process. In this case, the kernel will not move the process away
+   from the selected CPUs. For example, if you use shielding, the shielded CPUs
+   will not run any processes that do not have an affinity to the shielded
+   CPUs. Another possibility to remove load from the other CPUs is to run all
+   low priority tasks on a selected CPU.
+  </para>
 
-    <para> If a task is running inside a specific &cpuset;, the affinity
-      dialog must match at least one of the CPUs available in this set.
-      The <command>taskset</command> command will not move a process
-      outside the &cpuset; it is running in. </para>
+  <para>
+   If a task is running inside a specific &cpuset;, the affinity dialog must
+   match at least one of the CPUs available in this set. The
+   <command>taskset</command> command will not move a process outside the
+   &cpuset; it is running in.
+  </para>
 
-    <para> To set or retrieve the CPU affinity of a task a bitmask is
-      used. It is represented by a hexadecimal number. If you count the
-      bits of this bitmask, the lowest bit represents the first logical
-      CPU as they are found in <filename>/proc/cpuinfo</filename>. For
-      example: </para>
+  <para>
+   To set or retrieve the CPU affinity of a task a bitmask is used. It is
+   represented by a hexadecimal number. If you count the bits of this bitmask,
+   the lowest bit represents the first logical CPU as they are found in
+   <filename>/proc/cpuinfo</filename>. For example:
+  </para>
 
-    <variablelist>
-      <varlistentry>
-        <term><literal>0x00000001</literal>
-        </term>
-        <listitem>
-          <para> is processor #0. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><literal>0x00000002</literal>
-        </term>
-        <listitem>
-          <para> is processor #1. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><literal>0x00000003</literal>
-        </term>
-        <listitem>
-          <para> is processor #0 and processor #1. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><literal>0xFFFFFFFE</literal>
-        </term>
-        <listitem>
-          <para> all but the first CPU. </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+  <variablelist>
+   <varlistentry>
+    <term><literal>0x00000001</literal></term>
+    <listitem>
+     <para>
+      is processor #0.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>0x00000002</literal></term>
+    <listitem>
+     <para>
+      is processor #1.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>0x00000003</literal></term>
+    <listitem>
+     <para>
+      is processor #0 and processor #1.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><literal>0xFFFFFFFE</literal></term>
+    <listitem>
+     <para>
+      all but the first CPU.
+     </para>
+    </listitem>
+   </varlistentry>
+  </variablelist>
 
-    <para> If a given dialog does not contain any valid CPU on the system,
-      an error is returned. If taskset returns without an error, the
-      given program has been scheduled to the specified list of CPUs. </para>
+  <para>
+   If a given dialog does not contain any valid CPU on the system, an error is
+   returned. If taskset returns without an error, the given program has been
+   scheduled to the specified list of CPUs.
+  </para>
 
-    <para> The command <command>taskset</command> starts a new process with a
-     given CPU affinity, or to redefine the
-      CPU affinity of an already running process. </para>
+  <para>
+   The command <command>taskset</command> starts a new process with a given CPU
+   affinity, or to redefine the CPU affinity of an already running process.
+  </para>
 
-    <variablelist>
-      <title>Examples</title>
-      <varlistentry>
-        <term><option>taskset -p <replaceable>PID</replaceable></option>
-        </term>
-        <listitem>
-          <para> Retrieves the current CPU affinity of the process with
-            PID <replaceable>pid</replaceable>. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><option>taskset -p
-              <replaceable>mask</replaceable><replaceable>PID</replaceable></option>
-        </term>
-        <listitem>
-          <para> Sets the CPU affinity of the process with the
-              <replaceable>PID</replaceable> to <replaceable>mask</replaceable>. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><option>taskset
-              <replaceable>mask</replaceable><replaceable>command</replaceable></option>
-        </term>
-        <listitem>
-          <para> Runs <replaceable>command</replaceable> with a CPU
-            affinity of <literal>mask</literal>. </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+  <variablelist>
+   <title>Examples</title>
+   <varlistentry>
+    <term><option>taskset -p <replaceable>PID</replaceable></option></term>
+    <listitem>
+     <para>
+      Retrieves the current CPU affinity of the process with PID
+      <replaceable>pid</replaceable>.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><option>taskset -p <replaceable>mask</replaceable><replaceable>PID</replaceable></option></term>
+    <listitem>
+     <para>
+      Sets the CPU affinity of the process with the
+      <replaceable>PID</replaceable> to <replaceable>mask</replaceable>.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><option>taskset <replaceable>mask</replaceable><replaceable>command</replaceable></option></term>
+    <listitem>
+     <para>
+      Runs <replaceable>command</replaceable> with a CPU affinity of
+      <literal>mask</literal>.
+     </para>
+    </listitem>
+   </varlistentry>
+  </variablelist>
 
-    <para> For more detailed information about
-        <command>taskset</command>, see the man page <command>man 1 taskset</command>.
-    </para>
-  </sect1>
+  <para>
+   For more detailed information about <command>taskset</command>, see the man
+   page <command>man 1 taskset</command>.
+  </para>
+ </sect1>
+ <sect1 xml:id="sec-quick-ionice">
+  <title>Changing I/O priorities with <command>ionice</command></title>
 
-  <sect1 xml:id="sec-quick-ionice">
-    <title>Changing I/O priorities with <command>ionice</command></title>
-    <para> Handling I/O is one of the critical issues for all
-      high-performance systems. If a task has lots of CPU power
-      available, but must wait for the disk, it will not work as
-      efficiently as it could. The Linux kernel provides three different
-      scheduling classes to determine the I/O handling for a process.
-      All of these classes can be fine-tuned with a nice level. </para>
+  <para>
+   Handling I/O is one of the critical issues for all high-performance systems.
+   If a task has lots of CPU power available, but must wait for the disk, it
+   will not work as efficiently as it could. The Linux kernel provides three
+   different scheduling classes to determine the I/O handling for a process.
+   All of these classes can be fine-tuned with a nice level.
+  </para>
 
-    <variablelist>
-      <varlistentry>
-        <term>The <emphasis>Best Effort</emphasis> scheduler</term>
-        <listitem>
-          <para> The <emphasis>Best Effort</emphasis> scheduler is the
-            default I/O scheduler, and is used for all processes that do
-            not specify a different I/O scheduler class. By default,
-            this scheduler sets its nice level according to the nice
-            value of the running process. </para>
-          <para> There are eight different nice levels available for
-            this scheduler. The lowest priority is represented by a nice
-            level of seven, the highest priority is zero. </para>
-          <para> This scheduler has the scheduling class number 2. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term>The <emphasis>Real Time</emphasis> scheduler</term>
-        <listitem>
-          <para> The real-time I/O class always gets the highest
-            priority for disk access. The other schedulers will only be
-            served if no real-time request is present. This scheduling
-            class may easily lock up the system if not implemented with
-            care. </para>
-          <para> The real-time scheduler defines nice levels (similar to
-            the <emphasis>Best Effort</emphasis> scheduler). </para>
-          <para> This scheduler has the scheduling class number 1. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term>The <emphasis>Idle</emphasis> scheduler</term>
-        <listitem>
-          <para> The <emphasis>Idle</emphasis> scheduler does not define
-            any nice levels. I/O is only done in this class if no other
-            scheduler runs an I/O request. This scheduler has the lowest
-            available priority and can be used for processes that are
-            not time-critical. </para>
-          <para> This scheduler has the scheduling class number 3. </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+  <variablelist>
+   <varlistentry>
+    <term>The <emphasis>Best Effort</emphasis> scheduler</term>
+    <listitem>
+     <para>
+      The <emphasis>Best Effort</emphasis> scheduler is the default I/O
+      scheduler, and is used for all processes that do not specify a different
+      I/O scheduler class. By default, this scheduler sets its nice level
+      according to the nice value of the running process.
+     </para>
+     <para>
+      There are eight different nice levels available for this scheduler. The
+      lowest priority is represented by a nice level of seven, the highest
+      priority is zero.
+     </para>
+     <para>
+      This scheduler has the scheduling class number 2.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term>The <emphasis>Real Time</emphasis> scheduler</term>
+    <listitem>
+     <para>
+      The real-time I/O class always gets the highest priority for disk access.
+      The other schedulers will only be served if no real-time request is
+      present. This scheduling class may easily lock up the system if not
+      implemented with care.
+     </para>
+     <para>
+      The real-time scheduler defines nice levels (similar to the
+      <emphasis>Best Effort</emphasis> scheduler).
+     </para>
+     <para>
+      This scheduler has the scheduling class number 1.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term>The <emphasis>Idle</emphasis> scheduler</term>
+    <listitem>
+     <para>
+      The <emphasis>Idle</emphasis> scheduler does not define any nice levels.
+      I/O is only done in this class if no other scheduler runs an I/O request.
+      This scheduler has the lowest available priority and can be used for
+      processes that are not time-critical.
+     </para>
+     <para>
+      This scheduler has the scheduling class number 3.
+     </para>
+    </listitem>
+   </varlistentry>
+  </variablelist>
 
-    <para> To change I/O schedulers and nice values, use the
-        <command>ionice</command> command. This provides a means to tune
-      the scheduler of already running processes, or to start new
-      processes with specific I/O settings. </para>
+  <para>
+   To change I/O schedulers and nice values, use the <command>ionice</command>
+   command. This provides a means to tune the scheduler of already running
+   processes, or to start new processes with specific I/O settings.
+  </para>
 
-    <variablelist>
-      <title>Examples</title>
-      <varlistentry>
-        <term><command>ionice -c3 -p$$</command>
-        </term>
-        <listitem>
-          <para> Sets the scheduler of the current shell to
-              <literal>Idle</literal>. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><command>ionice</command>
-        </term>
-        <listitem>
-          <para> Without additional parameters, this prints the I/O
-            scheduler settings of the current shell. </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><command>ionice -c1 -p42 -n2</command>
-        </term>
-        <listitem>
-          <para> Sets the scheduler of the process with process id
-              42 to <literal>Real Time</literal>, and its nice value to 2.
-          </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><command>ionice -c3 /bin/bash</command>
-        </term>
-        <listitem>
-          <para> Starts the Bash shell with the <literal>Idle</literal>
-            I/O scheduler. </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+  <variablelist>
+   <title>Examples</title>
+   <varlistentry>
+    <term><command>ionice -c3 -p$$</command></term>
+    <listitem>
+     <para>
+      Sets the scheduler of the current shell to <literal>Idle</literal>.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><command>ionice</command></term>
+    <listitem>
+     <para>
+      Without additional parameters, this prints the I/O scheduler settings of
+      the current shell.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><command>ionice -c1 -p42 -n2</command></term>
+    <listitem>
+     <para>
+      Sets the scheduler of the process with process id 42 to <literal>Real
+      Time</literal>, and its nice value to 2.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><command>ionice -c3 /bin/bash</command></term>
+    <listitem>
+     <para>
+      Starts the Bash shell with the <literal>Idle</literal> I/O scheduler.
+     </para>
+    </listitem>
+   </varlistentry>
+  </variablelist>
 
-    <para> For more detailed information about
-      <command>ionice</command>, see the <command>ionice</command> man
-      page with <command>man 1 ionice</command></para>
-  </sect1>
-  <sect1 xml:id="sec-quick-io-block-change">
-    <title>Changing the I/O scheduler for block devices</title>
+  <para>
+   For more detailed information about <command>ionice</command>, see the
+   <command>ionice</command> man page with <command>man 1 ionice</command>
+  </para>
+ </sect1>
+ <sect1 xml:id="sec-quick-io-block-change">
+  <title>Changing the I/O scheduler for block devices</title>
 
-    <para> The Linux kernel provides several block device schedulers
-      that can be selected individually for each block device. All but
-      the <literal>noop</literal> scheduler perform a kind of ordering
-      of requested blocks to reduce head movements on the hard disk. If
-      you use an external storage system that has its own scheduler, you
-      should disable the Linux internal reordering by selecting the
-        <literal>noop</literal> scheduler. </para>
+  <para>
+   The Linux kernel provides several block device schedulers that can be
+   selected individually for each block device. All but the
+   <literal>noop</literal> scheduler perform a kind of ordering of requested
+   blocks to reduce head movements on the hard disk. If you use an external
+   storage system that has its own scheduler, you should disable the Linux
+   internal reordering by selecting the <literal>noop</literal> scheduler.
+  </para>
 
-    <variablelist>
-      <title>The Linux I/O schedulers</title>
-      <varlistentry>
-        <term>noop</term>
-        <listitem>
-          <para> The <emphasis>noop</emphasis> scheduler is a very
-            simple scheduler that performs basic merging and sorting on
-            I/O requests. This scheduler is mainly used for specialized
-            environments that run their own schedulers optimized for the
-            used hardware, such as storage systems or hardware RAID
-            controllers. </para>
-          <!-- http://aplawrence.com/Linux/linux26_features.html -->
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term>deadline</term>
-        <listitem>
-          <para> The main point of <emphasis>deadline</emphasis>
-            scheduling is to try hard to answer a request before a given
-            deadline. This results in very good I/O for a random single
-            I/O in real-time environments. </para>
-          <para> In principle, the <emphasis>deadline</emphasis>
-            scheduler uses two lists with all requests. One is sorted by
-            block sequences to reduce seeking latencies, the other is
-            sorted by expire times for each request. Normally, requests
-            are served according to the block sequence, but if a request
-            reaches its deadline, the scheduler starts to work on this
-            request. </para>
-          <!-- http://lwn.net/2002/0110/a/io-scheduler.php3 -->
-          <!-- /usr/src/linux/Documentation/block/deadline-iosched.txt -->
-          <!-- http://kerneltrap.org/node/431 -->
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term>cfq</term>
-        <listitem>
-          <para> The <emphasis>Completely Fair Queuing</emphasis>
-            scheduler uses a separate I/O queue for each process. All of
-            these queues get a similar time slice for disk access. With
-            this procedure, the <emphasis>CFQ</emphasis> tries to divide
-            the bandwidth evenly between all requesting processes. This
-            scheduler has a similar throughput as the
-              <emphasis>anticipatory</emphasis> scheduler, but the
-            maximum latency is much shorter. </para>
-          <para> For the average system this scheduler yields the best
-            results, and thus is the default I/O scheduler on &sle;
-            systems. </para>
-          <!-- http://en.wikipedia.org/wiki/CFQ -->
-          <!-- http://lwn.net/Articles/114770/ -->
-        </listitem>
-      </varlistentry>
-    </variablelist>
+  <variablelist>
+   <title>The Linux I/O schedulers</title>
+   <varlistentry>
+    <term>noop</term>
+    <listitem>
+     <para>
+      The <emphasis>noop</emphasis> scheduler is a very simple scheduler that
+      performs basic merging and sorting on I/O requests. This scheduler is
+      mainly used for specialized environments that run their own schedulers
+      optimized for the used hardware, such as storage systems or hardware RAID
+      controllers.
+     </para>
+<!-- http://aplawrence.com/Linux/linux26_features.html -->
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term>deadline</term>
+    <listitem>
+     <para>
+      The main point of <emphasis>deadline</emphasis> scheduling is to try hard
+      to answer a request before a given deadline. This results in very good
+      I/O for a random single I/O in real-time environments.
+     </para>
+     <para>
+      In principle, the <emphasis>deadline</emphasis> scheduler uses two lists
+      with all requests. One is sorted by block sequences to reduce seeking
+      latencies, the other is sorted by expire times for each request.
+      Normally, requests are served according to the block sequence, but if a
+      request reaches its deadline, the scheduler starts to work on this
+      request.
+     </para>
+<!-- http://lwn.net/2002/0110/a/io-scheduler.php3 -->
+<!-- /usr/src/linux/Documentation/block/deadline-iosched.txt -->
+<!-- http://kerneltrap.org/node/431 -->
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term>cfq</term>
+    <listitem>
+     <para>
+      The <emphasis>Completely Fair Queuing</emphasis> scheduler uses a
+      separate I/O queue for each process. All of these queues get a similar
+      time slice for disk access. With this procedure, the
+      <emphasis>CFQ</emphasis> tries to divide the bandwidth evenly between all
+      requesting processes. This scheduler has a similar throughput as the
+      <emphasis>anticipatory</emphasis> scheduler, but the maximum latency is
+      much shorter.
+     </para>
+     <para>
+      For the average system this scheduler yields the best results, and thus
+      is the default I/O scheduler on &sle; systems.
+     </para>
+<!-- http://en.wikipedia.org/wiki/CFQ -->
+<!-- http://lwn.net/Articles/114770/ -->
+    </listitem>
+   </varlistentry>
+  </variablelist>
 
-    <para> To print the current scheduler of a block device like
-        <filename>/dev/sda</filename>, use the following command: </para>
+  <para>
+   To print the current scheduler of a block device like
+   <filename>/dev/sda</filename>, use the following command:
+  </para>
 
-    <screen><command>cat</command> /sys/block/sda/queue/scheduler
+<screen><command>cat</command> /sys/block/sda/queue/scheduler
 noop deadline [cfq]</screen>
 
-    <para> In this case, the scheduler for <filename>/dev/sda</filename>
-      is set to <literal>cfq</literal>, the <literal>Completely Fair
-        Queuing</literal> scheduler. This is the default scheduler on
-      &slerte;. </para>
+  <para>
+   In this case, the scheduler for <filename>/dev/sda</filename> is set to
+   <literal>cfq</literal>, the <literal>Completely Fair Queuing</literal>
+   scheduler. This is the default scheduler on &slerte;.
+  </para>
 
-    <para> To change the schedulers, echo one of the names
-       <literal>noop</literal>, <literal>deadline</literal>, or
-       <literal>cfq</literal> into
-        <filename>/sys/block/&lt;device&gt;/scheduler</filename>. For
-      example, if you want to set the I/O scheduler of the device
-        <filename>/dev/sda</filename> to <literal>noop</literal>, use
-      the following command: </para>
+  <para>
+   To change the schedulers, echo one of the names <literal>noop</literal>,
+   <literal>deadline</literal>, or <literal>cfq</literal> into
+   <filename>/sys/block/&lt;device&gt;/scheduler</filename>. For example, if
+   you want to set the I/O scheduler of the device
+   <filename>/dev/sda</filename> to <literal>noop</literal>, use the following
+   command:
+  </para>
 
-    <screen><command>echo</command> "noop" &gt; /sys/block/sda/queue/scheduler</screen>
+<screen><command>echo</command> "noop" &gt; /sys/block/sda/queue/scheduler</screen>
 
-    <para> To set other variables in the <filename>/sys</filename> file
-      system, use a similar approach. </para>
-  </sect1>
-  <sect1 xml:id="sec-quick-io-block-tune">
-    <title>Tuning the block device I/O scheduler</title>
+  <para>
+   To set other variables in the <filename>/sys</filename> file system, use a
+   similar approach.
+  </para>
+ </sect1>
+ <sect1 xml:id="sec-quick-io-block-tune">
+  <title>Tuning the block device I/O scheduler</title>
 
-    <para> All schedulers, except for the <emphasis>noop</emphasis>
-      scheduler, have several common parameters that may be tuned for
-      each block device. You can access these parameters with
-        <filename>sysfs</filename> in the
-        <filename>/sys/block/&lt;device&gt;/queue/iosched/</filename>
-      directory. The following parameters are tuneable for the
-      respective scheduler: </para>
+  <para>
+   All schedulers, except for the <emphasis>noop</emphasis> scheduler, have
+   several common parameters that may be tuned for each block device. You can
+   access these parameters with <filename>sysfs</filename> in the
+   <filename>/sys/block/&lt;device&gt;/queue/iosched/</filename> directory. The
+   following parameters are tuneable for the respective scheduler:
+  </para>
 
-    <!--
+<!--
   http://www.linux-magazin.de/heft_abo/ausgaben/2005/04/kern_technik
   -->
 
-    <variablelist>
+  <variablelist>
+   <varlistentry>
+    <term>Anticipatory scheduler</term>
+    <listitem>
+     <variablelist>
       <varlistentry>
-        <term>Anticipatory scheduler</term>
-        <listitem>
-          <variablelist>
-            <varlistentry>
-              <term><option>read_batch_expire</option>
-              </term>
-              <listitem>
-                <para> If write requests are scheduled, this is the time
-                  in milliseconds that reads are served before pending
-                  writes get a time slice. If writes are more important
-                  than reads, set this value lower than
-                    <option>read_expire</option>. </para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><option>write_batch_expire</option>
-              </term>
-              <listitem>
-                <para> Similar to <option>read_batch_expire</option> for
-                  write requests. </para>
-              </listitem>
-            </varlistentry>
-          </variablelist>
-        </listitem>
+       <term><option>read_batch_expire</option></term>
+       <listitem>
+        <para>
+         If write requests are scheduled, this is the time in milliseconds that
+         reads are served before pending writes get a time slice. If writes are
+         more important than reads, set this value lower than
+         <option>read_expire</option>.
+        </para>
+       </listitem>
       </varlistentry>
       <varlistentry>
-        <term>Deadline scheduler</term>
-        <listitem>
-          <variablelist>
-            <varlistentry>
-              <term><option>read_expire</option>
-              </term>
-              <listitem>
-                <para> The main focus of this scheduler is to limit the
-                  start latency for a request to a given time.
-                  Therefore, for each request, a deadline is calculated
-                  from the current time plus the value of
-                    <option>read_expire</option> in milliseconds.
-                </para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><option>write_expire</option>
-              </term>
-              <listitem>
-                <para> Similar to <option>read_expire</option> for write
-                  requests. </para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><option>fifo_batch</option>
-              </term>
-              <listitem>
-                <para> If a request hits its deadline, it is necessary
-                  to move the request from the sorted I/O scheduler list
-                  to the dispatch queue. The variable
-                    <option>fifo_batch</option> controls how many
-                  requests are moved, depending on the cost of each
-                  request. </para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><option>front_merges</option>
-              </term>
-              <listitem>
-                <para> The scheduler normally tries to find contiguous
-                  I/O requests and merges them. There are two kinds of
-                  merges: The new I/O request may be in front of the
-                  existing I/O request (front merge), or it may follow
-                  behind the existing request (back merge). Most merges
-                  are back merges. Therefore, you can disable the front
-                  merge functionality by setting
-                    <option>front_merges</option> to
-                    <literal>0</literal>. </para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><option>write_starved</option>
-              </term>
-              <listitem>
-                <para> In case some read or write requests hit their
-                  deadline, the scheduler prefers the read requests by
-                  default. To prevent write requests from being
-                  postponed forever, the variable
-                    <option>write_starved</option> controls how often
-                  read requests are preferred until write requests are
-                  preferred over read requests. </para>
-              </listitem>
-            </varlistentry>
-          </variablelist>
-        </listitem>
+       <term><option>write_batch_expire</option></term>
+       <listitem>
+        <para>
+         Similar to <option>read_batch_expire</option> for write requests.
+        </para>
+       </listitem>
+      </varlistentry>
+     </variablelist>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term>Deadline scheduler</term>
+    <listitem>
+     <variablelist>
+      <varlistentry>
+       <term><option>read_expire</option></term>
+       <listitem>
+        <para>
+         The main focus of this scheduler is to limit the start latency for a
+         request to a given time. Therefore, for each request, a deadline is
+         calculated from the current time plus the value of
+         <option>read_expire</option> in milliseconds.
+        </para>
+       </listitem>
       </varlistentry>
       <varlistentry>
-        <!-- http://donami.com/118 -->
-        <!--
+       <term><option>write_expire</option></term>
+       <listitem>
+        <para>
+         Similar to <option>read_expire</option> for write requests.
+        </para>
+       </listitem>
+      </varlistentry>
+      <varlistentry>
+       <term><option>fifo_batch</option></term>
+       <listitem>
+        <para>
+         If a request hits its deadline, it is necessary to move the request
+         from the sorted I/O scheduler list to the dispatch queue. The variable
+         <option>fifo_batch</option> controls how many requests are moved,
+         depending on the cost of each request.
+        </para>
+       </listitem>
+      </varlistentry>
+      <varlistentry>
+       <term><option>front_merges</option></term>
+       <listitem>
+        <para>
+         The scheduler normally tries to find contiguous I/O requests and
+         merges them. There are two kinds of merges: The new I/O request may be
+         in front of the existing I/O request (front merge), or it may follow
+         behind the existing request (back merge). Most merges are back merges.
+         Therefore, you can disable the front merge functionality by setting
+         <option>front_merges</option> to <literal>0</literal>.
+        </para>
+       </listitem>
+      </varlistentry>
+      <varlistentry>
+       <term><option>write_starved</option></term>
+       <listitem>
+        <para>
+         In case some read or write requests hit their deadline, the scheduler
+         prefers the read requests by default. To prevent write requests from
+         being postponed forever, the variable <option>write_starved</option>
+         controls how often read requests are preferred until write requests
+         are preferred over read requests.
+        </para>
+       </listitem>
+      </varlistentry>
+     </variablelist>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+<!-- http://donami.com/118 -->
+<!--
     http://www.linux-magazin.de/heft_abo/ausgaben/2005/04/kern_technik
     beware, that article seems to be incorrect sometimes -->
-        <!-- http://lwn.net/Articles/101029/ mail from axboe, good,
+<!-- http://lwn.net/Articles/101029/ mail from axboe, good,
     somewhat old! -->
-        <!-- http://lwn.net/Articles/114273/ mail from axboe, good! -->
-        <term>CFQ Scheduler</term>
-        <listitem>
-          <variablelist>
-            <varlistentry>
-              <term><option>back_seek_max</option> and
-                  <option>back_seek_penalty</option>
-              </term>
-              <listitem>
-                <para> The <emphasis>CFQ</emphasis> scheduler normally
-                  uses a strict ascending elevator. When needed, it also
-                  allows small backward seeks, but it puts some penalty
-                  on them. The maximum backward sector seek is defined
-                  with <option>back_seek_max</option>, and the
-                  multiplier for the penalty is set by
-                    <option>back_seek_penalty</option>. </para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><option>fifo_expire_async</option> and
-                  <option>fifo_expire_sync</option>
-              </term>
-              <listitem>
-                <para> The <option>fifo_expire_*</option> variables
-                  define the timeout in milliseconds for asynchronous
-                  and synchronous I/O requests. To prefer
-                  synchronous operations over asynchronous ones, 
-                  <option>fifo_expire_sync</option> value should be lower
-                  than fifo_expire_async.</para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><option>quantum</option>
-              </term>
-              <listitem>
-                <para> Defines number of I/O requests to be dispatched at
-                  once by the block device. This parameter is used for
-                  synchronous requests.</para>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><option>slice_async</option>,
-                  <option>slice_async_rq</option>,
-                  <option>slice_sync</option>, and
-                  <option>slice_idle</option>
-              </term>
-              <listitem>
-                <para> These variables define the time slices a block
-                  device gets for synchronous or asynchronous
-                  operations. </para>
-                <itemizedlist>
-                  <listitem>
-                    <para>
-                      <option>slice_async</option> and
-                        <option>slice_sync</option> serve as a base value
-                      in milliseconds for asynchronous or synchronous disk
-                      slice length calculations.</para>
-                  </listitem>
-                  <listitem>
-                    <para><option>slice_async_rq</option> for how many
-                      requests can an asynchronous disk slice accommodate.</para>
-                  </listitem>
-                  <listitem>
-                    <para><option>slice_idle</option> defines how long I/O
-                      scheduler idles before servicing next thread.</para>
-                  </listitem>
-                </itemizedlist>
-              </listitem>
-            </varlistentry>
-          </variablelist>
-        </listitem>
+<!-- http://lwn.net/Articles/114273/ mail from axboe, good! -->
+    <term>CFQ Scheduler</term>
+    <listitem>
+     <variablelist>
+      <varlistentry>
+       <term><option>back_seek_max</option> and <option>back_seek_penalty</option></term>
+       <listitem>
+        <para>
+         The <emphasis>CFQ</emphasis> scheduler normally uses a strict
+         ascending elevator. When needed, it also allows small backward seeks,
+         but it puts some penalty on them. The maximum backward sector seek is
+         defined with <option>back_seek_max</option>, and the multiplier for
+         the penalty is set by <option>back_seek_penalty</option>.
+        </para>
+       </listitem>
       </varlistentry>
-    </variablelist>
+      <varlistentry>
+       <term><option>fifo_expire_async</option> and <option>fifo_expire_sync</option></term>
+       <listitem>
+        <para>
+         The <option>fifo_expire_*</option> variables define the timeout in
+         milliseconds for asynchronous and synchronous I/O requests. To prefer
+         synchronous operations over asynchronous ones,
+         <option>fifo_expire_sync</option> value should be lower than
+         fifo_expire_async.
+        </para>
+       </listitem>
+      </varlistentry>
+      <varlistentry>
+       <term><option>quantum</option></term>
+       <listitem>
+        <para>
+         Defines number of I/O requests to be dispatched at once by the block
+         device. This parameter is used for synchronous requests.
+        </para>
+       </listitem>
+      </varlistentry>
+      <varlistentry>
+       <term><option>slice_async</option>, <option>slice_async_rq</option>, <option>slice_sync</option>, and <option>slice_idle</option></term>
+       <listitem>
+        <para>
+         These variables define the time slices a block device gets for
+         synchronous or asynchronous operations.
+        </para>
+        <itemizedlist>
+         <listitem>
+          <para>
+           <option>slice_async</option> and <option>slice_sync</option> serve
+           as a base value in milliseconds for asynchronous or synchronous disk
+           slice length calculations.
+          </para>
+         </listitem>
+         <listitem>
+          <para>
+           <option>slice_async_rq</option> for how many requests can an
+           asynchronous disk slice accommodate.
+          </para>
+         </listitem>
+         <listitem>
+          <para>
+           <option>slice_idle</option> defines how long I/O scheduler idles
+           before servicing next thread.
+          </para>
+         </listitem>
+        </itemizedlist>
+       </listitem>
+      </varlistentry>
+     </variablelist>
+    </listitem>
+   </varlistentry>
+  </variablelist>
 
-    <!--
+<!--
   TIP: versucht requests so anzuordnen, dass möglichst wenig
       kopfbewegung gemacht wird
       Storage: 
@@ -1587,12 +1687,14 @@ noop deadline [cfq]</screen>
   bg: should be in there ...
   -->
 
-    <para> The system default Block Device I/O Scheduler can be also set
-      by the kernel parameter <literal>elevator=</literal>. For example,
-        <literal>elevator=deadline</literal> changes the I/O Scheduler
-      to <literal>deadline</literal>. </para>
-  </sect1>
-  <!--
+  <para>
+   The system default Block Device I/O Scheduler can be also set by the kernel
+   parameter <literal>elevator=</literal>. For example,
+   <literal>elevator=deadline</literal> changes the I/O Scheduler to
+   <literal>deadline</literal>.
+  </para>
+ </sect1>
+<!--
  <sect1>
   <title>Interrupt priorities</title>
 
@@ -1605,41 +1707,45 @@ noop deadline [cfq]</screen>
   </para>
  </sect1>
  -->
-  <sect1 xml:id="sec-quick-more">
-    <title>More information</title>
+ <sect1 xml:id="sec-quick-more">
+  <title>More information</title>
 
-    <para> A lot of information about real-time implementations and
-      administration can be found on the Internet. The following list
-      contains several selected links:
-      <!--
+  <para>
+   A lot of information about real-time implementations and administration can
+   be found on the Internet. The following list contains several selected
+   links:
+<!--
    http://linuxdevices.com/articles/AT6476691775.html
    http://www.linuxdevices.com/articles/AT8073314981.html
    https://www.rtai.org/
    http://www.fsmlabs.com/
    -->
-    </para>
+  </para>
 
-    <itemizedlist>
-      <listitem>
-        <para> More detailed information about the real-time Linux
-          development and an introduction how to write a real-time
-          application can be found in the real-time Linux community
-          Wiki. <link xlink:href="http://rt.wiki.kernel.org"/>, <link
+  <itemizedlist>
+   <listitem>
+    <para>
+     More detailed information about the real-time Linux development and an
+     introduction how to write a real-time application can be found in the
+     real-time Linux community Wiki.
+     <link xlink:href="http://rt.wiki.kernel.org"/>,
+     <link
             xlink:href="http://rt.wiki.kernel.org/index.php/HOWTO:_Build_an_RT-application"
           />
-        </para>
-      </listitem>
-      <listitem>
-        <para> The &cpuset; feature of the kernel is explained in
-            <filename>/usr/src/linux/Documentation/cgroups/cpusets.txt</filename>.
-	    More detailed documentation is available from <!-- <link
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     The &cpuset; feature of the kernel is explained in
+     <filename>/usr/src/linux/Documentation/cgroups/cpusets.txt</filename>.
+     More detailed documentation is available from
+<!-- <link
             xlink:href="http://techpubs.sgi.com/library/tpl/cgi-bin/getdoc.cgi/linux/bks/SGI_Admin/books/LX_Resource_AG/sgi_html/ch01.html"
 	    />, <link xlink:href="http://www.bullopensource.org/cpuset/"/>, and -->
-            <link xlink:href="http://lwn.net/Articles/127936/"/>.
-           -->
-        </para>
-      </listitem>
-      <!--
+     <link xlink:href="http://lwn.net/Articles/127936/"/>. -->
+    </para>
+   </listitem>
+<!--
    <listitem>
     <para>
      Detailed information about the anticipatory I/O scheduler is available
@@ -1650,22 +1756,26 @@ noop deadline [cfq]</screen>
     </para>
    </listitem>
    -->
-      <!--<remark>mschnitzer: the links above does not work anymore.</remark>-->
-      <listitem>
-        <para> For more information about the deadline I/O scheduler,
-          refer to <link
+<!--<remark>mschnitzer: the links above does not work anymore.</remark>-->
+   <listitem>
+    <para>
+     For more information about the deadline I/O scheduler, refer to
+     <link
             xlink:href="https://en.wikipedia.org/wiki/Deadline_scheduler"/>.
-          <!-- <link xlink:href="http://kerneltrap.org/node/431"/> -->
-          In your installed system, find further information in
-            <filename>/usr/src/linux/Documentation/block/deadline-iosched.txt</filename>.
-        </para>
-      </listitem>
-      <listitem>
-        <para> The CFQ I/O scheduler is covered in detail in <link
-            xlink:href="http://en.wikipedia.org/wiki/CFQ"/>
-          and <filename>/usr/src/linux/Documentation/block/cfq-iosched.txt</filename>. </para>
-      </listitem>
-      <!-- toms 2019-08-08: this link is dead, no replacement found
+<!-- <link xlink:href="http://kerneltrap.org/node/431"/> -->
+     In your installed system, find further information in
+     <filename>/usr/src/linux/Documentation/block/deadline-iosched.txt</filename>.
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     The CFQ I/O scheduler is covered in detail in
+     <link
+            xlink:href="http://en.wikipedia.org/wiki/CFQ"/> and
+     <filename>/usr/src/linux/Documentation/block/cfq-iosched.txt</filename>.
+    </para>
+   </listitem>
+<!-- toms 2019-08-08: this link is dead, no replacement found
       <listitem>
         <para> A lot of information about real-time can be found at
             <link
@@ -1673,10 +1783,10 @@ noop deadline [cfq]</screen>
           />. </para>
       </listitem>
       -->
-    </itemizedlist>
-  </sect1>
-  <!--
+  </itemizedlist>
+ </sect1>
+<!--
  o CPU set: http://www.nabble.com/cpuset- - -question-t476909.html
 -->
-  <xi:include href="common_legal.xml" parse="xml"/>
+ <xi:include href="common_legal.xml" parse="xml"/>
 </article>
