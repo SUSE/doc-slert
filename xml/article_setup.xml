@@ -1739,8 +1739,7 @@ noop deadline [cfq]</screen>
      The &cpuset; feature of the kernel is explained in
      <filename>/usr/src/linux/Documentation/cgroups/cpusets.txt</filename>.
      More detailed documentation is available from
-<!-- <link
-            xlink:href="http://techpubs.sgi.com/library/tpl/cgi-bin/getdoc.cgi/linux/bks/SGI_Admin/books/LX_Resource_AG/sgi_html/ch01.html"
+<!-- <link xlink:href="http://techpubs.sgi.com/library/tpl/cgi-bin/getdoc.cgi/linux/bks/SGI_Admin/books/LX_Resource_AG/sgi_html/ch01.html"
 	    />, <link xlink:href="http://www.bullopensource.org/cpuset/"/>, and -->
      <link xlink:href="http://lwn.net/Articles/127936/"/>. -->
     </para>
@@ -1760,8 +1759,7 @@ noop deadline [cfq]</screen>
    <listitem>
     <para>
      For more information about the deadline I/O scheduler, refer to
-     <link
-            xlink:href="https://en.wikipedia.org/wiki/Deadline_scheduler"/>.
+     <link xlink:href="https://en.wikipedia.org/wiki/Deadline_scheduler"/>.
 <!-- <link xlink:href="http://kerneltrap.org/node/431"/> -->
      In your installed system, find further information in
      <filename>/usr/src/linux/Documentation/block/deadline-iosched.txt</filename>.
@@ -1770,8 +1768,7 @@ noop deadline [cfq]</screen>
    <listitem>
     <para>
      The CFQ I/O scheduler is covered in detail in
-     <link
-            xlink:href="http://en.wikipedia.org/wiki/CFQ"/> and
+     <link xlink:href="http://en.wikipedia.org/wiki/CFQ"/> and
      <filename>/usr/src/linux/Documentation/block/cfq-iosched.txt</filename>.
     </para>
    </listitem>
