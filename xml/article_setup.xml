@@ -24,8 +24,8 @@
    </para>
 
    <para>
-    To meets this requirement, &slerte; offers several options for CPU and I/O
-    scheduling, CPU shielding and for setting CPU affinities to processes.
+    To meet this requirement, &slerte; offers several options for CPU and I/O
+    scheduling, CPU shielding, and for setting CPU affinities of processes.
    </para>
   </abstract>
  </info>
@@ -37,7 +37,7 @@
    market conditions, you have a distinct advantage over those that cannot.
    Running your time-sensitive mission-critical applications using &slert;
    reduces process dispatch latencies and gives you the time advantage you need
-   to increase profits or avoid further financial losses, ahead of your
+   to increase profits, or avoid further financial losses, ahead of your
    competitors.
   </para>
 
@@ -63,8 +63,8 @@
       time.
      </para>
      <para>
-      In comparison to normal Linux kernel, which is optimized for overall
-      system performance regardless of individual process response time,
+      In comparison to the normal Linux kernel, which is optimized for overall
+      system performance regardless of individual process response time, the
       &slert; kernel is tuned toward predictable process response time.
      </para>
     </listitem>
@@ -115,10 +115,11 @@
 
   <para>
    In some circumstances, it is beneficial to be able to run specific tasks
-   only on defined CPUs. For this reason, the Linux kernel provides a feature
-   called <emphasis>cpuset</emphasis>. The &cpuset; feature provides the means
-   to do a so called <quote>soft partitioning</quote> of the system. Dedicated
-   CPUs, together with some predefined memory, work on several tasks.
+   only on defined CPUs. For this reason, the Linux kernel provides a
+   feature called <emphasis>cpuset</emphasis>. The &cpuset; feature provides the
+   means to do so-called <quote>soft partitioning</quote> of the system. This
+   enables you to dedicate CPUs, together with some predefined memory,
+   to work on particular tasks.
   </para>
 
   <para>
@@ -130,8 +131,8 @@
   </para>
 
   <para>
-   For more information about options and parameters of the
-   <command>shield</command> subcommand, view the help by running:
+   For more information about the options and parameters of the
+   <command>shield</command> subcommand, view its help by running:
   </para>
 
 <screen><command>cset</command> help shield</screen>
@@ -146,37 +147,40 @@
 <!-- shield cpu -->
 <screen><command>cset</command> shield --cpu=3</screen>
    <para>
-    This will shield CPU3. On a machine with 4 cores CPU0-CPU2 are unshielded.
+    On a machine with four CPUs, this will shield CPU #3. CPUs #0-2 are
+    unshielded.
    </para>
   </sect2>
 
   <sect2 xml:id="sec-slert-quick-settingup-cpushield-multi">
    <title>Setting up CPU shields for multiple CPUs</title>
    <para>
-    If you need to shield more than one CPUs, the argument of the
-    <option>--cpu</option> option accepts comma separated lists of CPUs
+    If you need to shield more than one CPU, the argument of the
+    <option>--cpu</option> option accepts comma-separated lists of CPUs,
     including range specifications:
    </para>
 <screen><command>cset</command> shield --cpu=1,3,5-7</screen>
    <para>
-    On a machine with 8 cores, this command will shield CPU1, CPU3, CPU5, CPU6,
-    and CPU7. The CPUs CPU0, CPU2 and CPU4 will remain unshielded.
+    On a machine with eight CPUs, this command will shield CPUs #1, #3,
+    and #5-7. CPUs #0, #2, and #4 will remain unshielded.
    </para>
    <para>
-    Already existing CPU shields can be extended by the same command. For
-    example, to add CPU4 to the mentioned CPU set, use this command:
+    Existing CPU shields can be extended by the same command. For example, to
+    add CPU #4 to the CPU set described above, use this command:
    </para>
 <screen><command>cset</command> shield --cpu=1,3-7</screen>
    <para>
-    CPU1, CPU3, CPU5 to CPU6 were already shielded and only CPU4 will
-    additionally be shielded. Technically, the command is updating the current
-    CPU shield schema. To reduce the number of shielded CPUs and to unshield
-    CPU1, for example, use the following command:
+    This command updates the current CPU shield schema. CPUs #1, #3, and
+    #5-6 were already shielded. Afterward, CPU #4 will also be shielded.
+   </para>
+   <para>
+    To reduce the number of shielded CPUs, redefine the scheme so as to exclude
+    the CPUs you wish to unshield. For example, to unshield CPU #1, use the
+    following command:
    </para>
 <screen><command>cset</command> shield --cpu=3-7</screen>
    <para>
-    Now only CPU3, CPU4, CPU5, CPU6, and CPU7 are shielded. CPU0, CPU1, and
-    CPU2 are available for system usage.
+    Now only CPUs #3-7 are shielded. CPUs #0-2 are available for system usage.
    </para>
   </sect2>
 
@@ -219,24 +223,24 @@ cset: "user" cpuset of:  3-7 cpu,  with: 0
   <sect2 xml:id="sec-slert-quick-shielding-processes">
    <title>Shielding processes</title>
    <para>
-    Certain processes or groups of processes can be assigned to a shielded
-    &cpuset;, after the CPU set is created. To start a new process in the
-    shielded CPU set use the <option>--exec</option> option:
+    After a shielded CPU set is created, certain processes or groups of
+    processes can be assigned to the shielded &cpuset;. To start a new process
+    in the shielded CPU set, use the <option>--exec</option> option:
    </para>
 <screen><command>cset</command> shield --exec <replaceable>APPLICATION</replaceable></screen>
    <para>
-    To move already running processes to the shielded CPU set use the
+    To move already-running processes to the shielded CPU set, use the
     <option>--shield</option> and <option>--pid</option> options. The
     <option>--pid</option> option accepts a comma-separated list of PIDs and
     range specifications:
    </para>
 <screen><command>cset</command> shield --shield --pid=1,2,600-700</screen>
    <para>
-    This moves processes with PID 1, 2, and from 600 to 700 to the shielded CPU
-    set. If there is a gap in the range from 600 to 700, then only those
+    This moves processes with PID 1, 2, and from 600 to 700 to the shielded
+    CPU set. If there is a gap in the range from 600 to 700, then only those
     available process will be moved to the shield without warning.
-    <command>cset</command> handles threads like processes and will also
-    interpret TIDs and assign them to the required CPU set.
+    The <command>cset</command> command handles threads like processes and will
+    also interpret TIDs and assign them to the required CPU set.
    </para>
 <!-- shield DANGER note -  stolen from "cset help shield" -->
 <!-- bg: modified -->
@@ -265,20 +269,20 @@ cset: --> shielding system active with
 cset: "system" cpuset of: 0-2,4-15 cpu, with:
    USER       PID  PPID S TASK NAME
       -------- ----- ----- - ---------
-         root         1     0 S init [3]   
+         root         1     0 S init [3]
 [...]
 
-cset: "user" cpuset of:    3 cpu, with: 1 
+cset: "user" cpuset of:    3 cpu, with: 1
    USER       PID  PPID S TASK NAME
       -------- ----- ----- - ---------
-         root     10202 10170 S application 
+         root     10202 10170 S application
 </screen>
   </sect2>
 
   <sect2 xml:id="sec-slert-quick-unshielding-processes">
    <title>Unshielding processes</title>
    <para>
-    To remove a process (or group of processes) from the CPU shield use the
+    To remove a process (or group of processes) from the CPU shield, use the
     <option>--unshield</option> option. The argument for
     <option>--unshield</option> is similar to the <option>--shield</option>
     option. This option accepts a comma-separated list of PIDs/TIDs and range
@@ -286,15 +290,15 @@ cset: "user" cpuset of:    3 cpu, with: 1
    </para>
 <screen><command>cset</command> shield --unshield --pid=2,650-655</screen>
    <para>
-    This command will unshield the process with the PID 2 and the processes in
-    range of 650 and 655.
+    This command will unshield the process with the PID <literal>2</literal> and
+    the processes in the range between 650 and 655.
    </para>
   </sect2>
 
   <sect2 xml:id="sec-slert-quick-resetting-cpusets">
    <title>Resetting CPU sets</title>
    <para>
-    To delete CPU sets use the <command>cset</command> option
+    To delete CPU sets, use the <command>cset</command> option
     <option>--reset</option>. This will unshield all CPUs and migrate dedicated
     processes to all available CPUs again.
    </para>
@@ -323,7 +327,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
   <para>
    Besides assigning memory nodes, the subcommand <command>set</command>
    creates cpusets in a tree-like structure, rooted at the
-   <systemitem 
+   <systemitem
         class="resource">root</systemitem> &cpuset;.
   </para>
 
@@ -339,7 +343,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
   <para>
    This command will create a &cpuset; called <systemitem>one</systemitem> with
-   assigned CPUs from CPU1 to CPU7. To specify a new &cpuset; called
+   assigned CPUs from #1 to #7. To specify a new &cpuset; called
    <systemitem>two</systemitem> that is a subset of
    <systemitem>one</systemitem>, proceed as follows:
   </para>
@@ -363,8 +367,8 @@ cset: "user" cpuset of:    3 cpu, with: 1
 <!-- cset set ... list and destroy -->
 
   <para>
-   To show a table containing useful information, like CPU list and memory
-   list, use the <option>-r</option> parameter. The <quote>-X</quote> column
+   To show a table containing useful information, such as CPU lists and memory
+   lists, use the <option>-r</option> parameter. The <quote>-X</quote> column
    shows the exclusive state of CPU or memory. The <quote>path</quote> column
    shows the real path in the virtual &cpuset; file system.
   </para>
@@ -374,7 +378,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
 <!-- cset set .... assinging memory -->
 
   <para>
-   On NUMA machines memory nodes can be assigned to a &cpuset; similar to CPUs.
+   On NUMA machines, memory nodes can be assigned to a &cpuset; similar to CPUs.
    The <option>--mem</option> option of the subcommand <command>set</command>
    allows a comma-separated and inclusive range specification of memory nodes.
    This example will assign MEM1, MEM3, MEM4, MEM5 and MEM6 to the &cpuset;
@@ -422,10 +426,10 @@ cset: "user" cpuset of:    3 cpu, with: 1
 <!-- cset proc ... move -->
 
   <para>
-   To move an already running process inside an already existing &cpuset; use
+   To move an already-running process inside an already-existing &cpuset;, use
    the option <option>--move</option>. It accepts a comma-separated list and
    range specifications of PIDs. The following command will move processes with
-   PID 2442 and within range of 3000 to 3200 into the &cpuset;
+   PID 2442 and within the range between 3000 and 3200 into the &cpuset;
    <systemitem>new_set</systemitem>:
   </para>
 
@@ -468,14 +472,14 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
   <para>
    Use the <command>chrt</command> command to manipulate the real-time
-   attributes of an already running process (like scheduling policy and
+   attributes of an already-running process (such as scheduling policy and
    priority), or to execute a new process with specified real-time attributes.
   </para>
 
   <para>
    It is highly recommended for applications which do not use real-time
-   specific attributes by their own but should nevertheless experience the full
-   advantages of real-time. To get full real-time experiences, call these
+   specific attributes by themselves, but should nevertheless experience the
+   full advantages of real-time. To get full real-time experiences, call these
    applications with the <command>chrt</command> command and the right set of
    scheduler policy and priority parameters.
   </para>
@@ -518,8 +522,8 @@ cset: "user" cpuset of:    3 cpu, with: 1
   </itemizedlist>
 
   <para>
-   It is also possible to get the current scheduler policy and priority of
-   single processes by specifying the PID of the process with the
+   It is also possible to obtain the current scheduler policy, and the priority
+   of single processes, by specifying the PID of the process with the
    <option>-p</option> parameter. For example:
   </para>
 
@@ -547,22 +551,22 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
   <warning>
    <para>
-    Handle changing of real-time attributes of processes with care. Increasing
-    the priority of certain processes can harm the entire system, depending on
-    the behavior of the process. In some cases, this can lead to a complete
-    system lockup or bad influence on certain devices.
+    Handle the changing of real-time attributes of processes with care.
+    Increasing the priority of certain processes can harm the entire system,
+    depending on the behavior of the process. In some cases, this can lead to a
+    complete system lockup or bad influences on certain devices.
    </para>
   </warning>
 
 <!-- man chrt(1) -->
 
   <para>
-   For more information about chrt, see the <command>chrt</command> man page
-   with <command>man 1 chrt</command>.
+   For more information about <command>chrt</command>, see the
+   <command>chrt</command> man page with <command>man 1 chrt</command>.
   </para>
  </sect1>
 <!--
- 
+
   <sect1>
   <title>Executing processes with <command>run</command></title>
 
@@ -577,7 +581,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
   <variablelist>
    <varlistentry>
-  
+
     <term><option>bias=<replaceable>CPULIST</replaceable></option></term>
   <listitem>
      <para>
@@ -588,7 +592,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>policy=<replaceable>policy</replaceable></option></term>
     <listitem>
      <para>
@@ -599,7 +603,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
- 
+
   <term><option>priority=<replaceable>priority</replaceable></option>
     </term>
     <listitem>
@@ -610,7 +614,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
- 
+
   <term><option>quantum=<replaceable>quantum</replaceable></option></term>
     <listitem>
      <para>
@@ -619,14 +623,14 @@ cset: "user" cpuset of:    3 cpu, with: 1
       <literal>nice</literal> value
       generally known from <literal>SCHED_OTHER</literal>. To obtain a table
       of nice values and their respective values in milliseconds, run the
-      command 
-  
+      command
+
   <command>run quantum=list</command>.
      </para>
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
     <term><option>info</option></term>
     <listitem>
      <para>
@@ -642,8 +646,8 @@ cset: "user" cpuset of:    3 cpu, with: 1
   </variablelist>
 
   <para>
-   For Non-Uniform Memory Access (NUMA) architectures, the  
-  
+   For Non-Uniform Memory Access (NUMA) architectures, the
+
   <command>run mempolicy=MEMPOLICY_SPECIFIER</command> command can
    also be used to set memory specific options. Choose one of the
    following options:
@@ -656,7 +660,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
      <para>
       Use the memory local to the CPUs in the given list. If
       <literal>list</literal> is omitted, use the CPUs given in
-  
+
   <literal>bias</literal> which is required in this case.
      </para>
     </listitem>
@@ -666,7 +670,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     <listitem>
      <para>
       Use memory that is attached with optimized bandwidth instead of
-      optimized latency. 
+      optimized latency.
      </para>
     </listitem>
    </varlistentry>
@@ -706,7 +710,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
   </variablelist>
- 
+
   <para>
    All of the above commands may be used when starting new commands, but also
    to change the environment of processes already running. To change the
@@ -716,7 +720,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
 
   <variablelist>
    <varlistentry>
-  
+
   <term><option>all</option></term>
     <listitem>
      <para>
@@ -725,7 +729,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
- 
+
   <term><option>pid=<replaceable>list</replaceable></option></term>
     <listitem>
      <para>
@@ -736,7 +740,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
- 
+
   <term><option>tid=<replaceable>list</replaceable></option></term>
     <listitem>
      <para>
@@ -747,7 +751,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-    
+
   <term><option>group=<replaceable>list</replaceable></option></term>
     <listitem>
      <para>
@@ -757,7 +761,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>user=<replaceable>list</replaceable></option></term>
     <listitem>
      <para>
@@ -767,7 +771,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>name=<replaceable>list</replaceable></option></term>
     <listitem>
      <para>
@@ -790,19 +794,19 @@ cset: "user" cpuset of:    3 cpu, with: 1
    which tasks may run on a specified CPU.
    To prevent interrupts
    from being executed on this CPU, the CPU may be shielded.
-   Furthermore, if you intend to only run defined processes on 
+   Furthermore, if you intend to only run defined processes on
    selected CPUs, you can shield this set of CPUs from
    all processes. To run processes on those CPUs, the processes must
    set a CPU affinity to the shielded CPUs.
   </para>
 
   <para>
-  To mark one or several CPUs as shielded, use the  
-   <command>shield</command> command and specify a list of CPUs. 
+  To mark one or several CPUs as shielded, use the
+   <command>shield</command> command and specify a list of CPUs.
    The numbers to use in CPULIST can be obtained from the <literal>processor
     :</literal> entry in the <filename>/proc/cpuinfo</filename> file. To
    define ranges of several CPUs, use a <quote>&mdash;</quote> between the
-   numbers as in <literal>2&mdash;7</literal>. 
+   numbers as in <literal>2&mdash;7</literal>.
   </para>
   <para>
    This approach is only useful on systems with at least two virtual CPUs. The
@@ -811,7 +815,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
   </para>
   <variablelist>
    <varlistentry>
-   
+
   <term><option>irq=<replaceable>CPULIST</replaceable></option></term>
     <listitem>
      <para>
@@ -823,7 +827,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>loc=<replaceable>CPULIST</replaceable></option></term>
     <listitem>
      <para>
@@ -835,11 +839,11 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>proc=<replaceable>CPULIST</replaceable></option></term>
     <listitem>
      <para>
-      Use the CPUs in <literal>CPULIST</literal> only for 
+      Use the CPUs in <literal>CPULIST</literal> only for
       processes that have a defined affinity to those CPUs. If several
       processes have this affinity, they may still have different
       priorities to define background and high priority
@@ -850,7 +854,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>all=<replaceable>CPULIST</replaceable></option></term>
     <listitem>
      <para>
@@ -860,7 +864,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
-  
+
   <term><option>reset</option></term>
     <listitem>
      <para>
@@ -869,7 +873,7 @@ cset: "user" cpuset of:    3 cpu, with: 1
     </listitem>
    </varlistentry>
    <varlistentry>
- 
+
   <term><option>current</option></term>
     <listitem>
      <para>
@@ -884,9 +888,9 @@ cset: "user" cpuset of:    3 cpu, with: 1
    CPU. For example, if you want to run a process as the only process on
    processor <literal>#1</literal>, use the following commands:
   </para>
-  
+
   <screen>shield proc=1
-  run  bias=1 &lt;command&gt;  
+  run  bias=1 &lt;command&gt;
   </screen>
   </sect1>-->
 <!--
@@ -941,7 +945,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
     <term>mems</term>
     <listitem>
      <para>
-      A list of memory nodes available to the current cpuset. 
+      A list of memory nodes available to the current cpuset.
      </para>
     </listitem>
    </varlistentry>
@@ -1023,7 +1027,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
    <literal>memory_pressure</literal> entries in the different
    cpusets.
   </para>
-  <para> 
+  <para>
    To make use of cpusets, you need detailed hardware information
    for several reasons: on big machines, memory that is local to a CPU will be
    much faster than memory that is only available on a different node. If you
@@ -1052,7 +1056,7 @@ mem_exclusive  memory_pressure_enabled  mems</screen>
    <varlistentry>
     <term>Create a cpuset</term>
     <listitem>
-     <para> 
+     <para>
       To create a cpuset with the name <literal>exampleset</literal>, just
       run <command>mkdir /dev/cpuset/exampleset</command> to create the
       respective directory. The newly created set will contain several entries that
@@ -1150,7 +1154,7 @@ logger cpuset: releasing $1
 rmdir /dev/cpuset/$1
      </screen>
 
-     <para>After adding the script to your system, run 
+     <para>After adding the script to your system, run
       <command>chmod 755 /sbin/cpuset_release_agent</command> to make the script
       executable.
      </para>
@@ -1163,7 +1167,7 @@ rmdir /dev/cpuset/$1
       All processes with the process id <literal>PID</literal> have an entry
       in <filename>/proc/PID/cpuset</filename>. If you run the command
       <command>cat /proc/PID/cpuset</command> on a PID that runs in
-      the cpuset <literal>exampleset</literal>, you will find the results in 
+      the cpuset <literal>exampleset</literal>, you will find the results in
       <literal>/exampleset</literal>.
      </para>
     </listitem>
@@ -1172,7 +1176,7 @@ rmdir /dev/cpuset/$1
  </sect1>
  -->
  <sect1 xml:id="sec-quick-taskset">
-  <title>Specifying a CPU affinity with <command>taskset</command></title>
+  <title>Specifying CPU affinity with <command>taskset</command></title>
 
   <para>
    The default behavior of the kernel is to keep a process running on the same
@@ -1194,51 +1198,41 @@ rmdir /dev/cpuset/$1
   </para>
 
   <para>
-   To set or retrieve the CPU affinity of a task a bitmask is used. It is
+   To set or retrieve the CPU affinity of a task, use a bitmask. This mask is
    represented by a hexadecimal number. If you count the bits of this bitmask,
-   the lowest bit represents the first logical CPU as they are found in
+   the lowest bit represents the first logical CPU as found in
    <filename>/proc/cpuinfo</filename>. For example:
   </para>
 
-  <variablelist>
-   <varlistentry>
-    <term><literal>0x00000001</literal></term>
-    <listitem>
-     <para>
-      is processor #0.
-     </para>
+  <itemizedlist>
+   <listitem>
+    <para>
+     <literal>0x00000001</literal> means CPU <literal>0</literal>.
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     <literal>0x00000002</literal> means CPU <literal>1</literal>.
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     <literal>0x00000003</literal> means CPUs <literal>0</literal> and
+     <literal>1</literal>.
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     <literal>0xFFFFFFFE</literal> means all but the first CPU.
+    </para>
     </listitem>
-   </varlistentry>
-   <varlistentry>
-    <term><literal>0x00000002</literal></term>
-    <listitem>
-     <para>
-      is processor #1.
-     </para>
-    </listitem>
-   </varlistentry>
-   <varlistentry>
-    <term><literal>0x00000003</literal></term>
-    <listitem>
-     <para>
-      is processor #0 and processor #1.
-     </para>
-    </listitem>
-   </varlistentry>
-   <varlistentry>
-    <term><literal>0xFFFFFFFE</literal></term>
-    <listitem>
-     <para>
-      all but the first CPU.
-     </para>
-    </listitem>
-   </varlistentry>
-  </variablelist>
+  </itemizedlist>
 
   <para>
-   If a given dialog does not contain any valid CPU on the system, an error is
-   returned. If taskset returns without an error, the given program has been
-   scheduled to the specified list of CPUs.
+   If a given dialog does not contain any valid CPU on the system, the
+   <command>taskset</command> command will return an error. If
+   <command>taskset</command> returns without an error, the given program has
+   been scheduled to the specified list of CPUs.
   </para>
 
   <para>
@@ -1290,7 +1284,7 @@ rmdir /dev/cpuset/$1
    If a task has lots of CPU power available, but must wait for the disk, it
    will not work as efficiently as it could. The Linux kernel provides three
    different scheduling classes to determine the I/O handling for a process.
-   All of these classes can be fine-tuned with a nice level.
+   All of these classes can be fine-tuned with a <literal>nice</literal> level.
   </para>
 
   <variablelist>
@@ -1300,16 +1294,18 @@ rmdir /dev/cpuset/$1
      <para>
       The <emphasis>Best Effort</emphasis> scheduler is the default I/O
       scheduler, and is used for all processes that do not specify a different
-      I/O scheduler class. By default, this scheduler sets its nice level
-      according to the nice value of the running process.
+      I/O scheduler class. By default, this scheduler sets its
+      <literal>nice</literal> level according to the nice value of the running
+      process.
      </para>
      <para>
-      There are eight different nice levels available for this scheduler. The
-      lowest priority is represented by a nice level of seven, the highest
-      priority is zero.
+      There are eight different <literal>nice</literal> levels available for
+      this scheduler. The lowest priority is represented by a
+      <literal>nice</literal> level of <literal>7</literal>, and the highest
+      priority is <literal>0</literal>.
      </para>
      <para>
-      This scheduler has the scheduling class number 2.
+      This scheduler has the scheduling class number <literal>2</literal>.
      </para>
     </listitem>
    </varlistentry>
@@ -1323,11 +1319,11 @@ rmdir /dev/cpuset/$1
       implemented with care.
      </para>
      <para>
-      The real-time scheduler defines nice levels (similar to the
-      <emphasis>Best Effort</emphasis> scheduler).
+      The real-time scheduler defines <literal>nice</literal> levels (similar to
+      the <emphasis>Best Effort</emphasis> scheduler).
      </para>
      <para>
-      This scheduler has the scheduling class number 1.
+      This scheduler has the scheduling class number <literal>1</literal>.
      </para>
     </listitem>
    </varlistentry>
@@ -1335,22 +1331,24 @@ rmdir /dev/cpuset/$1
     <term>The <emphasis>Idle</emphasis> scheduler</term>
     <listitem>
      <para>
-      The <emphasis>Idle</emphasis> scheduler does not define any nice levels.
-      I/O is only done in this class if no other scheduler runs an I/O request.
-      This scheduler has the lowest available priority and can be used for
-      processes that are not time-critical.
+      The <emphasis>Idle</emphasis> scheduler does not define any
+      <literal>nice</literal> levels. I/O is only done in this class if no other
+      scheduler is running an I/O request. This scheduler has the lowest
+      available priority and can be used for processes that are not
+      time-critical.
      </para>
      <para>
-      This scheduler has the scheduling class number 3.
+      This scheduler has the scheduling class number <literal>3</literal>.
      </para>
     </listitem>
    </varlistentry>
   </variablelist>
 
   <para>
-   To change I/O schedulers and nice values, use the <command>ionice</command>
-   command. This provides a means to tune the scheduler of already running
-   processes, or to start new processes with specific I/O settings.
+   To change I/O schedulers and <literal>nice</literal> values, use the
+   <command>ionice</command> command. This provides a means to tune the
+   scheduler of already-running processes, or to start new processes with
+   specific I/O settings.
   </para>
 
   <variablelist>
@@ -1376,8 +1374,9 @@ rmdir /dev/cpuset/$1
     <term><command>ionice -c1 -p42 -n2</command></term>
     <listitem>
      <para>
-      Sets the scheduler of the process with process id 42 to <literal>Real
-      Time</literal>, and its nice value to 2.
+      Sets the scheduler of the process with process ID 42 to <literal>Real
+      Time</literal>, and its <literal>nice</literal> value to
+      <literal>2</literal>.
      </para>
     </listitem>
    </varlistentry>
@@ -1452,13 +1451,13 @@ rmdir /dev/cpuset/$1
       separate I/O queue for each process. All of these queues get a similar
       time slice for disk access. With this procedure, the
       <emphasis>CFQ</emphasis> tries to divide the bandwidth evenly between all
-      requesting processes. This scheduler has a similar throughput as the
+      requesting processes. This scheduler allows throughput similar to the
       <emphasis>anticipatory</emphasis> scheduler, but the maximum latency is
       much shorter.
      </para>
      <para>
-      For the average system this scheduler yields the best results, and thus
-      is the default I/O scheduler on &sle; systems.
+      For the average system, this scheduler yields the best results, and thus
+      it is the default I/O scheduler on &sle; systems.
      </para>
 <!-- http://en.wikipedia.org/wiki/CFQ -->
 <!-- http://lwn.net/Articles/114770/ -->
@@ -1467,7 +1466,7 @@ rmdir /dev/cpuset/$1
   </variablelist>
 
   <para>
-   To print the current scheduler of a block device like
+   To print the current scheduler of a block device such as
    <filename>/dev/sda</filename>, use the following command:
   </para>
 
@@ -1682,7 +1681,7 @@ noop deadline [cfq]</screen>
 <!--
   TIP: versucht requests so anzuordnen, dass möglichst wenig
       kopfbewegung gemacht wird
-      Storage: 
+      Storage:
       cat /sys/block/hda/queue/scheduler
   bg: should be in there ...
   -->
@@ -1699,7 +1698,7 @@ noop deadline [cfq]</screen>
   <title>Interrupt priorities</title>
 
   <para>
-    
+
    interrupt inheritance -> was ist denn das????
    - softirq
    /usr/src/linux/Documentation/DocBook/kernel-hacking.tmpl, line 191
@@ -1728,10 +1727,8 @@ noop deadline [cfq]</screen>
      More detailed information about the real-time Linux development and an
      introduction how to write a real-time application can be found in the
      real-time Linux community Wiki.
-     <link xlink:href="http://rt.wiki.kernel.org"/>,
-     <link
-            xlink:href="http://rt.wiki.kernel.org/index.php/HOWTO:_Build_an_RT-application"
-          />
+     <link xlink:href="https://rt.wiki.kernel.org"/>, <link xlink:href=
+     "https://rt.wiki.kernel.org/index.php/HOWTO:_Build_an_RT-application"/>
     </para>
    </listitem>
    <listitem>
