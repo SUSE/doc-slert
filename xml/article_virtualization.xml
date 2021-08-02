@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
-                 type="text/xml" 
+                 type="text/xml"
                  title="Profiling step"?>
 <!DOCTYPE article
 [
@@ -24,20 +24,20 @@
 
    <para>
     To see the degree of interference from running within a particular &kvm;
-    configuration versus running on bare-metal configuration, Each RT
+    configuration versus running on a bare-metal configuration, each RT
     application has to be assessed individually. We do not give any specific
-    guarantees on performance or deadlines been missed.
+    guarantees on performance or deadlines being missed.
    </para>
 
    <para>
-    Virtualization inevitably introduces overhead but there is currently no
+    Virtualization inevitably introduces overhead, but there is currently no
     rule of thumb for the performance penalty incurred. It is up to each RT
     application developer to set performance and deadline requirements and
     evaluate if those requirements are met.
    </para>
 
    <para>
-    This guide provides the following 3 examples for user reference only.
+    This guide provides the following three examples for user reference only.
    </para>
   </abstract>
  </info>
@@ -46,13 +46,13 @@
 
   <para>
    It is possible to achieve isolation of real-time workloads running alongside
-   &kvm; by using standard methods. For example, cpusets and routing IRQs to
-   dedicated CPUs, all of which can be achieved by using the cset utility. Both
-   libvirtd and &kvm; work fine in such configurations. System configurations
-   that share CPUs between both RT and &kvm; workloads are not supported;
-   proper isolation of workloads is imperative for achieving RT deadline
-   constraints. None of the below observations and recommendations are specific
-   to virtualization. Nevertheless, they can be considered
+   &kvm; by using standard methods&mdash;for example, cpusets and routing IRQs
+   to dedicated CPUs. These can be done using the <command>cset</command>
+   utility. Both libvirtd and &kvm; work fine in such configurations. System
+   configurations that share CPUs between both RT and &kvm; workloads are not
+   supported; proper isolation of workloads is imperative for achieving RT
+   deadline constraints. None of the below observations and recommendations are
+   specific to virtualization. Nevertheless, they can be considered
    <quote>best-effort</quote> for isolating RT and &kvm; workloads. The basic
    steps are:
   </para>
@@ -78,11 +78,11 @@
   <sect2 xml:id="sec-virtguide-setup">
    <title>Setup</title>
    <para>
-    All examples were carried out on a 48-core Xeon machine with 2 NUMA nodes
-    and 64GB of RAM running &slert;. The virtual machine was installed with
-    <command>vm-install</command>, running &sls; on 4 CPUs and 2GB of memory.
-    The disk was a physical disk <filename>/dev/sdb</filename> as recommended
-    by the &sls; &virtual;.
+    All examples were carried out on a 48-core Xeon machine with two NUMA nodes
+    and 64&nbsp;GB of RAM running &slert;. The virtual machine was installed
+    with <command>vm-install</command>, running &sls; on four CPUs and 2&nbsp;GB
+    of memory. The disk was a physical disk <filename>/dev/sdb</filename> as
+    recommended by the &sls; &virtual;.
    </para>
    <para>
     The <command>cpuset</command> utility was used to shield the RT workload
@@ -96,14 +96,15 @@
     pinned to CPU&nbsp;0, etc.
    </para>
    <para>
-    The CPUs were split into two groups. CPU 0-7 were allocated to the
-    <systemitem>system</systemitem> cpuset and CPU 8-47 were allocated to the
+    The CPUs were split into two groups. CPUs 0-7 were allocated to the
+    <systemitem>system</systemitem> cpuset, and CPUs 8-47 were allocated to the
     <systemitem>user</systemitem> group. Having CPUs on the same socket in two
     groups was done intentionally to monitor the effects on shared CPU
-    resources, such as LLC.
+    resources, such as last-level cache (LLC).
    </para>
    <para>
-    The RT workload used throughout is cyclictest, executed like so:
+    The RT workload used throughout is <literal>cyclictest</literal>, executed
+    as so:
    </para>
 <screen>cset shield --exec cyclictest -- -a 8-47 -t 40 -n -m -p99 -d 0 -D 120 --quiet</screen>
   </sect2>
@@ -185,12 +186,12 @@
    <orderedlist>
     <listitem>
      <para>
-      Affinitize RT tasks to their own CPUs, and if possible, to CPUs on their
-      own dedicated socket. Using a dedicated socket avoids the issue from
-      <xref linkend="sec-virtguide-observations"/> above where the LLC
-      occupancy is churned by VMs doing lots of I/O operations. If that is not
-      an option some customers should look at Intel's Cache Allocation
-      Technology to further enforce cache allocation policies.
+      Use CPU affinity to schedule RT tasks to their own CPUs, and if possible,
+      to CPUs on their own dedicated socket. Using a dedicated socket avoids the
+      issue from <xref linkend="sec-virtguide-observations"/> above, where the
+      LLC occupancy is churned by VMs doing lots of I/O operations. If that is
+      not an option, some customers should look at Intel's Cache Allocation
+      Technology to further enforce cache-allocation policies.
      </para>
     </listitem>
     <listitem>
@@ -244,9 +245,9 @@
   <para>
    Some shielding is possible but there is no tool-based support for it. There
    is a generic shield script attached that can move Docker contents onto
-   shielded cores once running. Launching of either &kvm;/Docker directly into
-   a shielded home did not appear to be possible but the Docker or
-   virtualisation team may be able to do better. The basic steps are
+   shielded cores once running. Launching of either &kvm; or Docker directly
+   into a shielded home did not appear to be possible but the Docker or
+   virtualization team may be able to do better. The basic steps are:
   </para>
 
   <procedure>
@@ -272,27 +273,29 @@
    <para>
     Standard real-time dangers apply in that if the intention is to run a
     compute intensive application with realtime priority, then the user must
-    ensure that kernel threads cannnot starve. A simple precaution is to use
-    <option>rtkthread=prio</option> and <option>rtworkqueues=prio</option>
-    kernel boot parameters, with priority set higher than anything that may
-    dominate a CPU. This is not strictly real-time capable, but it is safer
-    overall.
+    ensure that kernel threads cannot starve. A simple precaution is to use
+    the <option>rtkthread=<replaceable>PRIORITY</replaceable></option> and
+    <option>rtworkqueues=<replaceable>PRIORITY</replaceable></option> kernel
+    boot parameters. Set the <replaceable>PRIORITY</replaceable> values higher
+    than the priority of any process that has the potential to dominate a CPU.
+    This is not strictly real-time capable, but it is safer overall.
    </para>
    <itemizedlist>
-    <title>Docker Prerequisites</title>
+    <title>Docker prerequisites</title>
     <listitem>
      <para>
-      kernel must be booted with <option>nortsched</option> command-line
+      The kernel must be booted with <option>nortsched</option> command-line
       parameter
      </para>
      <para>
       This is to hide cgroup scheduling from Docker. If cgroup scheduling is
-      required then isolating docker is very problematic.
+      required, then isolating Docker containers is very problematic.
      </para>
     </listitem>
     <listitem>
      <para>
-      Docker run must be passed <option>--privileged=true</option>
+      The <command>docker run</command> command must be passed
+      <option>--privileged=true</option>.
      </para>
      <para>
       This is required for using the RT classes.
@@ -300,30 +303,31 @@
     </listitem>
     <listitem>
      <para>
-      your container is equipped with the <command>chrt</command> system tool.
+      Your container is equipped with the <command>chrt</command> system tool.
      </para>
     </listitem>
    </itemizedlist>
    <para>
-    If no isolation is required for your use case then it's ready. Run
-    <command>docker run</command> your container, using <command>chrt</command>
-    to set RT class/priority of that which you execute upon startup of the
-    container. Example:
+    If no isolation is required for your use case, then it is ready. Start your
+    container with <command>docker run</command>, using <command>chrt</command>
+    to set the RT class/priority of the program you execute when starting of the
+    container. For example:
    </para>
 <screen>docker run --privileged=true ... /usr/bin/chrt -f 1 /usr/sbin/sshd -D</screen>
    <para>
-    The above (with additional arguments of course) will start
+    The above (with additional arguments, of course) will start
     <systemitem class="daemon">sshd</systemitem> within the container as
-    a <literal>SCHED_FIFO</literal> task of priority 1. ssh into it, and
-    whatever you run therein will inherit scheduler RT class/priority.
+    a <literal>SCHED_FIFO</literal> task of priority 1. <literal>ssh</literal>
+    into it, and whatever you run in the container will inherit the scheduler's
+    RT class/priority.
    </para>
   </sect2>
 
   <sect2 xml:id="sec-virtguide-docker-shielding">
    <title>Docker shielding</title>
    <para>
-    There is currently no facility withing Docker to launch a container
-    directly into an isolated cpuset, this must be done manually.
+    There is currently no facility within Docker to launch a container
+    directly into an isolated cpuset. You must do this manually.
    </para>
    <example>
     <title>Pseudo script</title>
@@ -570,13 +574,13 @@ fi</screen>
  	char dummy;
  	int i, n_cores, runtime = 70;
 +	cpu_set_t cpus;
- 
+
  	g.max_interruptions = 1000000;
- 
+
 @@ -609,10 +610,13 @@ int main(int argc, char *argv[])
  	    sscanf(argv[0], "%u%c", &amp;g.threshold_nsec, &amp;dummy) != 1)
  		usage(app);
- 
+
 +	CPU_ZERO(&amp;cpus);
 +	sched_getaffinity(0, sizeof(cpus), &amp;cpus);
 +
@@ -587,7 +591,7 @@ fi</screen>
 -		if (move_to_core(i) == 0)
 +		if (CPU_ISSET(i, &amp;cpus) &amp;&amp; move_to_core(i) == 0)
  			threads[g.n_threads++].core_i = i;
- 
+
  	signal(SIGALRM, handle_alarm);</screen>
    </example>
   </sect2>
@@ -604,7 +608,7 @@ fi</screen>
 
   <para>
    Applications and guest operating systems run inside &kvm; guests similarly
-   to how they run on bare metal. The guest interfaces with emulated hardware
+   to how they run on bare metal. Guests interface with emulated hardware
    presented by &qemu;, which submits I/O requests to the host on behalf of the
    guest. Then the host kernel treats the guest I/Os like any user-space
    application.
@@ -663,12 +667,13 @@ fi</screen>
          </listitem>
          <listitem>
           <para>
-           We can specify the vCPU scheduler type (values batch, idle, fifo,
-           rr), and priority for particular vCPU threads. Priority
-           <literal>99</literal> is too high, and it will massively interfere
-           with the host's ability to function properly. There are host-side
-           per-CPU threads that must be always be able to preempt, for example,
-           timer sirq threads.
+           We can specify the vCPU scheduler type (values <literal>batch</literal>,
+           <literal>idle</literal>, <literal>fifo</literal>, or
+           <literal>rr</literal>), and priority for particular vCPU threads.
+           Priority <literal>99</literal> is too high, and it will massively
+           interfere with the host's ability to function properly. There are
+           host-side per-CPU threads that must be always be able to preempt,
+           such as timer <literal>sirq</literal> threads.
           </para>
          </listitem>
         </itemizedlist>
@@ -733,8 +738,8 @@ fi</screen>
        dynamically adjusts the frequency of processor to meet processing needs.
        Turboboost requires Speedstep to be enabled, as it is an extension of
        Speedstep. For maximum performance, enable both Turboboost and Speedstep
-       in BIOS. The host OS may also need configuration to support running at
-       higher clock speeds. For example:
+       in the BIOS. The host OS may also need configuration to support running
+       at higher clock speeds. For example:
       </para>
      </formalpara>
 <screen><command>cpupower</command> -c all frequency-set -g performance</screen>
