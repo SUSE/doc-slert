@@ -271,10 +271,13 @@
   <sect2 xml:id="sec-virtguide-docker-rt-env">
    <title>Running real-time applications in a virtualized environment</title>
    <para>
-    Standard real-time dangers apply in that if the intention is to run a
-    compute intensive application with realtime priority, then the user must
-    ensure that kernel threads cannot starve. A simple precaution is to use
-    the <option>rtkthread=<replaceable>PRIORITY</replaceable></option> and
+    If you intend to run compute-intensive applications with real-time priority,
+    you must make sure that kernel threads cannot starve. (This is general
+    advice that applies to other real-time scenarios as well.)
+   </para>
+   <para>
+    A simple precaution is to use the
+    <option>rtkthread=<replaceable>PRIORITY</replaceable></option> and
     <option>rtworkqueues=<replaceable>PRIORITY</replaceable></option> kernel
     boot parameters. Set the <replaceable>PRIORITY</replaceable> values higher
     than the priority of any process that has the potential to dominate a CPU.
