@@ -122,6 +122,27 @@
    to work on particular tasks.
   </para>
 
+  <note>
+   <title>CPUs, processors, and cores</title>
+   <para>
+    Modern servers are typically built around multi-core CPUs, which means that
+    a single processor socket typically contains many separate processor units.
+    For example, a low-end processor might have four cores, while a high-end one
+    may have from tens to hundreds of cores.
+   </para>
+   <para>
+    Secondarily, some vendors support simultaneous multithreading (SMT), which
+    enables a single core to support two or more execution threads which can be
+    partially overlapped. The processor makes this visible to the operating
+    system by reporting each threads as an additional core.
+   </para>
+   <para>
+    The &cpuset; feature works on the level of logical processors: individual
+    cores or SMT units, not processor sockets. When this document
+    refers to <quote>a CPU</quote>, this denotes a logical processor.
+   </para>
+  </note>
+
   <para>
    <command>cset</command> consists of one <quote>super command</quote> called
    <command>shield</command> and the <quote>regular commands</quote>
