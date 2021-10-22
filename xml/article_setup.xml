@@ -12,7 +12,6 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
  <title>Setup Guide</title>
- <subtitle>&productname; &productnumber;</subtitle>
  <info><productname>&productname;</productname>
   <productnumber>&productnumber;</productnumber>
   <xi:include href="common_copyright_gfdl.xml" parse="xml"/><date>
