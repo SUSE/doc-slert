@@ -1,7 +1,7 @@
 ## Doc Config File for SLE-RT
 ## Quick Start
 
-MAIN="article_kernel_states.xml"
+MAIN="article_kernel_tasks.xml"
 
 # Profiling
 PROFOS="sles"
