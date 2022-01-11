@@ -1,11 +1,11 @@
 ## Doc Config File for SLE-RT
 ## Quick Start
 
-MAIN=MAIN.SLERT.xml
-ROOTID=article-kernel-states
+MAIN="article_kernel_states.xml"
 
 # Profiling
-PROFOS="slert"
+PROFOS="sles"
+PROFCONDITION="noquick;suse-product"
 
 # Stylesheets
 STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2021-ns"
