@@ -1,0 +1,11 @@
+## Doc Config File for SLE-RT
+## Quick Start
+
+MAIN=MAIN.SLERT.xml
+ROOTID=article-kernel-states
+
+# Profiling
+PROFOS="slert"
+
+# Stylesheets
+STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2021-ns"

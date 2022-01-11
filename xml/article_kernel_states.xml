@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
+                 type="text/xml"
+                 title="Profiling step"?>
+<!DOCTYPE article
+[
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
+]>
+<article version="5.0" xml:lang="en" xml:id="article-kernel-states"
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+ <title>Processes and process states for Linux RT Kernel</title>
+ <info><productname>&productname;</productname>
+  <productnumber>&productnumber;</productnumber>
+  <xi:include href="common_copyright_gfdl.xml" parse="xml"/><date>
+<?dbtimestamp?></date>
+  <abstract>
+   <para>
+    The following article lists and describes the most important task modes
+    needed for programming the Linux RT Kernel.
+   </para>
+  </abstract>
+ </info>
+ <sect1 xml:id="sec-slert-kernel-states-intro">
+  <title>Processes and process states </title>
+
+  <para>
+   Processes can have different states, like ‘running’ or ‘idle’. When a
+   process is running, it means, that its context is loaded into the CPU
+   registers and memory. The performance of the system depends on a major
+   number of process states.
+  </para>
+ 
+  <para>
+   A process might be unable to run at any time and for a number of reasons. A
+   process might be unable to continue running because it is waiting for input
+   that is not present or the scheduler may have decided it has run the maximum
+   amount of time units allowed and that it must yield to another process.
+  </para>
+  
+  <para>
+   The following article lists and describes the most important task modes
+   needed for programming tge Linux RT Kernel.
+  </para>
+
+<variablelist>
+ <varlistentry>
+  <term>
+   <parameter>TASK_RUNNING</parameter>
+  </term>
+  <listitem>
+   <para>
+    The process is runnable, and it is either currently running or on a run
+    queue waiting to run. This process is either executing on CPU or waiting
+    for the CPU to execute.
+    </para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_INTERRUPTIBLE</parameter>
+  </term>
+  <listitem>
+   <para>
+    The process is supended (sleeping) until some condition becomes true.
+    Events like hardware interrupt, signal delivery, released system resources
+    can wake up the process and change the status back to TASK_RUNNING.
+    Procesess in ‘idle’ mode should be in this state.
+   </para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_UNINTERUPTIBLE</parameter>
+  </term>
+  <listitem>
+   <para>
+    The process is in suspended (sleeping) mode. A signal delivery is not
+    honored with any action. Tasks must be explicetily waked up by an event.
+   </para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_WAKEKILL</parameter>
+  </term>
+  <listitem>
+   <para>
+    Wakes up the process on receipt of fatal signals, e.g.
+   </para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_DEAD</parameter>
+  </term>
+  <listitem>
+   <para>
+    Task is ended but not deleted from the process table.
+   </para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_NEW</parameter>
+  </term>
+  <listitem>
+   <para>
+    
+   </para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_KILLABLE</parameter>
+  </term>
+  <listitem>
+   <para>
+    Alternates ‘TASK_UNINTERRUPTIBLE’ semantic to allow wake up on fatal
+    signals. This task is not visible from userspace.
+   </para>
+  </listitem>
+ </varlistentry>
+ 
+</variablelist>
+
+  <sect2 xml:id="sec-slert-kernel-states-Diagram">
+   <title>Diagramm</title>
+   <para>
+    Insert picture here.
+   </para>
+  </sect2>
+ </sect1>
+ 
+ <xi:include href="common_legal.xml" parse="xml"/>
+</article>
