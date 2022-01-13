@@ -76,7 +76,8 @@
  </term>
  <listitem>
   <para>
-  TODO
+  Task is put to sleep until a condition evaluates to
+   <parameter>TRUE</parameter>.
   </para>
  </listitem>
  </varlistentry>
@@ -152,7 +153,7 @@
   </term>
   <listitem>
    <para>
-   Task is blocked by <parameter>SIGSTOP</parameter>.
+    Task is blocked by <parameter>SIGSTOP</parameter>.
    </para>
   </listitem>
  </varlistentry>
