@@ -11,17 +11,23 @@
   xmlns="http://docbook.org/ns/docbook"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
- <title>Processes and task states for Kernel programming</title>
+ <title>Processes and task states for Linux Kernel programming</title>
  <info><productname>&productname;</productname>
   <productnumber>&productnumber;</productnumber>
-  <xi:include href="common_copyright_gfdl.xml" parse="xml"/><date>
-<?dbtimestamp?></date>
+  <xi:include href="common_copyright_gfdl.xml" parse="xml"/>
+  <date><?dbtimestamp?></date>
   <abstract>
    <para>
     The following article lists and describes the most important task modes
-    needed for programming the &slert; Kernel.
+    needed for programming a Linux Kernel.
    </para>
   </abstract>
+  <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
+   <dm:bugtracker>
+    <dm:assignee>julia.faltenbacher@suse.com</dm:assignee>
+   </dm:bugtracker>
+   <dm:translation>no</dm:translation>
+  </dm:docmanager>
  </info>
  <sect1 xml:id="sec-slert-kernel-tasks-intro">
   <title>Processes and task states</title>
@@ -32,19 +38,18 @@
   </para>
  
   <para>
-   A process might be unable to run at any time and for a number of reasons. A
-   process might be unable to continue running because it is waiting for input
-   that is not present or the scheduler has decided it has run the maximum
-   amount of time units allowed and that it must yield to another process.
+   A process might be unable to run at any time and for different reasons.
+   For example, the process is paused because it is waiting for input or the
+   scheduler has decided it has run the maximum amount of time units allowed
+   and that it must yield to another process.
   </para>
   
   <para>
    The following list describes the most important tasks needed for programming
-   the &slerta; Kernel.
+   a Linux Kernel.
   </para>
 
 <variablelist>
- 
  <varlistentry>
   <term>
    <parameter>TASK_NEW</parameter>
@@ -54,6 +59,21 @@
     Marks newly created tasks to prevent from external events (e.g. signals
     delivery) until the process is fully initialized and ready for running.
    </para>
+   <para>This taks is not visible from the userspace.</para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_DEAD</parameter>
+  </term>
+  <listitem>
+   <para>
+    Task is ended but not deleted from the process table. It can be reported as
+    <parameter>Zombie</parameter> until their parent task collects their exit
+    status.
+   </para>
+   <para>This taks is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -66,20 +86,9 @@
     Task is runnable, and it is either currently running or on a run
     queue waiting to run. This process is either executing on CPU or waiting
     for the CPU to execute.
-    </para>
+   </para>
+   <para>This taks is visible from the userspace.</para>
   </listitem>
- </varlistentry>
- 
- <varlistentry>
- <term>
-  <parameter>TASK_IDLE</parameter>
- </term>
- <listitem>
-  <para>
-  Task is put to sleep until a condition evaluates to
-   <parameter>TRUE</parameter>.
-  </para>
- </listitem>
  </varlistentry>
  
  <varlistentry>
@@ -88,11 +97,14 @@
   </term>
   <listitem>
    <para>
-    Task is supended (sleeping) until some condition becomes true.
-    Events like hardware interrupt, signal delivery, released system resources
-    can wake up the process and change the status back to
-    <parameter>TASK_RUNNING</parameter>.
+    Task is blocked but can react to signals sent by the userspace. As soon as
+    the task is woken up, it changes to <parameter>TASK_RUNNING</parameter>.
    </para>
+   <para>
+    <parameter>TASK_INTERRUPTIBLE</parameter> is used to pause a task while
+    waiting for an external signal but it is still able to interact with the
+    userspace via signals.</para>
+   <para>This taks is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -102,10 +114,13 @@
   </term>
   <listitem>
    <para>
-    Task is in suspended (sleeping) mode. A signal delivery is deferred.
-    Tasks must be explicetily waked up by an event as for example by a
-    <parameter>mutex</parameter>.
-   </para>
+    Task is blocked while waiting for an event or condition, as for example
+    <parameter>mutex</parameter>. Any userspace interaction is deferred during
+    this time. Taks blocked in this state, contribute to the load average. If
+    this tasks is blocked for too long, it can get reported by the hung task
+    detector.
+    </para>
+   <para>This taks is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -115,36 +130,36 @@
   </term>
   <listitem>
    <para>
-    Wakes up the task on receipt of fatal signals as for example an
-    <parameter>I/O</parameter> operation.
+    Task is uninterruptible put to sleep which allows to wake up on a fatal
+    signal, e.g. <parameter>SIGKILL</parameter>. The task contributes to the
+    load average and is not considered for hung task detectors.
    </para>
+   <para>
+    <parameter>TASK_KILLABLE</parameter> is used when waiting for an
+    <parameter>I/O</parameter> operation on NFS mount, but it allows to kill
+    the waiting application in case the operation takes too long.
+   </para>
+   <para>This taks is not visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
  <varlistentry>
-  <term>
-   <parameter>TASK_DEAD</parameter>
-  </term>
-  <listitem>
-   <para>
-    Task is ended but not deleted from the process table. These tasks can be
-    reported as <parameter>Zombie</parameter> until their parent task collects
-    their exit status.
-   </para>
-  </listitem>
- </varlistentry>
- 
-  
- <varlistentry>
-  <term>
-   <parameter>TASK_KILLABLE</parameter>
-  </term>
-  <listitem>
-   <para>
-    Alternates <parameter>TASK_UNINTERRUPTIBLE</parameter> semantic to allow
-    wake up on fatal signals. This state is not visible from userspace.
-   </para>
-  </listitem>
+ <term>
+  <parameter>TASK_IDLE</parameter>
+ </term>
+ <listitem>
+  <para>
+   Task is uninterruptible put to sleep until a condition evaluates to
+   <parameter>TRUE</parameter>. This task does not contribute to the load
+   average and is not reported by the hung task detector.
+  </para>
+  <para>
+   <parameter>TAKS_IDLE</parameter> is used for tasks that are expected to
+   be blocked for a long time, as for example with
+   <parameter>schedule_timeout_idle</parameter>.
+  </para>
+  <para>This taks is not visible from the userspace.</para>
+ </listitem>
  </varlistentry>
  
  <varlistentry>
@@ -153,8 +168,10 @@
   </term>
   <listitem>
    <para>
-    Task is blocked by <parameter>SIGSTOP</parameter>.
+    Task has received a <parameter>SIGSTOP</parameter> from userspace and is
+    blocked until it gets <parameter>SIGCONT</parameter>.
    </para>
+   <para>This taks is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -164,8 +181,11 @@
   </term>
   <listitem>
    <para>
-    Task is blocked during <parameter>ptrace</parameter>.
+    Task is blocked during <parameter>ptrace</parameter>. For more information
+    on <parameter>ptrace</parameter>, see the man pages with
+    <command>man ptrace(2)</command>.
    </para>
+   <para>This taks is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -177,6 +197,7 @@
    <para>
     A kernel thread is parked.
    </para>
+   <para>This taks is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
