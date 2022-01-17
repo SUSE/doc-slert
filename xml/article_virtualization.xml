@@ -492,7 +492,7 @@ else
   cset shield --userset=rtcpus --cpu=${START_CPU}-${END_CPU} --kthread=on
 
   # If cpuset wasn't previously mounted (systemd will, like it or not),
-  # we just mounted it.  Find the mount point.
+  # it has now been mounted. Find the mount point.
   if [ -z $CPUSET_ROOT ]; then
    CPUSET_ROOT=$(grep cpuset /proc/mounts|cut -d ' ' -f2)
    if [ -z $CPUSET_ROOT ]; then
@@ -520,7 +520,7 @@ else
   # wait a bit for sched_domain rebuild
   sleep 1
 
-  # now we can go to hpc
+  # now go to hpc
   if [ -f ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_hpc_rt ]; then
     echo 1 > ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_hpc_rt
   fi
@@ -602,7 +602,7 @@ fi</screen>
   <title>Running RT applications with RT &kvm; guests</title>
 
   <para>
-   In <xref linkend="sec-virtguide-rtapp"/>, we see that it is possible to
+   <xref linkend="sec-virtguide-rtapp"/> shows that it is possible to
    isolate real-time workloads running alongside &kvm; by using standard
    methods. In &slea; RT 15 SP2 this can be done in user space using
    libvirt/qemu.
@@ -647,7 +647,7 @@ fi</screen>
        <term>CPU allocation</term>
        <listitem>
         <para>
-         We can define the maximum number of virtual CPUs allocated for the
+         You can define the maximum number of virtual CPUs allocated for the
          guest OS.
         </para>
        </listitem>
@@ -659,7 +659,7 @@ fi</screen>
          <listitem>
           <para>
            Pinning is a tuning option for the virtual CPUs in &kvm; guests.
-           With pinning we can control where the guest runs in order to reduce
+           With pinning, you can control where the guest runs in order to reduce
            the overhead of scheduler switches, pin vCPUs to physical CPUs that
            have low utilization, and improve the data cache performance.
            Overall performance is improved when the memory that an application

@@ -19,7 +19,7 @@
    <para>
     Using &productnamereg; needs real-time capable hardware. This paper
     describes the tools that can be used to determine if a specific hardware
-    has the needed real-time capabilities. Specifically, we describe
+    has the needed real-time capabilities. Specifically, it describes
     <systemitem>cyclictest</systemitem> and <quote>hardware latency
     detector</quote> and the ways to analyze their results.
    </para>

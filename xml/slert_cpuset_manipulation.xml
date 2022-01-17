@@ -266,8 +266,8 @@ root        4     2 Sf99 [posix_cpu_timer]</screen>
     Linux tool and include it in pipelines as in the example above.
    </para>
    <para>
-    Taking a peek into the third cpuset called <literal>three</literal>, we
-    see:
+    Taking a peek into the third cpuset called <literal>three</literal>, you
+    can see output such as:
    </para>
 <screen>&prompt.user;<command>cset</command> proc -l -s three
 cset: "three" cpuset of CPUSPEC(3) with 10 tasks running
@@ -320,7 +320,7 @@ root     20955 19253 Soth bash
 root     20981 20955 Roth python ./cset proc -l two</screen>
    <para>
     You can see that initially, <literal>two</literal> had nothing running
-    in it. After the completion of the second command, we list
+    in it. After the completion of the second command, list
     <literal>two</literal> again and see that there are two tasks running:
     the shell which you executed and the <command>python cset</command> command
     that is listing the cpuset. The reason for the second task is that the
@@ -341,7 +341,7 @@ root     20955 19253 Soth bash
 root     21118 20955 Soth bash
 root     21147 21118 Roth python ./cset proc -l two</screen>
    <para>
-    Here again we see that the second shell, PID <literal>21118</literal>,
+    Here again, you can see that the second shell, PID <literal>21118</literal>,
     has a parent PID of <literal>20955</literal> which is the first shell.
     Both shells, and the listing command, are running in the two cpuset.
    </para>
@@ -443,7 +443,7 @@ cset: **> [Errno 2] No such file or directory</screen>
     </para>
    </note>
    <para>
-    In the following example, we move the current shell into the cpuset
+    The following example moves the current shell into the cpuset
     named <literal>two</literal> with a range PIDSPEC and back out to the
     <literal>root</literal> cpuset with the Bash variable for the current
     PID.
@@ -539,7 +539,7 @@ three        3 n          0 n       0     0    /three</screen>
      <emphasis>and</emphasis> the <option>-t/--toset</option> options.
     </para>
     <para>
-     In the following example, we move all 10 <literal>beagled</literal>
+     The following example moves all 10 <literal>beagled</literal>
      threads back to cpuset <literal>three</literal> with this method.
     </para>
 <screen>&prompt.user;<command>cset</command> proc -l two three
@@ -603,7 +603,7 @@ three        3 n          0 n       10    0    /three</screen>
      </para>
     </warning>
     <para>
-     In the following example, we move all unbound kernel threads running in
+     The following example moves all unbound kernel threads running in
      the root cpuset to the cpuset named two by using the
      <option>-k</option> option.
     </para>
@@ -614,8 +614,8 @@ cset: --> not moving 76 threads (not unbound, use --force)
 [==================================================]%
 cset: done</screen>
     <para>
-     You will note that we used the fromset→toset facility of the
-     <command>proc</command> subcommand and we only specified the
+     This example uses the fromset→toset facility of the
+     <command>proc</command> subcommand. However, it only specifies the
      <option>-k</option> option (not the <option>-m</option> option). This
      has the effect of moving all kernel threads only.
     </para>
@@ -661,11 +661,11 @@ Name         CPUs-X       MEMs-X    Tasks Subs Path
 two          2 n          0 n       70    0    /two</screen>
     <para>
      Of course, since the cpuset named <literal>two</literal> only has CPU2
-     assigned to it, once we moved the unbound kernel threads from
+     assigned to it, after it was moved the unbound kernel threads from
      <literal>root</literal> to <literal>two</literal>, their affinity masks
      got automatically changed to only use CPU2. This is evident from the
      <command>taskset</command> output which is a hex value. To really move
-     these threads back to root, we need to force the move as follows.
+     these threads back to root, force the move as follows:
     </para>
 <screen>&prompt.user;<command>cset</command> proc -k -f two -t root --force
 cset: moving all kernel threads from /two to /
@@ -692,15 +692,16 @@ cset: done</screen>
 
   <para>
    With the preceding material on the <command>set</command> and
-   <command>proc</command> subcommands, we now have the background to
-   implement the basic shielding model, like the <command>shield</command> subcommand.
+   <command>proc</command> subcommands, you now have the background to
+   implement the basic shielding model, like the <command>shield</command>
+   subcommand.
   </para>
 
   <para>
-   One may pose the question why we want to do this, especially since
-   <command>shield</command> already does it? The answer is that sometimes
-   one needs more functionality than <command>shield</command> need to
-   implement one’s shielding strategy. In those cases you need to first
+   While <command>shield</command> provides this functionality already, doing
+   this manually can still be useful. For example, to implement a shielding
+   strategy that need more functionality than <command>shield</command> can
+   provide. In such cases, you need to first
    stop using <command>shield</command> since that subcommand will interfere
    with the further application of <command>set</command> and
    <command>proc</command>. However, you will still need to implement the
@@ -745,8 +746,8 @@ user         1-3 n        0 n       0     0    /user
 system       0 n          0 n       0     0    /system</screen>
 
   <para>
-   Now, we need to move all running user processes into the
-   <literal>system</literal> cpuset.
+   Now, move all running user processes into the
+   <literal>system</literal> cpuset:
   </para>
 
 <screen>&prompt.user;<command>cset</command> proc -m -f root -t system
@@ -765,7 +766,7 @@ user         1-3 n        0 n       0      0   /user
 system       0 n          0 n       187    0   /system</screen>
 
   <para>
-   We now have the basic shielding setup. Since all user space tasks are
+   This completes the basic shielding setup. Since all user space tasks are
    running in <literal>system</literal>, anything that is spawned from them
    will also run in <literal>system</literal>. The <literal>user</literal>
    cpuset has nothing running in it unless you put tasks there with the
@@ -819,11 +820,11 @@ system       0 n          0 n       257   0    /system</screen>
   </para>
 
   <para>
-   We define a shielding setup as in the previous section where we have a
+   Define a shielding setup as in the previous section where there is a
    <literal>system</literal> cpuset with only CPU0 that takes care of
    <quote>unimportant</quote> system tasks. You will usually require this
-   type of cpuset since it forms the basis of shielding. We modify the
-   strategy to not use a <literal>user</literal> cpuset; instead we create
+   type of cpuset since it forms the basis of shielding. Modify the
+   strategy to not use a <literal>user</literal> cpuset&mdash;instead create
    several new cpusets each holding one more CPU than the other. These
    cpusets will be called <literal>prio_low</literal> with one CPU,
    <literal>prio_med</literal> with two CPUs, <literal>prio_high</literal>
@@ -870,8 +871,7 @@ system       0 n          0 n       257   0    /system</screen>
   </para>
 
   <para>
-   Now, we start with a clean slate and build the appropriate cpusets as
-   follows.
+   Start with a clean slate and build the appropriate cpusets as follows:
   </para>
 
 <screen>&prompt.user;<command>cset</command> set -r
@@ -923,8 +923,8 @@ prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</
   </note>
 
   <para>
-   The strategy is now implemented and we now move all user space tasks
-   and all movable kernel threads into the <literal>system</literal>
+   The strategy is now implemented. This means that you can move all user space
+   tasks and all movable kernel threads into the <literal>system</literal>
    cpuset to activate the shield.
   </para>
 

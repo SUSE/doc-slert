@@ -77,10 +77,12 @@
 
  <sect1 xml:id="sec-shielding-model-ex">
   <title>A simple shielding example</title>
-  <para> Assume that we have a four-core machine that has uniform memory access.
+  <para>
+   Assume a four-core machine that has uniform memory access.
    This means there are four CPUs at your disposal and there is only one memory node
-   available. On such machines, we do not need to specify any memory node
-   parameters to cset, it sets up the only available memory node by default. </para>
+   available. On such machines, there is no need to specify any memory node
+   parameters to cset, it sets up the only available memory node by default.
+  </para>
 
   <para>
    Usually, one wants to dedicate as many CPUs to the shield as possible and
@@ -150,8 +152,8 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
     It is important to move all possible tasks from the
     <literal>root</literal> &cpuset; to the unshielded
     <literal>system</literal> &cpuset; because a task’s &cpuset; property is
-    inherited by its children. Since we’ve moved all running tasks
-    (including init) to the unshielded <literal>system</literal> &cpuset;,
+    inherited by its children. As all running tasks (including init) have been
+    moved to the unshielded <literal>system</literal> &cpuset;,
     that means that any new tasks that are spawned will also run in the
     unshielded <literal>system</literal> &cpuset;.
    </para>
@@ -214,7 +216,7 @@ root     84    2     Sf50 [IRQ-9
 alext    31796 31789 Soth less
 root     32653 25222 Roth python ./cset shield --unshield -v</screen>
    <para>
-    Note that the listing is abbreviated; we do have 251 tasks running in
+    The previous listing is abbreviated&mdash;there are 251 tasks running in
     the <literal>system</literal> set. However, the <literal>SPPr</literal>
     field may need a little
     explanation. SPPr stands for <literal>State, Policy and
@@ -247,8 +249,8 @@ cset: done</screen>
   <sect1 xml:id="sec-shielding-model-ex-move">
    <title>Moving interesting tasks into and out of the shield</title>
    <para>
-    Now that we have a shield running, the objective is to run our
-    <quote>important</quote> processes in that shield. These processes can
+    Now that a shield is running, the objective is to run processes that
+    you have categorized as important in that shield. These processes can
     be anything, but usually they are directly related to the purpose of the
     machine. There are two ways to run tasks in the shield:
    </para>
@@ -324,7 +326,7 @@ cset: done</screen>
      The next command lists the status of the shield again. There are two
      tasks running shielded: our new shell and the cset status command
      itself. Remember that the &cpuset; property of a task is inherited by its
-     children. Since we ran the new shell in the shield, its child, which is
+     children. Since running the new shell in the shield, its child, which is
      the status command, also ran in the shield.
     </para>
     <tip>
@@ -336,8 +338,8 @@ cset: done</screen>
      </para>
     </tip>
     <para>
-     The last command exits the shell after which we request a shield status
-     again and see that, once again, it does not contain any tasks.
+     The last command exits the shell. After this, shield status is requested
+     again but again, it does not contain any tasks.
     </para>
     <para>
      You may have noticed in the output above that both the new shell and
@@ -428,7 +430,7 @@ alext    14241 14212 Roth python ./cset shield -s -v</screen>
      thread in that process.
     </para>
     <para>
-     In the following example, we move the current shell into the shield
+     The following example moves the current shell into the shield
      with a range PIDSPEC and back out with the Bash variable for the
      current PID.
     </para>
