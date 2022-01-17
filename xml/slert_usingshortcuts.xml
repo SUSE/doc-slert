@@ -90,7 +90,7 @@
   </para>
 
   <para>
-   For the common use case of actually shielding either a PIDSPEC or execing
+   For the common use case of actually shielding either a PIDSPEC or executing
    a command into the shield, the following <command>cset</command> commands
    are equivalent.
   </para>

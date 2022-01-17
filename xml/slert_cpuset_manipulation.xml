@@ -192,7 +192,7 @@ three        3 n          0 n       0     0    /one/two/three</screen>
    Now that you know how to create, rename and destroy cpusets with the
    <command>set</command> subcommand, the next step is to manage threads and
    processes in those cpusets. The subcommand to do this is called
-   <command>proc</command> and it allows you to exec processes into a
+   <command>proc</command> and it allows you to execute processes into a
    cpuset, move existing tasks around existing cpusets, and list tasks
    running in specified cpusets. For the following examples, let us assume a
    cpuset setup of two sets as follows:
@@ -301,10 +301,10 @@ alext    16165     1 Soth beagled /usr/lib64/beagle/BeagleDaemon.exe --bg --auto
   <sect2 xml:id="sec-shielding-cpuset-proc-exec">
    <title>Execing tasks with <literal>proc</literal></title>
    <para>
-    To exec a task into a cpuset, the <command>proc</command> subcommand
+    To execute a task into a cpuset, the <command>proc</command> subcommand
     needs to be employed with the <option>-e/--exec</option> option. Let us
-    exec a shell into the cpuset named <literal>two</literal> in our set.
-    First we check to see what is running that set:
+    execute a shell into the cpuset named <literal>two</literal> in our set.
+    First, check to see what is running that set:
    </para>
 <screen>&prompt.user;<command>cset</command> proc -l -s two
 cset: "two" cpuset of CPUSPEC(2) with 0 tasks running
@@ -322,10 +322,10 @@ root     20981 20955 Roth python ./cset proc -l two</screen>
     You can see that initially, <literal>two</literal> had nothing running
     in it. After the completion of the second command, we list
     <literal>two</literal> again and see that there are two tasks running:
-    the shell which we execed and the <command>python cset</command> command
+    the shell which you executed and the <command>python cset</command> command
     that is listing the cpuset. The reason for the second task is that the
     cpuset property of a running task is inherited by all its children.
-    Since we executed the listing command from the new shell which was bound
+    Because you executed the listing command from the new shell which was bound
     to cpuset two, the resulting process for the listing is also bound to
     cpuset <literal>two</literal>. Let us test that by running a new
     shell with no prefixed <command>cset</command> command.
@@ -349,10 +349,10 @@ root     21147 21118 Roth python ./cset proc -l two</screen>
     <title>Separating the Tool Options From the cset Command</title>
     <para>
      <command>cset</command> follows the tradition of separating the tool
-     options from the command to be execed options with a double dash
+     options from the command to be executed options with a double hyphen
      (<literal>--</literal>). This is not shown in this simple example, but
-     if the command you want to exec also takes options, separate them with
-     the double dash as follows:
+     if the command you want to execute also takes options, separate them with
+     the double hyphen as follows:
     </para>
 <screen>&prompt.user;<command>cset</command> proc -s myset -e mycommand -- -v</screen>
     <para>
@@ -361,21 +361,24 @@ root     21147 21118 Roth python ./cset proc -l two</screen>
     </para>
    </note>
    <tip>
-    <title>Execing a Shell Into the Shield Is Useful</title>
+    <title>Executing a shell into a cpuset</title>
     <para>
-     Execing a shell into a cpuset is a useful way to experiment with
+     Executing a shell into a cpuset is a useful way to experiment with
      running tasks in that cpuset since all children of the shell will also
-     run in the same cpuset. Finally, if you misspell the command to be
-     execed, the result may be puzzling. For example:
+     run in the same cpuset.
     </para>
    </tip>
+   <para>
+    If you misspell the command to be
+    executed, the result may be puzzling. For example:
+   </para>
 <screen>&prompt.user;<command>cset</command> proc -s two -e blah-blah
 cset: --> last message, executed args into cpuset "/two", new pid is: 21655
 cset: **> [Errno 2] No such file or directory</screen>
    <para>
     The result is no new process even though a new PID is output. The reason
     for the message is of course that the <command>cset</command> process
-    forked in preparation for exec, but the command
+    forked in preparation of the execution, but the command
     <command>blah-blah</command> was not found to execute it.
    </para>
   </sect2>
@@ -383,7 +386,7 @@ cset: **> [Errno 2] No such file or directory</screen>
   <sect2 xml:id="sec-shielding-cpuset-proc-move">
    <title>Moving tasks with <command>proc</command></title>
    <para>
-    Although the ability to exec a task into a cpuset is fundamental, you
+    Although the ability to execute a task into a cpuset is fundamental, you
     will most likely be moving tasks between cpusets more often. Moving
     tasks is accomplished with the <option>-m/--move</option> and
     <option>-p/--pid</option> options to the <command>proc</command>
@@ -484,8 +487,8 @@ cset: "two" cpuset of CPUSPEC(2) with 0 tasks running</screen>
     task IDs in the PIDSPEC belongs to a thread in a process container, then
     <emphasis>all</emphasis> the sibling threads in that process container
     will also get moved. This flag provides an easy mechanism to move all
-    threads of a process by simply specifying one thread in that process. In
-    the following example, we move all the threads running in cpuset
+    threads of a process by simply specifying one thread in that process.
+    The following example moves all threads running in cpuset
     <literal>three</literal> to cpuset <literal>two</literal> by using the
     <option>--threads</option> flag.
    </para>
