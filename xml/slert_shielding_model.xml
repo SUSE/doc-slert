@@ -255,7 +255,7 @@ cset: done</screen>
    <itemizedlist mark="bullet" spacing="normal">
     <listitem>
      <para>
-      Exec a process into the shield
+      Execute a process into the shield
      </para>
     </listitem>
     <listitem>
@@ -265,12 +265,12 @@ cset: done</screen>
     </listitem>
    </itemizedlist>
    <sect2 xml:id="sec-shielding-model-ex-move-exec">
-    <title>Execing a process into the shield</title>
+    <title>Executing a process into the shield</title>
     <para>
      Running a new process in the shield can be done with the
-     <option>-e/--exec</option> option to the <command>shield</command>
+     <option>-e</option>/<option>--exec</option> option to the <command>shield</command>
      subcommand. This is the simplest way to get a task to run in the
-     shield. For this example, let’s exec a new Bash shell into the shield
+     shield. For this example, execute a new Bash shell into the shield
      with the following commands.
     </para>
 <screen>&prompt.user;<command>cset</command> shield -s
@@ -302,7 +302,7 @@ cset: done</screen>
      are no tasks running in it.
     </para>
     <para>
-     The second command execs the Bash shell into the shield with the
+     The second command executes the Bash shell into the shield with the
      <option>-e</option> option. The last message of <command>cset</command>
      lists the PID of the new process.
     </para>
@@ -310,10 +310,10 @@ cset: done</screen>
      <title>Separating the tool options from the <command>cset</command> command</title>
      <para>
       <command>cset</command> follows the tradition of separating the tool
-      options from the command to be execed options with a double dash
+      options from the command to be executed options with a double hyphen
       (<literal>--</literal>). This is not shown in this simple example, but
-      if the command you want to exec also takes options, separate them with
-      the double dash as follows:
+      if the command you want to execute also takes options, separate them with
+      the double hyphen as follows:
      </para>
 <screen>&prompt.user;<command>cset</command> shield -e mycommand -- -v</screen>
      <para>
@@ -328,9 +328,9 @@ cset: done</screen>
      the status command, also ran in the shield.
     </para>
     <tip>
-     <title>Execing a shell into the shield is useful</title>
+     <title>Executing a shell into a shield</title>
      <para>
-      Execing a shell into the shield is a useful way to experiment with
+      Executing a shell into a shield is a useful way to experiment with
       running tasks in the shield since all children of the shell will also
       run in the shield.
      </para>
@@ -361,7 +361,7 @@ alext    14241 14212 Roth python ./cset shield -s -v</screen>
    <sect2 xml:id="sec-shielding-model-ex-move-shield-unshield">
     <title>Moving a running task into and out of the shield</title>
     <para>
-     While execing a process into the shield is undoubtedly useful, most of
+     While executing a process into the shield is undoubtedly useful, most of
      the time, you will want to move already running tasks into and out of
      the shield. The <command>cset</command> shield subcommand includes two
      options for doing this: <option>-s/--shield</option> and
