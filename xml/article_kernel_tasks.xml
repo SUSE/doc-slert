@@ -39,14 +39,14 @@
  
   <para>
    A process might be unable to run at any time and for different reasons.
-   For example, the process is paused because it is waiting for input or the
-   scheduler has decided it has run the maximum amount of time units allowed
-   and that it must yield to another process.
+   For example, the process can be paused because it is waiting for input or
+   the scheduler has decided it has run the maximum amount of time units
+   allowed and that it must yield to another process.
   </para>
   
   <para>
    The following list describes the most important tasks needed for programming
-   a Linux Kernel.
+   the Linux Kernel.
   </para>
 
 <variablelist>
@@ -59,7 +59,7 @@
     Marks newly created tasks to prevent from external events (e.g. signals
     delivery) until the process is fully initialized and ready for running.
    </para>
-   <para>This taks is not visible from the userspace.</para>
+   <para>This task is not visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -73,7 +73,7 @@
     <parameter>Zombie</parameter> until their parent task collects their exit
     status.
    </para>
-   <para>This taks is visible from the userspace.</para>
+   <para>This task is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -87,7 +87,7 @@
     queue waiting to run. This process is either executing on CPU or waiting
     for the CPU to execute.
    </para>
-   <para>This taks is visible from the userspace.</para>
+   <para>This task is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -104,7 +104,7 @@
     <parameter>TASK_INTERRUPTIBLE</parameter> is used to pause a task while
     waiting for an external signal but it is still able to interact with the
     userspace via signals.</para>
-   <para>This taks is visible from the userspace.</para>
+   <para>This task is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -116,11 +116,11 @@
    <para>
     Task is blocked while waiting for an event or condition, as for example
     <parameter>mutex</parameter>. Any userspace interaction is deferred during
-    this time. Taks blocked in this state, contribute to the load average. If
+    this time. Tasks blocked in this state, contribute to the load average. If
     this tasks is blocked for too long, it can get reported by the hung task
     detector.
     </para>
-   <para>This taks is visible from the userspace.</para>
+   <para>This task is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -139,7 +139,7 @@
     <parameter>I/O</parameter> operation on NFS mount, but it allows to kill
     the waiting application in case the operation takes too long.
    </para>
-   <para>This taks is not visible from the userspace.</para>
+   <para>This task is not visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -154,11 +154,11 @@
    average and is not reported by the hung task detector.
   </para>
   <para>
-   <parameter>TAKS_IDLE</parameter> is used for tasks that are expected to
+   <parameter>TASK_IDLE</parameter> is used for tasks that are expected to
    be blocked for a long time, as for example with
    <parameter>schedule_timeout_idle</parameter>.
   </para>
-  <para>This taks is not visible from the userspace.</para>
+  <para>This task is not visible from the userspace.</para>
  </listitem>
  </varlistentry>
  
@@ -171,7 +171,7 @@
     Task has received a <parameter>SIGSTOP</parameter> from userspace and is
     blocked until it gets <parameter>SIGCONT</parameter>.
    </para>
-   <para>This taks is visible from the userspace.</para>
+   <para>This task is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -185,7 +185,7 @@
     on <parameter>ptrace</parameter>, see the man pages with
     <command>man ptrace(2)</command>.
    </para>
-   <para>This taks is visible from the userspace.</para>
+   <para>This task is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -197,7 +197,7 @@
    <para>
     A kernel thread is parked.
    </para>
-   <para>This taks is visible from the userspace.</para>
+   <para>This task is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
