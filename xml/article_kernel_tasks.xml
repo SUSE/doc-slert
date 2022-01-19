@@ -29,7 +29,7 @@
    <dm:translation>no</dm:translation>
   </dm:docmanager>
  </info>
- <sect1 xml:id="sec-slert-kernel-tasks-intro">
+ <section xml:id="sec-slert-kernel-tasks-intro">
   <title>Processes and task states</title>
 
   <para>
@@ -201,17 +201,27 @@
    <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
- 
-</variablelist>
+ </variablelist>
 
-  <sect2 xml:id="sec-slert-kernel-states-Diagram">
-   <title>Task life cycle</title>
-   <para>
-    The following figure illustrates the life cycle of a task and its possible
-    task states.
-   </para>
-  </sect2>
- </sect1>
+  <para>
+   The following figure illustrates the life cycle of a task and its possible
+   task states.
+  </para>
+  <figure>
+   <title>Task life cycle and states</title>
+   <mediaobject>
+    <imageobject role="fo">
+     <imagedata fileref="kernel_tasks.svg" width="90%" format="SVG"/>
+    </imageobject>
+    <imageobject role="html">
+     <imagedata fileref="kernel_tasks.svg" width="80%" format="SVG"/>
+    </imageobject>
+    <textobject role="description">
+     <phrase>Task life cycle and states</phrase>
+    </textobject>
+   </mediaobject>
+  </figure>
+ </section>
  
  <xi:include href="common_legal.xml" parse="xml"/>
 </article>

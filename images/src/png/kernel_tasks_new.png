@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:xhtml="http://www.w3.org/1999/xhtml"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="286.22195mm"
+   height="173.9668mm"
+   viewBox="0 0 286.22195 173.9668"
+   version="1.1"
+   id="svg130"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="kernel_tasks_new.svg">
+  <defs
+     id="defs124">
+    <rect
+       x="133.33217"
+       y="135.7067"
+       width="3.2430716"
+       height="11.947132"
+       id="rect873" />
+    <marker
+       markerWidth="3.0606589"
+       markerHeight="4.7071061"
+       refX="1.5303295"
+       refY="2.3535531"
+       orient="auto"
+       id="marker8836481"
+       inkscape:stockid="marker8836481">
+      <path
+         style="fill:#ffffff;fill-opacity:0;stroke:#0c322c;stroke-width:0.999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 0.35355295,0.35355295 2.3535531,2.3535531 0.35355295,4.3535533"
+         id="path2261" />
+    </marker>
+    <marker
+       markerWidth="3.0606589"
+       markerHeight="4.7071061"
+       refX="1.5303295"
+       refY="2.3535531"
+       orient="auto"
+       id="marker8836481-6"
+       inkscape:stockid="marker8836481">
+      <path
+         style="fill:#ffffff;fill-opacity:0;stroke:#0c322c;stroke-width:0.999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 0.35355295,0.35355295 2.3535531,2.3535531 0.35355295,4.3535533"
+         id="path2261-7" />
+    </marker>
+    <marker
+       markerWidth="3.0606589"
+       markerHeight="4.7071061"
+       refX="1.5303295"
+       refY="2.3535531"
+       orient="auto"
+       id="marker8836481-3"
+       inkscape:stockid="marker8836481">
+      <path
+         style="fill:#ffffff;fill-opacity:0;stroke:#0c322c;stroke-width:0.999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 0.35355295,0.35355295 2.3535531,2.3535531 0.35355295,4.3535533"
+         id="path2261-56" />
+    </marker>
+    <marker
+       markerWidth="3.0606589"
+       markerHeight="4.7071061"
+       refX="1.5303295"
+       refY="2.3535531"
+       orient="auto"
+       id="marker8836481-9"
+       inkscape:stockid="marker8836481">
+      <path
+         style="fill:#ffffff;fill-opacity:0;stroke:#0c322c;stroke-width:0.999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 0.35355295,0.35355295 2.3535531,2.3535531 0.35355295,4.3535533"
+         id="path2261-1" />
+    </marker>
+    <marker
+       markerWidth="3.0606589"
+       markerHeight="4.7071061"
+       refX="1.5303295"
+       refY="2.3535531"
+       orient="auto"
+       id="marker8836481-0"
+       inkscape:stockid="marker8836481">
+      <path
+         style="fill:#ffffff;fill-opacity:0;stroke:#0c322c;stroke-width:0.999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 0.35355295,0.35355295 2.3535531,2.3535531 0.35355295,4.3535533"
+         id="path2261-9" />
+    </marker>
+    <marker
+       markerWidth="3.0606589"
+       markerHeight="4.7071061"
+       refX="1.5303295"
+       refY="2.3535531"
+       orient="auto"
+       id="marker8836481-60"
+       inkscape:stockid="marker8836481">
+      <path
+         style="fill:#ffffff;fill-opacity:0;stroke:#0c322c;stroke-width:0.999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 0.35355295,0.35355295 2.3535531,2.3535531 0.35355295,4.3535533"
+         id="path2261-6" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.85044643"
+     inkscape:cx="567.15507"
+     inkscape:cy="564.83349"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1892"
+     inkscape:window-height="868"
+     inkscape:window-x="26"
+     inkscape:window-y="98"
+     inkscape:window-maximized="0"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1520"
+       originx="-5.5781743"
+       originy="-7.5985023" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata127">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-5.5781746,-7.5985025)">
+    <g
+       id="g1518"
+       transform="translate(5.2916669)">
+      <path
+         id="path451"
+         style="fill:#30ba78;stroke:#30ba78;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none"
+         d="m 118.32715,50.196419 v 6.085416 h 52.91666 v -6.085416 z" />
+      <path
+         d="m 118.32716,56.282045 v 28.31042 h 52.91667 v -28.31042"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="none"
+         id="path453"
+         style="fill:none;stroke:#30ba78;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none" />
+      <g
+         fill="#000000"
+         font-family="Helvetica"
+         font-weight="bold"
+         pointer-events="none"
+         text-anchor="middle"
+         font-size="12px"
+         id="g459"
+         transform="matrix(0.26458333,0,0,0.26458333,2.0570547,7.4773233)">
+        <text
+           x="539.5"
+           y="176"
+           id="text457"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:'Poppins Bold'">TASK_RUNNING</text>
+      </g>
+      <g
+         transform="matrix(0.26458333,0,0,0.26458333,3.2334081,6.1292183)"
+         id="g465">
+        <switch
+           id="switch463">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 235px; margin-left: 535px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">ready but not running<xhtml:br />
+
+
+or<xhtml:br />
+
+
+running</xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="535"
+             y="239"
+             fill="#000000"
+             font-family="Helvetica"
+             font-size="12px"
+             text-anchor="middle"
+             id="text461"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins"><tspan
+               sodipodi:role="line"
+               id="tspan895"
+               x="535"
+               y="239">ready but not running</tspan><tspan
+               sodipodi:role="line"
+               id="tspan897"
+               x="535"
+               y="254">or running</tspan></text>
+        </switch>
+      </g>
+    </g>
+    <g
+       id="g1496"
+       transform="translate(6.3135309)">
+      <path
+         d="M 1.3813309,13.948716 V 7.8632988 H 54.297997 v 6.0854172"
+         fill="#ffffff"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="none"
+         id="path467"
+         style="fill:#0c322c;stroke:#0c322c;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none" />
+      <path
+         d="M 1.3813309,13.948716 V 42.259135 H 54.297997 V 13.948716"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="none"
+         id="path469"
+         style="stroke:#0c322c;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none" />
+      <path
+         d="M 1.3813309,13.948716 H 54.297997"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="none"
+         id="path471"
+         style="stroke-width:0.264583" />
+      <g
+         fill="#000000"
+         font-family="Helvetica"
+         font-weight="bold"
+         pointer-events="none"
+         text-anchor="middle"
+         font-size="12px"
+         id="g475"
+         transform="matrix(0.26458333,0,0,0.26458333,1.3813309,7.8632988)">
+        <text
+           x="99.999992"
+           y="14.042001"
+           id="text473"
+           style="fill:#ffffff"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:'Poppins Bold';fill:#ffffff"
+             id="tspan867">TASK_NEW</tspan></text>
+      </g>
+      <g
+         transform="matrix(0.26458333,0,0,0.26458333,1.3019559,10.064634)"
+         id="g481">
+        <switch
+           id="switch479">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 60px; margin-left: 100px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">
+                  <xhtml:div>Newly created task,</xhtml:div>
+                  <xhtml:div> waiting to run</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="100"
+             y="64"
+             fill="#000000"
+             font-family="Helvetica"
+             font-size="12px"
+             text-anchor="middle"
+             id="text477"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins"><tspan
+               sodipodi:role="line"
+               id="tspan899"
+               x="100"
+               y="64">Newly created task,</tspan><tspan
+               sodipodi:role="line"
+               id="tspan901"
+               x="100"
+               y="79">waiting to run</tspan></text>
+        </switch>
+      </g>
+    </g>
+    <g
+       id="g1505"
+       transform="translate(4.4042298)">
+      <path
+         id="path483"
+         style="fill:#fe7c3f;stroke:#fe7c3f;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         d="m 885.2207,29.71875 v 23 h 200 v -23 z"
+         transform="scale(0.26458333)" />
+      <path
+         d="m 234.21466,13.948716 v 28.310419 h 52.91667 V 13.948716"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="none"
+         id="path485"
+         style="stroke:#fe7c3f;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none" />
+      <g
+         fill="#000000"
+         font-family="Helvetica"
+         font-weight="bold"
+         pointer-events="none"
+         text-anchor="middle"
+         font-size="12px"
+         id="g491"
+         transform="matrix(0.26458333,0,0,0.26458333,1.5294757,7.4773233)">
+        <text
+           x="979.5"
+           y="16"
+           id="text489"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:'Poppins Bold'">TASK_DEAD</text>
+      </g>
+      <g
+         transform="matrix(0.26458333,0,0,0.26458333,1.462292,11.173767)"
+         id="g497">
+        <switch
+           id="switch495">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 65px; margin-left: 980px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">task is ended</xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="980"
+             y="69"
+             fill="#000000"
+             font-family="Helvetica"
+             font-size="12px"
+             text-anchor="middle"
+             id="text493"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins">task is ended</text>
+        </switch>
+      </g>
+    </g>
+    <g
+       transform="matrix(0.26458333,0,0,0.26458333,1.2490399,7.7310068)"
+       id="g517">
+      <switch
+         id="switch515">
+        <foreignObject
+           style="overflow: visible; text-align: left;"
+           pointer-events="none"
+           width="100%"
+           height="100%"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div
+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 575px; margin-left: 505px;">
+            <xhtml:div
+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
+               data-drawio-colors="color: rgb(0, 0, 0); ">
+              <xhtml:div
+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">e.g.:<xhtml:br />
+
+
+TASK_IDLE</xhtml:div>
+            </xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+      </switch>
+    </g>
+    <g
+       id="g1396"
+       transform="translate(-24.364837,6.0026084)">
+      <g
+         transform="matrix(0.26458333,0,0,0.26458333,0.77570819,13.769988)"
+         id="g523">
+        <switch
+           id="switch521">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 535px; margin-left: 510px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">
+                  <xhtml:div>task is paused until</xhtml:div>
+                  <xhtml:div>signal delivery</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <g
+             id="g1317">
+            <path
+               id="path503"
+               style="fill:#90ebcd;stroke:#90ebcd;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               d="m 405.2207,509.71875 v 23 h 210 v -23 z"
+               transform="translate(-4.7207808,-29.219554)" />
+            <path
+               d="m 107.21466,140.94871 v 28.31042 h 55.5625 v -28.31042"
+               fill="none"
+               stroke="#000000"
+               stroke-miterlimit="10"
+               pointer-events="none"
+               id="path505"
+               style="stroke:#90ebcd;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none"
+               transform="matrix(3.7795276,0,0,3.7795276,-4.7207808,-29.219554)" />
+            <g
+               fill="#000000"
+               font-family="Helvetica"
+               font-weight="bold"
+               pointer-events="none"
+               text-anchor="middle"
+               font-size="12px"
+               id="g511"
+               transform="translate(0.49999748,0.50000175)">
+              <text
+                 x="505.1499"
+                 y="494.5412"
+                 id="text509"
+                 style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:'Poppins Bold'">TASK_UNINTERRUPTIBLE</text>
+            </g>
+            <g
+               id="g1417"
+               transform="translate(-4.1880228,-5.1660072)">
+              <text
+                 x="505"
+                 y="579"
+                 fill="#000000"
+                 font-family="Helvetica"
+                 font-size="12px"
+                 text-anchor="middle"
+                 id="text513"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins"><tspan
+                   sodipodi:role="line"
+                   id="tspan915"
+                   x="505"
+                   y="579">e.g.</tspan><tspan
+                   sodipodi:role="line"
+                   id="tspan917"
+                   x="505"
+                   y="594">TASK_IDLE</tspan></text>
+              <text
+                 x="510"
+                 y="539"
+                 fill="#000000"
+                 font-family="Helvetica"
+                 font-size="12px"
+                 text-anchor="middle"
+                 id="text519"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins"><tspan
+                   sodipodi:role="line"
+                   id="tspan911"
+                   x="510"
+                   y="539">task is paused until</tspan><tspan
+                   sodipodi:role="line"
+                   id="tspan913"
+                   x="510"
+                   y="554">signal delivery</tspan></text>
+            </g>
+          </g>
+        </switch>
+      </g>
+    </g>
+    <g
+       id="g1348"
+       transform="translate(-6.1218859,12.041592)">
+      <g
+         transform="matrix(0.26458333,0,0,0.26458333,1.2490399,7.7310068)"
+         id="g539">
+        <switch
+           id="switch537">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 575px; margin-left: 140px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">e.g.: <xhtml:br />
+
+
+TASK_KILLABLE </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+        </switch>
+      </g>
+      <g
+         id="g1483">
+        <path
+           id="path525"
+           style="fill:#90ebcd;stroke:#90ebcd;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 11.964644,134.86308 v 6.08542 h 54.239582 v -6.08542 z" />
+        <path
+           d="m 11.964664,140.94871 v 28.31042 h 54.239583 v -28.31042"
+           fill="none"
+           stroke="#000000"
+           stroke-miterlimit="10"
+           pointer-events="none"
+           id="path527"
+           style="stroke:#90ebcd;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" />
+        <g
+           fill="#000000"
+           font-family="Helvetica"
+           font-weight="bold"
+           pointer-events="none"
+           text-anchor="middle"
+           font-size="12px"
+           id="g533"
+           transform="matrix(0.26458333,0,0,0.26458333,1.5532872,7.4773208)">
+          <text
+             x="142"
+             y="496"
+             id="text531"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:'Poppins Bold'">TASK_INTERRUPTIBLE</text>
+        </g>
+        <g
+           id="g1409"
+           transform="translate(-0.51805727,-1.366839)">
+          <text
+             x="140"
+             y="579"
+             fill="#000000"
+             font-family="Helvetica"
+             font-size="12px"
+             text-anchor="middle"
+             id="text535"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins"
+             transform="matrix(0.26458333,0,0,0.26458333,1.2490398,7.7310068)"><tspan
+               sodipodi:role="line"
+               id="tspan907"
+               x="140"
+               y="579">e.g.</tspan><tspan
+               sodipodi:role="line"
+               id="tspan909"
+               x="140"
+               y="594">TASK_KILLABLE</tspan></text>
+          <g
+             transform="matrix(0.26458333,0,0,0.26458333,1.2490399,7.7310068)"
+             id="g545">
+            <switch
+               id="switch543">
+              <foreignObject
+                 style="overflow: visible; text-align: left;"
+                 pointer-events="none"
+                 width="100%"
+                 height="100%"
+                 requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                <xhtml:div
+                   style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 535px; margin-left: 145px;">
+                  <xhtml:div
+                     style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                     data-drawio-colors="color: rgb(0, 0, 0); ">
+                    <xhtml:div
+                       style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">
+                      <xhtml:div>task is paused but</xhtml:div>
+                      <xhtml:div> reacts on signals</xhtml:div>
+                    </xhtml:div>
+                  </xhtml:div>
+                </xhtml:div>
+              </foreignObject>
+              <text
+                 x="145"
+                 y="539"
+                 fill="#000000"
+                 font-family="Helvetica"
+                 font-size="12px"
+                 text-anchor="middle"
+                 id="text541"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins"><tspan
+                   sodipodi:role="line"
+                   id="tspan903"
+                   x="145"
+                   y="539">task is paused but</tspan><tspan
+                   sodipodi:role="line"
+                   id="tspan905"
+                   x="145"
+                   y="554">reacts on signals</tspan></text>
+            </switch>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       id="g1365"
+       transform="translate(-59.624927,12.041487)">
+      <path
+         d="m 297.71466,140.94871 v -6.08542 h 52.91666 v 6.08542"
+         fill="#ffffff"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="none"
+         id="path547"
+         style="fill:#90ebcd;stroke:#90ebcd;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none" />
+      <path
+         d="m 297.71466,140.94871 v 28.31042 h 52.91666 v -28.31042"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="none"
+         id="path549"
+         style="stroke:#90ebcd;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none" />
+      <g
+         fill="#000000"
+         font-family="Helvetica"
+         font-weight="bold"
+         pointer-events="none"
+         text-anchor="middle"
+         font-size="12px"
+         id="g555"
+         transform="matrix(0.26458333,0,0,0.26458333,1.5294929,7.3452391)">
+        <text
+           x="1219.5"
+           y="496"
+           id="text553"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:'Poppins Bold'">TASK_PARKED</text>
+      </g>
+      <g
+         id="g1443"
+         transform="translate(2.5730597,-0.70538063)">
+        <g
+           id="g1468">
+          <g
+             id="g1454"
+             transform="translate(-1.2673561)">
+            <g
+               transform="matrix(0.26458333,0,0,0.26458333,1.236341,7.9933084)"
+               id="g561">
+              <switch
+                 id="switch559">
+                <foreignObject
+                   style="overflow: visible; text-align: left;"
+                   pointer-events="none"
+                   width="100%"
+                   height="100%"
+                   requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                  <xhtml:div
+                     style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 575px; margin-left: 1215px;">
+                    <xhtml:div
+                       style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                       data-drawio-colors="color: rgb(0, 0, 0); ">
+                      <xhtml:div
+                         style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">e.g.:<xhtml:br />
+
+
+TASK_PARKED</xhtml:div>
+                    </xhtml:div>
+                  </xhtml:div>
+                </foreignObject>
+                <text
+                   x="1215"
+                   y="579"
+                   fill="#000000"
+                   font-family="Helvetica"
+                   font-size="12px"
+                   text-anchor="middle"
+                   id="text869"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins">e.g.</text>
+              </switch>
+            </g>
+            <text
+               x="1215"
+               y="579"
+               fill="#000000"
+               font-family="Helvetica"
+               font-size="12px"
+               text-anchor="middle"
+               id="text557"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins"
+               transform="matrix(0.26458333,0,0,0.26458333,1.249041,7.7310067)"><tspan
+                 sodipodi:role="line"
+                 id="tspan931"
+                 x="1215"
+                 y="579" /><tspan
+                 sodipodi:role="line"
+                 id="tspan933"
+                 x="1215"
+                 y="594">TASK_PARKED</tspan></text>
+          </g>
+          <g
+             transform="matrix(0.26458333,0,0,0.26458333,1.2490399,7.7310068)"
+             id="g567">
+            <switch
+               id="switch565">
+              <foreignObject
+                 style="overflow: visible; text-align: left;"
+                 pointer-events="none"
+                 width="100%"
+                 height="100%"
+                 requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+                <xhtml:div
+                   style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 530px; margin-left: 1210px;">
+                  <xhtml:div
+                     style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                     data-drawio-colors="color: rgb(0, 0, 0); ">
+                    <xhtml:div
+                       style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">
+                      <xhtml:div>kernel thread is<xhtml:br />
+</xhtml:div>
+                      <xhtml:div>parked<xhtml:br />
+</xhtml:div>
+                    </xhtml:div>
+                  </xhtml:div>
+                </xhtml:div>
+              </foreignObject>
+              <text
+                 x="1210"
+                 y="534"
+                 fill="#000000"
+                 font-family="Helvetica"
+                 font-size="12px"
+                 text-anchor="middle"
+                 id="text563"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins"><tspan
+                   sodipodi:role="line"
+                   id="tspan927"
+                   x="1210"
+                   y="534">kernel thread is</tspan><tspan
+                   sodipodi:role="line"
+                   id="tspan929"
+                   x="1210"
+                   y="549">parked</tspan></text>
+            </switch>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       id="g1298"
+       transform="translate(-41.570107,12.041487)">
+      <path
+         d="m 202.46466,140.94871 v -6.08542 h 52.91667 v 6.08542"
+         fill="#ffffff"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="none"
+         id="path569"
+         style="fill:#90ebcd;stroke:#90ebcd;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none" />
+      <path
+         d="m 202.46466,140.94871 v 28.31042 h 52.91667 v -28.31042"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="none"
+         id="path571"
+         style="stroke:#90ebcd;stroke-width:0.529167;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         fill="#000000"
+         font-family="Helvetica"
+         font-weight="bold"
+         pointer-events="none"
+         text-anchor="middle"
+         font-size="12px"
+         id="g577"
+         transform="matrix(0.26458333,0,0,0.26458333,1.5294967,7.3452391)">
+        <text
+           x="859.5"
+           y="496"
+           id="text575"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:'Poppins Bold'">TASK_STOPPED</text>
+      </g>
+      <g
+         transform="matrix(0.26458333,0,0,0.26458333,1.2490399,7.7310068)"
+         id="g583">
+        <switch
+           id="switch581">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 575px; margin-left: 847px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">e.g.:<xhtml:br />
+
+
+TASK_TRACED</xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+        </switch>
+      </g>
+      <g
+         id="g1430"
+         transform="translate(3.654422,-1.366839)">
+        <text
+           x="847"
+           y="579"
+           fill="#000000"
+           font-family="Helvetica"
+           font-size="12px"
+           text-anchor="middle"
+           id="text579"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins"
+           transform="matrix(0.26458333,0,0,0.26458333,1.2490409,7.7310067)"><tspan
+             sodipodi:role="line"
+             id="tspan923"
+             x="847"
+             y="579">e.g.</tspan><tspan
+             sodipodi:role="line"
+             id="tspan925"
+             x="847"
+             y="594">TASK_TRACED</tspan></text>
+        <g
+           transform="matrix(0.26458333,0,0,0.26458333,1.2490399,7.7310068)"
+           id="g589">
+          <switch
+             id="switch587">
+            <foreignObject
+               style="overflow: visible; text-align: left;"
+               pointer-events="none"
+               width="100%"
+               height="100%"
+               requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+              <xhtml:div
+                 style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 535px; margin-left: 847px;">
+                <xhtml:div
+                   style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                   data-drawio-colors="color: rgb(0, 0, 0); ">
+                  <xhtml:div
+                     style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">
+                    <xhtml:div>task is blocked until</xhtml:div>
+                    <xhtml:div>signal delivery</xhtml:div>
+                  </xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </foreignObject>
+            <text
+               x="847"
+               y="539"
+               fill="#000000"
+               font-family="Helvetica"
+               font-size="12px"
+               text-anchor="middle"
+               id="text585"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Poppins;-inkscape-font-specification:Poppins"><tspan
+                 sodipodi:role="line"
+                 id="tspan919"
+                 x="847"
+                 y="539">task is blocked until</tspan><tspan
+                 sodipodi:role="line"
+                 id="tspan921"
+                 x="847"
+                 y="554">signal delivery</tspan></text>
+          </switch>
+        </g>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       id="text871"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect873);fill:#000000;fill-opacity:1;stroke:none;" />
+    <path
+       style="fill:none;stroke:#0c322c;stroke-width:0.685104px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker8836481)"
+       d="M 60.551871,26.458333 122.2375,68.2625"
+       id="path2233"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#0c322c;stroke-width:0.685104px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker8836481-6)"
+       d="M 177.49769,69.334314 237.06666,27.00098"
+       id="path2233-5"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#0c322c;stroke-width:0.685104px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker8836481-3)"
+       d="M 150.62206,85.445407 263.52501,144.99168"
+       id="path2233-2"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#0c322c;stroke-width:0.685104px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker8836481-9)"
+       d="m 150.8125,85.725 36.5125,59.26667"
+       id="path2233-27"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#0c322c;stroke-width:0.685104px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker8836481-0)"
+       d="M 150.62206,85.445407 113.77083,145.52083"
+       id="path2233-3"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#0c322c;stroke-width:0.685104px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker8836481-60)"
+       d="M 150.3524,85.435288 34.395833,144.99168"
+       id="path2233-26"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>
