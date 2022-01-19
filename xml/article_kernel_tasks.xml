@@ -18,8 +18,8 @@
   <date><?dbtimestamp?></date>
   <abstract>
    <para>
-    The following article lists and describes the most important task modes
-    needed for programming a Linux Kernel.
+    The following article describes the most important task states needed for
+    programming the Linux Kernel.
    </para>
   </abstract>
   <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
@@ -33,20 +33,21 @@
   <title>Processes and task states</title>
 
   <para>
-   Processes can be in different states, like <parameter>running</parameter> or
-   <parameter>idle</parameter>.
+   Each process can run through different states during its life cycle,
+   like <parameter>running</parameter> or <parameter>idle</parameter>.
   </para>
  
   <para>
-   A process might be unable to run at any time and for different reasons.
+   A process might be unable to run (<parameter>idle</parameter>) at any time
+   and for different reasons.
    For example, the process can be paused because it is waiting for input or
    the scheduler has decided it has run the maximum amount of time units
    allowed and that it must yield to another process.
   </para>
   
   <para>
-   The following list describes the most important tasks needed for programming
-   the Linux Kernel.
+   The following list describes the most important task states needed for
+   programming the Linux Kernel.
   </para>
 
 <variablelist>
@@ -56,10 +57,10 @@
   </term>
   <listitem>
    <para>
-    Marks newly created tasks to prevent from external events (e.g. signals
+    Marks a newly created task to prevent from external events (e.g. signals
     delivery) until the process is fully initialized and ready for running.
    </para>
-   <para>This task is not visible from the userspace.</para>
+   <para>The task state is not visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -73,7 +74,7 @@
     <parameter>Zombie</parameter> until their parent task collects their exit
     status.
    </para>
-   <para>This task is visible from the userspace.</para>
+   <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -87,7 +88,7 @@
     queue waiting to run. This process is either executing on CPU or waiting
     for the CPU to execute.
    </para>
-   <para>This task is visible from the userspace.</para>
+   <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -104,7 +105,7 @@
     <parameter>TASK_INTERRUPTIBLE</parameter> is used to pause a task while
     waiting for an external signal but it is still able to interact with the
     userspace via signals.</para>
-   <para>This task is visible from the userspace.</para>
+   <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -120,7 +121,7 @@
     this tasks is blocked for too long, it can get reported by the hung task
     detector.
     </para>
-   <para>This task is visible from the userspace.</para>
+   <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -139,7 +140,7 @@
     <parameter>I/O</parameter> operation on NFS mount, but it allows to kill
     the waiting application in case the operation takes too long.
    </para>
-   <para>This task is not visible from the userspace.</para>
+   <para>The task state is not visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -158,7 +159,7 @@
    be blocked for a long time, as for example with
    <parameter>schedule_timeout_idle</parameter>.
   </para>
-  <para>This task is not visible from the userspace.</para>
+  <para>The task state is not visible from the userspace.</para>
  </listitem>
  </varlistentry>
  
@@ -171,7 +172,7 @@
     Task has received a <parameter>SIGSTOP</parameter> from userspace and is
     blocked until it gets <parameter>SIGCONT</parameter>.
    </para>
-   <para>This task is visible from the userspace.</para>
+   <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -185,7 +186,7 @@
     on <parameter>ptrace</parameter>, see the man pages with
     <command>man ptrace(2)</command>.
    </para>
-   <para>This task is visible from the userspace.</para>
+   <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
@@ -197,16 +198,17 @@
    <para>
     A kernel thread is parked.
    </para>
-   <para>This task is visible from the userspace.</para>
+   <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
  
 </variablelist>
 
   <sect2 xml:id="sec-slert-kernel-states-Diagram">
-   <title>Diagramm</title>
+   <title>Task life cycle</title>
    <para>
-    Insert picture here.
+    The following figure illustrates the life cycle of a task and its possible
+    task states.
    </para>
   </sect2>
  </sect1>
