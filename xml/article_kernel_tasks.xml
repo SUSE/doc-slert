@@ -117,7 +117,7 @@
    <para>
     Task is blocked while waiting for an event or condition, as for example
     <parameter>mutex</parameter>. Any userspace interaction is deferred during
-    this time. Tasks blocked in this state, contribute to the load average. If
+    this time. Tasks blocked in this state contribute to the load average. If
     this tasks is blocked for too long, it can get reported by the hung task
     detector.
     </para>
