@@ -40,9 +40,10 @@
   <para>
    A process might be unable to run (<parameter>idle</parameter>) at any time
    and for different reasons.
-   For example, the process can be paused because it is waiting for input or
-   the scheduler has decided it has run the maximum amount of time units
-   allowed and that it must yield to another process.
+   For example, the process can be paused because it is waiting for input.
+   Another reason could be, that the Kernel scheduler has decided it has run
+   the maximum amount of time units allowed and that it must yield to another
+   process.
   </para>
   
   <para>
@@ -57,8 +58,9 @@
   </term>
   <listitem>
    <para>
-    Marks a newly created task to prevent from external events (e.g. signals
-    delivery) until the process is fully initialized and ready for running.
+    Task is newly created task and prevented from external events (for example,
+    signal delivery) until the process is fully initialized and ready for
+    running.
    </para>
    <para>The task state is not visible from the userspace.</para>
   </listitem>
@@ -132,8 +134,8 @@
   <listitem>
    <para>
     Task is uninterruptible put to sleep which allows to wake up on a fatal
-    signal, e.g. <parameter>SIGKILL</parameter>. The task contributes to the
-    load average and is not considered for hung task detectors.
+    signal, for example: <parameter>SIGKILL</parameter>. The task contributes
+    to the load average and is not considered for hung task detectors.
    </para>
    <para>
     <parameter>TASK_KILLABLE</parameter> is used when waiting for an
@@ -196,7 +198,12 @@
   </term>
   <listitem>
    <para>
-    A kernel thread is parked.
+    Task parks a kernel thread. It is not running and held in a well defined
+    state. This taks is used to guarantee that no interference of a kthread
+    with the ongoing operation occurs, for example:
+    <parameter>cpu hotplug</parameter>.
+    2:59
+    an example would be cpu hotplugThe thread is It can easily be woken up.
    </para>
    <para>The task state is visible from the userspace.</para>
   </listitem>
@@ -207,7 +214,7 @@
    The following figure illustrates the life cycle of a task and its possible
    task states.
   </para>
-  <figure>
+  <figure xml:id="kernel-task-diagram">
    <title>Task life cycle and states</title>
    <mediaobject>
     <imageobject role="fo">
