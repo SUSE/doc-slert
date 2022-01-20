@@ -13,7 +13,7 @@
    version="1.1"
    id="svg992"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="kernel_tasks_new_Jana.svg">
+   sodipodi:docname="kernel_tasks.svg">
   <defs
      id="defs986">
     <marker
@@ -422,9 +422,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.3182814"
+     inkscape:zoom="0.83972969"
      inkscape:cx="344.55998"
-     inkscape:cy="488.39322"
+     inkscape:cy="365.69504"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -498,7 +498,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -674,12 +674,12 @@
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#0c322c;stroke-width:0.688253;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker2563);marker-mid:url(#marker2563);marker-end:url(#EmptyTriangleOutL)"
-       d="M 104.12293,140.37974 H 55.872103"
+       d="M 92.48126,140.37974 H 55.342936"
        id="path2233-0"
        sodipodi:nodetypes="cc" />
     <g
        id="g1148"
-       transform="translate(4.7727948,41.043645)">
+       transform="translate(-6.8688725,37.339476)">
       <g
          id="g1753-3"
          transform="translate(141.76931,3.1337453)">
@@ -750,7 +750,7 @@
     </g>
     <g
        id="g993"
-       transform="translate(5.5026041,39.747242)">
+       transform="translate(-4.551563,39.747242)">
       <g
          id="g1753-3-9"
          transform="translate(141.16917,48.417895)">
@@ -821,7 +821,7 @@
     </g>
     <g
        id="g1201"
-       transform="translate(2.4954086,40.170346)">
+       transform="translate(-8.0879252,40.170346)">
       <g
          id="g1753-3-9-3"
          transform="translate(143.94989,91.982537)">
@@ -892,7 +892,7 @@
     </g>
     <g
        id="g1133"
-       transform="translate(1.9405891,77.140063)">
+       transform="translate(-9.7010781,73.435894)">
       <g
          id="g1753-3-9-3-0"
          transform="translate(144.47955,99.00055)">
@@ -963,17 +963,17 @@
     </g>
     <path
        style="fill:none;stroke:#0c322c;stroke-width:0.652481px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 105.45434,166.21956 H 157.9588"
+       d="M 95.400137,166.21956 H 147.90457"
        id="path2233-4"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#0c322c;stroke-width:0.652481px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 104.99138,122.12992 h 53.5628"
+       d="m 94.93718,122.12992 h 53.56277"
        id="path2233-5"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#0c322c;stroke-width:0.510277;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 158.63185,210.28695 -53.51893,-0.16003 -0.30336,-131.835847 h 53.95498"
+       d="M 146.99011,206.58276 93.471219,206.42273 93.167859,74.586904 H 147.1228"
        id="path2514"
        sodipodi:nodetypes="cccc" />
   </g>
