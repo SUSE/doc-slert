@@ -33,7 +33,7 @@
   <title>Processes and task states</title>
 
   <para>
-   Each process can run through different states during its life cycle,
+   Each process runs through different states during its life cycle,
    like <parameter>running</parameter> or <parameter>idle</parameter>.
   </para>
  
