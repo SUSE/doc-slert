@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
+                 type="text/xml"
+                 title="Profiling step"?>
+<!DOCTYPE article
+[
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
+]>
+<article version="5.0" xml:lang="en" xml:id="article-kernel-tasks"
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+ <title>Processes and task states for Linux Kernel programming</title>
+ <info><productname>&productname;</productname>
+  <productnumber>&productnumber;</productnumber>
+  <xi:include href="common_copyright_gfdl.xml" parse="xml"/>
+  <date><?dbtimestamp?></date>
+  <abstract>
+   <para>
+    The following article describes the most important task states needed for
+    programming the Linux Kernel.
+   </para>
+  </abstract>
+  <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
+   <dm:bugtracker>
+    <dm:assignee>julia.faltenbacher@suse.com</dm:assignee>
+   </dm:bugtracker>
+   <dm:translation>no</dm:translation>
+  </dm:docmanager>
+ </info>
+ <section xml:id="sec-slert-kernel-tasks-intro">
+  <title>Processes and task states</title>
+
+  <para>
+   Each process runs through different states during its life cycle,
+   like <parameter>running</parameter> or <parameter>idle</parameter>.
+  </para>
+ 
+  <para>
+   A process might be unable to run (<parameter>idle</parameter>) at any time
+   and for different reasons.
+   For example, the process can be paused because it is waiting for input.
+   Another reason could be, that the Kernel scheduler has decided it has run
+   the maximum amount of time units allowed and that it must yield to another
+   process.
+  </para>
+  
+  <para>
+   The following list describes the most important task states needed for
+   programming the Linux Kernel.
+  </para>
+
+<variablelist>
+ <varlistentry>
+  <term>
+   <parameter>TASK_NEW</parameter>
+  </term>
+  <listitem>
+   <para>
+    Task is newly created task and prevented from external events (for example,
+    signal delivery) until the process is fully initialized and ready for
+    running.
+   </para>
+   <para>The task state is not visible from the userspace.</para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_DEAD</parameter>
+  </term>
+  <listitem>
+   <para>
+    Task is ended but not deleted from the process table. It can be reported as
+    <parameter>Zombie</parameter> until their parent task collects their exit
+    status.
+   </para>
+   <para>The task state is visible from the userspace.</para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_RUNNING</parameter>
+  </term>
+  <listitem>
+   <para>
+    Task is runnable, and it is either currently running or on a run
+    queue waiting to run. This process is either executing on CPU or waiting
+    for the CPU to execute.
+   </para>
+   <para>The task state is visible from the userspace.</para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_INTERRUPTIBLE</parameter>
+  </term>
+  <listitem>
+   <para>
+    Task is blocked but can react to signals sent from the userspace. As soon as
+    the task is woken up, it changes to <parameter>TASK_RUNNING</parameter>.
+   </para>
+   <para>
+    <parameter>TASK_INTERRUPTIBLE</parameter> is used to pause a task while
+    waiting for an external signal. However, the task is still able to interact with the
+    userspace via signals.</para>
+   <para>The task state is visible from the userspace.</para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_UNINTERUPTIBLE</parameter>
+  </term>
+  <listitem>
+   <para>
+    Task is blocked while waiting for an event or condition, as for example
+    <parameter>mutex</parameter>. Any userspace interaction is deferred during
+    this time. Tasks blocked in this state contribute to the load average. If
+    this tasks is blocked for too long, it can get reported by the hung task
+    detector.
+    </para>
+   <para>The task state is visible from the userspace.</para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_KILLABLE</parameter>
+  </term>
+  <listitem>
+   <para>
+    Task is uninterruptible put to sleep which allows to wake up on a fatal
+    signal, for example: <parameter>SIGKILL</parameter>. The task contributes
+    to the load average and is not considered for hung task detectors.
+   </para>
+   <para>
+    <parameter>TASK_KILLABLE</parameter> is used when waiting for an
+    <parameter>I/O</parameter> operation on NFS mount, but it allows to kill
+    the waiting application in case the operation takes too long.
+   </para>
+   <para>The task state is not visible from the userspace.</para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+ <term>
+  <parameter>TASK_IDLE</parameter>
+ </term>
+ <listitem>
+  <para>
+   Task is uninterruptible put to sleep until a condition evaluates to
+   <parameter>TRUE</parameter>. This task does not contribute to the load
+   average and is not reported by the hung task detector.
+  </para>
+  <para>
+   <parameter>TASK_IDLE</parameter> is used for tasks that are expected to
+   be blocked for a long time, as for example with
+   <parameter>schedule_timeout_idle</parameter>.
+  </para>
+  <para>The task state is not visible from the userspace.</para>
+ </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_STOPPED</parameter>
+  </term>
+  <listitem>
+   <para>
+    Task has received a <parameter>SIGSTOP</parameter> from userspace and is
+    blocked until it gets <parameter>SIGCONT</parameter>.
+   </para>
+   <para>The task state is visible from the userspace.</para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_TRACED</parameter>
+  </term>
+  <listitem>
+   <para>
+    Task is blocked during <parameter>ptrace</parameter>. For more information
+    on <parameter>ptrace</parameter>, see the man pages with
+    <command>man ptrace(2)</command>.
+   </para>
+   <para>The task state is visible from the userspace.</para>
+  </listitem>
+ </varlistentry>
+ 
+ <varlistentry>
+  <term>
+   <parameter>TASK_PARKED</parameter>
+  </term>
+  <listitem>
+   <para>
+   Task parks a kernel thread. It is not running and held in a well defined
+   state. This taks is used to guarantee that no interference of a kthread
+   with the ongoing operation occurs. For example: per cpu kernel threads
+   during <parameter>cpu hotplug</parameter>.
+   </para>
+   <para>The task state is visible from the userspace.</para>
+  </listitem>
+ </varlistentry>
+ </variablelist>
+
+  <para>
+   The following figure illustrates the life cycle of a task and its possible
+   task states.
+  </para>
+  <figure xml:id="kernel-task-diagram">
+   <title>Task life cycle and states</title>
+   <mediaobject>
+    <imageobject role="fo">
+     <imagedata fileref="kernel_tasks.png" width="70%"/>
+    </imageobject>
+    <imageobject role="html">
+     <imagedata fileref="kernel_tasks.png" width="70%"/>
+    </imageobject>
+    <textobject role="description">
+     <phrase>Task life cycle and states</phrase>
+    </textobject>
+   </mediaobject>
+  </figure>
+ </section>
+ 
+ <xi:include href="common_legal.xml" parse="xml"/>
+</article>
