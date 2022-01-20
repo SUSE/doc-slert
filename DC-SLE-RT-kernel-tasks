@@ -1,0 +1,11 @@
+## Doc Config File for SLE-RT article for EB/BMW
+## Article about kernel tasks
+
+MAIN="article_kernel_tasks.xml"
+
+# Profiling
+PROFOS="sles"
+## PROFCONDITION="noquick;suse-product"
+
+# Stylesheets
+STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2021-ns"
