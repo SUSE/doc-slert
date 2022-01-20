@@ -198,12 +198,10 @@
   </term>
   <listitem>
    <para>
-    Task parks a kernel thread. It is not running and held in a well defined
-    state. This taks is used to guarantee that no interference of a kthread
-    with the ongoing operation occurs, for example:
-    <parameter>cpu hotplug</parameter>.
-    2:59
-    an example would be cpu hotplugThe thread is It can easily be woken up.
+   Task parks a kernel thread. It is not running and held in a well defined
+   state. This taks is used to guarantee that no interference of a kthread
+   with the ongoing operation occurs. For example: per cpu kernel threads
+   during <parameter>cpu hotplug</parameter>.
    </para>
    <para>The task state is visible from the userspace.</para>
   </listitem>
