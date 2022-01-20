@@ -216,10 +216,10 @@
    <title>Task life cycle and states</title>
    <mediaobject>
     <imageobject role="fo">
-     <imagedata fileref="kernel_tasks.png" width="90%" format="PNG"/>
+     <imagedata fileref="kernel_tasks.svg" width="70%"/>
     </imageobject>
     <imageobject role="html">
-     <imagedata fileref="kernel_tasks.png" width="80%" format="PNG"/>
+     <imagedata fileref="kernel_tasks.png" width="70%"/>
     </imageobject>
     <textobject role="description">
      <phrase>Task life cycle and states</phrase>

@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="709.99695"
+   width="671.99695"
    height="935.12793"
-   viewBox="0 0 187.85337 247.41925"
+   viewBox="0 0 177.7992 247.41925"
    version="1.1"
    id="svg992"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
@@ -422,7 +422,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.83972969"
+     inkscape:zoom="1.1539143"
      inkscape:cx="344.55998"
      inkscape:cy="365.69504"
      inkscape:document-units="px"
@@ -478,7 +478,7 @@
        orientation="0,-1"
        id="guide3250" />
     <sodipodi:guide
-       position="161.76682,98.096054"
+       position="161.76682,98.096053"
        orientation="0,-1"
        id="guide3252" />
     <sodipodi:guide
@@ -498,7 +498,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
