@@ -100,12 +100,12 @@
   </term>
   <listitem>
    <para>
-    Task is blocked but can react to signals sent by the userspace. As soon as
+    Task is blocked but can react to signals sent from the userspace. As soon as
     the task is woken up, it changes to <parameter>TASK_RUNNING</parameter>.
    </para>
    <para>
     <parameter>TASK_INTERRUPTIBLE</parameter> is used to pause a task while
-    waiting for an external signal but it is still able to interact with the
+    waiting for an external signal. However, the task is still able to interact with the
     userspace via signals.</para>
    <para>The task state is visible from the userspace.</para>
   </listitem>
