@@ -198,8 +198,8 @@
   </term>
   <listitem>
    <para>
-   Task parks a kernel thread. It is not running and held in a well defined
-   state. This taks is used to guarantee that no interference of a kthread
+   Kernel thread is parked. It is not running and held in a well defined
+   state. This task is used to guarantee that no interference of a kthread
    with the ongoing operation occurs. For example: per cpu kernel threads
    during <parameter>cpu hotplug</parameter>.
    </para>
