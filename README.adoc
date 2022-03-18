@@ -33,13 +33,13 @@ switched the default branch from `develop` to `master`.**
 If you would like to contribute, please fork this repository and send
 pull requests.
 
-* *Use the master branch* as the basis of your commits/of new feature branches.
+* *Use the main branch* as the basis of your commits/of new feature branches.
 
-* The *develop branch has been deleted* on the server. Do not to push to the `develop` branch.
-  Your changes may go lost in the medium term and never make it to the proper branch.
+. Make sure all validation checks are passed, and tag relevant SMEs from the development team (if applicable)
+  and members of the SLE-RT doc team: Thomas Schraitle (@tomschr).
 
-
-=== How to Update Your Local Repository
+. Implement any required changes, or fix any merge conflicts if relevant. If you have any questions, ping a documentation team
+  member in #team-suse-docs on Slack.
 
 If you *created* a local clone or GitHub fork of this repo *before Sep 12, 2019, do the following*:
 
