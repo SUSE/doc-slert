@@ -46,7 +46,7 @@ Thank you for contributing to this repo. Please adhere to the following guidelin
 
 . If you are contributing to a previous release, please see _maintenance/_<RELEASENUMBER>_. These branches are also protected.
 
-. Make sure all validation (Travis CI) checks are passed, and tag relevant SMEs from the development team (if applicable)
+. Make sure all validation checks are passed, and tag relevant SMEs from the development team (if applicable)
   and members of the SLE-RT doc team: Thomas Schraitle (@tomschr).
 
   **NOTE:** If your pull request has multiple files and reorganisation changes, please build locally using DAPS or daps2docker
@@ -54,7 +54,7 @@ Thank you for contributing to this repo. Please adhere to the following guidelin
   are correct.
 
 . Implement any required changes, or fix any merge conflicts if relevant. If you have any questions, ping a documentation team
-  member in #susedoc on RocketChat.
+  member in #team-suse-docs on Slack.
 
 
 == Editing DocBook
