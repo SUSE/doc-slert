@@ -14,6 +14,6 @@ PROFARCH="x86;amd64;em64t"
 HTMLROOT="slerte11"
 
 ## stylesheet location
-STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2021-ns"
+STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2022-ns"
 #HTML_CSS="/usr/share/xml/docbook/stylesheet/suse/html/susebooks.css"
 #EPUB_CSS="/usr/share/xml/docbook/stylesheet/suse/epub/susebooks.css"
