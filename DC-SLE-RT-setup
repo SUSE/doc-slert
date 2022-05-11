@@ -8,4 +8,4 @@ ROOTID=article-setup
 PROFOS="slert"
 
 # Stylesheets
-STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2021-ns"
+STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2022-ns"
