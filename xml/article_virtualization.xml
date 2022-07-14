@@ -617,7 +617,7 @@ fi</screen>
   </para>
 
   <para>
-   In &slea; RT 15 SP3, both &qemu; and libvirt support isolating the CPUs,
+   In &slea; RT 15 SP4, both &qemu; and libvirt support isolating the CPUs,
    partitioning the memory for guests, and setting the vCPU/iothread scheduler
    policy and priority for running both non-RT &kvm; and RT &kvm;.
   </para>
