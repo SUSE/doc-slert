@@ -97,12 +97,32 @@
  </sect1>
  <sect1 xml:id="sec-slert-quick-install">
   <title>Installing &slerte;</title>
-
   <para>
-   To install &slerte; &productnumber;, refer to the &instquick; of
-   &sls;&nbsp;&productnumber;
-   <link xlink:href="https://documentation.suse.com/sles/15-SP4/#redirectmsg"/>
+   To install &slerte; &productnumber;, keep the following points in mind:
   </para>
+  <itemizedlist>
+   <listitem>
+    <para>
+     Boot from the quarterly update medium. &productname; is only
+     available from the quarterly update medium as this product is released
+     roughly three months later than the rest of the &slea;.
+     <!--For internal customers and partners, the ISOs can be downloaded.-->
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     Refer to the &instquick; of &sls;&nbsp;&productnumber;
+     <link xlink:href="https://documentation.suse.com/sles/15-SP4/#redirectmsg"/> to install
+     &productname;.
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     In the <guimenu>Language, keyboard, and product selection</guimenu>, select
+     the entry <guimenu>&productname;</guimenu>.
+    </para>
+   </listitem>
+  </itemizedlist>
 
   <para>
    The following sections provide a brief introduction to the tools and
