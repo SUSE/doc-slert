@@ -24,8 +24,13 @@
   </abstract>
   <dm:docmanager xmlns:dm="urn:x-suse:ns:docmanager">
    <dm:bugtracker>
+    <dm:url>https://bugzilla.suse.com/enter_bug.cgi</dm:url>
+    <!-- product has no "Documentation" component as of 15 SP3 -->
+    <dm:component>Documentation</dm:component>
+    <dm:product>SUSE Linux Enterprise Real Time 15 SP4</dm:product>
     <dm:assignee>julia.faltenbacher@suse.com</dm:assignee>
    </dm:bugtracker>
+   <dm:editurl>https://github.com/SUSE/doc-slert/edit/main/xml/</dm:editurl>
    <dm:translation>no</dm:translation>
   </dm:docmanager>
  </info>
