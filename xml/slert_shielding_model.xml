@@ -54,10 +54,8 @@
   The subcommand automatically moves all movable tasks on the system into the
   <literal>unshielded</literal> &cpuset; on shield activation, and back into
   the <systemitem>root</systemitem> &cpuset; on shield tear down. The subcommand
-  lets you move tasks into and out of the shield. Additionally, you can move
-  special tasks (kernel threads) which normally run in the
-  <systemitem>root</systemitem> &cpuset; into the <literal>unshielded</literal>
-  set. This makes your shield have even less disturbance.
+  lets you move tasks into and out of the shield. Kernel threads are excluded
+  from these migrations.
  </para>
  <para>
   The <command>shield</command> subcommand abstracts the management of these &cpuset;s away from
@@ -131,8 +129,7 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
     Note that the command did not move the kernel threads that are running
     in the <literal>root</literal> &cpuset; to the <literal>system</literal>
     &cpuset;. This is because you may want these kernel threads to use all
-    available CPUs. If you do not, then you can use the
-    <option>-k</option>/<option>--kthread</option> option as described below.
+    available CPUs.
    </para>
    <para>
     The shield setup command above outputs the information of which &cpuset;s
@@ -164,9 +161,8 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
    </para>
   </formalpara>
    <para>
-    Some kernel threads can be moved into the unshielded
-    <literal>system</literal> &cpuset; as well. These are the threads that are
-    not bound to specific CPUs. If a kernel thread is bound to a specific
+    Kernel threads can be both unbound or bound to specific CPUs.
+    If a kernel thread is bound to a specific
     CPU, then it is generally not a good idea to move that thread to the
     <literal>system</literal> set because at worst it may hang the system
     and at best it will slow the system down significantly. These threads
@@ -177,27 +173,9 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
    </para>
    <para>
     However, if your application demands an even <quote>quieter</quote>
-    shield, then you can move all movable kernel threads into the unshielded
-    <literal>system</literal> set with the following command.
+    shield, you should look at <literal>isolcpus=</literal> kernel command line
+    argument.
    </para>
-<screen>&prompt.user;<command>cset</command> shield -k on
-cset: --> activating kthread shielding
-cset: kthread shield activated, moving 70 tasks into system cpuset...
-[==================================================]%
-cset: done</screen>
-   <para>
-    You can see that this moved an additional 70 tasks to the unshielded
-    <literal>system</literal> &cpuset;. Note that the <option>-k</option
-    >/<option>--kthread on</option> parameter can be given at the shield's
-    creation time. You do not need to perform these two steps separately if you know
-    you will want kernel thread shielding as well. Executing
-    <command>cset shield</command> again shows us the current state of the
-    shield.
-   </para>
-<screen>&prompt.user;<command>cset</command> shield
-cset: --> shielding system active with
-cset: "system" cpuset of CPUSPEC(0) with 246 tasks running
-cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
    <para>
     You can get a detailed listing of what is running in the shield by
     adding either <option>-s/--shield</option> or
