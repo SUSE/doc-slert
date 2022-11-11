@@ -6,6 +6,14 @@
 ]>
 <chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-intro">
  <title>Introduction</title>
+  <note>
+   <title>cset and cgroup version</title>
+   <para>The <command>cset</command> utility supports cpuset controller only
+   on v1 hierarchy (legacy or hybrid in systemd lingo). On a system with the
+   unified (v2) hierarchy, <command>cset</command> is not supported and
+   cpuset controller can be used via systemd.
+   </para>
+  </note>
  <para>
   In the Linux kernel, the cpuset facility provides a mechanism for creating
   logical entities called <quote>cpusets</quote> that encompass definitions
