@@ -26,6 +26,7 @@
   </info>
  <xi:include href="slert_intro.xml" parse="xml"/>
  <xi:include href="slert_shielding_model.xml" parse="xml"/>
+ <xi:include href="slert_systemd_shielding.xml" parse="xml"/>
  <xi:include href="slert_cpuset_manipulation.xml" parse="xml"/>
  <xi:include href="slert_usingshortcuts.xml" parse="xml"/>
  <xi:include href="slert_gettinghelp.xml" parse="xml"/>
