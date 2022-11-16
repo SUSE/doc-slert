@@ -5,7 +5,7 @@
   %entities;
 ]>
 
-<chapter version="5.0" xml:id="cha-shielding-model"
+<chapter version="5.0" xml:id="cha-shielding-with-systemd"
  xmlns="http://docbook.org/ns/docbook"
  xmlns:xlink="http://www.w3.org/1999/xlink">
 <title>Shielding with systemd</title>
@@ -43,7 +43,7 @@ AllowedCPUs=0-1
 [Slice]
 AllowedCPUs=0-1
 </screen>
-...
+
 <para>
         This way we constrain the system workload just to the first two CPUs.
 </para>
@@ -66,21 +66,21 @@ AllowedCPUs=2-15
     <title>Running jobs in the shield</title>
     <para>
     When the <literal>workload.slice</literal> is prepared according to the previous section, running the sensitive jobs is as simple as configuring their service into that slice.
-    <para>
+    </para>
    <screen>&prompt.root; cat /etc/systemd/system/sensitive.service.d/40-shielding.conf
 [Service]
 Slice=workload.slice
 </screen>
 <note>
-        Beware that the <literal>Slice=</literal> directive only takes effect upon service (re)start.
+    <para>Beware that the <literal>Slice=</literal> directive only takes effect upon service (re)start.</para>
 </note>
 <para>
         Should not the sensitive job have a form of a service but an ad-hoc command, you may start it in a systemd scope:
 </para>
 <screen>&prompt.root; systemd-run --scope -p Slice=workload.slice command arg1 ...</screen>
 <note>
-        Existing processes cannot be moved under the shield since that would involve process migration between cgroups which would cause distortion of the accounting state.
-        But sensitive workload should start with their resources ensured in advance anyway.
+        <para>Existing processes cannot be moved under the shield since that would involve process migration between cgroups which would cause distortion of the accounting state.
+        But sensitive workload should start with their resources ensured in advance anyway.</para>
 </note>
  </sect1>
 </chapter>
