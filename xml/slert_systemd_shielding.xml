@@ -23,7 +23,7 @@
         The general idea is to have one cpuset for the main sensitive workload
         and a complementary cpuset for the supporting tasks.
         Resources are distributed in the top-down fashion, so to ensure proper
-        allocation for the main workload we must take into consideration the
+        allocation for the main workload we must take into consideration all the
         top-level cgroups on the system.
         systemd by default creates the following units:
            <literal>init.scope</literal>,
@@ -45,10 +45,10 @@ AllowedCPUs=0-1
 </screen>
 
 <para>
-        This way we constrain the system workload just to the first two CPUs.
+        This way we constrain the supporting system workload just to the first two CPUs.
 </para>
 <para>
-        Finally, we create a dedicated slice for our workload with all the remaining systemd CPUs:
+        Finally, we create a dedicated slice for our sensitive workload with all the remaining system CPUs:
 </para>
 <screen>&prompt.root; cat /etc/systemd/system/workload.slice
 [Slice]
@@ -57,9 +57,9 @@ AllowedCPUs=2-15
 <para>
         The setup can also be changed at runtime (for debugging reasons):
 </para>
-<screen>&prompt.root; systemctl set-property --runtime init.scope AllowedCPUs=0-1
-&prompt.root; systemctl set-property --runtime system.slice AllowedCPUs=0-1
-...
+<screen>&prompt.root; systemctl set-property --runtime workload.slice AllowedCPUs=4-15
+&prompt.root; systemctl set-property --runtime init.scope AllowedCPUs=0-3
+&prompt.root; systemctl set-property --runtime system.slice AllowedCPUs=0-3
 </screen>
  </sect1>
  <sect1 xml:id="sec-shielding-systemd-ex-move">
