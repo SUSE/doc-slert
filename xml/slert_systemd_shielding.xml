@@ -12,9 +12,9 @@
  <info/>
  <para>
   systemd has native support for the cpuset controller since version 244.
-  Shielding the sensitive workload can be achieved by proper configuration of respective units.
+  Shielding the sensitive workload can be achieved with the proper configuration of respective units.
   This is only supported with cgroup unified hierarchy (v2) and hence the shielded
-  vs unshielded division copies the structure of typical systemd cgroup tree.
+  vs. unshielded division copies the structure of typical systemd cgroup tree.
  </para>
 
  <sect1 xml:id="sec-systemd-shielding-teardown">
@@ -55,7 +55,7 @@ AllowedCPUs=0-1
 AllowedCPUs=2-15
 </screen>
 <para>
-        The setup can also be changed at runtime (for debugging reasons)
+        The setup can also be changed at runtime (for debugging reasons):
 </para>
 <screen>&prompt.root; systemctl set-property --runtime init.scope AllowedCPUs=0-1
 &prompt.root; systemctl set-property --runtime system.slice AllowedCPUs=0-1
@@ -80,7 +80,7 @@ Slice=workload.slice
 <screen>&prompt.root; systemd-run --scope -p Slice=workload.slice command arg1 ...</screen>
 <note>
         <para>Existing processes cannot be moved under the shield since that would involve process migration between cgroups which would cause distortion of the accounting state.
-        But sensitive workload should start with their resources ensured in advance anyway.</para>
+        But sensitive workload should start with their resources secured in advance anyway.</para>
 </note>
  </sect1>
 </chapter>
