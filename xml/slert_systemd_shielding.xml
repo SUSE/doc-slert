@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter
+[
+  <!ENTITY % entities SYSTEM "entity-decl.ent">
+  %entities;
+]>
+
+<chapter version="5.0" xml:id="cha-shielding-with-systemd"
+ xmlns="http://docbook.org/ns/docbook"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Shielding with systemd</title>
+ <info/>
+ <para>
+  systemd has native support for the cpuset controller since &productname; 15 SP4.
+  Shielding the sensitive workload can be achieved with the proper configuration of respective units.
+  This is only supported with cgroup unified hierarchy (v2) and hence the shielded
+  vs. unshielded division copies the structure of typical systemd cgroup tree.
+ </para>
+
+ <sect1 xml:id="sec-systemd-shielding-teardown">
+   <title>Setup of the shield</title>
+   <para>
+        The general idea is to have one cpuset for the main sensitive workload
+        and a complementary cpuset for the supporting tasks.
+        Resources are distributed in the top-down fashion, so to ensure proper
+        allocation for the main workload we must take into consideration all the
+        top-level cgroups on the system.
+        systemd by default creates the following units:
+           <literal>init.scope</literal>,
+           <literal>system.slice</literal>,
+           <literal>user.slice</literal>, and
+           <literal>machine.slice</literal>.
+   </para>
+   <para>
+           We must configure <emphasis>all</emphasis> of these units not to stand in the way of our main workload.
+           For instance with following
+           <link
+           xlink:href="https://documentation.suse.com/sles/15/html/SLES-all/cha-systemd.html#sec-boot-systemd-custom-drop-in">
+           drop-in file(s)</link>:
+   </para>
+   <screen>&prompt.root;cat /etc/systemd/system/init.scope.d/40-shielding.conf
+[Scope]
+AllowedCPUs=0-1
+</screen>
+   <screen>&prompt.root;cat /etc/systemd/system/system.slice.d/40-shielding.conf
+[Slice]
+AllowedCPUs=0-1
+</screen>
+
+<para>
+        This way we constrain the supporting system workload just to the first two CPUs.
+</para>
+<para>
+        Finally, we create a dedicated slice for our sensitive workload with all the remaining system CPUs:
+</para>
+<screen>&prompt.root;cat /etc/systemd/system/workload.slice
+[Slice]
+AllowedCPUs=2-15
+</screen>
+<para>
+        The setup can also be changed at runtime (for debugging reasons):
+</para>
+<screen>&prompt.root;systemctl set-property --runtime workload.slice AllowedCPUs=4-15
+&prompt.root;systemctl set-property --runtime init.scope AllowedCPUs=0-3
+&prompt.root;systemctl set-property --runtime system.slice AllowedCPUs=0-3
+</screen>
+ </sect1>
+ <sect1 xml:id="sec-shielding-systemd-ex-move">
+    <title>Running jobs in the shield</title>
+    <para>
+    When the <literal>workload.slice</literal> is prepared according to the previous section, running the sensitive jobs is as simple as configuring their service into that slice.
+    </para>
+   <screen>&prompt.root;cat /etc/systemd/system/sensitive.service.d/40-shielding.conf
+[Service]
+Slice=workload.slice
+</screen>
+<note>
+    <para>Beware that the <literal>Slice=</literal> directive only takes effect upon service (re)start.</para>
+</note>
+<para>
+        Should not the sensitive job have a form of a service but an ad-hoc command, you may start it in a systemd scope:
+</para>
+<screen>&prompt.root;systemd-run --scope -p Slice=workload.slice command arg1 ...</screen>
+<note>
+        <para>Existing processes cannot be moved under the shield since that would involve process migration between cgroups which would cause distortion of the accounting state.
+        But sensitive workload should start with their resources secured in advance anyway.</para>
+</note>
+ </sect1>
+</chapter>

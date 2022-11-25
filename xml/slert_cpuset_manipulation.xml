@@ -574,104 +574,20 @@ two          2 n          0 n       0     0    /two
 three        3 n          0 n       10    0    /three</screen>
    </sect3>
    <sect3 xml:id="sec-shielding-cpuset-proc-move-threads">
-    <title>Moving kernel threads with <command>proc</command></title>
+    <title>Kernel threads and <command>proc</command></title>
     <para>
      Kernel threads are special and <command>cset</command> detects tasks
-     that are kernel threads and will refuse to move them unless you also
-     add a <option>-k/--kthread</option> option to your
-     <command>proc</command> move command. Even if you include
-     <option>-k</option>, <command>cset</command> will still refuse to move
-     the kernel thread if they are bound to specific CPUs. The reason for
-     this is system protection.
-    </para>
-    <para>
-     Several kernel threads, especially on the real-time Linux kernel,
-     are bound to specific CPUs and depend on per-CPU kernel variables. If
-     you move these threads to a different CPU than what they are bound to,
-     you risk at best that the system will become horribly slow, and at
-     worst a system hang. If you must move those threads (after all,
-     <command>cset</command> needs to give the knowledgeable user access to
-     the keys), then you also need to use the <option>--force</option>
-     option.
+     that are kernel threads and will refuse to move them (since they typically
+     play a vital role on particular CPU).
     </para>
     <warning>
-     <title>Use <option>--force</option> with care</title>
+     <title>Use <option>-k</option> or <option>--force</option> with care</title>
      <para>
-      Overriding a task move command with <option>--force</option> can have
-      dire consequences for the system. Be sure of the command before you
-      force it.
+       Overriding a task move command with <option>-k</option> or <option>--force</option>
+       can have dire consequences for the system. Be sure of the command before
+       you force it.
      </para>
     </warning>
-    <para>
-     The following example moves all unbound kernel threads running in
-     the root cpuset to the cpuset named two by using the
-     <option>-k</option> option.
-    </para>
-<screen>&prompt.user;<command>cset</command> proc -k -f root -t two
-cset: moving all kernel threads from / to /two
-cset: moving 70 kernel threads to: /two
-cset: --> not moving 76 threads (not unbound, use --force)
-[==================================================]%
-cset: done</screen>
-    <para>
-     This example uses the fromset→toset facility of the
-     <command>proc</command> subcommand. However, it only specifies the
-     <option>-k</option> option (not the <option>-m</option> option). This
-     has the effect of moving all kernel threads only.
-    </para>
-    <para>
-     Note that only 70 actual kernel threads were moved and 76 were not. The
-     reason that 76 kernel threads were not moved was because they are bound
-     to specific CPUs. Now, let us move those kernel threads back to
-     <literal>root</literal>.
-    </para>
-<screen>&prompt.user;<command>cset</command> proc -k -f two -t root
-cset: moving all kernel threads from /two to /
-cset: ** no task matched move criteria
-cset: **> kernel tasks are bound, use --force if ok
-
-
-&prompt.user;<command>cset</command> set -l -s two
-cset:
-Name         CPUs-X       MEMs-X    Tasks Subs Path
------------- ---------- - ------- - ----- ---- ----------
-two          2 n          0 n       70    0    /two</screen>
-    <para>
-     <command>cset</command> refused to move the kernel threads back to
-     <literal>root</literal> because it says that they are
-     <quote>bound</quote>. Let us check this with the
-     <command>taskset</command> command.
-    </para>
-<screen>&prompt.user;<command>cset</command> proc -l -s two | head -5
-cset: "two" cpuset of CPUSPEC(2) with 70 tasks running
-USER     PID   PPID  SPPr TASK NAME
--------- ----- ----- ---- ---------
-root         2     0 Soth [kthreadd]
-root        55     2 Soth [khelper]
-
-
-&prompt.user;<command>taskset</command> -p 2
-pid 2's current affinity mask: 4
-
-
-&prompt.user;<command>cset</command> set -l -s two
-cset:
-Name         CPUs-X       MEMs-X    Tasks Subs Path
------------- ---------- - ------- - ----- ---- ----------
-two          2 n          0 n       70    0    /two</screen>
-    <para>
-     Of course, since the cpuset named <literal>two</literal> only has CPU2
-     assigned to it, after it was moved the unbound kernel threads from
-     <literal>root</literal> to <literal>two</literal>, their affinity masks
-     got automatically changed to only use CPU2. This is evident from the
-     <command>taskset</command> output which is a hex value. To really move
-     these threads back to root, force the move as follows:
-    </para>
-<screen>&prompt.user;<command>cset</command> proc -k -f two -t root --force
-cset: moving all kernel threads from /two to /
-cset: moving 70 kernel threads to: /
-[==================================================]%
-cset: done</screen>
    </sect3>
   </sect2>
 
@@ -717,8 +633,7 @@ cset: done</screen>
    unimportant system tasks; and <literal>user</literal>, which is the
    <emphasis>shielded</emphasis> set of CPUs and runs your important tasks.
    Remember also that <command>shield</command> moves all movable tasks into
-   <literal>system</literal> and, optionally, moves unbound kernel threads
-   into <literal>system</literal> as well.
+   <literal>system</literal> (except for kernel threads).
   </para>
 
   <para>
@@ -771,27 +686,11 @@ system       0 n          0 n       187    0   /system</screen>
    will also run in <literal>system</literal>. The <literal>user</literal>
    cpuset has nothing running in it unless you put tasks there with the
    <command>proc</command> subcommand as described above. If you also want
-   to move movable kernel threads from <literal>root</literal> to
-   <literal>system</literal> (to achieve a form of <quote>interrupt
-   shielding</quote> on a real time Linux kernel, for example), you would
-   execute the following command as well:
+   to eliminate kernel threads from <literal>root</literal> that could interfere
+   with <literal>user</literal> workload (to achieve a form of <quote>interrupt
+   shielding</quote> on a real time Linux kernel, for example), you should look 
+   at <literal>isolcpus=</literal> kernel command line argument.
   </para>
-
-<screen>&prompt.user;<command>cset</command> proc -k -f root -t system
-cset: moving all kernel threads from / to /system
-cset: moving 70 kernel threads to: /system
-cset: --> not moving 76 threads (not unbound, use --force)
-[==================================================]%
-cset: done
-
-
-&prompt.user;<command>cset</command> set -l
-cset:
-Name         CPUs-X       MEMs-X    Tasks Subs Path
------------- ---------- - ------- - ----- ---- ----------
-root         0-3 y        0 y       76    2    /
-user         1-3 n        0 n       0     0    /user
-system       0 n          0 n       257   0    /system</screen>
 
   <para>
    At this point, you have achieved the simple shielding model that the
@@ -924,15 +823,13 @@ prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</
 
   <para>
    The strategy is now implemented. This means that you can move all user space
-   tasks and all movable kernel threads into the <literal>system</literal>
-   cpuset to activate the shield.
+   tasks into the <literal>system</literal> cpuset to activate the shield.
   </para>
 
-<screen>&prompt.user;<command>cset</command> proc -m -k -f root -t system
+<screen>&prompt.user;<command>cset</command> proc -m -f root -t system
 cset: moving all tasks from root to /system
 cset: moving 198 userspace tasks to /system
-cset: moving 70 kernel threads to: /system
-cset: --> not moving 76 threads (not unbound, use --force)
+cset: *** not moving kernel threads, need both --force and --kthread
 [==================================================]%
 cset: done
 
@@ -941,8 +838,8 @@ cset: done
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
-root         0-3 y        0 y       76    2    /
-system       0 n          0 n       268   0    /system
+root         0-3 y        0 y       146    2    /
+system       0 n          0 n       198   0    /system
 prio_all     0-3 n        0 n       0     1    /prio_all
 prio_high    1-3 n        0 n       0     1    /prio_all/prio_high
 prio_med     2-3 n        0 n       0     1    /prio_all/prio_high/prio_med
@@ -967,8 +864,8 @@ prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</
 cset:
 Name         CPUs-X       MEMs-X    Tasks Subs Path
 ------------ ---------- - ------- - ----- ---- ----------
-root         0-3 y        0 y       76    2    /
-system       0 n          0 n       268   0    /system
+root         0-3 y        0 y       146    2    /
+system       0 n          0 n       198   0    /system
 prio_all     0-3 n        0 n       0     1    /prio_all
 prio_high    1-3 n        0 n       0     1    /prio_all/prio_high
 prio_med     2-3 n        0 n       0     1    /prio_all/prio_high/prio_med

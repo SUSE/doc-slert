@@ -8,11 +8,6 @@
  <title>What to do if there are problems</title>
  <info/>
  <para>
-  If you encounter any issues with the <command>cset</command> application,
-  you can file a bug report here:
-  <link xlink:href="https://github.com/lpechacek/cpuset/issues"/>
- </para>
- <para>
   If you are using <command>cset</command> on a supported operating system
   such as &sls; &productnumber; or &slerte; &productnumber;,
   then should use the following Bugzilla product listing here:
