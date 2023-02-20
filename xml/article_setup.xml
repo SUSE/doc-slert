@@ -134,7 +134,7 @@
     </para>
    </step>
    <step>
-    <para>When the prompt shows up, open the file <filename>controlxml</filename> and add the
+    <para>When the prompt shows up, open the file <filename>control.xml</filename> and add the
     following lines:</para>
     <screen>&lt;base_product>
   &lt;display_name>SUSE Linux Enterprise Real Time &productnumber;&lt;/display_name>
