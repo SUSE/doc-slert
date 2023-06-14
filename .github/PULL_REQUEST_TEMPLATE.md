@@ -11,6 +11,7 @@ Describe this pull request.
 
 SLE-RT 15
 - [ ] 15 next *(current `main`, no backport necessary)*
+- [ ] 15 SP5
 - [ ] 15 SP4
 - [ ] 15 SP3
 
