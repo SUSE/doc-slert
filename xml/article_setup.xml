@@ -90,7 +90,7 @@
    <title>Specific scenario</title>
    <para>
     &productname; &productnumber; supports virtualization and Docker usage as a
-    Technology Preview (best-effort support). For reference, see
+    Technology Preview. For reference, see
     <xref linkend="article-virtualization"/>.
    </para>
   </sect2>
