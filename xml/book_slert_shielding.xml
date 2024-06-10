@@ -9,6 +9,7 @@
 <!-- ##################################################################### -->
 <book version="5.0" xml:lang="en" xml:id="book-shielding"
   xmlns="http://docbook.org/ns/docbook"
+  xmlns:its="http://www.w3.org/2005/11/its"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
  <title>Shielding Linux Resources</title>
@@ -17,6 +18,23 @@
     <productname role="abbrev">&slertabbr;</productname>
     <productnumber>&productnumber;</productnumber>
     <date><?dbtimestamp format="B d, Y"?></date>
+    <meta name="title" its:translate="yes">Shielding Linux Resources</meta>
+    <meta name="series" its:translate="no">Products &amp; Solutions</meta>
+    <meta name="description" its:translate="yes">How to shield Linux resources using cpusets for precise CPU and memory allocation</meta>
+    <meta name="social-descr" its:translate="yes">Shield Linux resources using cpusets</meta>
+    <meta name="task" its:translate="yes">
+      <phrase>Configuration</phrase>
+    </meta>
+    <revhistory xml:id="rh-book-shielding">
+      <revision>
+        <date>2023-06-20</date>
+        <revdescription>
+          <para>
+            Updated for the initial release of &productname; &productnumber;.
+          </para>
+        </revdescription>
+      </revision>
+    </revhistory>
     <xi:include href="common_copyright_gfdl.xml" parse="xml"/>
     <authorgroup>
       <author>
