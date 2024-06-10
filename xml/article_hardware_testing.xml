@@ -9,12 +9,31 @@
 ]>
 <article version="5.0" xml:id="article-hardware-testing" xml:lang="en"
   xmlns="http://docbook.org/ns/docbook"
+  xmlns:its="http://www.w3.org/2005/11/its"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
  <title>&slertabbr; Hardware Testing</title>
  <info><productname>&productname;</productname>
   <productnumber>&productnumber;</productnumber>
   <date><?dbtimestamp?></date>
+  <meta name="title" its:translate="yes">&slertabbr; Hardware Testing</meta>
+  <meta name="series" its:translate="no">Products &amp; Solutions</meta>
+  <meta name="description" its:translate="yes">How to identify real-time capable hardware with the cyclictest and hwlatdetect tools</meta>
+  <meta name="social-descr" its:translate="yes">Identify real-time capable hardware</meta>
+  <meta name="task" its:translate="yes">
+    <phrase>Administration</phrase>
+    <phrase>Configuration</phrase>
+  </meta>
+  <revhistory xml:id="rh-article-hardware-testing">
+    <revision>
+      <date>2024-06-26</date>
+      <revdescription>
+        <para>
+          Updated for the initial release of &productname; &productnumber;.
+        </para>
+      </revdescription>
+    </revision>
+  </revhistory>
   <abstract>
    <para>
     Using &productnamereg; needs real-time capable hardware. This paper
