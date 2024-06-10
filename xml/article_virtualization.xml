@@ -9,12 +9,32 @@
 ]>
 <article version="5.0" xml:id="article-virtualization" xml:lang="en"
   xmlns="http://docbook.org/ns/docbook"
+  xmlns:its="http://www.w3.org/2005/11/its"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
  <title>Virtualization Guide</title>
  <info><productname>&productname;</productname>
   <productnumber>&productnumber;</productnumber>
   <date><?dbtimestamp?></date>
+  <meta name="title" its:translate="yes">Virtualization Guide</meta>
+  <meta name="series" its:translate="no">Products &amp; Solutions</meta>
+  <meta name="description" its:translate="yes">How to use virtualization and Docker with &slertabbr;</meta>
+  <meta name="social-descr" its:translate="yes">Use virtualization and Docker with &slertabbr;</meta>
+  <meta name="task" its:translate="yes">
+    <phrase>Containerization</phrase>
+    <phrase>Virtualization</phrase>
+    <phrase>Configuration</phrase>
+  </meta>
+  <revhistory xml:id="rh-article-virtualization">
+    <revision>
+      <date>2024-06-26</date>
+      <revdescription>
+        <para>
+          Updated for the initial release of &productname; &productnumber;.
+        </para>
+      </revdescription>
+    </revision>
+  </revhistory>
   <abstract>
    <para>
     &productname; &productnumber; supports virtualization and Docker usage as a
