@@ -10,6 +10,7 @@
 
 <article version="5.0" xml:id="art-slert-virtguide" xml:lang="en"
   xmlns="http://docbook.org/ns/docbook"
+  xmlns:its="http://www.w3.org/2005/11/its"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <?suse-quickstart color="suse"?>
@@ -19,6 +20,25 @@
    <productname>&productname;</productname>
    <productnumber>&productnumber;</productnumber>
    <date><?dbtimestamp?></date>
+   <meta name="title" its:translate="yes">Virtualization Guide</meta>
+   <meta name="series" its:translate="no">Products &amp; Solutions</meta>
+   <meta name="description" its:translate="yes">How to use virtualization and Docker with &slertabbr;</meta>
+   <meta name="social-descr" its:translate="yes">Use virtualization and Docker with &slertabbr;</meta>
+   <meta name="task" its:translate="yes">
+     <phrase>Containerization</phrase>
+     <phrase>Virtualization</phrase>
+     <phrase>Configuration</phrase>
+   </meta>
+   <revhistory xml:id="rh-art-slert-virtguide">
+     <revision>
+       <date>2020-01-31</date>
+       <revdescription>
+         <para>
+           Updated for the initial release of &productname; &productnumber;.
+         </para>
+       </revdescription>
+     </revision>
+   </revhistory>
    <abstract>
       <para>&productname; &productnumber; supports virtualization and Docker usage. The
        following text describes how to do so.

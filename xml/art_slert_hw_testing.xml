@@ -11,6 +11,7 @@
 
 <article version="5.0" xml:id="art-slert-hwtest" xml:lang="en"
   xmlns="http://docbook.org/ns/docbook"
+  xmlns:its="http://www.w3.org/2005/11/its"
   xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <?suse-quickstart color="suse"?>
@@ -20,6 +21,24 @@
     <productname>&productname;</productname>
     <productnumber>&productnumber;</productnumber>
     <date><?dbtimestamp?></date>
+    <meta name="title" its:translate="yes">&slertabbr; Hardware Testing</meta>
+    <meta name="series" its:translate="no">Products &amp; Solutions</meta>
+    <meta name="description" its:translate="yes">How to identify real-time capable hardware with the cyclictest and hwlatdetect tools</meta>
+    <meta name="social-descr" its:translate="yes">Identify real-time capable hardware</meta>
+    <meta name="task" its:translate="yes">
+      <phrase>Administration</phrase>
+      <phrase>Configuration</phrase>
+    </meta>
+    <revhistory xml:id="rh-art-slert-hwtest">
+      <revision>
+        <date>2020-01-31</date>
+        <revdescription>
+          <para>
+            Updated for the initial release of &productname; &productnumber;.
+          </para>
+        </revdescription>
+      </revision>
+    </revhistory>
     <abstract>
       <para> Using &productnamereg; needs real-time capable hardware.
         This paper describes the tools that can be used to determine if
