@@ -20,7 +20,7 @@
   <meta name="series" its:translate="no">Products &amp; Solutions</meta>
   <meta name="description" its:translate="yes">How to identify real-time capable hardware with the cyclictest and hwlatdetect tools</meta>
   <meta name="social-descr" its:translate="yes">Identify real-time capable hardware</meta>
-  <meta name="task" its:translate="yes">
+  <meta name="task" its:translate="no">
     <phrase>Administration</phrase>
     <phrase>Configuration</phrase>
   </meta>
