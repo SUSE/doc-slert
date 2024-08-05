@@ -24,7 +24,7 @@
    <meta name="series" its:translate="no">Products &amp; Solutions</meta>
    <meta name="description" its:translate="yes">How to use virtualization and Docker with &slertabbr;</meta>
    <meta name="social-descr" its:translate="yes">Use virtualization and Docker with &slertabbr;</meta>
-   <meta name="task" its:translate="yes">
+   <meta name="task" its:translate="no">
      <phrase>Containerization</phrase>
      <phrase>Virtualization</phrase>
      <phrase>Configuration</phrase>

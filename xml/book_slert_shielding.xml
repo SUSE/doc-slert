@@ -25,7 +25,7 @@
     <meta name="series" its:translate="no">Products &amp; Solutions</meta>
     <meta name="description" its:translate="yes">How to shield Linux resources using cpusets for precise CPU and memory allocation</meta>
     <meta name="social-descr" its:translate="yes">Shield Linux resources using cpusets</meta>
-    <meta name="task" its:translate="yes">
+    <meta name="task" its:translate="no">
       <phrase>Configuration</phrase>
     </meta>
     <revhistory xml:id="rh-book-slert-shielding">
