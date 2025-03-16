@@ -158,7 +158,7 @@
     <screen>&lt;base_product>
   &lt;display_name>SUSE Linux Enterprise Real Time &productnumber;&lt;/display_name>
   &lt;name>SLE_RT&lt;/name>
-  &lt;version>15.5&lt;/version>
+  &lt;version>15.7&lt;/version>
   &lt;register_target>sle-15-$arch&lt;/register_target>
   &lt;archs>x86_64&lt;/archs>
 &lt;/base_product></screen>
