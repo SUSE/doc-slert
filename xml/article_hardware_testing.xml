@@ -1,18 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
-                 type="text/xml" 
-                 title="Profiling step"?>
-<!DOCTYPE article
-[
+<?xml version="1.0"?>
+<!DOCTYPE article [
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
-<article version="5.0" xml:id="article-hardware-testing" xml:lang="en"
-  xmlns="http://docbook.org/ns/docbook"
-  xmlns:xi="http://www.w3.org/2001/XInclude"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
+                 type="text/xml" 
+                 title="Profiling step"?><article xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="article-hardware-testing" xml:lang="en">
  <title>&slertabbr; Hardware Testing</title>
- <info><productname>&productname;</productname>
+ <info xmlns:d="http://docbook.org/ns/docbook"><productname>&productname;</productname>
   <productnumber>&productnumber;</productnumber>
   <date><?dbtimestamp?></date>
   <abstract>
@@ -29,7 +25,15 @@
     latency detector</quote> are parts of the &productname; product.
    </para>
   </abstract>
- </info>
+ <revhistory xml:id="rh-article-hardware-testing">
+   <revision>
+     <date>2022-01-17</date>
+     <revdescription>
+       <para/>
+     </revdescription>
+   </revision>
+ </revhistory>
+</info>
 
  <sect1 xml:id="sec-hwtest-basics">
   <title>General testing procedure and analysis</title>
@@ -166,7 +170,7 @@
      redirect it to a file:
     </para>
 <screen><command>cyclictest</command> --loops=1000 \
---histogram=1000 > histogram</screen>
+--histogram=1000 &gt; histogram</screen>
    </listitem>
   </itemizedlist>
  </sect1>

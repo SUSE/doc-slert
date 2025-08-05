@@ -1,18 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
-                 type="text/xml"
-                 title="Profiling step"?>
-<!DOCTYPE article
-[
+<?xml version="1.0"?>
+<!DOCTYPE article [
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
-<article version="5.0" xml:lang="en" xml:id="article-kernel-tasks"
-  xmlns="http://docbook.org/ns/docbook"
-  xmlns:xi="http://www.w3.org/2001/XInclude"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
+                 type="text/xml"
+                 title="Profiling step"?><article xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en" xml:id="article-kernel-tasks">
  <title>Processes and task states for Linux Kernel programming</title>
- <info><productname>&productname;</productname>
+ <info xmlns:d="http://docbook.org/ns/docbook"><productname>&productname;</productname>
   <productnumber>&productnumber;</productnumber>
   <xi:include href="common_copyright_gfdl.xml" parse="xml"/>
   <date><?dbtimestamp?></date>
@@ -33,7 +29,15 @@
    <dm:editurl>https://github.com/SUSE/doc-slert/edit/main/xml/</dm:editurl>
    <dm:translation>no</dm:translation>
   </dm:docmanager>
- </info>
+ <revhistory xml:id="rh-article-kernel-tasks">
+   <revision>
+     <date>2022-11-07</date>
+     <revdescription>
+       <para/>
+     </revdescription>
+   </revision>
+ </revhistory>
+</info>
  <section xml:id="sec-slert-kernel-tasks-intro">
   <title>Processes and task states</title>
 
