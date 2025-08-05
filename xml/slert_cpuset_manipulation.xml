@@ -1,11 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter
-[
+<?xml version="1.0"?>
+<!DOCTYPE chapter [
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
+
 <chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-cpuset">
  <title>Full-featured cpuset manipulation commands</title>
+ <info xmlns:d="http://docbook.org/ns/docbook"><revhistory xml:id="rh-cha-shielding-cpuset">
+   <revision>
+     <date>2022-01-17</date>
+     <revdescription>
+       <para/>
+     </revdescription>
+   </revision>
+ </revhistory>
+</info>
  <para>
   While basic shielding as described above is useful and a common use model
   for <command>cset</command>, there comes a time when more functionality
@@ -29,7 +38,7 @@
     The basic syntax of <command>set</command> for cpuset creation is:
    </para>
 <screen>&prompt.user;<command>cset</command> set -c 1-3 -s my_cpuset1
-cset: --> created cpuset "my_cpuset1"</screen>
+cset: --&gt; created cpuset "my_cpuset1"</screen>
    <para>
     This creates a cpuset named <literal>my_cpuset1</literal> with a CPUSPEC
     of CPU1, CPU2 and CPU3. The CPUSPEC is the same concept as described in
@@ -48,7 +57,7 @@ cset: --> created cpuset "my_cpuset1"</screen>
     omit CPU2), then issue the following command.
    </para>
 <screen>&prompt.user;<command>cset</command> set -c 1,3 -s my_cpuset1
-cset: --> modified cpuset "my_cpuset</screen>
+cset: --&gt; modified cpuset "my_cpuset</screen>
    <para>
     <command>cset</command> will then adjust the CPUs that are assigned to
     the <literal>my_cpuset1</literal> set to only use CPU1 and CPU3.
@@ -58,7 +67,7 @@ cset: --> modified cpuset "my_cpuset</screen>
     example:
    </para>
 <screen>&prompt.user;<command>cset</command> set -s my_cpuset1 -n super_set
-cset: --> renaming "/cpusets/my_cpuset1" to "super_set"</screen>
+cset: --&gt; renaming "/cpusets/my_cpuset1" to "super_set"</screen>
    <para>
     Renames the cpuset called <literal>my_cpuset1</literal> to
     <literal>super_set</literal>.
@@ -68,8 +77,8 @@ cset: --> renaming "/cpusets/my_cpuset1" to "super_set"</screen>
     follows.
    </para>
 <screen>&prompt.user;<command>cset</command> set -d super_set
-cset: --> processing cpuset "super_set", moving 0 tasks to parent "/"...
-cset: --> deleting cpuset "/super_set"
+cset: --&gt; processing cpuset "super_set", moving 0 tasks to parent "/"...
+cset: --&gt; deleting cpuset "/super_set"
 cset: done</screen>
    <para>
     This command destroys the newly created cpuset called
@@ -97,11 +106,11 @@ cset: done</screen>
     example:
    </para>
 <screen>&prompt.user;<command>cset</command> set -c 1,3 -s top_set
-cset: --> created cpuset "top_set"
+cset: --&gt; created cpuset "top_set"
 
 
 &prompt.user;<command>cset</command> set -c 3 -s /top_set/sub_set
-cset: --> created cpuset "/top_set/sub_set"</screen>
+cset: --&gt; created cpuset "/top_set/sub_set"</screen>
    <para>
     These commands created two cpusets: <literal>top_set</literal> and
     <literal>sub_set</literal>. The <literal>top_set</literal> uses CPU1 and
@@ -112,7 +121,7 @@ cset: --> created cpuset "/top_set/sub_set"</screen>
     ask you to use the path. For example:
    </para>
 <screen>&prompt.user;<command>cset</command> set -c 1,3 -s sub_set
-cset: --> modified cpuset "sub_set</screen>
+cset: --&gt; modified cpuset "sub_set</screen>
    <para>
     This command adds CPU1 to the <literal>sub_set</literal> cpuset for its
     use. Note that using the path in this case is optional.
@@ -310,7 +319,7 @@ USER     PID   PPID  SPPr TASK NAME
 cset: "two" cpuset of CPUSPEC(2) with 0 tasks running
 
 &prompt.user;<command>cset</command> proc -s two -e bash
-cset: --> last message, executed args into cpuset "/two", new pid is: 20955
+cset: --&gt; last message, executed args into cpuset "/two", new pid is: 20955
 
 &prompt.user;<command>cset</command> proc -l -s two
 cset: "two" cpuset of CPUSPEC(2) with 2 tasks running
@@ -373,8 +382,8 @@ root     21147 21118 Roth python ./cset proc -l two</screen>
     executed, the result may be puzzling. For example:
    </para>
 <screen>&prompt.user;<command>cset</command> proc -s two -e blah-blah
-cset: --> last message, executed args into cpuset "/two", new pid is: 21655
-cset: **> [Errno 2] No such file or directory</screen>
+cset: --&gt; last message, executed args into cpuset "/two", new pid is: 21655
+cset: **&gt; [Errno 2] No such file or directory</screen>
    <para>
     The result is no new process even though a new PID is output. The reason
     for the message is of course that the <command>cset</command> process
@@ -610,7 +619,7 @@ three        3 n          0 n       10    0    /three</screen>
 <screen>&prompt.user;<command>cset</command> proc -k -f root -t two
 cset: moving all kernel threads from / to /two
 cset: moving 70 kernel threads to: /two
-cset: --> not moving 76 threads (not unbound, use --force)
+cset: --&gt; not moving 76 threads (not unbound, use --force)
 [==================================================]%
 cset: done</screen>
     <para>
@@ -628,7 +637,7 @@ cset: done</screen>
 <screen>&prompt.user;<command>cset</command> proc -k -f two -t root
 cset: moving all kernel threads from /two to /
 cset: ** no task matched move criteria
-cset: **> kernel tasks are bound, use --force if ok
+cset: **&gt; kernel tasks are bound, use --force if ok
 
 
 &prompt.user;<command>cset</command> set -l -s two
@@ -730,11 +739,11 @@ cset: done</screen>
   </para>
 
 <screen>&prompt.user;<command>cset</command> set -c 0 -s system
-cset: --> created cpuset "system"
+cset: --&gt; created cpuset "system"
 
 
 &prompt.user;<command>cset</command> set -c 1-3 -s user
-cset: --> created cpuset "user"
+cset: --&gt; created cpuset "user"
 
 
 &prompt.user;<command>cset</command> set -l
@@ -780,7 +789,7 @@ system       0 n          0 n       187    0   /system</screen>
 <screen>&prompt.user;<command>cset</command> proc -k -f root -t system
 cset: moving all kernel threads from / to /system
 cset: moving 70 kernel threads to: /system
-cset: --> not moving 76 threads (not unbound, use --force)
+cset: --&gt; not moving 76 threads (not unbound, use --force)
 [==================================================]%
 cset: done
 
@@ -882,23 +891,23 @@ root         0-3 y        0 y       344   0    /
 
 
 &prompt.user;<command>cset</command> set -c 0-3 prio_all
-cset: --> created cpuset "prio_all"
+cset: --&gt; created cpuset "prio_all"
 
 
 &prompt.user;<command>cset</command> set -c 1-3 /prio_all/prio_high
-cset: --> created cpuset "/prio_all/prio_high"
+cset: --&gt; created cpuset "/prio_all/prio_high"
 
 
 &prompt.user;<command>cset</command> set -c 2-3 /prio_all/prio_high/prio_med
-cset: --> created cpuset "/prio_all/prio_high/prio_med"
+cset: --&gt; created cpuset "/prio_all/prio_high/prio_med"
 
 
 &prompt.user;<command>cset</command> set -c 3 /prio_all/prio_high/prio_med/prio_low
-cset: --> created cpuset "/prio_all/prio_high/prio_med/prio_low"
+cset: --&gt; created cpuset "/prio_all/prio_high/prio_med/prio_low"
 
 
 &prompt.user;<command>cset</command> set -c 0 system
-cset: --> created cpuset "system"
+cset: --&gt; created cpuset "system"
 
 
 &prompt.user;<command>cset</command> set -l -r
@@ -932,7 +941,7 @@ prio_low     3 n          0 n       0     0    /prio_all/pr...rio_med/prio_low</
 cset: moving all tasks from root to /system
 cset: moving 198 userspace tasks to /system
 cset: moving 70 kernel threads to: /system
-cset: --> not moving 76 threads (not unbound, use --force)
+cset: --&gt; not moving 76 threads (not unbound, use --force)
 [==================================================]%
 cset: done
 

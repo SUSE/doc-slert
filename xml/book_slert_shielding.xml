@@ -1,18 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book
-[
+<?xml version="1.0"?>
+<!DOCTYPE book [
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
+
 <!-- ##################################################################### -->
 <!-- SLERT Shielding HowTo-->
 <!-- ##################################################################### -->
-<book version="5.0" xml:lang="en" xml:id="book-shielding"
-  xmlns="http://docbook.org/ns/docbook"
-  xmlns:xi="http://www.w3.org/2001/XInclude"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en" xml:id="book-shielding">
  <title>Shielding Linux Resources</title>
-  <info>
+  <info xmlns:d="http://docbook.org/ns/docbook">
     <productname>&productname;</productname>
     <productname role="abbrev">&slertabbr;</productname>
     <productnumber>&productnumber;</productnumber>
@@ -23,7 +20,15 @@
         <personname><firstname>Alex</firstname><surname>Tsariounov</surname></personname>
       </author>
     </authorgroup>
-  </info>
+  <revhistory xml:id="rh-book-shielding">
+   <revision>
+     <date>2021-07-20</date>
+     <revdescription>
+       <para/>
+     </revdescription>
+   </revision>
+ </revhistory>
+</info>
  <xi:include href="slert_intro.xml" parse="xml"/>
  <xi:include href="slert_shielding_model.xml" parse="xml"/>
  <xi:include href="slert_cpuset_manipulation.xml" parse="xml"/>

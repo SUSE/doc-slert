@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE legalnotice
-[
+<?xml version="1.0"?>
+<!DOCTYPE legalnotice [
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
+
 <!--
      Please keep this document neatly formatted, because a text version
      for LICENSE.txt is created form this source. That means only the
@@ -11,6 +11,15 @@
      in the txt file as is.
 -->
 <legalnotice xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <info xmlns:d="http://docbook.org/ns/docbook"><revhistory>
+   <revision>
+     <date>2021-07-20</date>
+     <revdescription>
+       <para/>
+     </revdescription>
+   </revision>
+ </revhistory>
+</info>
  <para>
   Copyright &copy; 2006&ndash;<?dbtimestamp format="Y"?>
   SUSE LLC and contributors. All rights reserved.

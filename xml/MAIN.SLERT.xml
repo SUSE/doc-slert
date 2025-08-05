@@ -1,18 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
-                 type="text/xml"
-                 title="Profiling step"?>
-<!DOCTYPE set
-[
+<?xml version="1.0"?>
+<!DOCTYPE set [
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
-<set version="5.0" xml:lang="en" xml:id="set-slert"
-  xmlns="http://docbook.org/ns/docbook"
-  xmlns:xi="http://www.w3.org/2001/XInclude"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
+                 type="text/xml"
+                 title="Profiling step"?><set xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en" xml:id="set-slert">
   <title>&slert; Documentation</title>
-  <info>
+  <info xmlns:d="http://docbook.org/ns/docbook">
     <productname>&productname;</productname>
     <productname role="abbrev">&productnameshort;</productname>
     <productnumber>&productnumber;</productnumber>
@@ -27,12 +23,30 @@
       <dm:editurl>https://github.com/SUSE/doc-slert/edit/main/xml/</dm:editurl>
       <dm:translation>no</dm:translation>
     </dm:docmanager>
-  </info>
+    <revhistory xml:id="rh-set-slert">
+     <revision>
+      <date>2022-11-07</date>
+      <revdescription>
+       <para/>
+      </revdescription>
+     </revision>
+    </revhistory>
+   </info>
 
   <xi:include href="book_slert_shielding.xml"/>
 
   <book xml:id="book-slert-qs">
     <title>Quick Start Guides</title>
+    <info xmlns:d="http://docbook.org/ns/docbook">
+     <revhistory xml:id="rh-book-slert-qs">
+      <revision>
+       <date>2022-11-07</date>
+       <revdescription>
+        <para/>
+       </revdescription>
+      </revision>
+     </revhistory>
+    </info>
     <xi:include href="article_setup.xml"/>
     <xi:include href="article_hardware_testing.xml"/>
     <xi:include href="article_virtualization.xml"/>

@@ -1,18 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
-                 type="text/xml"
-                 title="Profiling step"?>
-<!DOCTYPE article
-[
+<?xml version="1.0"?>
+<!DOCTYPE article [
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
-<article version="5.0" xml:id="article-virtualization" xml:lang="en"
-  xmlns="http://docbook.org/ns/docbook"
-  xmlns:xi="http://www.w3.org/2001/XInclude"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<?xml-stylesheet href="urn:x-suse:xslt:profiling:docbook51-profile.xsl"
+                 type="text/xml"
+                 title="Profiling step"?><article xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="article-virtualization" xml:lang="en">
  <title>Virtualization Guide</title>
- <info><productname>&productname;</productname>
+ <info xmlns:d="http://docbook.org/ns/docbook"><productname>&productname;</productname>
   <productnumber>&productnumber;</productnumber>
   <date><?dbtimestamp?></date>
   <abstract>
@@ -39,7 +35,15 @@
     This guide provides the following three examples for user reference only.
    </para>
   </abstract>
- </info>
+ <revhistory xml:id="rh-article-virtualization">
+   <revision>
+     <date>2022-07-14</date>
+     <revdescription>
+       <para/>
+     </revdescription>
+   </revision>
+ </revhistory>
+</info>
  <sect1 xml:id="sec-virtguide-rtapp">
   <title>Running RT applications with non-RT &kvm; guests</title>
 
@@ -346,7 +350,7 @@ docker_id=$(docker ps -q)
 # move container content into the isolated cpuset
 for i in $(cat ${cpuset_mnt}/system/docker/${docker_path}/tasks);
 do
-  echo $i > ${cpuset_mnt}/rtcpus/tasks;
+  echo $i &gt; ${cpuset_mnt}/rtcpus/tasks;
 done
 
 # stop/destroy the container
@@ -395,50 +399,50 @@ fi
 
 if [ $SHIELD_UP -eq 1 ]; then
   # take it down
-  echo 1 > ${CPUSET_ROOT}/${CPUSET_PREFIX}sched_load_balance
+  echo 1 &gt; ${CPUSET_ROOT}/${CPUSET_PREFIX}sched_load_balance
   cset shield --userset=rtcpus --reset
 
   # restore default irq affinity
-  echo ${DEFAULT_MASK} > /proc/irq/default_smp_affinity
+  echo ${DEFAULT_MASK} &gt; /proc/irq/default_smp_affinity
   for irqlist in $(ls /proc/irq/*/smp_affinity); do
-    echo ${DEFAULT_MASK} > $irqlist 2>/dev/null
+    echo ${DEFAULT_MASK} &gt; $irqlist 2&gt;/dev/null
   done
 
   if [ -f /proc/sys/kernel/timer_migration ]; then
-    echo 1 > /proc/sys/kernel/timer_migration
+    echo 1 &gt; /proc/sys/kernel/timer_migration
   fi
   if [ -f /proc/sys/kernel/sched_rt_runtime_us ]; then
-    echo ${RT_RUNTIME} > /proc/sys/kernel/sched_rt_runtime_us
+    echo ${RT_RUNTIME} &gt; /proc/sys/kernel/sched_rt_runtime_us
   fi
   if [ -f /sys/kernel/debug/tracing/tracing_on ]; then
-    echo 1 > /sys/kernel/debug/tracing/tracing_on
+    echo 1 &gt; /sys/kernel/debug/tracing/tracing_on
   fi
   if [ -f /sys/kernel/mm/transparent_hugepage/enabled ]; then
-    echo always > /sys/kernel/mm/transparent_hugepage/enabled
+    echo always &gt; /sys/kernel/mm/transparent_hugepage/enabled
   fi
   if [ -f /proc/sys/kernel/nmi_watchdog ]; then
-   echo ${NMI_WATCHDOG} > /proc/sys/kernel/nmi_watchdog
+   echo ${NMI_WATCHDOG} &gt; /proc/sys/kernel/nmi_watchdog
   fi
   if [ -f /sys/devices/system/machinecheck/machinecheck0/check_interval ]; then
-   echo 300 > /sys/devices/system/machinecheck/machinecheck0/check_interval
+   echo 300 &gt; /sys/devices/system/machinecheck/machinecheck0/check_interval
   fi
   if [ -f /sys/devices/virtual/workqueue/writeback/cpumask ]; then
-   echo ${DEFAULT_MASK} > /sys/devices/virtual/workqueue/writeback/cpumask
+   echo ${DEFAULT_MASK} &gt; /sys/devices/virtual/workqueue/writeback/cpumask
   fi
   if [ -f /sys/devices/virtual/workqueue/cpumask ]; then
-    echo ${DEFAULT_MASK} > /sys/devices/virtual/workqueue/cpumask
+    echo ${DEFAULT_MASK} &gt; /sys/devices/virtual/workqueue/cpumask
   fi
   if [ -f /proc/sys/vm/stat_interval ]; then
-    echo 1 > /proc/sys/vm/stat_interval
+    echo 1 &gt; /proc/sys/vm/stat_interval
   fi
   if [ -f /sys/module/processor/parameters/latency_factor ]; then
-   echo 2 > /sys/module/processor/parameters/latency_factor
+   echo 2 &gt; /sys/module/processor/parameters/latency_factor
   fi
   if [ -f /sys/module/processor/parameters/ignore_ppc ]; then
-   echo 0 > /sys/module/processor/parameters/ignore_ppc
+   echo 0 &gt; /sys/module/processor/parameters/ignore_ppc
   fi
   if [ -f /sys/module/processor/parameters/ignore_tpc ]; then
-   echo 0 > /sys/module/processor/parameters/ignore_tpc
+   echo 0 &gt; /sys/module/processor/parameters/ignore_tpc
   fi
   if [ -f /etc/init.d/sgi_irqbalance ]; then
    /etc/init.d/sgi_irqbalance start
@@ -448,44 +452,44 @@ else
   if [ -f /etc/init.d/sgi_irqbalance ]; then
     /etc/init.d/sgi_irqbalance stop
   fi
-  echo $SHIELD_MASK > /proc/irq/default_smp_affinity
+  echo $SHIELD_MASK &gt; /proc/irq/default_smp_affinity
   for irqlist in $(ls /proc/irq/*/smp_affinity); do
-    echo $SHIELD_MASK > $irqlist 2>/dev/null
+    echo $SHIELD_MASK &gt; $irqlist 2&gt;/dev/null
   done
 
   # poke some buttons..
   if [ -f /proc/sys/kernel/sched_rt_runtime_us ]; then
-    echo -1 > /proc/sys/kernel/sched_rt_runtime_us
+    echo -1 &gt; /proc/sys/kernel/sched_rt_runtime_us
   fi
   if [ -f /sys/kernel/debug/tracing/tracing_on ]; then
-    echo 0 > /sys/kernel/debug/tracing/tracing_on
+    echo 0 &gt; /sys/kernel/debug/tracing/tracing_on
   fi
   if [ -f /sys/kernel/mm/transparent_hugepage/enabled ]; then
-    echo never > /sys/kernel/mm/transparent_hugepage/enabled
+    echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled
   fi
   if [ -f /proc/sys/kernel/nmi_watchdog ]; then
-    echo 0 > /proc/sys/kernel/nmi_watchdog
+    echo 0 &gt; /proc/sys/kernel/nmi_watchdog
   fi
   if [ -f /sys/devices/system/machinecheck/machinecheck0/check_interval ]; then
-    echo 0 > /sys/devices/system/machinecheck/machinecheck0/check_interval
+    echo 0 &gt; /sys/devices/system/machinecheck/machinecheck0/check_interval
   fi
   if [ -f /sys/devices/virtual/workqueue/writeback/cpumask ]; then
-    echo ${SHIELD_MASK} > /sys/devices/virtual/workqueue/writeback/cpumask
+    echo ${SHIELD_MASK} &gt; /sys/devices/virtual/workqueue/writeback/cpumask
   fi
   if [ -f /sys/devices/virtual/workqueue/cpumask ]; then
-    echo ${SHIELD_MASK} > /sys/devices/virtual/workqueue/cpumask
+    echo ${SHIELD_MASK} &gt; /sys/devices/virtual/workqueue/cpumask
   fi
   if [ -f /proc/sys/vm/stat_interval ]; then
-    echo 999999 > /proc/sys/vm/stat_interval
+    echo 999999 &gt; /proc/sys/vm/stat_interval
   fi
   if [ -f /sys/module/processor/parameters/latency_factor ]; then
-    echo 1 > /sys/module/processor/parameters/latency_factor
+    echo 1 &gt; /sys/module/processor/parameters/latency_factor
   fi
   if [ -f /sys/module/processor/parameters/ignore_ppc ]; then
-    echo 1 > /sys/module/processor/parameters/ignore_ppc
+    echo 1 &gt; /sys/module/processor/parameters/ignore_ppc
   fi
   if [ -f /sys/module/processor/parameters/ignore_tpc ]; then
-    echo 1 > /sys/module/processor/parameters/ignore_tpc
+    echo 1 &gt; /sys/module/processor/parameters/ignore_tpc
   fi
 
   # ...and fire up the shield
@@ -507,41 +511,41 @@ else
    fi
   fi
 
-  echo 0 > ${CPUSET_ROOT}/${CPUSET_PREFIX}sched_load_balance
-  echo 1 > ${CPUSET_ROOT}/system/${CPUSET_PREFIX}sched_load_balance
-  echo 0 > ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_relax_domain_level
+  echo 0 &gt; ${CPUSET_ROOT}/${CPUSET_PREFIX}sched_load_balance
+  echo 1 &gt; ${CPUSET_ROOT}/system/${CPUSET_PREFIX}sched_load_balance
+  echo 0 &gt; ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_relax_domain_level
   # this ain't gonna happen in -rt kernels, but...
   if [ -f ${CPUSET_ROOT}/rtcpus/cpu.rt_runtime_us ]; then
-    echo 300000 > ${CPUSET_ROOT}/system/cpu.rt_runtime_us
-    echo 300000 > ${CPUSET_ROOT}/rtcpus/cpu.rt_runtime_us
+    echo 300000 &gt; ${CPUSET_ROOT}/system/cpu.rt_runtime_us
+    echo 300000 &gt; ${CPUSET_ROOT}/rtcpus/cpu.rt_runtime_us
   fi
-  echo 0 > ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_load_balance
+  echo 0 &gt; ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_load_balance
 
   # wait a bit for sched_domain rebuild
   sleep 1
 
   # now go to hpc
   if [ -f ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_hpc_rt ]; then
-    echo 1 > ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_hpc_rt
+    echo 1 &gt; ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}sched_hpc_rt
   fi
 
   # offline/online to migrate timers and whatnot
   if [ $ONLINE -eq 1 ]; then
     for i in `seq ${START_CPU} ${END_CPU}`; do
-      echo 0 > /sys/devices/system/cpu/cpu$i/online
+      echo 0 &gt; /sys/devices/system/cpu/cpu$i/online
     done
     for i in `seq ${START_CPU} ${END_CPU}`; do
-      echo 1 > /sys/devices/system/cpu/cpu$i/online
+      echo 1 &gt; /sys/devices/system/cpu/cpu$i/online
     done
 
     # re-add CPUs the kernel removed on offline
-    echo ${START_CPU}-${END_CPU} > ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}cpus
+    echo ${START_CPU}-${END_CPU} &gt; ${CPUSET_ROOT}/rtcpus/${CPUSET_PREFIX}cpus
 
     # and prioritize re-initialized kthreads
     systenctl restart set_kthread_prio
   fi
   if [ -f /proc/sys/kernel/timer_migration ]; then
-    echo 0 > /proc/sys/kernel/timer_migration
+    echo 0 &gt; /proc/sys/kernel/timer_migration
   fi
   GOVERNOR="performance"
 fi
@@ -550,7 +554,7 @@ if [ -f /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]; then
   CURRENT_GOVERNOR=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor)
   if ! [ $GOVERNOR = $CURRENT_GOVERNOR ]; then
     for i in $(ls /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor); do
-     echo $GOVERNOR > $i;
+     echo $GOVERNOR &gt; $i;
     done
   fi
 fi</screen>
@@ -639,8 +643,7 @@ fi</screen>
      <para>
       libvirt supports CPU Allocation, CPU Tuning, and Memory Backing, which
       allows you to control RT parameters, see
-      <xref
-       linkend="sec-virtguide-rtkvmguests-sample"/>.
+      <xref linkend="sec-virtguide-rtkvmguests-sample"/>.
      </para>
      <variablelist>
       <varlistentry>
@@ -699,23 +702,23 @@ fi</screen>
 
   <sect2 xml:id="sec-virtguide-rtkvmguests-sample">
    <title>Sample of <filename>libvirt.xml</filename></title>
-<screen language="xml"><![CDATA[<domain>
+<screen language="xml">&lt;domain&gt;
    …
-   <vcpu placement='static' cpuset="1-4,^3,6" current="1">4</vcpu>
+   &lt;vcpu placement='static' cpuset="1-4,^3,6" current="1"&gt;4&lt;/vcpu&gt;
    …
-   <cputune>
-       <vcpupin vcpu="0" cpuset="1-5,^2"/>
-       <vcpupin vcpu="1" cpuset="0,1"/>
-       <vcpupin vcpu="2" cpuset="2,3"/>
-       <vcpupin vcpu="3" cpuset="0,4"/>
-       <vcpusched '0-4,^3' scheduler='fifo' priority='1'/>
-   </cputune>
+   &lt;cputune&gt;
+       &lt;vcpupin vcpu="0" cpuset="1-5,^2"/&gt;
+       &lt;vcpupin vcpu="1" cpuset="0,1"/&gt;
+       &lt;vcpupin vcpu="2" cpuset="2,3"/&gt;
+       &lt;vcpupin vcpu="3" cpuset="0,4"/&gt;
+       &lt;vcpusched '0-4,^3' scheduler='fifo' priority='1'/&gt;
+   &lt;/cputune&gt;
    …
-   <memoryBacking>
-       <locked/>
-   <memoryBacking/>
+   &lt;memoryBacking&gt;
+       &lt;locked/&gt;
+   &lt;memoryBacking/&gt;
    …
-</domain>]]></screen>
+&lt;/domain&gt;</screen>
   </sect2>
 
   <sect2 xml:id="sec-virtguide-rtkvmguests-othersettings">
