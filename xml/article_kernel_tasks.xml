@@ -32,7 +32,7 @@
    <dm:editurl>https://github.com/SUSE/doc-slert/edit/main/xml/</dm:editurl>
    <dm:translation>no</dm:translation>
   </dm:docmanager>
-  <revhistory xml:id="rh-book-slert-qs">
+  <revhistory xml:id="rh-kernel-tasks">
    <revision>
     <date>2022-11-09</date>
     <revdescription>
