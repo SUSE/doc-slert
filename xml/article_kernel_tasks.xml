@@ -32,6 +32,14 @@
    <dm:editurl>https://github.com/SUSE/doc-slert/edit/main/xml/</dm:editurl>
    <dm:translation>no</dm:translation>
   </dm:docmanager>
+  <revhistory xml:id="rh-book-slert-qs">
+   <revision>
+    <date>2022-11-09</date>
+    <revdescription>
+     <para/>
+    </revdescription>
+   </revision>
+  </revhistory>
  </info>
  <section xml:id="sec-slert-kernel-tasks-intro">
   <title>Processes and task states</title>
@@ -40,7 +48,7 @@
    Each process runs through different states during its life cycle,
    like <parameter>running</parameter> or <parameter>idle</parameter>.
   </para>
- 
+
   <para>
    A process might be unable to run (<parameter>idle</parameter>) at any time
    and for different reasons.
@@ -49,7 +57,7 @@
    the maximum amount of time units allowed and that it must yield to another
    process.
   </para>
-  
+
   <para>
    The following list describes the most important task states needed for
    programming the Linux Kernel.
@@ -69,7 +77,7 @@
    <para>The task state is not visible from the userspace.</para>
   </listitem>
  </varlistentry>
- 
+
  <varlistentry>
   <term>
    <parameter>TASK_DEAD</parameter>
@@ -83,7 +91,7 @@
    <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
- 
+
  <varlistentry>
   <term>
    <parameter>TASK_RUNNING</parameter>
@@ -97,7 +105,7 @@
    <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
- 
+
  <varlistentry>
   <term>
    <parameter>TASK_INTERRUPTIBLE</parameter>
@@ -114,7 +122,7 @@
    <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
- 
+
  <varlistentry>
   <term>
    <parameter>TASK_UNINTERUPTIBLE</parameter>
@@ -130,7 +138,7 @@
    <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
- 
+
  <varlistentry>
   <term>
    <parameter>TASK_KILLABLE</parameter>
@@ -149,7 +157,7 @@
    <para>The task state is not visible from the userspace.</para>
   </listitem>
  </varlistentry>
- 
+
  <varlistentry>
  <term>
   <parameter>TASK_IDLE</parameter>
@@ -168,7 +176,7 @@
   <para>The task state is not visible from the userspace.</para>
  </listitem>
  </varlistentry>
- 
+
  <varlistentry>
   <term>
    <parameter>TASK_STOPPED</parameter>
@@ -181,7 +189,7 @@
    <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
- 
+
  <varlistentry>
   <term>
    <parameter>TASK_TRACED</parameter>
@@ -195,7 +203,7 @@
    <para>The task state is visible from the userspace.</para>
   </listitem>
  </varlistentry>
- 
+
  <varlistentry>
   <term>
    <parameter>TASK_PARKED</parameter>
@@ -231,6 +239,6 @@
    </mediaobject>
   </figure>
  </section>
- 
+
  <xi:include href="common_legal.xml" parse="xml"/>
 </article>
