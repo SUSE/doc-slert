@@ -1,15 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter
-[
+<?xml version="1.0"?>
+<!DOCTYPE chapter [
   <!ENTITY % entities SYSTEM "entity-decl.ent">
   %entities;
 ]>
 
-<chapter version="5.0" xml:id="cha-shielding-model"
- xmlns="http://docbook.org/ns/docbook"
- xmlns:xlink="http://www.w3.org/1999/xlink">
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-model">
  <title>The basic shielding model</title>
- <info/>
+ <info xmlns:d="http://docbook.org/ns/docbook"><revhistory xml:id="rh-cha-shielding-model">
+   <revision>
+     <date>2022-11-25</date>
+     <revdescription>
+       <para/>
+     </revdescription>
+   </revision>
+ </revhistory>
+</info>
  <para>
   Although any setup of &cpuset;s can really be described as
   <emphasis>shielding</emphasis>, there is one prevalent shielding model in
@@ -107,7 +112,7 @@
     processing, issue the following command.
    </para>
 <screen>&prompt.user;<command>cset</command> shield -c 1-3
-cset: --> activating shielding:
+cset: --&gt; activating shielding:
 cset: moving 176 tasks from root into system cpuset...
 [==================================================]%
 cset: "system" cpuset of CPUSPEC(0) with 176 tasks running
@@ -137,7 +142,7 @@ cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
     the current status of the shield again, issue this command:
    </para>
 <screen>&prompt.user;<command>cset</command> shield
-cset: --> shielding system active with
+cset: --&gt; shielding system active with
 cset: "system" cpuset of CPUSPEC(0) with 176 tasks running
 cset: "user" cpuset of CPUSPEC(1-3) with 0 tasks running</screen>
    <para>
@@ -216,7 +221,7 @@ root     32653 25222 Roth python ./cset shield --unshield -v</screen>
     access to all resources on the system. For example:
    </para>
 <screen>&prompt.user;<command>cset</command> shield --reset
-cset: --> deactivating/reseting shielding
+cset: --&gt; deactivating/reseting shielding
 cset: moving 0 tasks from "/user" user set to root set...
 cset: moving 250 tasks from "/system" system set to root set...
 [==================================================]%
@@ -259,7 +264,7 @@ cset: done
 
 
 &prompt.user;<command>cset</command> shield -e bash
-cset: --> last message, executed args into cpuset "/user", new pid is: 13300
+cset: --&gt; last message, executed args into cpuset "/user", new pid is: 13300
 
 
 &prompt.user;<command>cset</command> shield -s -v
@@ -328,7 +333,7 @@ cset: done</screen>
      and <option>--group</option> options for execution as follows.
     </para>
 <screen>&prompt.user;<command>cset</command> shield --user=&exampleuser; --group=users -e bash
-cset: --> last message, executed args into cpuset "/user", new pid is: 14212
+cset: --&gt; last message, executed args into cpuset "/user", new pid is: 14212
 
 
 &prompt.user;<command>cset</command> shield -s -v
@@ -417,7 +422,7 @@ USER     PID   PPID  SPPr TASK NAME
 
 
 &prompt.user;<command>cset</command> shield -s -p 22010-22020
-cset: --> shielding following pidspec: 22010-22020
+cset: --&gt; shielding following pidspec: 22010-22020
 cset: done
 
 
@@ -431,7 +436,7 @@ cset: done
 
 
 &prompt.user;<command>cset</command> shield -u -p $$
-cset: --> unshielding following pidspec: 22018
+cset: --&gt; unshielding following pidspec: 22018
 cset: done
 
 
