@@ -32,6 +32,14 @@
    <dm:editurl>https://github.com/SUSE/doc-slert/edit/main/xml/</dm:editurl>
    <dm:translation>no</dm:translation>
   </dm:docmanager>
+  <revhistory xml:id="rh-kernel-tasks">
+   <revision>
+    <date>2022-11-09</date>
+    <revdescription>
+     <para/>
+    </revdescription>
+   </revision>
+  </revhistory>
  </info>
  <section xml:id="sec-slert-kernel-tasks-intro">
   <title>Processes and task states</title>
