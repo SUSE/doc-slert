@@ -50,6 +50,14 @@ AllowedCPUs=0-1
 [Slice]
 AllowedCPUs=0-1
 </screen>
+   <screen>&prompt.root;cat /etc/systemd/system/user.slice.d/40-shielding.conf
+[Slice]
+AllowedCPUs=0-1
+</screen>
+   <screen>&prompt.root;cat /etc/systemd/system/machine.slice.d/40-shielding.conf
+[Slice]
+AllowedCPUs=0-1
+</screen>
 
 <para>
         This way we constrain the supporting system workload just to the first two CPUs.
@@ -62,11 +70,18 @@ AllowedCPUs=0-1
 AllowedCPUs=2-15
 </screen>
 <para>
-        The setup can also be changed at runtime (for debugging reasons):
+        and apply the new config files to systemd:
 </para>
-<screen>&prompt.root;systemctl set-property --runtime workload.slice AllowedCPUs=4-15
-&prompt.root;systemctl set-property --runtime init.scope AllowedCPUs=0-3
-&prompt.root;systemctl set-property --runtime system.slice AllowedCPUs=0-3
+<screen>&prompt.root;systemctl daemon-reload
+</screen>
+<para>
+        The setup can also be changed dynamically until next reboot (for debugging reasons):
+</para>
+<screen>&prompt.root;systemctl set-property --runtime workload.slice AllowedCPUs=2-15
+&prompt.root;systemctl set-property --runtime init.scope AllowedCPUs=0-1
+&prompt.root;systemctl set-property --runtime system.slice AllowedCPUs=0-1
+&prompt.root;systemctl set-property --runtime user.slice AllowedCPUs=0-1
+&prompt.root;systemctl set-property --runtime machine.slice AllowedCPUs=0-1
 </screen>
  </sect1>
  <sect1 xml:id="sec-shielding-systemd-ex-move">
@@ -84,7 +99,11 @@ Slice=workload.slice
 <para>
         Should not the sensitive job have a form of a service but an ad-hoc command, you may start it in a systemd scope:
 </para>
-<screen>&prompt.root;systemd-run --scope -p Slice=workload.slice command arg1 ...</screen>
+<screen>&prompt.root;systemd-run --scope --uid=&lt;UID&gt; -p Slice=workload.slice command arg1 ...</screen>
+<para>
+        starting such a scope is privileged operation but you can pass the <literal>--uid</literal>
+        argument to run the workload as given user.
+</para>
 <note>
         <para>Existing processes cannot be moved under the shield since that would involve process migration between cgroups which would cause distortion of the accounting state.
         But sensitive workload should start with their resources secured in advance anyway.</para>
