@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <title>SLES RT Meta Descriptions: AI Generated Meta Descriptions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans text-slate-800">
+<div class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+  <div class="mb-8">
+    <h1 class="text-4xl font-bold text-slate-900">SLES RT Meta Descriptions</h1>
+    <p class="text-xl text-slate-600 mt-1">AI Generated Meta Descriptions</p>
+    <p class="text-sm text-slate-400 mt-2">Report generated on 2026-04-29 11:03:26</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white p-5 rounded-xl shadow-lg flex items-center justify-between">
+      <div><div class="text-sm font-medium text-slate-500">Files Processed</div><div class="mt-1 text-3xl font-semibold text-slate-900">7</div></div>
+    </div>
+    <div class="bg-white p-5 rounded-xl shadow-lg flex items-center justify-between">
+      <div><div class="text-sm font-medium text-slate-500">Files Changed</div><div class="mt-1 text-3xl font-semibold text-green-600">6</div></div>
+    </div>
+    <div class="bg-white p-5 rounded-xl shadow-lg flex items-center justify-between">
+      <div><div class="text-sm font-medium text-slate-500">Processing Time</div><div class="mt-1 text-3xl font-semibold text-slate-900">106.22s</div></div>
+    </div>
+    <div class="bg-white p-5 rounded-xl shadow-lg flex items-center justify-between">
+      <div><div class="text-sm font-medium text-slate-500">Model Used</div><div class="mt-1 text-2xl font-semibold text-slate-900 truncate">qwen3:14b</div></div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+    <div class="p-5 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-center">
+      <div>
+        <h2 class="text-xl font-semibold text-slate-900">Processing Log</h2>
+        <p class="text-sm text-slate-500 mt-1">Detailed log of all file operations.</p>
+      </div>
+      <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Filter by path, status, or details..."
+        class="mt-4 sm:mt-0 w-full sm:w-64 px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div class="overflow-x-auto">
+      <table class="min-w-full" id="logTable">
+        <thead class="bg-slate-100 text-slate-600 text-sm font-semibold uppercase">
+          <tr>
+            <th class="py-3 px-6 text-left">File</th>
+            <th class="py-3 px-6 text-left">Type</th>
+            <th class="py-3 px-6 text-left">Status</th>
+            <th class="py-3 px-6 text-left">Chars</th>
+            <th class="py-3 px-6 text-left">Description / Details</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm">
+          <tr class="border-b border-slate-200 hover:bg-slate-50">
+            <td class="py-3 px-6 font-medium text-slate-700 border-l-4 border-yellow-500" title="xml/common_legal.xml">xml/common_legal.xml</td>
+            <td class="py-3 px-6 whitespace-nowrap">docbook</td>
+            <td class="py-3 px-6"><span class="text-white text-xs font-bold px-2.5 py-1 rounded-full bg-yellow-500">WARNING</span></td>
+            <td class="py-3 px-6 text-slate-500"></td>
+            <td class="py-3 px-6 font-mono text-xs text-slate-600 break-words">Insufficient content for generation (108 chars, minimum 150)</td>
+          </tr>
+          <tr class="border-b border-slate-200 hover:bg-slate-50">
+            <td class="py-3 px-6 font-medium text-slate-700 border-l-4 border-green-500" title="xml/slert_cpuset_manipulation.xml">xml/slert_cpuset_manipulation.xml</td>
+            <td class="py-3 px-6 whitespace-nowrap">docbook</td>
+            <td class="py-3 px-6"><span class="text-white text-xs font-bold px-2.5 py-1 rounded-full bg-green-500">ADDED</span></td>
+            <td class="py-3 px-6 text-slate-500">124</td>
+            <td class="py-3 px-6 font-mono text-xs text-slate-600 break-words">Manipulate cpusets using csets set and proc subcommands to create, adjust, rename, destroy, and manage processes within them</td>
+          </tr>
+          <tr class="border-b border-slate-200 hover:bg-slate-50">
+            <td class="py-3 px-6 font-medium text-slate-700 border-l-4 border-green-500" title="xml/slert_gettinghelp.xml">xml/slert_gettinghelp.xml</td>
+            <td class="py-3 px-6 whitespace-nowrap">docbook</td>
+            <td class="py-3 px-6"><span class="text-white text-xs font-bold px-2.5 py-1 rounded-full bg-green-500">ADDED</span></td>
+            <td class="py-3 px-6 text-slate-500">160</td>
+            <td class="py-3 px-6 font-mono text-xs text-slate-600 break-words">Discover how to use the csets logging application on supported systems to diagnose and resolve issues by creating logs with the --log option and submitting them</td>
+          </tr>
+          <tr class="border-b border-slate-200 hover:bg-slate-50">
+            <td class="py-3 px-6 font-medium text-slate-700 border-l-4 border-green-500" title="xml/slert_intro.xml">xml/slert_intro.xml</td>
+            <td class="py-3 px-6 whitespace-nowrap">docbook</td>
+            <td class="py-3 px-6"><span class="text-white text-xs font-bold px-2.5 py-1 rounded-full bg-green-500">ADDED</span></td>
+            <td class="py-3 px-6 text-slate-500">156</td>
+            <td class="py-3 px-6 font-mono text-xs text-slate-600 break-words">Learn how to use the cset command-line tool to manage cpusets, configure CPU and memory placement, and implement shielding and advanced resource constraints</td>
+          </tr>
+          <tr class="border-b border-slate-200 hover:bg-slate-50">
+            <td class="py-3 px-6 font-medium text-slate-700 border-l-4 border-green-500" title="xml/slert_shielding_model.xml">xml/slert_shielding_model.xml</td>
+            <td class="py-3 px-6 whitespace-nowrap">docbook</td>
+            <td class="py-3 px-6"><span class="text-white text-xs font-bold px-2.5 py-1 rounded-full bg-green-500">ADDED</span></td>
+            <td class="py-3 px-6 text-slate-500">119</td>
+            <td class="py-3 px-6 font-mono text-xs text-slate-600 break-words">Learn how to use the shield subcommand to configure and manage CPU sets for task isolation and performance optimization</td>
+          </tr>
+          <tr class="border-b border-slate-200 hover:bg-slate-50">
+            <td class="py-3 px-6 font-medium text-slate-700 border-l-4 border-green-500" title="xml/slert_systemd_shielding.xml">xml/slert_systemd_shielding.xml</td>
+            <td class="py-3 px-6 whitespace-nowrap">docbook</td>
+            <td class="py-3 px-6"><span class="text-white text-xs font-bold px-2.5 py-1 rounded-full bg-green-500">ADDED</span></td>
+            <td class="py-3 px-6 text-slate-500">153</td>
+            <td class="py-3 px-6 font-mono text-xs text-slate-600 break-words">Explore how to configure systemd's cpuset controller to shield sensitive workloads by setting up dedicated slices configuring system.slice and init.slice</td>
+          </tr>
+          <tr class="border-b border-slate-200 hover:bg-slate-50">
+            <td class="py-3 px-6 font-medium text-slate-700 border-l-4 border-green-500" title="xml/slert_usingshortcuts.xml">xml/slert_usingshortcuts.xml</td>
+            <td class="py-3 px-6 whitespace-nowrap">docbook</td>
+            <td class="py-3 px-6"><span class="text-white text-xs font-bold px-2.5 py-1 rounded-full bg-green-500">ADDED</span></td>
+            <td class="py-3 px-6 text-slate-500">145</td>
+            <td class="py-3 px-6 font-mono text-xs text-slate-600 break-words">Learn to use shortcuts in cset commands to execute subcommands and options with fewer characters while maintaining clarity and intuitive outcomes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="mt-8 text-center text-sm text-slate-500">
+    <p>Root: xml &bull; Type filter: docbook</p>
+  </div>
+</div>
+<script>
+function filterTable() {
+  var input = document.getElementById("searchInput").value.toUpperCase();
+  var rows = document.getElementById("logTable").getElementsByTagName("tr");
+  for (var i = 1; i < rows.length; i++) {
+    var cells = rows[i].getElementsByTagName("td");
+    var match = false;
+    for (var j = 0; j < cells.length; j++) {
+      if ((cells[j].textContent || cells[j].innerText).toUpperCase().indexOf(input) > -1) {
+        match = true; break;
+      }
+    }
+    rows[i].style.display = match ? "" : "none";
+  }
+}
+</script>
+</body>
+</html>
