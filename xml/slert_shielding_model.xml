@@ -4,9 +4,10 @@
   %entities;
 ]>
 
-<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-model">
+<chapter xmlns:its="http://www.w3.org/2005/11/its" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-model">
  <title>The basic shielding model</title>
- <info xmlns:d="http://docbook.org/ns/docbook"><revhistory xml:id="rh-cha-shielding-model">
+ <info>
+    <meta name="description" its:translate="yes">Learn how to use the shield subcommand to configure and manage CPU sets for task isolation and performance optimization</meta><revhistory xml:id="rh-cha-shielding-model">
    <revision>
      <date>2022-11-25</date>
      <revdescription>
