@@ -21,3 +21,4 @@ STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2022-ns"
 
 ## enable sourcing
 export DOCCONF=$BASH_SOURCE
+XSLTPARAM="--param generate.revhistory=0"
