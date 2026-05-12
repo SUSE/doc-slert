@@ -9,3 +9,4 @@ PROFOS="slert"
 
 # Stylesheets
 STYLEROOT="/usr/share/xml/docbook/stylesheet/suse2022-ns"
+XSLTPARAM="--param generate.revhistory=0"
