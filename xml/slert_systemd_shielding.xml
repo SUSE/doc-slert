@@ -75,7 +75,7 @@ AllowedCPUs=2-15
 <screen>&prompt.root;systemctl daemon-reload
 </screen>
 <para>
-        The setup can also be changed dynamically until next reboot (for debugging reasons):
+        The setup can also be changed dynamically until the next reboot (for debugging reasons):
 </para>
 <screen>&prompt.root;systemctl set-property --runtime workload.slice AllowedCPUs=2-15
 &prompt.root;systemctl set-property --runtime init.scope AllowedCPUs=0-1
