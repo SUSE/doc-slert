@@ -105,7 +105,7 @@ Slice=workload.slice
         argument to run the workload as the given user.
 </para>
 <note>
-        <para>Existing processes cannot be moved under the shield since that would involve process migration between cgroups which would cause distortion of the accounting state.
+        <para>Existing processes cannot be moved under the shield since that would involve process migration between cgroups, which would distort the accounting state.
         But sensitive workload should start with their resources secured in advance anyway.</para>
 </note>
  </sect1>
