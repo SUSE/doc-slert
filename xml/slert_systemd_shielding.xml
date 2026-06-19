@@ -97,7 +97,7 @@ Slice=workload.slice
     <para>Beware that the <literal>Slice=</literal> directive only takes effect upon service (re)start.</para>
 </note>
 <para>
-        Should not the sensitive job have a form of a service but an ad-hoc command, you may start it in a systemd scope:
+        Should not the sensitive job have a form of a service, but an ad-hoc command, you may start it in a systemd scope:
 </para>
 <screen>&prompt.root;systemd-run --scope --uid=&lt;UID&gt; -p Slice=workload.slice command arg1 ...</screen>
 <para>
