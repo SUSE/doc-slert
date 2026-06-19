@@ -101,8 +101,8 @@ Slice=workload.slice
 </para>
 <screen>&prompt.root;systemd-run --scope --uid=&lt;UID&gt; -p Slice=workload.slice command arg1 ...</screen>
 <para>
-        starting such a scope is privileged operation but you can pass the <literal>--uid</literal>
-        argument to run the workload as given user.
+       Starting such a scope is a privileged operation, but you can pass the <literal>--uid</literal>
+        argument to run the workload as the given user.
 </para>
 <note>
         <para>Existing processes cannot be moved under the shield since that would involve process migration between cgroups which would cause distortion of the accounting state.
