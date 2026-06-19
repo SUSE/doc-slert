@@ -106,7 +106,7 @@ Slice=workload.slice
 </para>
 <note>
         <para>Existing processes cannot be moved under the shield since that would involve process migration between cgroups, which would distort the accounting state.
-        But sensitive workload should start with their resources secured in advance anyway.</para>
+        But sensitive workloads should start with their resources secured in advance anyway.</para>
 </note>
  </sect1>
 </chapter>
