@@ -4,9 +4,10 @@
   %entities;
 ]>
 
-<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-cpuset">
+<chapter xmlns:its="http://www.w3.org/2005/11/its" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="cha-shielding-cpuset">
  <title>Full-featured cpuset manipulation commands</title>
- <info xmlns:d="http://docbook.org/ns/docbook"><revhistory xml:id="rh-cha-shielding-cpuset">
+ <info>
+    <meta name="description" its:translate="yes">Manipulate cpusets using csets set and proc subcommands to create, adjust, rename, destroy, and manage processes within them</meta><revhistory xml:id="rh-cha-shielding-cpuset">
    <revision>
      <date>2022-11-25</date>
      <revdescription>
