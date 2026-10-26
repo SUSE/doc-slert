@@ -9,7 +9,7 @@
  <info>
     <meta name="description" its:translate="yes">Configure systemd's cpuset controller to shield sensitive workloads by setting up dedicated slices for system.slice and init.slice</meta><revhistory xml:id="rh-cha-shielding-with-systemd">
    <revision>
-     <date>2022-11-25</date>
+     <date>2026-10-28</date>
      <revdescription>
        <para/>
      </revdescription>

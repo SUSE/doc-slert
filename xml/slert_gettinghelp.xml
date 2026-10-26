@@ -9,7 +9,7 @@
  <info>
     <meta name="description" its:translate="yes">Use the csets logging application to create logs with the --log option and submit them to Bugzilla for diagnosing and resolving issues on supported SUSE systems</meta><revhistory xml:id="rh-cha-shieldingt-help">
    <revision>
-     <date>2022-11-25</date>
+     <date>2026-10-28</date>
      <revdescription>
        <para/>
      </revdescription>

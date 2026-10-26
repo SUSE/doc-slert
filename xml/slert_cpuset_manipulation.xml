@@ -9,7 +9,7 @@
  <info>
     <meta name="description" its:translate="yes">Manipulate cpusets using csets set and proc subcommands to create, adjust, rename, destroy, and manage processes within them</meta><revhistory xml:id="rh-cha-shielding-cpuset">
    <revision>
-     <date>2022-11-25</date>
+     <date>2026-10-28</date>
      <revdescription>
        <para/>
      </revdescription>
